@@ -1,0 +1,73 @@
+.shop_reviews .item {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.shop_reviews .item .avatar img{
+    width: 80%;
+}
+
+.shop_reviews .item .avatar a{
+    display: block;
+}
+
+.shop_reviews .item .avatar{
+    position: relative;
+}
+
+.shop_reviews .item .comment_wrapp:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 11px solid;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);    
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: #f6f6f6;
+    top: 40px;
+    right: 100%;
+}
+
+.shop_reviews .item:hover .avatar:before{
+    border-left-color: #BBD057;
+}
+
+.shop_reviews .item:hover .comment_wrapp:before{
+    border-right-color: #BBD057;
+}
+
+.shop_reviews .item:hover .avatar .border_ksen,
+.shop_reviews .item:hover .comment_wrapp{
+    border-color: #BBD057;
+}
+
+.shop_reviews .item .comment_wrapp{
+    min-height: 109px;
+    padding: 5px 10px;
+    padding-bottom: 25px;
+    position: relative;
+    border: 2px solid #f6f6f6;
+    background-color: #f6f6f6;
+}
+
+.shop_reviews .item .comment_wrapp .read_more{
+    position: absolute;
+    bottom: 2px;
+    left: 10px;
+}
+
+.shop_reviews .item .comment_wrapp .comment{
+    max-height: 160px;
+    overflow: hidden;
+}
+
+.shop_reviews.item .comment_wrapp .comment{
+    max-height: 100%;
+    overflow: auto;
+}
+
+.shop_reviews .item .rating {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="kmdiscountactions" version="2.5.0" method="install">
+    <name>KSM_DISCOUNTACTIONS_SITEVISITS</name>
+    <creationDate>April 03 2013</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2012 L.D.M. Co All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>2.0</version>
+    <description>KSM_DISCOUNTACTIONS_SITEVISITS_DESCRIPTION</description>
+	
+    <files>
+		<filename plugin="sitevisits">sitevisits.php</filename>
+		<filename>index.html</filename>
+    </files>
+	
+    <languages>
+		<language tag="ru-RU">ru-RU.plg_kmdiscountactions_sitevisits.sys.ini</language>
+    </languages>
+
+</extension>
