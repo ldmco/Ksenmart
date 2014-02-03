@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.0.0">
+	<name>mod_km_products_list</name>
+	<author>ToMuH</author>
+	<creationDate>July 2011</creationDate>
+	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>tominpasha@mail.ru</authorEmail>
+	<authorUrl></authorUrl>
+	<version>2.0</version>
+	<description>Список продуктов KsenMart 2.0</description>
+	<files>
+		<filename module="mod_km_products_list">mod_km_products_list.php</filename>
+		<folder>tmpl</folder>
+		<filename>index.html</filename>
+		<filename>mod_km_products_list.xml</filename>
+	</files>
+	<languages>
+		<language tag="ru-RU">ru-RU.mod_km_products_list.ini</language>
+		<language tag="ru-RU">ru-RU.mod_km_products_list.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">	
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />	
+				<field
+					name="col"
+					type="text"
+					default="10"
+					label="MOD_KM_PRODUCTS_LIST_COL"
+					description="MOD_KM_PRODUCTS_LIST_COL" />	
+				<field
+					name="type"
+					type="list"
+					default="recommendation"
+					label="MOD_KM_PRODUCTS_LIST_TYPE"
+					description="MOD_KM_PRODUCTS_LIST_TYPE">
+					<option
+						value="recommendation">MOD_KM_PRODUCTS_LIST_TYPE_RECOMMENDATION</option>
+					<option
+						value="promotion">MOD_KM_PRODUCTS_LIST_PROMOTIONS</option>						
+					<option
+						value="new">MOD_KM_PRODUCTS_LIST_TYPE_NEW</option>
+					<option
+						value="hot">MOD_KM_PRODUCTS_LIST_HITS</option>
+					<option
+						value="carted">MOD_KM_PRODUCTS_LIST_TOP_CARTED</option>	
+					<option
+						value="hits">MOD_KM_PRODUCTS_LIST_TOP_HITS</option>		
+					<option
+						value="id">MOD_KM_PRODUCTS_LIST_LAST_ADDED</option>							
+				</field>					
+			</fieldset>		
+		</fields>	
+	</config>	
+</install>

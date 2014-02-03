@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.0.0">
+	<name>mod_km_shipping</name>
+	<author>ToMuH</author>
+	<creationDate>July 2011</creationDate>
+	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>tominpasha@mail.ru</authorEmail>
+	<authorUrl></authorUrl>
+	<version>2.0</version>
+	<description>Способы доставки и оплаты KsenMart 2.0</description>
+	<files>
+        <folder>tmpl</folder>
+        <folder>js</folder>
+		<filename module="mod_km_shipping">mod_km_shipping.php</filename>
+        <filename>hepler.php</filename>
+        <filename>mod_km_shipping.xml</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="ru-RU">ru-RU.mod_km_shipping.ini</language>
+		<language tag="ru-RU">ru-RU.mod_km_shipping.sys.ini</language>
+	</languages>
+</install>

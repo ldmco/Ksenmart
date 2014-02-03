@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_ksenmart/models/fields"
+	>
+	
+		<field 
+			name="images" 
+			type="images" 
+			label="KSM_PHOTOS"
+			class="active"
+			upload_to="media/ksenmart/images/countries/original"
+			upload_folder="countries"
+		/>
+		
+	</fieldset>
+</form>

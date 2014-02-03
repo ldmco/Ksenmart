@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="KSM_PRODUCT_CATALOG_CONFIG"
+		label="KSM_PRODUCT_CATALOG_CONFIG_LABEL"
+		description="KSM_PRODUCT_CATALOG_CONFIG_DESC">
+		<field
+			name="show_products_from_subcategories"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_SHOWFROMSUBCATEGORIES_LABEL"
+			description="KSM_PRODUCT_SHOWFROMSUBCATEGORIES_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+		
+		<field
+			name="show_out_stock"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_SHOWOUTSTOCK_LABEL"
+			description="KSM_PRODUCT_SHOWOUTSTOCK_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+		
+		<field
+			name="order_process"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_ORDERPROCESS_LABEL"
+			description="KSM_PRODUCT_ORDERPROCESS_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+
+		<field
+			name="show_comment_form"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_SHOWCOMMENTFORM_LABEL"
+			description="KSM_PRODUCT_SHOWCOMMENTFORM_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>			
+
+		<field
+			name="site_product_limit"
+			type="text"
+			default="30"
+			label="KSM_PRODUCT_LISTLIMIT_LABEL"
+			description="KSM_PRODUCT_LISTLIMIT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="site_use_pagination"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_USEPAGINATION_LABEL"
+			description="KSM_PRODUCT_USEPAGINATION_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+		
+		<field
+			name="parent_products_template"
+			type="radio"
+			default="list"
+			label="KSM_PRODUCT_PARENTPRODUCTTEMPLATE_LABEL"
+			description="KSM_PRODUCT_PARENTPRODUCTTEMPLATE_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="list">KSM_PARENTPRODUCTTEMPLATE_LIST</option>
+			<option
+				value="select">KSM_PARENTPRODUCTTEMPLATE_SELECT</option>
+		</field>		
+
+		<field
+			name="include_jquery"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_INCLUDEJQUERY_LABEL"
+			description="KSM_PRODUCT_INCLUDEJQUERY_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+        
+		<field
+			name="include_css"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_INCLUDECSS_LABEL"
+			description="KSM_PRODUCT_INCLUDECSS_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>        
+		
+		<field
+			name="only_auth_buy"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_ONLYAUTHBUY_LABEL"
+			description="KSM_PRODUCT_ONLYAUTHBUY_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>	
+
+		<field
+			name="use_stock"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_USESTOCK_LABEL"
+			description="KSM_PRODUCT_USESTOCK_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>		
+
+		<field
+			name="catalog_mode"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_CATALOGMODE_LABEL"
+			description="KSM_PRODUCT_CATALOGMODE_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>	
+
+		<field
+			name="path_separator"
+			type="text"
+			default=" - "
+			label="KSM_ALLSETTINGS_PATHSEPARATOR_LABEL"
+			description="KSM_ALLSETTINGS_PATHSEPARATOR_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>			
+			
+	</fieldset>	
+	
+	<fieldset name="KSM_PRODUCT_IMAGES_CONFIG"
+		label="KSM_PRODUCT_IMAGES_CONFIG_LABEL"
+		description="KSM_PRODUCT_IMAGES_CONFIG_DESC">
+
+		<field
+			name="thumb_width"
+			type="text"
+			default="220"
+			label="KSM_PRODUCT_THUMBWIDTH_LABEL"
+			description="KSM_PRODUCT_THUMBWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="thumb_height"
+			type="text"
+			default="220"
+			label="KSM_PRODUCT_THUMBHEIGHT_LABEL"
+			description="KSM_PRODUCT_THUMBHEIGHT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+			
+		<field
+			name="middle_width"
+			type="text"
+			default="350"
+			label="KSM_PRODUCT_MIDDLEWIDTH_LABEL"
+			description="KSM_PRODUCT_MIDDLEWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="middle_height"
+			type="text"
+			default="350"
+			label="KSM_PRODUCT_MIDDLEHEIGHT_LABEL"
+			description="KSM_PRODUCT_MIDDLEHEIGHT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+
+		<field
+			name="mini_thumb_width"
+			type="text"
+			default="110"
+			label="KSM_PRODUCT_MINITHUMBWIDTH_LABEL"
+			description="KSM_PRODUCT_MINITHUMBWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="mini_thumb_height"
+			type="text"
+			default="110"
+			label="KSM_PRODUCT_MINITHUMBHEIGHT_LABEL"
+			description="KSM_PRODUCT_MINITHUMBHEIGHT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+	</fieldset>
+	<fieldset name="KSM_SEARCH_CONFIG"
+		label="KSM_SEARCH_CONFIG_LABEL"
+		description="KSM_SEARCH_CONFIG_DESC">
+        
+		<field
+			name="count_result"
+			type="text"
+            default="5"
+			label="KSM_SEARCH_COUNT_RESULT_LABEL"
+			description="KSM_SEARCH_COUNT_RESULT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+        />
+		<field
+			name="count_relevants"
+			type="text"
+            default="3"
+			label="KSM_SEARCH_COUNT_RELEVANTS_LABEL"
+			description="KSM_SEARCH_COUNT_RELEVANTS_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+        />
+		<field
+			name="count_categories"
+			type="text"
+            default="1"
+			label="KSM_SEARCH_COUNT_CAT_LABEL"
+			description="KSM_SEARCH_COUNT_CAT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+        />
+		<field
+			name="count_manufactured"
+			type="text"
+            default="1"
+			label="KSM_SEARCH_COUNT_MANUFACTURED_LABEL"
+			description="KSM_SEARCH_COUNT_MANUFACTURED_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+        />
+	</fieldset>
+</config>

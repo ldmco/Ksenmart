@@ -1,0 +1,216 @@
+.catalog {
+	float: left;
+	width:100%;
+}
+.catalog h3{
+	font-size:25px;
+	color:#2c2e32;
+	line-height:25px;
+	font-weight:normal;
+	text-transform: uppercase;
+	background: url(i/tr.png) left bottom repeat-x;
+	padding: 0 0 12px 12px;
+	margin: 0 0 15px;
+}
+.catalog .items {
+	float: left;
+	width:725px;
+}
+.catalog .item {
+	float: left;
+	width:220px;
+	margin: 0 20px 35px 0;
+}
+.catalog .item .img {
+	float: left;
+	width:100%;
+	margin: 0 0 5px;
+	position: relative;
+}
+.catalog .item .img:hover span.hover {
+	display:block;
+}
+.catalog .item .img span.hover {
+	display: none;
+	position: absolute;
+	top:0px;
+	left:0px;
+	width:220px;
+	height: 220px;
+	background:transparent url(i/img-hover.png) center no-repeat!important;
+}
+.catalog .item .img span.hit,
+.catalog .item .img span.new,
+.catalog .item .img span.super {
+	position: absolute;
+	top:-3px;
+	right:15px;
+	width:30px;
+	height:87px;
+	display: block;
+}
+.catalog .item .img span.hit {
+	background: url(i/hit.png) top center no-repeat;
+}
+.catalog .item .img span.new {
+	background: url(i/new.png) top center no-repeat;
+}
+.catalog .item .img span.super {
+	background: url(i/super.png) top center no-repeat;
+}
+.catalog .item .img img {
+	border: 10px solid #EDEDF0;
+	display: block;
+	width:200px;
+	height:200px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(css/PIE.htc);
+}
+.catalog .item .article {
+	float: left;
+	width:200px;
+	margin: 0 10px 3px;
+	font-size:12px;
+	color:#bdbfbf;
+}
+.catalog .item .name {
+	float: left;
+	width:200px;
+	margin: 0 10px 15px;
+	font-size:17px;
+	line-height: 20px;
+	height:80px;
+	overflow: hidden;
+}
+.catalog .item .name a {
+	color:#2c2e32!important;
+	text-decoration: none;
+	background:transparent!important;
+}
+.catalog .item .name a:hover {
+	text-decoration: underline;
+}
+.catalog .item .bottom {
+	width:200px;
+	padding:10px;
+	float: left;
+	background: #EDEDF0 url(i/right-white.png) 12px 16px no-repeat;
+	position: relative;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(css/PIE.htc);
+}
+.catalog .item .bottom .price {
+	float: left;
+	margin: 3px 10px 0 15px;
+	width:85px;
+	height:27px;
+	text-align: right;
+	font-style: italic;
+	font-size:20px;
+}
+.catalog .item .bottom .price .ru {
+	font-size:15px;
+}
+.catalog .item .bottom .buy {
+	float: right;
+	width:90px;
+}
+.catalog .item .bottom .delta {
+	color: #EDEDF0;
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	top: -12px;
+	right: 97px;
+	font-size: 30px;
+	z-index: 1;
+	line-height: 22px;
+	border: none !important;
+}
+.catalog .item .bottom .button {
+	cursor: pointer;
+	font-size:16px;
+	color:#2c2e32;
+	text-shadow: 0 1px 1px #fff;
+	border: none;
+	font-family: "Trebuchet MS";
+	font-weight:bold;
+	padding: 3px 0 4px;
+	width:90px;
+	border-bottom: 1px solid #ddd;
+	background: #ebf18e; /* Old browsers */
+	background: -moz-linear-gradient(top, #ebf18e 24%, #d2e638 46%, #c3d825 59%, #aac52f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(24%,#ebf18e), color-stop(46%,#d2e638), color-stop(59%,#c3d825), color-stop(100%,#aac52f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ebf18e 24%,#d2e638 46%,#c3d825 59%,#aac52f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ebf18e 24%,#d2e638 46%,#c3d825 59%,#aac52f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ebf18e 24%,#d2e638 46%,#c3d825 59%,#aac52f 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ebf18e 24%,#d2e638 46%,#c3d825 59%,#aac52f 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf18e', endColorstr='#aac52f',GradientType=0 ); /* IE6-9 */
+	-webkit-box-shadow: 0px 1px 2px #777;
+	-moz-box-shadow: 0px 1px 2px #777;
+	box-shadow: 0px 1px 2px #777;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(css/PIE.htc);
+}
+.catalog .item .bottom:hover {
+	background: #BBD057 url(i/right-white.png) 12px 16px no-repeat;
+}
+.catalog .item .bottom:hover .delta {
+	color: #BBD057;
+}
+.catalog .item .bottom:hover .price,
+.catalog .item .bottom:hover .price .ru {
+	color:#fff;
+}
+.catalog .item .bottom .edit-menu {
+	display: none;
+	position: absolute;
+	z-index: 999;
+	top: 45px;
+	left: 30px;
+	background: white;
+	width: 210px;
+	padding: 15px 0px 15px 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0px 0 20px #CCC;
+	behavior: url(css/PIE.htc);
+}
+.catalog .item .bottom .edit-menu .delta {
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	top: -12px;
+	left: 32px;
+	font-size: 30px;
+	z-index: 2;
+	line-height: 22px;
+	color: #fff;
+}
+.catalog .item .bottom .edit-menu a {
+	color:#313535;
+	font-size:15px;
+	font-weight:bold;
+	float:left;
+	width:160px;
+	padding: 6px 0 6px 40px;
+	text-decoration: none;
+	margin: 0 0 5px;
+}
+.catalog .item .bottom .edit-menu a:hover {
+	text-decoration: underline;
+}
+.catalog .item .bottom .edit-menu a.add {
+	background: url(i/add.png) left center no-repeat;
+}
+.catalog .item .bottom .edit-menu a.edit {
+	background: url(i/edit.png) left center no-repeat;
+}
+.catalog .item .bottom .edit-menu a.del {
+	background: url(i/delete.png) left center no-repeat;
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="KSM_ORDERS_PRINTFORMS_CONFIG"
+		label="KSM_ORDERS_PRINTFORMS_CONFIG_LABEL"
+		description="KSM_ORDERS_PRINTFORMS_CONFIG_DESC">
+
+		<field
+			name="printforms_companyname"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_COMPANYNAME_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_COMPANYNAME_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="printforms_companyaddress"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_COMPANYADDRESS_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_COMPANYADDRESS_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>		
+
+		<field
+			name="printforms_companyphone"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_COMPANYPHONE_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_COMPANYPHONE_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>				
+			
+		<field
+			name="printforms_nds"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_NDS_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_NDS_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>		
+
+		<field
+			name="printforms_ceo_name"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_CEONAME_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_CEONAME_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>		
+
+		<field
+			name="printforms_buh_name"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_BUHNAME_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_BUHNAME_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_bank_account_number"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_BANKACCOUNTNUMBER_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_BANKACCOUNTNUMBER_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_inn"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_INN_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_INN_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_kpp"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_KPP_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_KPP_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_bankname"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_BANKNAME_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_BANKNAME_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_bank_kor_number"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_BANKKORNUMBER_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_BANKKORNUMBER_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_bik"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_BIK_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_BIK_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_ip_name"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_IPNAME_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_IPNAME_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>	
+
+		<field
+			name="printforms_ip_registration"
+			type="text"
+			label="KSM_ORDERS_PRINTFORMS_IPREGISTRATION_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_IPREGISTRATION_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+
+		<field name="printforms_company_logo" label="KSM_ORDERS_PRINTFORMS_COMPANYLOGO_LABEL" type="media" directory="ksenmart" class="inputbox_205" labelclass="inputname" />
+        
+		<field
+			name="printforms_congritulation_message_template"
+			type="textarea"
+			label="KSM_ORDERS_PRINTFORMS_CMT_LABEL"
+			description="KSM_ORDERS_PRINTFORMS_CMT_DESC"
+			labelclass="inputname"
+            rows="10"
+            cols="50"
+            filter="safehtml"
+		/>
+
+	</fieldset>
+</config>

@@ -1,0 +1,27 @@
+.km-path {
+   float: left;
+   width:100%;
+   color:#383838;
+   font-size:14px;
+   height: 45px;
+   line-height: 40px;
+   margin: 0 0 20px 5px;
+   position: relative;
+}
+.km-path .logo{
+	display:inline-block;
+	width:132px;
+	height:43px;
+	 background: url(i/logo.png) 0% 0% no-repeat;
+}
+.km-path a {
+   float: left;
+   margin: 0 10px 0 0;
+}
+.km-path span {
+   float: left;
+   background: url(i/sep.png) center center no-repeat;
+   width:13px;
+   height: 13px;
+   margin: 14px 10px 0 0;
+}

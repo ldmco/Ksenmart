@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_ksenmart/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_PAYMENTS_PAYMENT_TITLE_LBL"
+			description ="KSM_PAYMENTS_PAYMENT_TITLE_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="type"
+			type="paymenttype"
+			default=""
+			label="KSM_PAYMENTS_PAYMENT_TYPE_LBL"
+			description ="KSM_PAYMENTS_PAYMENT_TYPE_DESC"
+			labelclass="inputname"
+		/>		
+		
+		<field
+			name="params"
+			type="text"
+		/>	
+		
+		<field
+			type="editor"
+			name="description" 
+			label="KSM_PAYMENTS_PAYMENT_DESCRIPTION_LBL"
+			description="KSM_PAYMENTS_PAYMENT_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+		/>		
+
+		<field
+			name="published"
+			default="0"
+			label="KSM_STATUS_LBL"
+			labelclass="inputname" 
+			description="KSM_STATUS_DESC"
+			type="checkbox" 
+			value="1"
+		/>	
+
+		<field 
+			name="images" 
+			type="images" 
+			label="KSM_PHOTOS"
+			class="active"
+			upload_to="media/ksenmart/images/payments/original"
+			upload_folder="payments"
+		/>			
+
+		<field 
+			name="regions" 
+			type="regions" 
+			class="active"				
+		/>
+        
+	</fieldset>
+</form>

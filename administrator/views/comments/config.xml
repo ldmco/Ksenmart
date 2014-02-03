@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="KSN_SHOPREVIEWS_CONFIG"
+		label="KSN_SHOPREVIEWS_LABEL"
+		description="KSN_SHOPREVIEWS_CONFIG_DESC">
+        
+		<field
+			name="count_symbol"
+			type="text"
+            default="200"
+			label="KSN_SHOPREVIEWS_COUNT_SYMBOL_LABEL"
+			labelclass="inputname"
+			class="inputbox_205"
+        />
+	</fieldset>
+</config>

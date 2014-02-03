@@ -1,0 +1,86 @@
+#ksenmart-map {
+	margin-left:50px;
+}
+
+#ksenmart-map-inner{
+	position: relative;
+}
+
+#ksenmart-map-close{
+	display:none;
+}
+
+#ksenmart-map-status{
+	display:none;
+}
+
+#ksenmart-map-input{
+	margin-bottom:10px;
+}
+
+#ksenmart-map-to{
+	padding: 5px 5px 5px 9px;
+	color: #4C4C4C;
+	font-size: 15px;
+	height: 20px;
+	font-family: "Trebuchet MS";
+	background: url(i/inputbox.png) top left no-repeat;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid	#F3F3F3;
+	vertical-align: middle;
+	width:550px;
+}
+
+#ksenmart-map-ok{
+	display:none;
+}
+
+#ksenmart-map-clear{
+	display:none;	
+}
+
+#ksenmart-map .separator{
+	display:none;	
+}
+
+#ksenmart-map-to-region,#ksenmart-map-to-moscow,#ksenmart-map-to-me{
+	display:none;	
+}
+
+#ksenmart-map-search{
+	display:none;	
+	position:absolute;
+	z-index:10000;
+	background:#fff;
+	border:1px solid #ccc;
+	display:none;
+}
+
+#ksenmart-map-search ul{
+	list-style:none;
+}
+
+#ksenmart-map-search ul li{
+	padding:3px 4px;
+	min-width:400px;
+}
+
+#ksenmart-map-search ul li:hover{
+	background:#ccc;
+}
+
+#ksenmart-map-search ul li.ksenmart-map-search-item-active{
+	background:#ccc;
+}
+
+#ksenmart-map-layer{
+	height:380px;
+}
+
+.select{
+	height:30px;
+	color: #4C4C4C;
+	font-size: 15px;	
+}
