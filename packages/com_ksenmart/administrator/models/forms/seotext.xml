@@ -42,7 +42,8 @@
 			filter="JComponentHelper::filterText"
 			default=""
 			height="250px"
-		/>		
+			buttons="true"
+		/>
 		
 		<field 
 			name="categories"

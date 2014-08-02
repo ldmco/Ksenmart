@@ -172,6 +172,7 @@
 			filter="JComponentHelper::filterText"
 			default=""
 			height="250px"
+			buttons="true"
 		/>
 		
 		<field
@@ -182,6 +183,7 @@
 			filter="JComponentHelper::filterText"
 			default=""
 			height="250px"
+			buttons="true"
 		/>
 		
 		<field 
