@@ -6,7 +6,7 @@ function setSeoType(obj) {
         var seo_type = jQuery(obj).val();
         var layout = 'default_' + seo_type;
         jQuery.ajax({
-            url: 'index.php?option=com_ksen&view=seo&layout=' + layout + '&seo_type=' + seo_type + '&tmpl=ksenmart',
+            url: 'index.php?option=com_ksen&view=seo&layout=' + layout + '&seo_type=' + seo_type + '&tmpl=ksenmart&extension=com_ksenmart',
             success: function(html) {
                 jQuery('#seo_content').html(html);
                 var params = {
