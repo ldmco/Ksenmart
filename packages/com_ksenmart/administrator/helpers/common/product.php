@@ -71,7 +71,10 @@ class KSMProducts {
             } else {
                 $row->img_link = JURI::root() . 'media/com_ksenmart/images/products/no.jpg';
             }
+
             $row->add_link_cart = KSFunctions::getAddToCartLink($row->price, 2);
+            $row->tags = new JHelperTags;
+            $row->tags->getItemTags('com_ksenmart.product', $row->id);
         }
         $ext_name = $old_ext_name;
         return $row;

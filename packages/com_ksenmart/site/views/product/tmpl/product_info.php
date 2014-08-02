@@ -1,4 +1,4 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php defined('_JEXEC') or die; ?>
 <? if (!empty($this->product->product_code)){ ?>
 <div class="control-group">
 	<label class="control-label"><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></label>
@@ -24,14 +24,14 @@
 		</div>
 	</div>
 <?php } ?>
-<?php if(!empty($this->product->tag)){ ?>
+<?php if(!empty($this->product->tags->itemTags)){ ?>
 	<div class="control-group">
 		<label class="control-label"><?php echo JText::_('KSM_PRODUCT_TAG'); ?></label>
 		<div class="controls">
-			<span><a href="javascript:void(0);"><?php echo $this->product->tag?></a></span>
+			<?php echo JLayoutHelper::render('joomla.content.tags', $this->product->tags->itemTags); ?>
 		</div>
 	</div>
-<?php } ?>	
+<?php } ?>
 <?php if(isset($this->product->manufacturer->country) && count($this->product->manufacturer->country)>0){ ?>
 	<div class="control-group">
 		<label class="control-label"><?php echo JText::_('KSM_PRODUCT_COUNTRY'); ?></label>
