@@ -9,7 +9,7 @@ class KsenControllerSettings extends KsenController {
         $app = JFactory::getApplication();
         $model = $this->getModel('settings');
         $form = $model->getForm();
-		$extension = JRequest::getVar('extension', null);
+        $extension = JRequest::getVar('extension', null);
         $data = JRequest::getVar('jform', array() , 'post', 'array');
         $id = JRequest::getInt('id');
         
@@ -65,20 +65,18 @@ class KsenControllerSettings extends KsenController {
         return true;
     }
 
-    function del_images_cache() {
+    public function del_images_cache() {
+        $extension = JRequest::getVar('extension', null);
         $path = JPATH_ROOT.'/media/'.$extension.'/images';
-        $folders = scandir($path);
+
+        $folders = JFolder::folders($path, '.', false, false , array('tmp', 'icons'));
         foreach($folders as $folder){
-            if($folder != '.' && $folder != 'original' && is_dir($path.'/'.$folder)){		
-				$subfolders = scandir($path.'/'.$folder);		
-				foreach($subfolders as $subfolder){
-					if($subfolder != '.' && $subfolder != 'original' && $subfolder != '..' && is_dir($path.'/'.$folder.'/'.$subfolder)){
-						JFolder::delete($path.'/'.$folder.'/'.$subfolder);
-					}
-				}
-			}
-		}
-        $this->setRedirect('index.php?option=com_ksen&view=settings&extension='.$extension);
+            $subfolders = JFolder::folders($path.'/'.$folder, '.', false, false , array('original', 'thumb'));
+            foreach($subfolders as $subfolder){
+                JFolder::delete($path.'/'.$folder.'/'.$subfolder);
+            }
+        }
+        $this->setRedirect('index.php?option=com_ksen&view=settings&extension=' . $extension);
 
         return true;
     }
