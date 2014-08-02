@@ -9,6 +9,7 @@ jQuery(document).ready(function() {
             KMShowMessage(Joomla.JText._('KSM_PAYMENTS_PAYMENT_INVALID_TITLE_LBL'));
             return false;
         }
+        form.unbind('submit');
         form.submit();
         return true;
     });
