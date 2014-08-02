@@ -140,7 +140,11 @@ class KsenMartModelcatalog extends JModelKSList {
         }
         if (count($this->_countries) > 0) {
             $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
+            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
         }
+        if (count($this->_manufacturers) > 0) {
+            $this->_ids = $this->getIdsByManufacturers($this->_manufacturers);
+        }   
         
         $this->onExecuteAfter('getProductsIds', array(&$this->_ids));
         return $this->_ids;
@@ -188,7 +192,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $this->onExecuteAfter('getIdsByPropertiesV', array(&$props));
             return $props;
         }
-        return array(0);
+        return array();
     }
     
     /**
@@ -204,23 +208,21 @@ class KsenMartModelcatalog extends JModelKSList {
             $where_pv = array();
             end($properties);
             $last_value = key($properties);
-            
+ 
+            $query = $this->_db->getQuery(true); 
             foreach ($properties as $property_id => $property_values) {
                 if (!empty($property_values)) {
-                    $where_pv[0] = "(value_id IN (" . implode(',', $property_values) . "))";
-                    if($last_value != $property_id){
-                        $where_pv[0] .= ' OR ';
-                    }
+                    $query->innerjoin('#__ksenmart_product_properties_values as kppv'.$property_id.' on kppv'.$property_id.'.product_id=p.id');
+                    $where_pv[] = '(kppv'.$property_id.'.value_id IN (' . implode(',', $property_values) . '))';
                 }
             }
             if (!empty($this->_ids)){
-                $where_pv[] = "(product_id IN (" . implode(',', $this->_ids) . "))";
+                $where_pv[] = "(p.id IN (" . implode(',', $this->_ids) . "))";
             }
-            $query = $this->_db->getQuery(true);
             $query
-                ->select('product_id')
-                ->from('#__ksenmart_product_properties_values')
-                ->group('product_id')
+                ->select('p.id')
+                ->from('#__ksenmart_products as p')
+                ->group('p.id')
                 ->where($where_pv)
             ;
             $this->_db->setQuery($query);
@@ -308,10 +310,20 @@ class KsenMartModelcatalog extends JModelKSList {
             $price_where_l  = array();
             $price_where_m  = array();
             
-            $currencies  = KSMPrice::getCurrencies();
+            $query          = $this->_db->getQuery(true);
+            $query
+                ->select('
+                    c.id, 
+                    c.rate
+                ')
+                ->from('#__ksenmart_currencies AS c')
+            ;
+            $this->_db->setQuery($query);
+            $currencies  = $this->_db->loadObjectList('id');
+            
             foreach ($currencies as $key => $value) {
-                $cur_price_l = $price_less / $currencies[$key]->rate;
-                $cur_price_m = $price_more / $currencies[$key]->rate;
+                $cur_price_l = $price_less * $currencies[$key]->rate;
+                $cur_price_m = $price_more * $currencies[$key]->rate;
                 
                 $price_where_l[] = '(p.price>='.$this->_db->escape($cur_price_l).' AND p.price_type='.$this->_db->escape($currencies[$key]->id).')';
                 $price_where_m[] = '(p.price<='.$this->_db->escape($cur_price_m).' AND p.price_type='.$this->_db->escape($currencies[$key]->id).')';
@@ -322,12 +334,12 @@ class KsenMartModelcatalog extends JModelKSList {
             if (count($price_where_m)) {
                 $where[] = '(' . implode(' OR ', $price_where_m) . ')';
             }
-            
             $this->onExecuteAfter('getIdsByMMPrices', array(&$where));
             return $this->getProductsIdsByWhere($where);
         }
         return array(0);        
     }
+    
     
     /**
      * KsenMartModelcatalog::getIdsByCategories()
@@ -403,6 +415,29 @@ class KsenMartModelcatalog extends JModelKSList {
         }
         return array(0);
     }
+    
+    private function getIdsByManufacturers($manufacturers){
+        $this->onExecuteBefore('getIdsByManufacturers', array(&$manufacturers));
+        
+        if(!empty($manufacturers)){
+            $where = array();
+            if(count($this->_ids) > 0){
+                $where[] = "(p.id IN (" . implode(',', $this->_ids) . "))";
+            }
+            if(count($manufacturers) > 0){
+                $where[] = "(p.manufacturer IN (" . implode(',', $manufacturers) . "))";
+            }           
+            $query = $this->_db->getQuery(true);
+            $query->select('p.id')->from('#__ksenmart_products as p')->where($where);
+            $this->_db->setQuery($query);
+            $this->_ids = $this->_db->loadColumn();
+            $this->_ids = count($this->_ids) > 0 ? $this->_ids : array(0);  
+            
+            $this->onExecuteAfter('getIdsByManufacturers', array(&$this->_ids));        
+            return $this->_ids;
+        }
+        return array(0);
+    }
 
     /**
      * KsenMartModelcatalog::getListQuery()
@@ -445,36 +480,51 @@ class KsenMartModelcatalog extends JModelKSList {
      */
     public function getFilterProperties() {
         $this->onExecuteBefore('getFilterProperties');
-
-        if(empty($this->_ids)){
-            $this->_ids = $this->getProductsIds();
+        
+        $this->_ids = array();
+        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+            $ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
         }
-
-        $where = $this->getFilterDefaultParams();
+        if (count($this->_categories) > 0) {
+            $ids = $this->getIdsByCategories($this->_categories);
+        }
+        if (count($this->_countries) > 0) {
+            $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
+            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
+        }
+        if (count($this->_manufacturers) > 0) {
+            $ids = $this->getIdsByManufacturers($this->_manufacturers);
+        }   
+        $request_props = $this->getIdsByPropertiesV($this->_properties);
         
         $query = $this->_db->getQuery(true);
-        $query
-            ->select('
-                ppv1.value_id, 
-                ppv1.property_id
-            ')
-            ->from('#__ksenmart_product_properties_values AS ppv1')
-            ->leftjoin('#__ksenmart_products AS p on p.id=ppv1.product_id')
-        ;
-        if ($this->_params->get('show_out_stock') != 1) {
-            $where[] = "(p.in_stock>0)";
-        }
-        $query->where($where);
-        $query->group('ppv1.value_id');
+        $query->select('id')->from('#__ksenmart_properties')->where('published=1');
         $this->_db->setQuery($query);
-        $values = $this->_db->loadObjectList();
-        
-        $properties = array();
-        foreach ($values as $value) {
-            if (!isset($properties[$value->property_id])){
-                $properties[$value->property_id] = array();
-            }
-            $properties[$value->property_id][] = $value->value_id;
+        $db_props = $this->_db->loadColumn();
+
+        $properties = array();      
+        foreach($db_props as $property_id)
+        {
+            $this->_ids = $ids;
+            $props = $request_props;
+            unset($props[$property_id]);
+            if (count($props))
+                $this->_ids = $this->getIdsByPropertiesPV($props);
+            
+            $where = $this->getFilterDefaultParams();
+            $where[] = 'ppv1.property_id = '.$property_id;
+            $query = $this->_db->getQuery(true);
+            $query
+                ->select('ppv1.value_id')
+                ->from('#__ksenmart_product_properties_values AS ppv1')
+                ->leftjoin('#__ksenmart_products AS p on p.id=ppv1.product_id')
+            ;
+            $query->where($where);
+            $query->group('ppv1.value_id');
+            $this->_db->setQuery($query);
+            $values = $this->_db->loadColumn();
+            
+            $properties[$property_id] = $values;
         }
         
         $this->onExecuteAfter('getFilterProperties', array(&$properties));
