@@ -94,24 +94,60 @@ class KSMProducts {
     public static function getLinks($pid) {
         if ($pid > 0) {
             $db = JFactory::getDBO();
+
             $query = $db->getQuery(true);
-            $query->select('id')->from('#__ksenmart_products')->where('id<' . $db->escape($pid))->order('id DESC');
+            $query
+                ->select('category_id')
+                ->from('#__ksenmart_products_categories')
+                ->where('product_id=' . $db->q($pid))
+                ->where('is_default=1')
+            ;
+            $db->setQuery($query, 0, 1);
+            $cid = $db->loadResult();
+
+            $query = $db->getQuery(true);
+            $query
+                ->select('product_id')
+                ->from('#__ksenmart_products_categories')
+                ->where('product_id<' . $db->q($pid))
+                ->where('category_id=' . $db->q($cid))
+                ->order('product_id DESC')
+            ;
             $db->setQuery($query, 0, 1);
             $prev_id = $db->loadResult();
+
             if (empty($prev_id)) {
                 $query = $db->getQuery(true);
-                $query->select('max(id)')->from('#__ksenmart_products');
+                $query
+                    ->select('MAX(product_id)')
+                    ->from('#__ksenmart_products_categories')
+                    ->where('category_id=' . $db->q($cid))
+                    ->where('is_default=1')
+                ;
                 $db->setQuery($query, 0, 1);
                 $prev_id = $db->loadResult();
             }
+
             $query = $db->getQuery(true);
-            $query->select('id')->from('#__ksenmart_products')->where('id>' . $db->escape($pid))->order('id ASC');
-            
+            $query
+                ->select('product_id')
+                ->from('#__ksenmart_products_categories')
+                ->where('product_id>' . $db->q($pid))
+                ->where('category_id=' . $db->q($cid))
+                ->where('is_default=1')
+                ->order('product_id ASC')
+            ;
             $db->setQuery($query, 0, 1);
             $next_id = $db->loadResult();
+
             if (empty($next_id)) {
                 $query = $db->getQuery(true);
-                $query->select('min(id)')->from('#__ksenmart_products');
+                $query
+                    ->select('MIN(product_id)')
+                    ->from('#__ksenmart_products_categories')
+                    ->where('category_id=' . $db->q($cid))
+                    ->where('is_default=1')
+                ;
                 $db->setQuery($query, 0, 1);
                 $next_id = $db->loadResult();
             }
