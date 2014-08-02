@@ -1,0 +1,47 @@
+.discount {
+	float: left;
+	width:630px;
+	background: #EDEDF0;
+	padding: 15px 30px 15px 40px;
+	margin: 20px 0 0;
+	color: #2c2e32;
+	position: relative;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(css/PIE.htc);
+}
+.discount span {
+	font-size:70px;
+	line-height:70px;
+	font-weight:bold;
+	float: left;
+	width:75px;
+}
+.discount p {
+	font-size:18px;
+	line-height:20px;
+	float: left;
+	width:380px;
+	margin: 3px 0 0;
+}
+.discount a {
+	float: right;
+	color: #2c2e32;
+	font-size:27px;
+	margin: 15px 0 0;
+}
+.discount .delta {
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	top: -12px;
+	right: 65px;
+	font-size: 80px;
+	z-index: 2;
+	line-height: 25px;
+	color: #EDEDF0;
+}
+
+.discount .login-form {
+	display: none;
+}

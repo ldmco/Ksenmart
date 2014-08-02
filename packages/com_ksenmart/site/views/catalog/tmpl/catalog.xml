@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="KSM_CATALOG_LAYOUT" >
+		<message>
+			<![CDATA[KSM_CATALOG_LAYOUT_DESC]]>
+		</message>
+	</layout>
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset 
+            name="request" 
+            addfieldpath="/plugins/system/ksencore/core/models/fields"
+        >
+
+			<field 
+				type="kscategories" 
+				name="categories"
+                extension="ksenmart"
+				default="" 
+				label="KSM_FIELD_CATEGORIES_LBL" 
+				description="KSM_FIELD_CATEGORIES_DESC"
+				usedefault="0"
+				multiple="true"
+			/>
+		
+		</fieldset>
+	</fields>
+</metadata>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="kmdiscount" version="2.5.0" method="upgrade">
+    <name>KSM_DISCOUNT_COUNTDOWN</name>
+    <version>2.0.0</version>
+    <creationDate>March 2014</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <description>KSM_DISCOUNT_COUNTDOWN_DESCRIPTION</description>
+	
+    <files>
+		<filename plugin="countdown">countdown.php</filename>
+        <filename>index.html</filename>
+		<folder>sql</folder>
+    </files>
+	
+    <languages folder="language">
+		<language tag="ru-RU">ru-RU/ru-RU.plg_kmdiscount_countdown.sys.ini</language>
+    </languages>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <updateservers>
+        <server type="extension" priority="1" name="countdown">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_countdown-update.xml</server>
+    </updateservers>
+
+</extension>

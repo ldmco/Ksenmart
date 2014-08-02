@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details" addfieldpath="/plugins/system/ksencore/core/models/fields">
+		<field type="text" name="title" class="inputbox imagetitles" default="" label="KSM_PHOTOS_TITLE_LBL" labelclass="inputname" />
+		<field type="hidden" name="orient" default="" />
+		<field type="imagedisplace" name="displace" default="0" label="KSM_PHOTOS_INSCRIBE_LBL" labelclass="inputname" />
+		<field type="imagewatermark" name="watermark" default="0" label="KSM_PHOTOS_WATERMARK_LBL" labelclass="inputname" />
+		<field type="list" name="halign" label="KSM_PHOTOS_HALIGN_LBL" default="center" class="sel" labelclass="inputname" >
+			<option value="left">KSM_PHOTOS_HALIGN_LEFT</option>
+			<option value="center">KSM_PHOTOS_HALIGN_CENTER</option>
+			<option value="right">KSM_PHOTOS_HALIGN_RIGHT</option>
+		</field>
+		<field type="list" name="valign" label="KSM_PHOTOS_VALIGN_LBL" default="center" class="sel" labelclass="inputname" >
+			<option value="top">KSM_PHOTOS_VALIGN_TOP</option>
+			<option value="middle">KSM_PHOTOS_VALIGN_MIDDLE</option>
+			<option value="bottom">KSM_PHOTOS_VALIGN_BOTTOM</option>
+		</field>
+	</fieldset>
+</form>

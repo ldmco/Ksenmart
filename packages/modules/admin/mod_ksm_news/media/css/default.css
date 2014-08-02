@@ -1,0 +1,24 @@
+.module_events {
+	margin-bottom: 15px;
+}
+
+.event__item {
+	background-color: #1D86BA;
+	color: #FFF;
+	padding: 10px 15px;
+}
+
+#tree ul li .event__item .item-title a{
+	padding: 0;
+	color: #FFF;
+	text-decoration: underline;
+}
+
+#tree ul li .event__item .item-title a:hover{
+	text-decoration: none;
+}
+
+.event__item .item-desc{
+	font-size: 16px;
+	margin-top: 10px;
+}

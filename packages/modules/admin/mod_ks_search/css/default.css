@@ -1,0 +1,26 @@
+.km-search {
+    float: left;
+    width:250px;
+    margin: 1px 20px 17px 0;
+}
+.km-search .inputbox {
+    float: left;
+    width:200px;
+    padding: 5px 5px 5px 10px;
+    color: #d1d1d1;
+    font-size: 14px;
+    height: 20px;
+    font-family:   "Trebuchet MS";
+    background: url(i/search-input.png) top left no-repeat;
+    border: none;
+    margin: 0 7px 0 0;
+}
+.km-search .button {
+    border: none;
+    float: left;
+    background: url(i/search.png) top center no-repeat;
+    width:28px;
+    height:28px;
+    cursor: pointer;
+    margin: 1px 0 0;
+}

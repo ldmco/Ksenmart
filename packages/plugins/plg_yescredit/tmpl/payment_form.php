@@ -1,0 +1,2 @@
+<?php defined('_JEXEC') or die(); ?>
+<input type="button" onclick='<?php echo $view->yescredit_onlick;?>' value="<?php echo JText::_('ksm_payment_yescredit_orderbutton_text');?>" class="button btn-success btn-large noTransition">

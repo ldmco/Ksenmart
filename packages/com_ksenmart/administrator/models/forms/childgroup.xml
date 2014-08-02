@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_CATALOG_CHILD_GROUP_TITLE_LBL"
+			description ="KSM_CATALOG_CHILD_GROUP_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			type="hidden"
+			name="product_id"
+		/>		
+		
+	</fieldset>
+</form>

@@ -1,0 +1,1 @@
+DELETE FROM `#__modules` WHERE `module`='mod_km_payment_types';

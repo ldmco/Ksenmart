@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<extension type="module" version="1.0.0" method="upgrade" client="administrator">
+    <name>MODULE_KSM_NEWS</name>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0</version>
+    <creationDate>July 2014</creationDate>
+    <description>MOD_KSM_NEWS_DESC</description>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <files>
+        <filename module="mod_ksm_news">mod_ksm_news.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+    </files>
+
+	<languages>
+		<language tag="en-GB">language/en-GB.mod_ksm_news.ini</language>
+		<language tag="en-GB">language/en-GB.mod_ksm_news.sys.ini</language>
+		<language tag="ru-RU">language/ru-RU.mod_ksm_news.ini</language>
+		<language tag="ru-RU">language/ru-RU.mod_ksm_news.sys.ini</language>
+	</languages>
+
+    <updateservers>
+        <server type="extension" priority="1" name="mod_ksm_news">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_ksm_news-update.xml</server>
+    </updateservers>
+
+    <media folder="media" destination="mod_ksm_news">
+        <folder>css</folder>
+        <filename>index.html</filename>
+    </media>
+
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                       description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+                <field name="cache" type="list" label="COM_MODULES_FIELD_CACHING_LABEL"
+                       description="COM_MODULES_FIELD_CACHING_DESC" default="1">
+                    <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

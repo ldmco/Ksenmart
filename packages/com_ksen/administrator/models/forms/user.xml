@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" default="0" class="id" />
+		
+		<field name="social" type="hidden" default="0" />
+	
+		<field
+			name="first_name"
+			type="text"
+			default=""
+			label="KS_USERS_USER_FIRSTNAME_LBL"
+			description ="KS_USERS_USER_FIRSTNAME_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="last_name"
+			type="text"
+			default=""
+			label="KS_USERS_USER_LASTNAME_LBL"
+			description ="KS_USERS_USER_LASTNAME_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="middle_name"
+			type="text"
+			default=""
+			label="KS_USERS_USER_MIDDLENAME_LBL"
+			description ="KS_USERS_USER_MIDDLENAME_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>		
+
+		<field
+			name="username"
+			type="text"
+			default=""
+			label="KS_USERS_USER_USERNAME_LBL"
+			description ="KS_USERS_USER_USERNAME_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="password"
+			type="password"
+			autocomplete="off"
+			default=""
+			label="KS_USERS_USER_PASSWORD_LBL"
+			description ="KS_USERS_USER_PASSWORD_DESC"
+			class="inputbox validate-password width360px"
+			labelclass="inputname"
+			filter="raw"
+		/>		
+
+		<field
+			name="password2"
+			type="password"
+			autocomplete="off"
+			default=""
+			label="KS_USERS_USER_PASSWORD2_LBL"
+			description ="KS_USERS_USER_PASSWORD2_DESC"
+			class="inputbox validate-password width360px"
+			labelclass="inputname"
+			filter="raw"
+			validate="equals"
+			field="password2"			
+		/>
+		
+		<field
+			name="email"
+			type="email"
+			default=""
+			label="KS_USERS_USER_EMAIL_LBL"
+			description ="KS_USERS_USER_EMAIL_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+			validate="email"
+		/>		
+		
+		<field
+			name="phone"
+			type="text"
+			default=""
+			label="KS_USERS_USER_PHONE_LBL"
+			description ="KS_USERS_USER_PHONE_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>			
+
+		<field
+			name="region_id"
+			type="region"
+			label="KS_USERS_USER_REGION_LBL"
+			description ="KS_USERS_USER_REGION_DESC"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="fields"
+			type="userfields"
+		/>	
+
+		<field
+			name="addresses"
+			type="useraddresses"
+			label="KS_USERS_USER_ADDRESSES_LBL"
+			wrap="slidemodule"
+			class="active"			
+		/>			
+			
+		<field 
+			name="images" 
+			type="images" 
+			label="KS_PHOTOS"
+			class="active"
+			upload_to="media/com_ksen/images/users/original"
+			upload_folder="users"
+			extension="com_ksen"
+		/>		
+			
+		<field
+			name="groups"
+			type="usergroups"
+			label="KS_USERS_USER_GROUPS_LBL"
+			wrap="slidemodule"
+			class="active"
+		/>				
+
+	</fieldset>
+</form>

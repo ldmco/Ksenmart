@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<extension type="plugin" version="3.0" method="upgrade" group="system">
+    <name>KsenCore</name>
+    <author>TakT</author>
+    <authorEmail>kirill.bereza@yandex.ru</authorEmail>
+    <authorUrl>http://brainstorage.me/TakT</authorUrl>
+    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0.2</version>
+    <description>PLG_KSENCORE_DESC</description>
+    <scriptfile>script.php</scriptfile>
+    
+    <files>
+        <folder>core</folder>
+        <filename plugin="ksencore">ksencore.php</filename>
+        <filename>index.html</filename>
+    </files>
+
+	<languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_system_ksencore.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_ksencore.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_system_ksencore.sys.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_ksencore.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    type="radio"
+                    name="angularJS"
+                    default="1"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+    
+    <updateservers>
+        <server type="extension" priority="1" name="ksencore">http://update.ksenmart.ru/update-info/j3/ksen_extensions/plugins/plg_ksencore-update.xml</server>
+    </updateservers>
+
+</extension>

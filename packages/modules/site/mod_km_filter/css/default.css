@@ -1,0 +1,135 @@
+/* TrackBar */
+.mod_ksm_filter .tracker {
+	background:repeat-x url(../images/b_bg_off.png) center left;
+	height:20px;
+	position: relative;
+}
+.mod_ksm_filter .tracker div{
+	top: 0;
+	height: 20px;
+	position: absolute;
+	z-index: 1;
+	height:20px;
+	display: block;
+	background:url(../images/b_bg_on.png) center left repeat-x;
+}
+.mod_ksm_filter .tracker a{
+	width:20px;
+	height:20px;
+	position: absolute;
+	z-index: 2;	
+	cursor:pointer;
+	top:0px;
+	margin-left:-10px;
+}
+.mod_ksm_filter .tracker a:nth-child(2){
+	background:url(../images/b_l.png) center left no-repeat;
+}
+.mod_ksm_filter .tracker a:nth-child(3){
+	background:url(../images/b_r.png) center left no-repeat;
+}
+.mod_ksm_filter .property .image_item img {
+    float: left;
+    width: 100%;
+    width: 26px;
+    height: 26px;
+    display: block;
+    border: 2px solid #EDEDF0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.mod_ksm_filter .property .image_item div {
+    cursor: pointer;
+    float: left;
+    position: relative;
+    z-index: 2;
+}
+
+.mod_ksm_filter .property  li.item_img {
+    padding: 3px 10px;
+}
+
+.mod_ksm_filter .property  .nav li.active a {
+    position: relative;
+}
+
+.mod_ksm_filter .property  .nav li.item_img.active a,
+.mod_ksm_filter .property  .nav li.item_img a:hover{
+    background-color: transparent;
+}
+
+.mod_ksm_filter .property  li.item_img.active{
+    border: none;
+}
+
+.mod_ksm_filter .property  .image_item.active img{
+    border: 2px solid #424242;
+}
+
+.mod_ksm_filter .property  .nav li.active a label:before{
+    position: absolute;
+    content: "x";
+    top: -5px;
+    right: -10px;
+}
+
+.mod_ksm_filter .property  .image_item .delta{
+    cursor: pointer;
+    color: #EDEDF0;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    bottom: -8px;
+    left: 7px;
+    font-size: 20px;
+    z-index: 1;
+    line-height: 20px;
+    border: none;
+}
+
+.mod_ksm_filter .property  .image_item.active .delta {
+    color: #424242!important;
+}
+
+.mod_ksm_filter .property  .item{
+    position: relative;
+}
+
+.mod_ksm_filter .prices input {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+    display: inline-block;
+    height: auto;
+    padding: 0;
+    margin-bottom: 0px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    vertical-align: middle;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 0 5px;
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mod_ksm_filter .nav-header {
+    color: #333;
+    font-size: 12px;
+}
+
+.mod_ksm_filter .item input[type="checkbox"] {
+	visibility: hidden;
+	width:0px;
+	height:0px;
+}

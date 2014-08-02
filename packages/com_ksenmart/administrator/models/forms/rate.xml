@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_COMMENTS_RATE_TITLE_LBL"
+			description ="KSM_COMMENTS_RATE_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+	</fieldset>
+</form>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KS_USERS_USERFIELD_TITLE_LBL"
+			description ="KS_USERS_USERFIELD_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+	</fieldset>
+</form>
