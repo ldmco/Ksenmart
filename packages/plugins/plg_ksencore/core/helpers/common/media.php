@@ -154,12 +154,12 @@ class KSMedia {
         $prefix = ucfirst($ext_name);
         
         $in = array();
-        JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . $ext_name_com . DS . 'tables');
+        JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_ksen' . DS . 'tables');
         if (isset($data['images']) && $data['images']) {
             foreach ($data['images'] as $k => $v) {
                 $k = (int)$k;
                 if ($v['task'] == 'save') {
-                    $table = JTable::getInstance('files', $prefix . 'Table', array());
+                    $table = JTable::getInstance('files', 'KsenTable', array());
                     
                     $v['owner_type'] = $owner_type;
                     $v['media_type'] = 'image';
