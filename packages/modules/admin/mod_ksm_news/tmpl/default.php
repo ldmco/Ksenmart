@@ -4,7 +4,12 @@
 	<?php foreach($events as $event): ?>
 		<div class="event__item">
 			<div class="item-title">
-				<a href="<?php echo $event->link; ?>" title="<?php echo $event->title; ?>"><?php echo $event->title; ?></a>
+				<?php if(isset($event->params->show_title) && $event->params->show_title): ?>
+					<?php if(!empty($event->params->url_from_title)): ?>
+						<?php $event->link = $event->params->url_from_title; ?>
+					<?php endif; ?>
+					<a href="<?php echo $event->link; ?>" title="<?php echo $event->title; ?>" target="_blank"><?php echo $event->title; ?></a>
+				<?php endif; ?>
 			</div>
 			<div class="item-desc"><?php echo $event->introtext; ?></div>
 		</div>

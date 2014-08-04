@@ -22,3 +22,8 @@
 	font-size: 16px;
 	margin-top: 10px;
 }
+
+#tree .module_events .event__item a{
+	width: auto;
+	padding: 0;
+}
