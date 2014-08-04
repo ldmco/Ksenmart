@@ -4,7 +4,7 @@ SET
 	`title` = 'Производители KsenMart', 
 	`position` = 'km-list-left', 
 	`published` = 1,
-	`ordering` = 3,
+	`ordering` = 4,
 	`params` = '{"views":["catalog"]}'
 WHERE 
 	`module` = 'mod_km_manufacturers'
