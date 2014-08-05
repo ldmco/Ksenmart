@@ -1,24 +1,11 @@
-<?php 
-defined( '_JEXEC' ) or die;
+<?php defined('_JEXEC') or die;
 
-if (!class_exists('KsenmartTable')){
-	require JPATH_COMPONENT_ADMINISTRATOR . DS . 'tables' .DS.'ksenmart.php' ;
+if(!class_exists('KsenTable')) {
+    require KSC_ADMIN_PATH_CORE_TABLES . 'ksentable.php';
 }
 
-class KsenmartTableFiles extends KsenmartTable
-{
-	/**
-	 * Constructor
-	 *
-	 * @since	1.5
-	 */
-	function __construct(&$_db)
-	{
-		parent::__construct('#__ksenmart_files', 'id', $_db);
-		//$date = JFactory::getDate();
-		
-	}
-
-
-	
+class KsenMartTableFiles extends KsenTable {
+    public function __construct(&$_db) {
+        parent::__construct('#__ksenmart_files', 'id', $_db);
+    }
 }

@@ -60,7 +60,7 @@ class KSUsers {
                 uf.filename AS logo
             ');
             $query->from('#__ksen_users AS km_u, #__users AS u');
-            $query->leftjoin('#__ksen_files AS uf ON uf.owner_id=u.id');
+            $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
             $query->leftjoin('#__ksen_user_addresses AS ua ON ua.user_id=u.id AND ua.default=1');
             $query->where('u.id=km_u.id');
             $query->where('km_u.id=' . $id);
