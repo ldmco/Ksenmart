@@ -83,7 +83,7 @@ INSERT INTO `#__ksenmart_products` (`id`, `parent_id`, `childs_group`, `title`, 
 (1596, 1593, 0, 'Обои Decoprint Idyllia 15705', 'oboi_decoprint_idyllia_15705', 1900, 0, 1, '', '', '15705', 10, 3, 1.0000, 0, 0, 0, 0, 0, 1, 28, 0, 170, '', '', '', '2013-11-06 13:07:08', 0, 'child', '');
 
 
-INSERT INTO `#__ksen_files` (`id`, `owner_id`, `media_type`, `owner_type`, `folder`, `filename`, `mime_type`, `title`, `ordering`, `params`) VALUES
+INSERT INTO `#__ksenmart_files` (`id`, `owner_id`, `media_type`, `owner_type`, `folder`, `filename`, `mime_type`, `title`, `ordering`, `params`) VALUES
 (17, 1479, 'image', 'product', 'products', '1353679439.1011.jpg', '', '123', 1, ''),
 (18, 1481, 'image', 'product', 'products', '1357832172.8362.jpg', '', '', 1, ''),
 (19, 1481, 'image', 'product', 'products', '1357832175.819.jpg', '', '', 2, ''),

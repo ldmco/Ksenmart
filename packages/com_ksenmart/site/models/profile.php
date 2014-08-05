@@ -616,9 +616,9 @@ class KsenMartModelProfile extends JModelKSList {
             try {
                 $asd = $this->issetUserAvatatFile($uid);
                 if($asd){
-                    $result = $this->_db->updateObject('#__ksen_files', $object, 'owner_id');
+                    $result = $this->_db->updateObject('#__ksenmart_files', $object, 'owner_id');
                 }else{
-                    $result = $this->_db->insertObject('#__ksen_files', $object);
+                    $result = $this->_db->insertObject('#__ksenmart_files', $object);
                 }
                 
                 $this->onExecuteAfter('setUserAvatar', array(&$result));
@@ -634,7 +634,7 @@ class KsenMartModelProfile extends JModelKSList {
         $query = $this->_db->getQuery(true);
         $query
             ->select('f.id')
-            ->from('#__ksen_files AS f')
+            ->from('#__ksenmart_files AS f')
             ->where('owner_id = ' . (int)$uid)
         ;
 

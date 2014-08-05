@@ -106,7 +106,7 @@ class KsenMartModelSearch extends JModelKSList {
                 LEFT JOIN
                     #__ksenmart_products_categories AS pc ON p.id = pc.product_id
                 LEFT JOIN
-                    #__ksen_files AS i ON p.id=i.owner_id
+                    #__ksenmart_files AS i ON p.id=i.owner_id
                 LEFT JOIN
                     #__ksenmart_categories AS c ON pc.category_id=c.id
                 WHERE ";
@@ -128,7 +128,7 @@ class KsenMartModelSearch extends JModelKSList {
                 ->select('p.id, p.title, p.alias, p.price, i.filename, i.folder, pc.category_id')
                 ->from('#__ksenmart_products AS p')
                 ->leftjoin('#__ksenmart_products_categories AS pc ON p.id = pc.product_id')
-                ->leftjoin('#__ksen_files AS i ON p.id=i.owner_id')
+                ->leftjoin('#__ksenmart_files AS i ON p.id=i.owner_id')
                 ->leftjoin('#__ksenmart_categories AS c ON pc.category_id=c.id')
                 ->where('p.title LIKE \'%'.$value.'%\' OR p.content LIKE \'%'.$value.'%\' OR p.introcontent LIKE \'%'.$value.'%\' OR c.title LIKE \'%'.$value.'%\' OR p.tag LIKE \'%'.$value.'%\'')
                 ->where('p.published=1')

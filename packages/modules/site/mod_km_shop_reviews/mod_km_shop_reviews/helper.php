@@ -27,7 +27,7 @@ class ModuleKm_Shop_ReviewsHelper {
         $query->from('#__ksenmart_comments AS c');
         $query->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id');
         $query->leftjoin('#__users AS u ON kmu.id=u.id');
-        $query->leftjoin('#__ksen_files AS uf ON uf.owner_id=u.id');
+        $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
         $query->where("type='shop_review'");
         $query->where("published=1");
         $query->order('date_add DESC');

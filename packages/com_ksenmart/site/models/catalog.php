@@ -463,7 +463,7 @@ class KsenMartModelcatalog extends JModelKSList {
         $query
             ->select('p.id')
             ->from('#__ksenmart_products AS p')
-            ->leftjoin("#__ksen_files AS f ON p.id=f.owner_id AND f.owner_type=".$this->_db->Quote('product'))
+            ->leftjoin("#__ksenmart_files AS f ON p.id=f.owner_id AND f.owner_type=".$this->_db->Quote('product'))
             ->where($where)
             ->order('p.' . $this->getState('list.ordering') . ' ' . $this->getState('list.direction'))
             ->group('p.id')
@@ -690,7 +690,7 @@ class KsenMartModelcatalog extends JModelKSList {
                     f.params
                 ')
                 ->from('#__ksenmart_categories AS c')
-                ->leftjoin('#__ksen_files AS f ON c.id=f.owner_id AND f.owner_type='.$this->_db->Quote('category'))
+                ->leftjoin('#__ksenmart_files AS f ON c.id=f.owner_id AND f.owner_type='.$this->_db->Quote('category'))
                 ->where('c.published=1')
                 ->where('c.id=' . $this->_categories[0])
             ;

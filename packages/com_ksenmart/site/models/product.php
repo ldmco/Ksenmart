@@ -110,7 +110,7 @@ class KsenMartModelProduct extends JModelKSList {
                     c.date_add,
                     uf.filename AS logo, 
                     u.name
-                ')->from('#__ksenmart_comments AS c')->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id')->leftjoin('#__users AS u ON kmu.id=u.id')->leftjoin('#__ksen_files AS uf ON uf.owner_id=u.id')->where('c.product_id=' . $this->_db->escape($pid))->where('c.published=1')->where('c.parent_id=0')->order('c.date_add DESC');
+                ')->from('#__ksenmart_comments AS c')->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id')->leftjoin('#__users AS u ON kmu.id=u.id')->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id')->where('c.product_id=' . $this->_db->escape($pid))->where('c.published=1')->where('c.parent_id=0')->order('c.date_add DESC');
             
             $this->_db->setQuery($query);
             
@@ -151,7 +151,7 @@ class KsenMartModelProduct extends JModelKSList {
                     c.date_add,
                     uf.filename AS logo, 
                     u.name
-                ')->from('#__ksenmart_comments AS c')->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id')->leftjoin('#__users AS u ON kmu.id=u.id')->leftjoin('#__ksen_files AS uf ON uf.owner_id=u.id')->where('c.published=1');
+                ')->from('#__ksenmart_comments AS c')->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id')->leftjoin('#__users AS u ON kmu.id=u.id')->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id')->where('c.published=1');
             
             
             foreach ($comments as $comment) {
@@ -395,7 +395,7 @@ class KsenMartModelProduct extends JModelKSList {
                 f.title,
                 f.ordering,
                 f.params
-            ')->from('#__ksen_files AS f')->where('f.owner_id=' . $this->_db->escape($this->_id))->where('f.owner_type=' . $this->_db->Quote('product'))->order('ordering');
+            ')->from('#__ksenmart_files AS f')->where('f.owner_id=' . $this->_db->escape($this->_id))->where('f.owner_type=' . $this->_db->Quote('product'))->order('ordering');
         $this->_db->setQuery($query);
         $rows = $this->_db->loadObjectList();
         

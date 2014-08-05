@@ -3,9 +3,9 @@
 class KSMProducts {
     
     private static function setProductMainImageToQuery($query) {
-        $query->select('(select f.filename from #__ksen_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as filename');
-        $query->select('(select f.folder from #__ksen_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as folder');
-        $query->select('(select f.params from #__ksen_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as params');
+        $query->select('(select f.filename from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as filename');
+        $query->select('(select f.folder from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as folder');
+        $query->select('(select f.params from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as params');
         return $query;
     }
     
@@ -40,7 +40,7 @@ class KSMProducts {
             if (empty($row->filename)) {
                 if (!empty($row->parent_id)) {
                     $query = $db->getQuery(true);
-                    $query->select('filename')->from('#__ksen_files')->where('owner_type=' . $db->quote('product'))->where('owner_id=' . $row->parent_id)->order('ordering');
+                    $query->select('filename')->from('#__ksenmart_files')->where('owner_type=' . $db->quote('product'))->where('owner_id=' . $row->parent_id)->order('ordering');
                     $db->setQuery($query, 0, 1);
                     $row->filename = $db->loadResult();
                     if (empty($row->filename)) $row->filename = 'no.jpg';
@@ -299,7 +299,7 @@ class KSMProducts {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select('m.*,f.filename,f.folder')->from('#__ksenmart_manufacturers as m');
-        $query->join("LEFT", "#__ksen_files as f on m.id=f.owner_id and f.owner_type='manufacturer'");
+        $query->join("LEFT", "#__ksenmart_files as f on m.id=f.owner_id and f.owner_type='manufacturer'");
         $query->where('m.id=' . $id);
         $db->setQuery($query);
         $row = $db->loadObject();
