@@ -80,7 +80,8 @@ class KsenMartModelSearch extends JModelKSList {
         $this->setState('value', $value);
         $this->setState('correct', $correct);
         
-        $results = parent::getItems($value, $correct = false);
+        $this->getListQuery();
+        $results = parent::getItems($value, $correct);
         
         $this->onExecuteAfter('getProductSearch', array(&$results));
         return $results;
@@ -89,7 +90,7 @@ class KsenMartModelSearch extends JModelKSList {
     protected function getListQuery(){
 
         $value = $this->getState('value', null);
-        $correct = $this->getState('correct', false);
+        $correct = $this->getState('correct', $value);
 
         if(mb_strlen($value, 'utf-8') >= 4){
             if($correct){
@@ -119,7 +120,7 @@ class KsenMartModelSearch extends JModelKSList {
                 $query .= 'MATCH
                     (' . $value . ') 
                 AGAINST 
-                    (\''.$morph_search.'*\' IN BOOLEAN MODE)';
+                    (\'*'.$morph_search.'*\' IN BOOLEAN MODE)';
             }
             $query .= ' GROUP BY p.id';
         }else{
@@ -311,7 +312,7 @@ class KsenMartModelSearch extends JModelKSList {
         
         $this->_db->setQuery($query, 0, $this->_limit_manufacture);
         $results = $this->_db->loadObjectList();
-        
+
         $this->onExecuteAfter('getManufactureSearch', array(&$results));
         return $results;
     }
