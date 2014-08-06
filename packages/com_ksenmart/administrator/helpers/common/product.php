@@ -61,9 +61,9 @@ class KSMProducts {
             
             $row->link = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $row->id . ':' . $row->alias . '&Itemid=' . KSSystem::getShopItemid());
             self::productPricesTransform($row);
-            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'));
-            $row->small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'));
-            $row->img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'));
+            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
+            $row->small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
+            $row->img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
             $row->rate = KSMProducts::getProductRate($row->id);
             
             if (!empty($row->folder)) {
