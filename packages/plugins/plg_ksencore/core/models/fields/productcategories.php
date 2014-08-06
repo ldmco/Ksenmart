@@ -74,6 +74,7 @@ class JFormFieldProductCategories extends JFormFieldCheckboxes {
 			var item=jQuery(obj).parents("li:first");
 			var data = {};
 			data["task"]="catalog.get_properties";
+			data["id"]=jQuery("#jform_id").val();
 			data["categories"]=[];
 			if (item.is(".active"))
 			{
