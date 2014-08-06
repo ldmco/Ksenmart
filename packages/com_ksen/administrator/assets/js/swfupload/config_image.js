@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.popupForm .displace label').on('click', function() {
-        var displace_val = jQuery(this).attr('displace_val');
+        var displace_val = jQuery(this).data().value;
         jQuery(this).parent().find('label').removeClass('selected');
         jQuery(this).addClass('selected');
         jQuery(this).parent().parent().find('input[type="hidden"]').val(displace_val);
@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.popupForm .watermark label').on('click', function() {
-        var watermark_val = jQuery(this).attr('watermark_val');
+        var watermark_val = jQuery(this).data().value;
         jQuery(this).parent().find('label').removeClass('selected');
         jQuery(this).addClass('selected');
         jQuery(this).parent().parent().find('input[type="hidden"]').val(watermark_val);

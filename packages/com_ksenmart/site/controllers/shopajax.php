@@ -418,6 +418,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		$middle_name = JRequest::getVar('middle_name', '');
 		$password = JRequest::getVar('password', '');
 		$subscribe = JRequest::getVar('subscribe', 0);
+		$ajax = JRequest::getVar('ajax', false);
 		$name = '';
 		if (!empty($last_name)) $name .= $last_name.' ';
 		if (!empty($first_name)) $name .= $first_name.' ';
@@ -482,7 +483,10 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			$db->setQuery($query);
 			$db->Query();
 		}
-		$this->setRedirect('/');
+		if ($ajax)
+			$app->close('login');
+		else
+			$this->setRedirect('/');
 	}
 	
 	public function test() {
