@@ -111,6 +111,7 @@ function KMChangeFilter(obj, click) {
 
     var formdata = form.serialize();
     filter_url += '&' + formdata;
+	filter_url += '&Itemid=' + shopItemid;
     page_url += '&' + formdata;
     page_url += '&clicked=' + clicked;
     page_url += '&Itemid=' + shopItemid;

@@ -11,9 +11,8 @@ function KsenMartBuildRoute(&$query) {
     
     if (!isset($query['view'])) $query['view'] = 'catalog';
     
-    if (isset($query['task']) && isset($query['tmpl']) && $query['task'] == 'catalog.filter_products' && $query['tmpl'] == 'ksenmart') {
+    if (isset($query['task']) && $query['task'] == 'catalog.filter_products') {
         unset($query['task']);
-        unset($query['tmpl']);
     }
     
     switch ($query['view']) {
@@ -35,7 +34,7 @@ function KsenMartBuildRoute(&$query) {
             }
         break;
         case 'search':
-            $segments[] = 'search';
+            $segments[] = 'searching';
             if (isset($query['value']) && !empty($query['value'])) {
                 $segments[] = $query['value'];
                 unset($query['value']);
@@ -190,7 +189,7 @@ function KsenMartBuildRoute(&$query) {
                             if (!empty($alias)) $categories[] = $alias;
                             else $categories[] = 'category-' . $category;
                         }
-                        $categories = implode('+', $categories);
+                        $categories = implode(';', $categories);
                         $segments[] = $categories;
                     }
                 }
@@ -236,7 +235,7 @@ function KsenMartBuildRoute(&$query) {
                             if (!empty($alias)) $manufacturers[] = $alias;
                             else $manufacturers[] = 'manufacturer-' . $manufacturer;
                         }
-                        $manufacturers = implode('+', $manufacturers);
+                        $manufacturers = implode(';', $manufacturers);
                         $segments[] = $manufacturers;
                     }
                 }
@@ -274,7 +273,7 @@ function KsenMartBuildRoute(&$query) {
                             if (!empty($alias)) $countries[] = $alias;
                             else $countries[] = 'country-' . $country;
                         }
-                        $countries = implode('+', $countries);
+                        $countries = implode(';', $countries);
                         $segments[] = $countries;
                     }
                 }
@@ -299,8 +298,8 @@ function KsenMartBuildRoute(&$query) {
                         $sql->select('alias')->from('#__ksenmart_properties')->where('id=' . $key);
                         $db->setQuery($sql);
                         $alias = $db->loadResult();
-                        if (!empty($alias)) $segments[] = $alias . '=' . implode('+', $property_values);
-                        else $segments[] = 'property-' . $key . '=' . implode('+', $property_values);
+                        if (!empty($alias)) $segments[] = $alias . '=' . implode(';', $property_values);
+                        else $segments[] = 'property-' . $key . '=' . implode(';', $property_values);
                     }
                 }
                 unset($query['properties']);
@@ -365,14 +364,14 @@ function KsenMartBuildRoute(&$query) {
                     if (isset($segments[1])) $vars['id'] = $segments[1];
                     
                     break;
-                case 'search':
+                case 'searching':
                     $vars['view'] = 'search';
                     if (isset($segments[1])) $vars['value'] = $segments[1];
                     
                     break;
                 default:
                     if (strpos($segment, '=') === false) {
-                        $segment = explode('+', $segment);
+                        $segment = explode(';', $segment);
                         
                         foreach ($segment as $alias) {
                             if ($alias == 'manufacturers') {
@@ -443,7 +442,7 @@ function KsenMartBuildRoute(&$query) {
                                 $vars['clicked'] = $segment[1];
                             break;
                             default:
-                                $segment = explode('+', $segment[1]);
+                                $segment = explode(';', $segment[1]);
                                 
                                 foreach ($segment as $alias) {
                                     $sql = $db->getQuery(true);
