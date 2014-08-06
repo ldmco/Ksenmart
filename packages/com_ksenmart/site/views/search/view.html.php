@@ -101,12 +101,6 @@ class KsenMartViewSearch extends JViewKS {
                 }
             }
             
-            if(!empty($this->model->_correct_string)){
-                echo '<div class="correct">';
-                echo 'Возможно вы ищите "<span>'.$this->model->_correct_string."</span>\"";
-                echo '</div>';
-            }
-            
             if(!empty($results)){
                 //$results = $this->model->setImages($results);
                 //echo $this->model->generateSearchResult($results);

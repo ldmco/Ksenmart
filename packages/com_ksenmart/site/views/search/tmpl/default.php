@@ -6,9 +6,12 @@
         Найденно <?php echo !empty($this->products)?count($this->products).' товаров':''; ?><?php echo !empty($this->cat_search)?', '.count($this->cat_search).' категорий':''; ?><?php echo !empty($this->manufacture_search)?' и '.count($this->manufacture_search).' производитель':''; ?>
     </div>
     <?php } ?>
-    <?php
-        echo $this->loadTemplate('cat_search');
-        echo $this->loadTemplate('manufacture_search');
-        echo $this->loadTemplate('results');
-    ?>
+    <?php echo $this->loadTemplate('cat_search'); ?>
+    <?php echo $this->loadTemplate('manufacture_search'); ?>
+    <?php echo $this->loadTemplate('results'); ?>
+    <?php if(!empty($this->model->_correct_string)): ?>
+        <div class="correct">
+        Возможно вы ищите "<span><?php echo $this->model->_correct_string; ?></span>";
+        </div>
+    <?php endif; ?>
 </div>
