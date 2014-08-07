@@ -124,9 +124,9 @@ class KsenMartModelCart extends JModelKSList {
                     }
                 }
             }
-            $this->setState('shipping_id', $shipping_selected);
-            $this->_session->set($this->context . '.shipping_id', $shipping_selected);
         }
+		$this->setState('shipping_id', $shipping_selected);
+		$this->_session->set($this->context . '.shipping_id', $shipping_selected);		
         
         $this->onExecuteAfter('getShippings', array(&$shippings));
         return $shippings;
