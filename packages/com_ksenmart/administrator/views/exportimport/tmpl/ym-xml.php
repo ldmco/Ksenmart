@@ -1,4 +1,4 @@
-?<php
+<?php
 chdir(dirname(__FILE__).'/../../../../../../');
 include('configuration.php');
 $config=new JConfig();
@@ -56,7 +56,7 @@ $res=mysql_query($query);
 while($row=mysql_fetch_array($res))
 	$categories.='<category id="'.$row['id'].'" '.($row['parent_id']!=0?'parentId="'.$row['parent_id'].'"':'').'>'.$row['title'].'</category>';	
 $cats_where="pc.category_id in (".implode(',',$cats).")";
-$query="select p.*,pc.category_id,(select filename from {$config->dbprefix}ksenmart_files where owner_id=p.id and owner_type='product' and media_type='image' order by ordering limit 1) as picture,(select title from {$config->dbprefix}ksenmart_manufacturers where id=p.manufacturer) as manufacturer_name,(select code from {$config->dbprefix}ksenmart_currencies where id=p.price_type) as code from {$config->dbprefix}ksenmart_products as p inner join {$config->dbprefix}ksenmart_products_categories as pc on pc.product_id=p.id where p.published='1' and type='product' and ($cats_where) group by p.id";
+$query="select p.*,pc.category_id,(select filename from {$config->dbprefix}ksenmart_files where owner_id=p.id and owner_type='product' and media_type='image' order by ordering limit 1) as picture,(select title from {$config->dbprefix}ksenmart_manufacturers where id=p.manufacturer) as manufacturer_name,(select code from {$config->dbprefix}ksenmart_currencies where id=p.price_type) as code from {$config->dbprefix}ksenmart_products as p inner join {$config->dbprefix}ksenmart_products_categories as pc on pc.product_id=p.id where p.published='1' and p.price>0 and type='product' and ($cats_where) group by p.id";
 $res=mysql_query($query);
 while($row=mysql_fetch_array($res))
 {
