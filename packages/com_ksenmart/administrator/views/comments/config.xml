@@ -12,5 +12,19 @@
 			labelclass="inputname"
 			class="inputbox_205"
         />
+
+		<field
+			name="review_moderation"
+			type="radio"
+			default="0"
+			label="KSM_SHOPREVIEWS_REVIEW_MODERATION_LABEL"
+			description="KSM_SHOPREVIEWS_REVIEW_MODERATION_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
 	</fieldset>
 </config>

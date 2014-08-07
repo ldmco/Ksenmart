@@ -118,6 +118,7 @@ class KsenMartModelComments extends JModelKSList {
 
         $user       = KSUsers::getUser();
         $jinput     = JFactory::getApplication()->input;
+        $params     = JComponentHelper::getParams('com_ksenmart');
         
         $name       = $jinput->get('comment_name', $user->name, 'string');
         $product    = $jinput->get('id', 0, 'int');
@@ -129,11 +130,15 @@ class KsenMartModelComments extends JModelKSList {
         $comment_object = new stdClass();
         $comment_object->user_id    = $user->id;
         $comment_object->product_id = $product;
-        $comment_object->name       = $user->name;
+        $comment_object->name       = $name;
         $comment_object->comment    = $comment;
         $comment_object->good       = $good;
         $comment_object->bad        = $bad;
         $comment_object->rate       = $rate;
+
+        if($params->get('review_moderation', false)){
+            $comment_object->published       = 0;
+        }
 
         try{
             $result = $this->_db->insertObject('#__ksenmart_comments', $comment_object);
