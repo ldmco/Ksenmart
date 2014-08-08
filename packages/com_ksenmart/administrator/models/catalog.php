@@ -321,7 +321,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         foreach($set->relative as &$prd) {
             $prd->small_img = KSMedia::resizeImage($prd->filename, $prd->folder, 36, 36, json_decode($prd->params, true));
             KSMProducts::productPricesTransform($prd);
-            $set->old_price += $prd->val_price;
+            $set->old_price += $prd->price;
         }
 
         $this->onExecuteAfter('getSet', array(&$set));

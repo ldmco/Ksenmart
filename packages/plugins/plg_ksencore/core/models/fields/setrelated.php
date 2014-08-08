@@ -35,7 +35,7 @@ class JFormFieldSetRelated extends JFormField {
 			$html.= '		<div class="col4">';
 			$html.= '			' . $product->in_stock;
 			$html.= '		</div>';
-			$html.= '		<input type="hidden" class="price" value="' . $product->val_price_wou . '">';
+			$html.= '		<input type="hidden" class="price" value="' . $product->price . '">';
 			$html.= '		<input type="hidden" name="' . $this->name . '[' . $product->id . '][relative_id]" class="pos-id" value="' . $product->id . '">';
 			$html.= '	</div>';
 		}
