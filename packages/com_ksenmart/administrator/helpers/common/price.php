@@ -88,6 +88,9 @@ class KSMPrice {
     
     public static function getPriceInCurrency($price, $currency = 0) {
         self::getCurrencies();
+        if($currency <= 0){
+            $currency = self::getDefaultUserCurrency();
+        }
         $currency = self::$_currencies[$currency];
         $price = $price * $currency->rate;
         $price = number_format($price, $currency->fractional, '.', $currency->separator);
