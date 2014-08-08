@@ -31,7 +31,7 @@ abstract class KMDiscountPlugin extends KMPlugin {
         }
     }
 
-    function onAfterExecuteCartGetcart($model,$cart=null) {
+    function onAfterExecuteKSMCartGetcart($model,$cart=null) {
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('id')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('enabled=1')->order('ordering');
@@ -50,7 +50,7 @@ abstract class KMDiscountPlugin extends KMPlugin {
         }
     }
 
-    function onAfterExecuteOrdersGetorder($model,$order=null) {
+    function onAfterExecuteKSMOrdersGetorder($model,$order=null) {
         if(empty($order)) return false;
         $order_discounts = json_decode($order->discounts, true);
         if(!count($order_discounts)) return false;
