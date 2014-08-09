@@ -53,4 +53,8 @@ jQuery(document).ready(function() {
             });
         });
     });
+
+    jQuery('body').on('click', '.popup .close', function(){
+        closePopup(jQuery(this));
+    });
 });
