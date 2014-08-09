@@ -30,9 +30,12 @@ class com_ksenmartInstallerScript {
 		}
 		JFolder::create(JPATH_ROOT . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'ksenmart');
 		JFolder::copy($path . DIRECTORY_SEPARATOR . 'images-ksenmart', JPATH_ROOT . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'ksenmart', null, 1);
-	
-		$db = JFactory::getDBO();
+		
+		JFolder::delete($path);
+	}
 
+	public function update(){
+		$db = JFactory::getDBO();
 		$query = '
 			CREATE TABLE IF NOT EXISTS `#__ksenmart_files` (
 			  `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -58,8 +61,6 @@ class com_ksenmartInstallerScript {
 		$query = 'INSERT `#__ksenmart_files` SELECT * FROM `#__ksen_files` AS `ksf` WHERE `ksf`.`owner_type`!=\'user\';';
 		$db->setQuery($query);
 		$db->execute();
-		
-		JFolder::delete($path);
 	}
 	
 	public function uninstall($parent) {
