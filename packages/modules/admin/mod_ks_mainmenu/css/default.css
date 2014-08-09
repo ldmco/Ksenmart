@@ -156,6 +156,70 @@ float: left;
 	background: url(i/settings.png) 0 0 no-repeat!important;*/
 }
 
+
+.overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.7;
+    z-index: 1900;
+}
+
+.popup{
+    display: none;
+    z-index: 1901;
+    width: 95%;
+    max-width: 1200px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    margin-left: -600px;
+    background-color: #fff;
+    box-shadow: 0px 0 20px #CCC;
+}
+
+.popup > header{
+    padding: 0px;
+    background-color: #525252;
+}
+
+.popup > .body{
+    padding: 20px;
+}
+
+.popup > header .title{
+    float: left;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+}
+
+.popup > header .buttonPannel{
+    float: right;
+    width: 190px;
+}
+
+.popup > header .buttonPannel .save{
+    display: block;
+    float: right;
+    font-size: 16px;
+}
+
+.popup > header .buttonPannel .close{
+    display: block;
+    float: right;
+    background-color: #EE1C25;
+    font-size: 16px;
+}
+
+.popup > header .buttonPannel .close:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .popup.license {
     width: 500px;
     margin-left: -250px;
