@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
     jQuery('.js-info').on('click', function() {
-		var extension = jQuery(this).attr('rel');
+        var extension = jQuery(this).attr('rel');
         createPopup('Лицензионное соглашение', 'license', false);
 
         var popup_license = jQuery('.popup.license');
@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
         jQuery('.overlay.license').fadeIn(400, function() {
 
             jQuery.ajax({
-                url: 'index.php?option=' + extension + '&task=settings.getKSVersion',
+                url: 'index.php?option=com_ksen&task=settings.getKSVersion&extension=' + extension,
                 type: 'POST',
                 dataType: 'JSON',
                 success: function(data) {
