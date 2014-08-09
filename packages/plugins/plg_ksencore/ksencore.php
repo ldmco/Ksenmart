@@ -7,15 +7,8 @@
  * @author      TakT
  */
 class plgSystemKsenCore extends JPlugin {
-    /**
-     * Class Constructor
-     * @param object $subject
-     * @param array $config
-     */
-    public function __construct(&$subject, $config) {
-        parent::__construct($subject, $config);
-        $this->loadLanguage();
-    }
+    
+    protected $autoloadLanguage = true;
     
     public function onLoadKsen($ext_name_local, array $hFolders = array() , array $ignoreHelpers = array() , array $config = array()) {
         global $ext_name, $ext_name_com, $ext_prefix;
