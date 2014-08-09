@@ -28,4 +28,5 @@ DROP TABLE
 `#__ksenmart_shipping_fields_values`, 
 `#__ksenmart_yandeximport`,
 `#__ksenmart_products`, 
+`#__ksenmart_files`, 
 `#__ksenmart_categories`;
