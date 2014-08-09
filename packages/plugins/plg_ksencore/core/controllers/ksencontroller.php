@@ -14,7 +14,7 @@ class KsenControllerAdmin extends JControllerAdmin {
         
         global $ext_name, $ext_name_com;
         $this->ext_name = $ext_name;
-        $this->ext_name_com = $ext_name_com;
+        $this->ext_name_com = JFactory::getApplication()->input->get('extension', $ext_name_com, 'string');
     }
     
     public function display($cachable = false, $urlparams = false) {
