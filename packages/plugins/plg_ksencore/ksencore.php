@@ -9,6 +9,7 @@
 class plgSystemKsenCore extends JPlugin {
     
     protected $autoloadLanguage = true;
+    private $input = null;
     
     public function onLoadKsen($ext_name_local, array $hFolders = array() , array $ignoreHelpers = array() , array $config = array()) {
         global $ext_name, $ext_name_com, $ext_prefix;
@@ -20,7 +21,9 @@ class plgSystemKsenCore extends JPlugin {
         $ext_name_com = 'com_' . $ext_name;
         $document = JFactory::getDocument();
         $version  = new JVersion();
-        $option   = JFactory::getApplication()->input->get('option', null, 'string');
+        $this->input = JFactory::getApplication()->input;
+        $option   = $this->input->get('option', null, 'string');
+        $extension   = $this->input->get('extension', $ext_name_com, 'string');
         
         include_once dirname(__FILE__) . '/core/defines.php';
         include_once KSC_ADMIN_PATH_CORE_HELPERS . 'helper.php';
@@ -114,7 +117,7 @@ class plgSystemKsenCore extends JPlugin {
         
         $script = '
             var KS = {
-                extension: \'' . $ext_name_com . '\',
+                extension: \'' . $extension . '\',
                 option: \'' . $ext_name_com . '\'
             };
         ';
