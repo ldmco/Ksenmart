@@ -126,7 +126,7 @@ class KSMedia {
         if (!$owner_type) return $item;
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query->select('*')->from('#__ksenmart_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id)->order('ordering');
+        $query->select('*')->from('#__' . $ext_name_com . '_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id)->order('ordering');
         $db->setQuery($query);
         $medias = $db->loadObjectList('id');
         
@@ -181,7 +181,7 @@ class KSMedia {
             }
         }
         $query = $db->getQuery(true);
-        $query->delete('#__ksenmart_files')->where('owner_id=' . $owner_id)->where('owner_type=' . $db->quote($owner_type));
+        $query->delete('#__' . $ext_name_com . '_files')->where('owner_id=' . $owner_id)->where('owner_type=' . $db->quote($owner_type));
         if (count($in)) {
             $query->where('id not in (' . implode(', ', $in) . ')');
         }
@@ -198,7 +198,7 @@ class KSMedia {
         if (!$owner_type) return false;
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query->select('*')->from('#__ksenmart_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id);
+        $query->select('*')->from('#__' . $ext_name_com . '_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id);
         $db->setQuery($query);
         $medias = $db->loadObjectList('id');
         
@@ -299,7 +299,7 @@ class KSMedia {
             }
         }
         $query = $db->getQuery(true);
-        $query->delete('#__ksenmart_files')->where('filename=' . $db->quote($filename));
+        $query->delete('#__' . $ext_name_com . '_files')->where('filename=' . $db->quote($filename));
         $db->setQuery($query);
         $db->query();
         return true;
@@ -319,7 +319,7 @@ class KSMedia {
             }
         }
         $query = $db->getQuery(true);
-        $query->delete('#__ksenmart_files')->where('filename=' . $db->quote($filename));
+        $query->delete('#__' . $ext_name_com . '_files')->where('filename=' . $db->quote($filename));
         $db->setQuery($query);
         $db->query();
         return true;
@@ -330,9 +330,9 @@ class KSMedia {
         
         $loc_ext_name = !empty($loc_ext_name) ? $loc_ext_name : $ext_name;
         
-        $query->select('(select f.filename from #__ksenmart_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as filename');
-        $query->select('(select f.folder from #__ksenmart_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as folder');
-        $query->select('(select f.params from #__ksenmart_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as params');
+        $query->select('(select f.filename from #__' . $ext_name_com . '_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as filename');
+        $query->select('(select f.folder from #__' . $ext_name_com . '_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as folder');
+        $query->select('(select f.params from #__' . $ext_name_com . '_files as f where f.owner_id=' . $l . 'id and owner_type="' . $owner_type . '" and media_type="image" order by ordering limit 1) as params');
         return $query;
     }
 }
