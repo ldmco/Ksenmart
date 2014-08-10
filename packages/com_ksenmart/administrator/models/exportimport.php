@@ -107,6 +107,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                 if(isset($_POST['content']) && $_POST['content'] != '') $product_data['content'] = $this->encode($data[$_POST['content']]);
                 if(isset($_POST['photos']) && $_POST['photos'] != '') $product_data['photos'] = $this->encode($data[$_POST['photos']]);
                 if(isset($_POST['relative']) && $_POST['relative'] != '') $product_data['relative'] = $this->encode($data[$_POST['relative']]);
+				if(isset($_POST['tags']) && $_POST['tags'] != '') $product_data['tags'] = $this->encode($data[$_POST['tags']]);
                 if(isset($_POST['metatitle']) && $_POST['metatitle'] != '') $product_data['metatitle'] = $this->encode($data[$_POST['metatitle']]);
                 else  $product_data['metatitle'] = '';
                 if(isset($_POST['metadescription']) && $_POST['metadescription'] != '') $product_data['metadescription'] = $this->encode($data[$_POST['metadescription']]);
@@ -404,34 +405,76 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                 }
 
                 if(isset($product_data['relative']) && $product_data['relative'] != '') $relatives[$product_id] = $product_data['relative'];
+				
+				if(isset($product_data['tags']) && $product_data['tags'] != '') {
+					$product_data['tags'] = explode(',', $product_data['tags']);
+					foreach($product_data['tags'] as $key=>$value)
+					{
+						$value = trim($value);
+                        $query = $this->_db->getQuery(true);
+                        $query->select('id')->from('#__tags')->where('title='.$this->_db->quote($value));
+                        $this->_db->setQuery($query);
+                        $tag_id = $this->_db->loadResult();	
+						if (!empty($tag_id))
+							$product_data['tags'][$key] = $tag_id;
+						else
+							$product_data['tags'][$key] = '#new#'.$value;
+					}
+
+					$tableProducts = $this->getTable('Products');
+					JObserverMapper::attachAllObservers($tableProducts);
+					JObserverMapper::addObserverClassToClass('JTableObserverTags', 'KsenmartTableProducts', array('typeAlias' => 'com_ksenmart.product'));					
+					$tableProducts->load($product_id);
+					$tagsObserver = $tableProducts->getObserverOfClass('JTableObserverTags');
+					$result = $tagsObserver->setNewTags($product_data['tags'], true);				
+				}				
 
                 if(isset($product_data['photos']) && $product_data['photos'] != '') {
-                    $product_data['photos'] = explode(';', $product_data['photos']);
+                    $product_data['photos'] = explode(',', $product_data['photos']);
                     $i = 1;
                     foreach($product_data['photos'] as $photo) {
                         $photo = trim($photo);
-                        if($photo != '' && file_exists(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo)) {
-                            $file = basename($photo);
-                            $nameParts = explode('.', $file);
-                            $file = microtime(true) . '.' . $nameParts[count($nameParts) - 1];
-                            if(copy(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo, JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file)) {
-                                $mime = mime_content_type(JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file);
-                                $qvalues = array(
-                                    $product_id,
-                                    $this->_db->quote('image'),
-                                    $this->_db->quote('product'),
-                                    $this->_db->quote('products'),
-                                    $this->_db->quote($file),
-                                    $this->_db->quote($mime),
-                                    $this->_db->quote(''),
-                                    $i);
-                                $query = $this->_db->getQuery(true);
-                                $query->insert('#__ksenmart_files')->columns('owner_id,media_type,owner_type,folder,filename,mime_type,title,ordering')->values(implode(',', $qvalues));
-                                $this->_db->setQuery($query);
-                                $this->_db->query();
-                                $i++;
-                            }
-                        }
+						if(!empty($photo))
+						{
+							$file = basename($photo);
+							$nameParts = explode('.', $file);
+							$file = microtime(true) . '.' . $nameParts[count($nameParts) - 1];	
+							$copied = false;
+							if (strpos($photo, 'http://') !== false)
+							{
+								if($photo_content = file_get_contents($photo)) {
+									if (file_put_contents(JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file, $photo_content)){
+										$copied = true;
+									}
+								}						
+							}
+							else
+							{
+								if(file_exists(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo)) {
+									if(copy(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo, JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file)) {
+										$copied = true;
+									}
+								}
+							}
+							if ($copied)
+							{
+								$mime = mime_content_type(JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file);
+								$qvalues = array(
+									$product_id,
+									$this->_db->quote('image'),
+									$this->_db->quote('product'),
+									$this->_db->quote('products'),
+									$this->_db->quote($file),
+									$this->_db->quote($mime),
+									$this->_db->quote(''),
+									$i);
+								$query = $this->_db->getQuery(true);
+								$query->insert('#__ksenmart_files')->columns('owner_id,media_type,owner_type,folder,filename,mime_type,title,ordering')->values(implode(',', $qvalues));
+								$this->_db->setQuery($query);
+								$this->_db->query();
+								$i++;							
+							}
+						}
                     }
                 }
 

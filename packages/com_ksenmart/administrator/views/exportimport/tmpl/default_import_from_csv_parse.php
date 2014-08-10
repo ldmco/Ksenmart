@@ -109,7 +109,13 @@ defined( '_JEXEC' ) or die;
 					<select class="sel" id="relative" name="relative">
 						<?php echo $this->options?>
 					</select>
-				</div>					
+				</div>		
+				<div class="row">
+					<label class="inputname" style="width:200px;"><?php echo JText::_('ksm_exportimport_product_tags')?></label>
+					<select class="sel" id="tags" name="tags">
+						<?php echo $this->options?>
+					</select>
+				</div>				
 				<?php foreach($this->properties as $property):?>
 				<div class="row">
 					<label class="inputname" style="width:200px;"><?php echo $property->title?></label>
