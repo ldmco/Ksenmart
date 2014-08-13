@@ -1,4 +1,4 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php defined('_JEXEC') or die; ?>
 	<?php if (count($this->product->comments) > 0) { ?>
 		<?php $i=0;foreach($this->product->comments as $comment) { $i++; ?>
 			<article class="item row-fluid reviews" data-id="<?php echo $comment->id; ?>">
@@ -10,14 +10,18 @@
 				<div class="span10">
 					<div class="info clearfix">
 						<div class="name pull-left">
-							<?php echo $comment->name; ?>
+							<?php if(empty($comment->name)): ?>
+								<?php echo $comment->comment_name; ?>
+							<?php else: ?>
+								<?php echo $comment->name; ?>
+							<?php endif; ?>
 						</div>
 						<div class="rating pull-left">
 							<?php for($k=1;$k<6;$k++) { if (floor($comment->rate)>=$k) { ?>
 								<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star-small.png" alt="" />
 								<?php } else { ?>
 									<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star2-small.png" alt="" />
-									<?php } } ?>
+								<?php } } ?>
 						</div>
 					</div>
 					<dl class="dl-horizontal">
