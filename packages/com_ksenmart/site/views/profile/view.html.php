@@ -56,12 +56,12 @@ class KsenMartViewProfile extends JViewKS {
                 $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.inputmask.js', 'text/javascript', false);
                 $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.bind-first-0.1.min.js', 'text/javascript', false);
                 $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.inputmask-multi.js', 'text/javascript', false);
-                $document->addScript(JURI::base() . 'administrator/modules/mod_joomlaid/js/jquery.Jcrop.min.js', 'text/javascript', true);
+                $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.Jcrop.min.js', 'text/javascript', true);
                 
                 $document->addScript(JURI::base() . 'components/com_ksenmart/js/profile.js', 'text/javascript', false);
                 
                 $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/map.css');
-                $document->addStyleSheet(JURI::base().'administrator/modules/mod_joomlaid/css/jquery.Jcrop.min.css');
+                $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/jquery.Jcrop.min.css');
 
                 $model      = $this->getModel('profile');
                 
