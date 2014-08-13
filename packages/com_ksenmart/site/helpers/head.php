@@ -16,7 +16,9 @@ class KsenmartHtmlHelper {
         if($params->get('include_jquery', 1)) {
             $document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
         }
-        $document->addScript(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'bootstrap.min.js');
+        if($params->get('include_bs', 1)) {
+            $document->addScript(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'bootstrap.min.js');
+        }
         $document->addScript(JURI::base() . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'jquery.custom.min.js');
         $document->addScript(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'common.js');
         
