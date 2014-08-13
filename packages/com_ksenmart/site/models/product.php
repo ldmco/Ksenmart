@@ -11,10 +11,8 @@ class KsenMartModelProduct extends JModelKSList {
     }
     
     protected function populateState($ordering = null, $direction = null) {
-        $this->onExecuteBefore('populateState', array(&$this
-        ));
-        $this->onExecuteAfter('populateState', array(&$this
-        ));
+        $this->onExecuteBefore('populateState', array(&$this));
+        $this->onExecuteAfter('populateState', array(&$this));
     }
     
     public function getProduct() {
@@ -31,8 +29,7 @@ class KsenMartModelProduct extends JModelKSList {
             
             KSMProducts::incProductHit($this->_id);
             
-            $this->onExecuteAfter('getProduct', array(&$row
-            ));
+            $this->onExecuteAfter('getProduct', array(&$row));
             
             return $row;
         }
@@ -40,8 +37,7 @@ class KsenMartModelProduct extends JModelKSList {
     }
     
     private function getProductRelations($pid) {
-        $this->onExecuteBefore('getProductRelations', array(&$pid
-        ));
+        $this->onExecuteBefore('getProductRelations', array(&$pid));
         
         if (!empty($pid) && $pid > 0) {
             $query = $this->_db->getQuery(true);
@@ -80,21 +76,18 @@ class KsenMartModelProduct extends JModelKSList {
             $this->_db->setQuery($query);
             $sets = $this->_db->loadObjectList();
             
-            
             foreach ($sets as & $set) {
                 $set = KSMProducts::getProduct($set->id);
             }
             
-            $this->onExecuteAfter('getProductRelations', array(&$sets
-            ));
+            $this->onExecuteAfter('getProductRelations', array(&$sets));
             
             return $sets;
         }
     }
     
     public function getProductComments($pid) {
-        $this->onExecuteBefore('getProductComments', array(&$pid
-        ));
+        $this->onExecuteBefore('getProductComments', array(&$pid));
         
         if (!empty($pid) && $pid > 0) {
             $query = $this->_db->getQuery(true);
@@ -120,8 +113,7 @@ class KsenMartModelProduct extends JModelKSList {
                 $comments = KSUsers::setAvatarLogoInObject($comments);
             }
             
-            $this->onExecuteAfter('populateState', array(&$comments
-            ));
+            $this->onExecuteAfter('populateState', array(&$comments));
             
             return $comments;
         }
@@ -130,8 +122,7 @@ class KsenMartModelProduct extends JModelKSList {
     }
     
     public function getProductCommentsChild($comments) {
-        $this->onExecuteBefore('getProductCommentsChild', array(&$comments
-        ));
+        $this->onExecuteBefore('getProductCommentsChild', array(&$comments));
         
         if (!empty($comments)) {
             $i = 0;
@@ -152,7 +143,6 @@ class KsenMartModelProduct extends JModelKSList {
                     uf.filename AS logo, 
                     u.name
                 ')->from('#__ksenmart_comments AS c')->leftjoin('#__ksen_users AS kmu ON kmu.id=c.user_id')->leftjoin('#__users AS u ON kmu.id=u.id')->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id')->where('c.published=1');
-            
             
             foreach ($comments as $comment) {
                 if (!empty($comment->id) && $comment->id > 0) {
@@ -176,7 +166,6 @@ class KsenMartModelProduct extends JModelKSList {
                 $children = KSUsers::setAvatarLogoInObject($children);
                 $children_l = count($children);
                 
-                
                 for ($i = 0;$i < $children_l;$i++) {
                     
                     for ($j = 0;$j <= $comments_l;$j++) {
@@ -190,15 +179,13 @@ class KsenMartModelProduct extends JModelKSList {
             }
         }
         
-        $this->onExecuteAfter('getProductCommentsChild', array(&$comments
-        ));
+        $this->onExecuteAfter('getProductCommentsChild', array(&$comments));
         
         return $comments;
     }
     
     public function getChilds($id = 0) {
-        $this->onExecuteBefore('getChilds', array(&$id
-        ));
+        $this->onExecuteBefore('getChilds', array(&$id));
         
         if ($id == 0) {
             $id = $this->_id;
@@ -215,15 +202,13 @@ class KsenMartModelProduct extends JModelKSList {
             }
         }
         
-        $this->onExecuteAfter('getChilds', array(&$childs
-        ));
+        $this->onExecuteAfter('getChilds', array(&$childs));
         
         return $childs;
     }
     
     public function getChildsTitles($id = 0) {
-        $this->onExecuteBefore('getChildsTitles', array(&$id
-        ));
+        $this->onExecuteBefore('getChildsTitles', array(&$id));
         
         if ($id == 0) {
             $id = $this->_id;
@@ -234,8 +219,7 @@ class KsenMartModelProduct extends JModelKSList {
         $this->_db->setQuery($query);
         $childs_titles = $this->_db->loadObjectList();
         
-        $this->onExecuteAfter('getChildsTitles', array(&$childs_titles
-        ));
+        $this->onExecuteAfter('getChildsTitles', array(&$childs_titles));
         
         return $childs_titles;
     }
@@ -272,7 +256,6 @@ class KsenMartModelProduct extends JModelKSList {
             $this->_db->setQuery($sql);
             $products = $this->_db->loadObjectList('id');
             
-            
             foreach ($childs_groups as & $child) {
                 $child->products = array();
                 
@@ -287,15 +270,13 @@ class KsenMartModelProduct extends JModelKSList {
             }
         }
         
-        $this->onExecuteAfter('getChildsGroups', array(&$childs_groups
-        ));
+        $this->onExecuteAfter('getChildsGroups', array(&$childs_groups));
         
         return $childs_groups;
     }
     
     public function getChildsTitle($id = 0) {
-        $this->onExecuteBefore('getChildsTitle', array(&$id
-        ));
+        $this->onExecuteBefore('getChildsTitle', array(&$id));
         
         if ($id == 0) {
             $id = $this->_id;
@@ -318,15 +299,13 @@ class KsenMartModelProduct extends JModelKSList {
             }
         }
         
-        $this->onExecuteAfter('getChildsTitle', array(&$title
-        ));
+        $this->onExecuteAfter('getChildsTitle', array(&$title));
         
         return $title;
     }
     
     public function getCategoryLevel($id = 0) {
-        $this->onExecuteBefore('getCategoryLevel', array(&$id
-        ));
+        $this->onExecuteBefore('getCategoryLevel', array(&$id));
         
         $level = 0;
         
@@ -338,8 +317,7 @@ class KsenMartModelProduct extends JModelKSList {
             $level++;
         }
         
-        $this->onExecuteAfter('getCategoryLevel', array(&$level
-        ));
+        $this->onExecuteAfter('getCategoryLevel', array(&$level));
         
         return $level;
     }
@@ -371,13 +349,9 @@ class KsenMartModelProduct extends JModelKSList {
         $prev_link = KSMProducts::generateProductLink($prev_id);
         $next_link = KSMProducts::generateProductLink($next_id);
         
-        $this->onExecuteAfter('getLinks', array(&$prev_link, &$next_link
-        ));
+        $this->onExecuteAfter('getLinks', array(&$prev_link, &$next_link));
         
-        return array(
-            $prev_link,
-            $next_link
-        );
+        return array($prev_link, $next_link);
     }
     
     public function getImages() {
@@ -399,15 +373,13 @@ class KsenMartModelProduct extends JModelKSList {
         $this->_db->setQuery($query);
         $rows = $this->_db->loadObjectList();
         
-        
         for ($k = 0;$k < count($rows);$k++) {
-            $rows[$k]->img_small = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('mini_thumb_width', 130) , $this->params->get('mini_thumb_height', 80) , json_decode($rows[$k]->params, true));
-            $rows[$k]->img = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200) , $this->params->get('middle_height', 200), json_decode($rows[$k]->params, true));
+            $rows[$k]->img_small = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('mini_thumb_width', 130), $this->params->get('mini_thumb_height', 80), json_decode($rows[$k]->params, true));
+            $rows[$k]->img = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
             $rows[$k]->img_link = JURI::root() . 'media/com_ksenmart/images/' . $rows[$k]->folder . '/original/' . $rows[$k]->filename;
         }
         
-        $this->onExecuteAfter('getImages', array(&$rows
-        ));
+        $this->onExecuteAfter('getImages', array(&$rows));
         
         return $rows;
     }
@@ -420,8 +392,7 @@ class KsenMartModelProduct extends JModelKSList {
         $this->_db->setQuery($sql);
         $category = $this->_db->loadResult();
         
-        $this->onExecuteAfter('getDefaultCategory', array(&$category
-        ));
+        $this->onExecuteAfter('getDefaultCategory', array(&$category));
         
         return $category;
     }
@@ -434,8 +405,7 @@ class KsenMartModelProduct extends JModelKSList {
         $this->_db->setQuery($sql);
         $categories = $this->_db->loadObjectList();
         
-        $this->onExecuteAfter('getProductCategories', array(&$categories
-        ));
+        $this->onExecuteAfter('getProductCategories', array(&$categories));
         
         return $categories;
     }
@@ -448,7 +418,6 @@ class KsenMartModelProduct extends JModelKSList {
         $parent_ids = array();
         $default_category = $this->getDefaultCategory();
         $product_categories = $this->getProductCategories();
-        
         
         foreach ($product_categories as $product_category) {
             if (!empty($default_category)) {
@@ -463,12 +432,7 @@ class KsenMartModelProduct extends JModelKSList {
                 if ($parent == $default_category) {
                     $id_default_way = true;
                 }
-                $category = KSSystem::getTableByIds(array(
-                    $parent
-                ) , 'categories', array(
-                    't.id',
-                    't.parent_id'
-                ) , true, false, true);
+                $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
                 $categories[] = $category->id;
                 $parent = $category->parent_id;
             }
@@ -479,18 +443,14 @@ class KsenMartModelProduct extends JModelKSList {
         
         $final_categories = array_reverse($final_categories);
         
-        $categories = KSSystem::getTableByIds($final_categories, 'categories', array(
-            't.title',
-            't.id'
-        ) , false);
+        $categories = KSSystem::getTableByIds($final_categories, 'categories', array('t.title', 't.id'), false);
         
         foreach ($categories as $category) {
             $category->link = JRoute::_('index.php?option=com_ksenmart&view=catalog&categories[]=' . $category->id . '&Itemid=' . KSSystem::getShopItemid());
             $path[] = $category;
         }
         
-        $this->onExecuteAfter('getCategoriesPath', array(&$path
-        ));
+        $this->onExecuteAfter('getCategoriesPath', array(&$path));
         
         return $path;
     }
@@ -520,20 +480,12 @@ class KsenMartModelProduct extends JModelKSList {
                             $title[] = $this->_product->product_code;
                         }
                         if ($key == 'seo-manufacturer' && isset($this->_product->manufacturer->id)) {;
-                            $manufacturer_title = KSSystem::getTableByIds(array(
-                                $this->_product->manufacturer->id
-                            ) , 'manufacturers', array(
-                                't.title'
-                            ) , false, false, true);
+                            $manufacturer_title = KSSystem::getTableByIds(array($this->_product->manufacturer->id), 'manufacturers', array('t.title'), false, false, true);
                             $title[] = $manufacturer_title->title;
                         }
                         if ($key == 'seo-country' && isset($this->_product->manufacturer->id)) {
                             if (!empty($this->_product->manufacturer->country)) {
-                                $country_title = KSSystem::getTableByIds(array(
-                                    $this->_product->manufacturer->country->id
-                                ) , 'countries', array(
-                                    't.title'
-                                ) , false, false, true);
+                                $country_title = KSSystem::getTableByIds(array($this->_product->manufacturer->country->id), 'countries', array('t.title'), false, false, true);
                                 $title[] = $country_title->title;
                             }
                         } elseif ($key == 'seo-parent-category') {
@@ -664,7 +616,6 @@ class KsenMartModelProduct extends JModelKSList {
             $document->setMetaData('keywords', $metakeywords);
         }
         
-        $this->onExecuteAfter('setProductMetaData', array(&$this
-        ));
+        $this->onExecuteAfter('setProductMetaData', array(&$this));
     }
 }
