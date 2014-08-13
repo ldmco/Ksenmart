@@ -15,10 +15,9 @@ jQuery(document).ready(function(){
 
         jQuery.ajax({
             type: 'POST',
-            url: 'index.php?option=com_ksenmart&task=catalog.setLayoutView',
+            url: URI_ROOT+'index.php?option=com_ksenmart&task=catalog.setLayoutView',
             data: {layout: layout},
             success: function(data){
-                console.log(data);
             }
         });
     });
