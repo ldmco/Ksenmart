@@ -450,7 +450,6 @@ class KsenMartModelcatalog extends JModelKSList {
         if(empty($this->_ids)){
             $this->_ids = $this->getProductsIds();
         }
-        $this->_manufacturers = $this->getState('com_ksenmart.manufacturers');
         
         $where   = $this->getFilterDefaultParams();
         $where[] = "(p.parent_id=0)";
@@ -539,8 +538,18 @@ class KsenMartModelcatalog extends JModelKSList {
     public function getFilterManufacturers() {
         $this->onExecuteBefore('getFilterManufacturers');
         
-        if(empty($this->_ids)){
-            $this->_ids = $this->getProductsIds();
+		$this->_ids = array();
+        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+            $this->_ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
+        }
+        if (count($this->_categories) > 0) {
+            $this->_ids = $this->getIdsByCategories($this->_categories);
+        }
+        if (count($this->_properties) > 0) {
+            $this->_ids = $this->getIdsByProperties($this->_properties);
+        }
+        if (count($this->_countries) > 0) {
+            $this->_manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
         }
         
         $where = $this->getFilterDefaultParams();
@@ -583,9 +592,6 @@ class KsenMartModelcatalog extends JModelKSList {
         
         $where = array('p.published=1');
         if (count($this->_ids) > 0) $where[] = "(p.id in (" . implode(',', $this->_ids) . "))";
-        if (count($this->_manufacturers) > 0) {
-            $where[] = "(p.manufacturer IN (" . implode(',', $this->_manufacturers) . "))";
-        }
         if (!empty($this->_title)) {
             $this->_title = $this->_db->quote('%'.$this->_title.'%');
             $where[] = '(p.title LIKE '.$this->_title.'  OR p.introcontent LIKE '.$this->_title.' OR p.content LIKE '.$this->_title.')';
@@ -615,8 +621,18 @@ class KsenMartModelcatalog extends JModelKSList {
     public function getFilterCountries() {
         $this->onExecuteBefore('getFilterCountries', array(&$this));
         
-        if(empty($this->_ids)){
-            $this->_ids = $this->getProductsIds();
+		$this->_ids = array();
+        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+            $this->_ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
+        }
+        if (count($this->_categories) > 0) {
+            $this->_ids = $this->getIdsByCategories($this->_categories);
+        }
+        if (count($this->_properties) > 0) {
+            $this->_ids = $this->getIdsByProperties($this->_properties);
+        }
+        if (count($this->_manufacturers) > 0) {
+            $this->_ids = $this->getIdsByManufacturers($this->_manufacturers);
         }
 
         $where = $this->getFilterDefaultParams();
