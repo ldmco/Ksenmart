@@ -57,15 +57,62 @@ class KsenMartController extends JControllerLegacy {
     }
     
     public function pluginAction() {
-        $action = $this->input->get('action', null, 'STRING');
-        if (!empty($action)) {
-            $method_name = 'onPlgAction' . ucfirst($action);
+        
+        $app        = JFactory::getApplication();
+        $format     = strtolower($this->input->getWord('format'));
+        $results    = null;
+        $parts      = null;
+
+        // Check for valid format
+        if (!$format) {
+            $results = new InvalidArgumentException('Please specify response format other that HTML (json, raw, etc.)', 404);
+        } elseif ($this->input->get('plugin')) {
+            $plugin = ucfirst($this->input->get('plugin'));
+            $action = ucfirst($this->input->get('action'));
+            $dispatcher = JEventDispatcher::getInstance();
             
-            $dispatcher = JDispatcher::getInstance();
-            $dispatcher->trigger($method_name, array($plugin));
-            
-            return true;
+            try {
+                $results = $dispatcher->trigger('onAjax' . $plugin . $action);
+                $results = $results[0];
+            }
+            catch(Exception $e) {
+                $results = $e;
+            }
         }
-        return false;
+        // Return the results in the desired format
+        switch ($format) {
+            // JSONinzed
+            case 'json':
+                $app->close(new JResponseJson($results, null, false, $this->input->get('ignoreMessages', true, 'bool')));
+            break;
+
+            // Human-readable format
+            case 'debug':
+                $app->close('<pre>' . print_r($results, true) . '</pre>');
+            break;
+            
+            // Handle as raw format
+            default:
+                // Output exception
+                if ($results instanceof Exception) {
+                    // Log an error
+                    JLog::add($results->getMessage(), JLog::ERROR);
+                    // Set status header code
+                    $app->setHeader('status', $results->getCode(), true);
+                    // Echo exception type and message
+                    $out = get_class($results) . ': ' . $results->getMessage();
+                }
+                // Output string/ null
+                elseif (is_scalar($results)) {
+                    $out = (string)$results;
+                }
+                // Output array/ object
+                else {
+                    $out = implode((array)$results);
+                }
+                
+                $app->close($out);
+            break;
+        }
     }
 }
