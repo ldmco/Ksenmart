@@ -3,10 +3,6 @@
 KSSystem::import('models.modelksadmin');
 class KsenMartModelOrders extends JModelKSAdmin {
 
-    function __construct() {
-        parent::__construct();
-    }
-
     function populateState() {
         $this->onExecuteBefore('populateState');
 

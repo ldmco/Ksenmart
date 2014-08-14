@@ -20,7 +20,7 @@
 			label="KSM_ORDERS_ORDER_REGION_LBL"
 			description ="KSM_ORDERS_ORDER_REGION_DESC"
 			labelclass="inputname"
-		/>		
+		/>
 		
 		<field
 			name="shipping_id"
@@ -28,7 +28,7 @@
 			label="KSM_ORDERS_ORDER_SHIPPING_LBL"
 			description ="KSM_ORDERS_ORDER_SHIPPING_DESC"
 			labelclass="inputname"
-		/>	
+		/>
 
 		<field
 			name="payment_id"
@@ -36,7 +36,7 @@
 			label="KSM_ORDERS_ORDER_PAYMENT_LBL"
 			description ="KSM_ORDERS_ORDER_PAYMENT_DESC"
 			labelclass="inputname"
-		/>	
+		/>
 
 		<field 
 			name="note"
@@ -54,18 +54,18 @@
 			label="KSM_ORDERS_ORDER_ADMINNOTE_LBL"
 			description="KSM_ORDERS_ORDER_ADMINNOTE_DESC"
 			class="textarea"
-		/>	
+		/>
 
 		<field 
 			name="items"
 			type="orderitems"
 			label="KSM_ORDERS_ORDER_ITEMS"
-		/>	
+		/>
 		
 		<field 
 			name="costs"
 			type="ordercosts"
-		/>	
+		/>
 
 		<field 
 			name="user_id"
@@ -74,7 +74,7 @@
 			class="active"
 			wrap="slidemodule"
 			default="0"
-		/>		
+		/>
 
 		<field 
 			name="customer_fields"
@@ -82,7 +82,7 @@
 			label="KSM_ORDERS_ORDER_CUSTOMERFIELDS_LBL"
 			class="active"
 			wrap="slidemodule"
-		/>	
+		/>
 
 		<field 
 			name="address_fields"
