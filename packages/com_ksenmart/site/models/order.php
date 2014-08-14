@@ -4,6 +4,18 @@ KSSystem::import('models.modelkslist');
 class KsenMartModelOrder extends JModelKSList {
     var $_order_id = null;
 
+    private $_roistatFields = array(
+        'id',
+        'cost',
+        'price',
+        'status',
+        'date_add',
+        'date_update',
+        'date_create',
+        'roistat',
+        'fields'
+    );
+
     public function __construct() {
         parent::__construct();
         $this->context = 'com_ksenmart';
@@ -120,6 +132,8 @@ class KsenMartModelOrder extends JModelKSList {
         $note           = $jinput->get('note', null, 'string');
         $prd_id         = $jinput->get('id', 0, 'int');
         $count          = $jinput->get('count', 1, 'int');
+        $roistat        = $this->input->get('roistat_visit', 0, 'int');
+
         if(!empty($prd_id)){
             $prd        = KSMProducts::getProduct($prd_id);
         }
@@ -162,6 +176,7 @@ class KsenMartModelOrder extends JModelKSList {
             $orders->address_fields  = json_encode($address_fields);
             $orders->note            = $this->_db->Quote($note);
             $orders->status_id       = $this->_db->Quote($status);
+            $orders->roistat         = $this->_db->q($roistat);
 
             try{
                 $result = $this->_db->updateObject('#__ksenmart_orders', $orders, 'id');
@@ -243,5 +258,93 @@ class KsenMartModelOrder extends JModelKSList {
             return $this->_db->loadObjectList();
         }
         return new stdClass;
+    }
+
+    public function getOrders($editDate){
+        $this->onExecuteBefore('getOrders');
+
+        $query = $this->_db->getQuery(true);
+        $query
+            ->select('
+                o.id,
+                o.cost,
+                o.roistat,
+                o.discounts,
+                o.user_id,
+                o.shipping_coords,
+                o.customer_fields,
+                o.address_fields, 
+                o.status_id AS status,
+                o.date_add,
+                r.title AS region,
+                p.title AS payment,
+                s.title AS shipping
+            ')
+            ->from($this->_db->qn('#__ksenmart_orders', 'o'))
+            ->leftjoin($this->_db->qn('#__ksenmart_regions', 'r') . ' ON ' . $this->_db->qn('r.id') . '=' . $this->_db->qn('o.region_id'))
+            ->leftjoin($this->_db->qn('#__ksenmart_payments', 'p') . ' ON ' . $this->_db->qn('p.id') . '=' . $this->_db->qn('o.payment_id'))
+            ->leftjoin($this->_db->qn('#__ksenmart_shippings', 's') . ' ON ' . $this->_db->qn('s.id') . '=' . $this->_db->qn('o.shipping_id'))
+            ->where('DATE_FORMAT(' . $this->_db->qn('o.date_add') . ', \'%Y-%m-%d\') > FROM_UNIXTIME(' . $this->_db->q($editDate) . ', \'%Y-%m-%d\')')
+        ;
+        $this->_db->setQuery($query);
+        $orders = $this->_db->loadObjectList();
+        
+        foreach ($orders as &$order) {
+            KSMOrders::setUserInfoField2Order($order);
+            $date = new JDate($order->date_add);
+            $order->date_create  = $date->toUnix();
+            $order->date_update  = $order->date_create;
+            unset($order->date_add);
+
+            $order->price        = $order->cost;
+            $order->cost         = 0;
+
+            $order->fields = array();
+            foreach ($order as $key => &$field) {
+                if(!in_array($key, $this->_roistatFields)){
+                    $key_name = JText::_('KSM_ROISTAT_FIELDS_' . strtoupper($key) . '_TITLE');
+                    if(is_array($field)){
+                        $field = implode(', ', $field);
+                    }elseif(is_object($field)){
+                        $field = JArrayHelper::fromObject($field);
+                        $field = implode(', ', $field);
+                    }
+                    $order->fields[$key_name] = $field;
+                    unset($order->{$key});
+                }
+            }
+        }
+
+        $this->onExecuteAfter('getOrders', array(&$orders));
+        return $orders;
+    }
+
+    public function getOrderStatuses(){
+        $this->onExecuteBefore('getOrderStatus');
+
+        $statuses = new stdClass;
+        $query = $this->_db->getQuery(true);
+        $query
+            ->select(
+                $this->_db->qn(
+                    array(
+                        'os.id',
+                        'os.title',
+                        'os.system'
+                    ),
+                    array(
+                        'id',
+                        'name',
+                        'system'
+                    )
+                )
+            )
+            ->from($this->_db->qn('#__ksenmart_order_statuses', 'os'))
+        ;
+        $this->_db->setQuery($query);
+        $statuses = $this->_db->loadObjectList();
+
+        $this->onExecuteAfter('getOrderStatus', array(&$statuses));
+        return $statuses;
     }
 }
