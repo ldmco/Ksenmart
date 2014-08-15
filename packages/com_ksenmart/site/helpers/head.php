@@ -17,17 +17,17 @@ class KsenmartHtmlHelper {
             $document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
         }
         if($params->get('include_bs', 1)) {
-            $document->addScript(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'bootstrap.min.js');
+            $document->addScript(JURI::base() . 'components/com_ksenmart/js/bootstrap.min.js');
         }
-        $document->addScript(JURI::base() . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'jquery.custom.min.js');
-        $document->addScript(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'js' . DS . 'common.js');
+        $document->addScript(JURI::base() . 'administrator/components/com_ksenmart/js/jquery.custom.min.js');
+        $document->addScript(JURI::base() . 'components/com_ksenmart/js/common.js');
         
-        $document->addStyleSheet(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'css' . DS . 'common.css');
+        $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
         
         if($params->get('include_css', 1)) {
-            $document->addStyleSheet(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'css' . DS . 'bootstrap.min.css');
-            $document->addStyleSheet(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'css' . DS . 'bootstrap-responsive.min.css');
-            $document->addStyleSheet(JURI::base() . 'components' . DS . 'com_ksenmart' . DS . 'css' . DS . 'template.css');
+            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap.min.css');
+            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap-responsive.min.css');
+            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/template.css');
         }
         
         $js = "
