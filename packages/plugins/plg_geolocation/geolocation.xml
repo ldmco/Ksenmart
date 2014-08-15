@@ -27,9 +27,8 @@
         <language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_geolocation.sys.ini</language>
     </languages>
 
-    <config>
-        <fields name="params">
-            <fieldset name="basic"></fieldset>
-        </fields>
-    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="geolocation">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_geolocation-update.xml</server>
+    </updateservers>
+    
 </extension>
