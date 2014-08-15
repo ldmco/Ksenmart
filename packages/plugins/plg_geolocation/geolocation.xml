@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<extension type="plugin" version="3.0" method="upgrade" group="kmplugins">
+    <name>PLG_GEOLOCATION</name>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0</version>
+    <creationDate>June 2014</creationDate>
+    <description>PLG_GEOLOCATION_DESC</description>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.sql</file>
+        </sql>
+    </install>
+
+    <files>
+        <filename plugin="geolocation">geolocation.php</filename>
+        <folder>helpers</folder>
+        <folder>sql</folder>
+        <filename>index.html</filename>
+    </files>
+
+	<languages folder="language">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_geolocation.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic"></fieldset>
+        </fields>
+    </config>
+</extension>
