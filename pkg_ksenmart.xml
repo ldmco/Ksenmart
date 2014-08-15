@@ -37,6 +37,7 @@
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>
 		<file type="plugin" id="viewproducts" group="kmdiscountactions">plugins/plg_viewproducts.zip</file>
+		<file type="plugin" id="geolocation" group="kmplugins">plugins/plg_geolocation.zip</file>
 
 		<file type="module" id="mod_km_categories" client="administrator">modules/admin/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_commentrates" client="administrator">modules/admin/mod_km_commentrates.zip</file>
