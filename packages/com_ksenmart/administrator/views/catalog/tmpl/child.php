@@ -1,7 +1,4 @@
-<?php
-defined( '_JEXEC' ) or die;
-JHtml::_('behavior.tooltip');
-?>
+<?php defined('_JEXEC') or die; ?>
 <form class="form" method="post">
 	<div class="heading">
 		<h3>
@@ -20,10 +17,10 @@ JHtml::_('behavior.tooltip');
 						<?php echo $this->form->getLabel('title'); ?>
 						<?php echo $this->form->getInput('title'); ?>
 						<span class="linka" rel="meta-data">
-							<a><?php echo JText::_('ksm_metadata')?></a>
+							<a><?php echo JText::_('KSM_METADATA'); ?></a>
 						</span>
 						<span class="linka" rel="alias">
-							<a><?php echo JText::_('ksm_alias')?></a>
+							<a><?php echo JText::_('KS_ALIAS'); ?></a>
 						</span>
 					</div>
 					<div class="row meta-data" style="display: none">
@@ -41,7 +38,7 @@ JHtml::_('behavior.tooltip');
 					<div class="row alias" style="display: none">
 						<?php echo $this->form->getLabel('alias'); ?>
 						<?php echo $this->form->getInput('alias'); ?>
-					</div>		
+					</div>
 					<div class="row">
 						<?php echo $this->form->getLabel('product_code'); ?> 
 						<?php echo $this->form->getInput('product_code'); ?> 
@@ -55,10 +52,15 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getInput('price_type'); ?>
 						</div>
 						<span class="linka" rel="old_price"><a><?php echo JText::_('KSM_CATALOG_PRODUCT_OLD_PRICE_LBL'); ?></a></span>
+						<span class="linka" rel="purchase_price"><a><?php echo JText::_('KSM_CATALOG_PRODUCT_PURCHASE_PRICE_LBL'); ?></a></span>
 					</div>
 					<div class="row old_price" style="display: none;">
 						<?php echo $this->form->getLabel('old_price'); ?> 
 						<?php echo $this->form->getInput('old_price'); ?> 
+					</div>
+					<div class="row purchase_price" style="display: none;">
+						<?php echo $this->form->getLabel('purchase_price'); ?> 
+						<?php echo $this->form->getInput('purchase_price'); ?> 
 					</div>
 					<div class="row">
 						<div class="col">
@@ -77,7 +79,7 @@ JHtml::_('behavior.tooltip');
 					<div class="row">
 						<?php echo $this->form->getLabel('tags'); ?> 
 						<?php echo $this->form->getInput('tags'); ?>
-					</div>					
+					</div>
 					<div class="row">
 						<label class="inputname"><?php echo JText::_('KSM_CATALOG_PRODUCT_FLAG'); ?></label>
 						<div class="checkb">
@@ -95,7 +97,7 @@ JHtml::_('behavior.tooltip');
 						<div class="checkb">
 							<?php echo $this->form->getInput('hot'); ?>
 							<?php echo $this->form->getLabel('hot'); ?>
-						</div>						
+						</div>
 					</div>
 					<div class="row">
 						<h3><?php echo $this->form->getLabel('content'); ?></h3>
@@ -113,14 +115,14 @@ JHtml::_('behavior.tooltip');
 					</div>
 					<div class="row">
 						<?php echo $this->form->getInput('properties');?>
-					</div>	
-				</td>	
+					</div>
+				</td>
 				<td class="rightcol">
 					<?php echo $this->form->getInput('images'); ?>
 					<?php echo $this->form->getInput('categories'); ?>
 					<?php echo $this->form->getInput('relative'); ?>
 				</td>
-			</tr>	
+			</tr>
 		</table>
 	<input type="hidden" name="task" value="save_form_item">
 	<?php echo $this->form->getInput('id');?>

@@ -91,6 +91,16 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
+
+		<field
+			name="purchase_price" 
+			type="text"
+			label="KSM_CATALOG_PRODUCT_PURCHASE_PRICE_LBL"
+			description="KSM_CATALOG_PRODUCT_PURCHASE_PRICE_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+		/>
 		
 		<field
 			name="product_unit" 
@@ -111,7 +121,7 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
-			 	
+
 		<field
 			type="text"
 			name="product_packaging" 
@@ -126,7 +136,7 @@
 		    label="JTAG" description="JTAG_DESC"
 		    multiple="true"
 		    labelclass="inputname"
-		/>	
+		/>
 		
 		<field
 			type="checkbox"
@@ -135,7 +145,7 @@
 			label="KSM_CATALOG_PRODUCT_NEW_LBL"
 			description="KSM_CATALOG_PRODUCT_NEW_DESC"
 			default="0"
-		/>	
+		/>
 
 		<field
 			type="checkbox"
@@ -144,7 +154,7 @@
 			label="KSM_CATALOG_PRODUCT_PROMOTION_LBL"
 			description="KSM_CATALOG_PRODUCT_PROMOTION_DESC"
 			default="0"
-		/>	
+		/>
 
 		<field
 			type="checkbox"
@@ -153,7 +163,7 @@
 			label="KSM_CATALOG_PRODUCT_RECOMMENDATION_LBL"
 			description="KSM_CATALOG_PRODUCT_RECOMMENDATION_DESC"
 			default="0"
-		/>	
+		/>
 
 		<field
 			type="checkbox"
@@ -162,7 +172,7 @@
 			label="KSM_CATALOG_PRODUCT_HOT_LBL"
 			description="KSM_CATALOG_PRODUCT_HOT_DESC"
 			default="0"
-		/>			
+		/>
 		
 		<field
 			type="editor"
@@ -199,7 +209,7 @@
 			class="active"
 			wrap="slidemodule"
             add_pcat="true"
-		/>		
+		/>
 		
 		<field
 			name="properties"
@@ -213,7 +223,7 @@
 			label="KSM_CATALOG_PRODUCT_MANUFACTURER_LBL"
 			class="active"
 			wrap="slidemodule"
-		/>			
+		/>
 		
 		<field
 			name="relative"
@@ -221,7 +231,7 @@
 			label="KSM_CATALOG_PRODUCT_RELATED_ITEMS"
 			class="active"
 			wrap="slidemodule"
-		/>		
+		/>
 		
 		<field 
 			name="images" 
@@ -244,7 +254,7 @@
 			name="is_parent"
 			class="is_parent"
 			default="0" 
-		/>		
+		/>
 		
 	</fieldset>
 </form>

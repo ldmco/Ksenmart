@@ -219,6 +219,7 @@ CREATE TABLE IF NOT EXISTS `#__ksenmart_products` (
   `alias` varchar(255) NOT NULL DEFAULT '',
   `price` double NOT NULL,
   `old_price` double NOT NULL,
+  `purchase_price` DOUBLE NOT NULL,
   `price_type` int(10) NOT NULL,
   `content` text NOT NULL,
   `introcontent` text NOT NULL,
