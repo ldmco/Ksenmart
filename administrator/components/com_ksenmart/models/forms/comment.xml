@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field 
+			name="name"
+			type="text"
+			default=""
+			class="inputbox"
+			labelclass="inputname"
+			label="KSM_COMMENTS_COMMENT_NAME_LBL"
+			description="KSM_ORDERS_COMMENT_NAME_DESC"
+		/>		
+		
+		<field 
+			name="rate"
+			type="rate"
+			default=""
+			labelclass="inputname"
+			label="KSM_COMMENTS_COMMENT_RATE_LBL"
+			description="KSM_ORDERS_COMMENT_RATE_DESC"
+		/>		
+		
+		<field 
+			name="rates"
+			type="commentrates"
+		/>		
+		
+		<field 
+			name="comment"
+			type="textarea"
+			default=""
+			label="KSM_COMMENTS_COMMENT_TEXT_LBL"
+			description="KSM_ORDERS_COMMENT_TEXT_DESC"
+			class="textarea"
+		/>	
+		
+		<field 
+			name="good"
+			type="textarea"
+			default=""
+			label="KSM_COMMENTS_COMMENT_GOOD_LBL"
+			description="KSM_ORDERS_COMMENT_GOOD_DESC"
+			class="textarea"
+		/>	
+
+		<field 
+			name="bad"
+			type="textarea"
+			default=""
+			label="KSM_COMMENTS_COMMENT_BAD_LBL"
+			description="KSM_ORDERS_COMMENT_BAD_DESC"
+			class="textarea"
+		/>			
+
+		<field 
+			name="user_id"
+			type="commentuser"
+			label="KSM_COMMENTS_COMMENT_USER_LBL"
+			class="active"
+			wrap="slidemodule"
+		/>	
+
+		<field 
+			name="product_id"
+			type="commentproduct"
+			label="KSM_COMMENTS_COMMENT_PRODUCT_LBL"
+			class="active"
+			wrap="slidemodule"
+		/>		
+		
+	</fieldset>
+</form>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_COUNTRIES_REGION_TITLE_LBL"
+			description ="KSM_COUNTRIES_REGION_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="alias"
+			default=""
+			description="KSM_ALIAS_DESC" 
+			label="KSM_ALIAS_LBL"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		<field 
+			name="metatitle"
+			type="text"
+			default=""
+			label="KSM_METATITLE_LBL"
+			description="KSM_METATITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="metadescription"
+			type="text"
+			default=""
+			label="KSM_METADESCRIPTION_LBL"
+			description="KSM_METADESCRIPTION_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="metakeywords"
+			type="text"
+			default=""
+			label="KSM_METAKEYWORDS_LBL"
+			description="KSM_METAKEYWORDS_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			type="editor"
+			name="content" 
+			label="KSM_COUNTRIES_REGION_DESCRIPTION_LBL"
+			description="KSM_COUNTRIES_REGION_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>
+		
+		<field
+			type="editor"
+			name="introcontent" 
+			label="KSM_COUNTRIES_REGION_INTRODESCRIPTION_LBL"
+			description="KSM_COUNTRIES_REGION_INTRODESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>		
+		
+		<field 
+			name="images" 
+			type="images" 
+			label="KSM_PHOTOS"
+			class="active"
+			upload_to="media/com_ksenmart/images/regions/original"
+			upload_folder="regions"
+		/>
+		
+		<field
+			name="country_id"
+			type="country"
+			label="KSM_COUNTRIES_COUNTRY"
+			wrap="slidemodule"
+		/>		
+		
+	</fieldset>
+</form>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field 
+			name="metatitle"
+			type="text"
+			default=""
+			label="KSM_METATITLE_LBL"
+			description="KSM_METATITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="metadescription"
+			type="textarea"
+			default=""
+			label="KSM_METADESCRIPTION_LBL"
+			description="KSM_METADESCRIPTION_DESC"
+			class="textarea"
+		/>
+		
+		<field 
+			name="metakeywords"
+			type="textarea"
+			label="KSM_METAKEYWORDS_LBL"
+			description="KSM_METAKEYWORDS_DESC"
+			default=""
+			class="textarea"
+		/>
+		
+		<field 
+			name="text"
+			type="editor"
+			label="KSM_SEO_SEOTEXT_TEXT_LBL"
+			description="KSM_SEO_SEOTEXT_TEXT_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>
+		
+		<field 
+			name="categories"
+			type="ksmcategories"
+			label="KSM_SEO_SEOTEXT_CATEGORIES_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>		
+
+		<field 
+			name="manufacturers"
+			type="manufacturers"
+			label="KSM_SEO_SEOTEXT_MANUFACTURERS_LBL"
+			onclick="setActive(this);"
+			wrap="slidemodule"
+		/>	
+
+		<field 
+			name="countries"
+			type="countries"
+			label="KSM_SEO_SEOTEXT_COUNTRIES_LBL"
+			onclick="setActive(this);"
+			wrap="slidemodule"
+		/>	
+
+		<field 
+			name="properties" 
+			type="propertiesvalues" 
+			label="KSM_SEO_SEOTEXT_PROPERTIES_LBL"
+			onclick="setActive(this);"
+			wrap="slidemodule"		
+		/>		
+		
+	</fieldset>
+</form>

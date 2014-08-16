@@ -1,0 +1,63 @@
+#ksenmart-map-inner{
+	position: relative;
+	max-height:none;
+}
+
+#ksenmart-map-actions{
+	margin:0px 0px 10px 0px;
+}
+
+#ksenmart-map-to{
+	width: 350px;
+	margin:0px;
+}
+
+#ksenmart-map-ok{
+	float:right;
+}
+
+#ksenmart-map-clear{
+	float:right;
+	margin-right:10px;
+}
+
+#ksenmart-map-to-area,#ksenmart-map-to-center,#ksenmart-map-to-me{
+	cursor:pointer;
+}
+
+#ksenmart-map-search{
+	position:absolute;
+	z-index:10000;
+	background:#fff;
+	border:1px solid #ccc;
+	display:none;
+}
+
+#ksenmart-map-search ul{
+	list-style:none;
+	margin:0px;
+}
+
+#ksenmart-map-search ul li{
+	padding:3px 4px;
+	min-width:400px;
+}
+
+#ksenmart-map-search ul li:hover{
+	background:#ccc;
+}
+
+#ksenmart-map-search ul li.ksenmart-map-search-item-active{
+	background:#ccc;
+}
+
+#ksenmart-map-layer{
+	border: 1px solid #ccc;
+}	
+
+#ksenmart-map-layer *{
+	-webkit-transition: all 0 ease 0;
+	-moz-transition: all 0 ease 0;
+	-o-transition: all 0 ease 0;
+	transition: all 0 ease 0;
+}	

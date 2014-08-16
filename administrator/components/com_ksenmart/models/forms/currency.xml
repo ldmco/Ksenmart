@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_CURRENCIES_CURRENCY_TITLE_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="code"
+			type="text"
+			default=""
+			label="KSM_CURRENCIES_CURRENCY_CODE_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_CODE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="rate"
+			type="text"
+			default="1"
+			label="KSM_CURRENCIES_CURRENCY_RATE_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_RATE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="separator"
+			type="text"
+			default=" "
+			label="KSM_CURRENCIES_CURRENCY_SEPARATOR_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_SEPARATOR_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="template"
+			type="text"
+			default="{price}"
+			label="KSM_CURRENCIES_CURRENCY_TEMPLATE_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_TEMPLATE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="default"
+			type="checkbox"
+			value="1"
+			label="KSM_CURRENCIES_CURRENCY_DEFAULT_LBL"
+			description ="KSM_CURRENCIES_CURRENCY_DEFAULT_DESC"
+			labelclass="inputname"
+		/>		
+		
+		<field
+			name="fractional"
+			type="list"
+			default="0"
+			class="sel"
+			label="KSM_CURRENCIES_CURRENCY_FRACTIONAL_LBL"
+			description="KSM_CURRENCIES_CURRENCY_FRACTIONAL_DESC"
+			labelclass="inputname"
+		>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</field>		
+		
+	</fieldset>
+</form>

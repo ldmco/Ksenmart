@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_CATALOG_SET_TITLE_LBL"
+			description ="KSM_CATALOG_SET_TITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="alias"
+			default=""
+			description="KSM_ALIAS_DESC" 
+			label="KSM_ALIAS_LBL"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		<field 
+			name="metatitle"
+			type="text"
+			default=""
+			label="KSM_METATITLE_LBL"
+			description="KSM_METATITLE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="metadescription"
+			type="text"
+			default=""
+			label="KSM_METADESCRIPTION_LBL"
+			description="KSM_METADESCRIPTION_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="metakeywords"
+			type="text"
+			default=""
+			label="KSM_METAKEYWORDS_LBL"
+			description="KSM_METAKEYWORDS_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field 
+			name="product_code"
+			type="text"
+			default=""
+			label="KSM_CATALOG_SET_SKU_LBL"
+			description="KSM_CATALOG_SET_SKU_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="price_type" 
+			type="currency"
+			label="KSM_CATALOG_SET_CURRENCY_LBL"
+			description="KSM_CATALOG_SET_CURRENCY_DESC"
+			default="0"
+		/>
+		
+		<field
+			name="price" 
+			type="text"
+			label="KSM_CATALOG_SET_PRICE_LBL"
+			description="KSM_CATALOG_SET_PRICE_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="old_price" 
+			type="text"
+			label="KSM_CATALOG_SET_OLD_PRICE_LBL"
+			description="KSM_CATALOG_SET_OLD_PRICE_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+			readonly="true"
+		/>
+		
+		<field
+			name="tag"
+			type="text"
+			default=""
+			label="KSM_CATALOG_SET_TAG_LBL"
+			description ="KSM_CATALOG_SET_TAG_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>		
+		
+		<field
+			type="checkbox"
+			value="1"
+			name="new" 
+			label="KSM_CATALOG_SET_NEW_LBL"
+			description="KSM_CATALOG_SET_NEW_DESC"
+			default="0"
+		/>	
+
+		<field
+			type="checkbox"
+			value="1"
+			name="promotion" 
+			label="KSM_CATALOG_SET_PROMOTION_LBL"
+			description="KSM_CATALOG_SET_PROMOTION_DESC"
+			default="0"
+		/>	
+
+		<field
+			type="checkbox"
+			value="1"
+			name="recommendation" 
+			label="KSM_CATALOG_SET_RECOMMENDATION_LBL"
+			description="KSM_CATALOG_SET_RECOMMENDATION_DESC"
+			default="0"
+		/>	
+
+		<field
+			type="checkbox"
+			value="1"
+			name="hot" 
+			label="KSM_CATALOG_SET_HOT_LBL"
+			description="KSM_CATALOG_SET_HOT_DESC"
+			default="0"
+		/>			
+		
+		<field
+			type="editor"
+			name="content" 
+			label="KSM_CATALOG_SET_DESCRIPTION_LBL"
+			description="KSM_CATALOG_SET_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>
+		
+		<field
+			type="editor"
+			name="introcontent" 
+			label="KSM_CATALOG_SET_INTRODESCRIPTION_LBL"
+			description="KSM_CATALOG_SET_INTRODESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>
+		
+		<field
+			name="relative"
+			type="setrelated" 
+			label="KSM_CATALOG_SET_RELATED_ITEMS"
+		/>		
+		
+		<field 
+			name="images" 
+			type="images" 
+			label="KSM_PHOTOS"
+			class="active"
+			upload_to="media/com_ksenmart/images/products/original"
+			upload_folder="products"
+			extension="com_ksenmart"
+		/>
+		
+		<field 
+			type="productcategories" 
+			name="categories" 
+			label="KSM_CATALOG_SET_CATEGORIES_LBL" 
+			class="active"
+			wrap="slidemodule"
+		/>			
+		
+		<field 
+			type="hidden"
+			name="type"
+			default="set" 
+		/>
+		
+	</fieldset>
+</form>

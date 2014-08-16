@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="title"
+			type="text"
+			default=""
+			label="KSM_DISCOUNT_TITLE_LBL"
+			description ="KSM_DISCOUNT_TITLE_DESC"
+			class="inputbox width360px"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="type"
+			type="discounttype"
+			default=""
+			label="KSM_DISCOUNT_TYPE_LBL"
+			description ="KSM_DISCOUNT_TYPE_DESC"
+			labelclass="inputname"
+		/>		
+		
+		<field
+			name="from_date"
+			type="text"
+			default=""
+			class="inputbox width100px"
+		/>	
+
+		<field
+			name="to_date"
+			type="text"
+			default=""
+			class="inputbox width100px"
+		/>	
+		
+		<field
+			name="params"
+			type="text"
+		/>		
+		
+		<field
+			name="sum"
+			default="0"
+			label="KSM_DISCOUNT_SUM_LBL"
+			labelclass="inputname" 
+			description="KSM_DISCOUNT_SUM_DESC"
+			type="checkbox" 
+			value="1"
+		/>		
+
+		<field
+			name="enabled"
+			default="0"
+			label="KSM_ENABLED_LBL"
+			labelclass="inputname" 
+			description="KSM_ENABLED_DESC"
+			type="checkbox" 
+			value="1"
+		/>	
+
+		<field
+			name="user_groups"
+			type="usergroups"
+			default=""
+			label="KSM_DISCOUNT_USERGROUPS_LBL"
+			description ="KSM_DISCOUNT_USERGROUPS_DESC"
+			labelclass="inputname"
+		/>	
+		
+		<field name="actions_limit" default="0" type="list" label="KSM_DISCOUNT_ACTIONS_LIMIT_LBL" description="KSM_DISCOUNT_ACTIONS_LIMIT_DESC" labelclass="inputname" class="sel width360px">
+				<option value="0">KSM_DISCOUNT_ACTIONS_LIMIT_ONE</option>
+				<option value="1">KSM_DISCOUNT_ACTIONS_LIMIT_ALL</option>
+		</field>		
+
+		<field
+			name="user_actions"
+			type="useractions"
+			default=""
+			label="KSM_DISCOUNT_USERACTIONS_LBL"
+			description ="KSM_DISCOUNT_USERACTIONS_DESC"
+			labelclass="inputname"
+		/>	
+
+		<field
+			name="user_actions"
+			type="useractions"
+			default=""
+			label="KSM_DISCOUNT_USERACTIONS_LBL"
+			description ="KSM_DISCOUNT_USERACTIONS_DESC"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="info_methods"
+			type="discountinfomethods"
+			default=""
+			label="KSM_DISCOUNT_INFOMETHODS_LBL"
+			description ="KSM_DISCOUNT_INFOMETHODS_DESC"
+			labelclass="inputname"
+		/>
+		
+		<field
+			type="editor"
+			name="content" 
+			label="KSM_DISCOUNT_DESCRIPTION_LBL"
+			description="KSM_DISCOUNT_DESCRIPTION_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="250px"
+			buttons="true"
+		/>
+		
+		<field 
+			name="images" 
+			type="images" 
+			label="KSM_PHOTOS"
+			class="active"
+			upload_to="media/com_ksenmart/images/discounts/original"
+			upload_folder="discounts"
+			extension="com_ksenmart"
+		/>			
+
+		<field
+			name="categories"
+			type="ksmcategories"
+			label="KSM_DISCOUNTS_DISCOUNT_CATEGORIES_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>	
+
+		<field
+			name="manufacturers"
+			type="manufacturers"
+			label="KSM_DISCOUNTS_DISCOUNT_MANUFACTURERS_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>	
+		
+		<field 
+			name="regions" 
+			type="regions" 
+			class="active"				
+		/>		
+
+	</fieldset>
+</form>

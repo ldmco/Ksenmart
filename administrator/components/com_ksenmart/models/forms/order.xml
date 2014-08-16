@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+	
+		<field name="id" type="hidden" class="id" />
+		
+		<field
+			name="status_id"
+			type="orderstatus"
+			label="KSM_ORDERS_ORDER_STATUS_LBL"
+			description ="KSM_ORDERS_ORDER_STATUS_DESC"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="region_id"
+			type="region"
+			label="KSM_ORDERS_ORDER_REGION_LBL"
+			description ="KSM_ORDERS_ORDER_REGION_DESC"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="shipping_id"
+			type="ordershipping"
+			label="KSM_ORDERS_ORDER_SHIPPING_LBL"
+			description ="KSM_ORDERS_ORDER_SHIPPING_DESC"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="payment_id"
+			type="orderpayment"
+			label="KSM_ORDERS_ORDER_PAYMENT_LBL"
+			description ="KSM_ORDERS_ORDER_PAYMENT_DESC"
+			labelclass="inputname"
+		/>
+
+		<field 
+			name="note"
+			type="textarea"
+			default=""
+			label="KSM_ORDERS_ORDER_NOTE_LBL"
+			description="KSM_ORDERS_ORDER_NOTE_DESC"
+			class="textarea"
+		/>
+
+		<field 
+			name="admin_note"
+			type="textarea"
+			default=""
+			label="KSM_ORDERS_ORDER_ADMINNOTE_LBL"
+			description="KSM_ORDERS_ORDER_ADMINNOTE_DESC"
+			class="textarea"
+		/>
+
+		<field 
+			name="items"
+			type="orderitems"
+			label="KSM_ORDERS_ORDER_ITEMS"
+		/>
+		
+		<field 
+			name="costs"
+			type="ordercosts"
+		/>
+
+		<field 
+			name="user_id"
+			type="orderuser"
+			label="KSM_ORDERS_ORDER_USER_LBL"
+			class="active"
+			wrap="slidemodule"
+			default="0"
+		/>
+
+		<field 
+			name="customer_fields"
+			type="ordercustomerfields"
+			label="KSM_ORDERS_ORDER_CUSTOMERFIELDS_LBL"
+			class="active"
+			wrap="slidemodule"
+		/>
+
+		<field 
+			name="address_fields"
+			type="orderaddressfields"
+			label="KSM_ORDERS_ORDER_ADDRESSFIELDS_LBL"
+			class="active"
+			wrap="slidemodule"
+		/>
+
+		<field name="shipping_coords" type="hidden" class="shipping_coords" />
+		
+	</fieldset>
+</form>
