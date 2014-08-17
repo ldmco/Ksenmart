@@ -42,7 +42,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         $encoding = $this->getState('encoding');
         if($encoding == 'cp1251') setLocale(LC_ALL, 'ru_RU.CP1251');
 
-        $f = fopen(JPATH_COMPONENT . '/tmp/import.csv', "rt") or die("Ошибка!");
+        $f = fopen(JPATH_COMPONENT  . DS . 'tmp' . DS . 'import.csv', "rt") or die("Ошибка!");
         $data = fgetcsv($f, 10000, ";");
         fclose($f);
         $options = '<option value=""></option>';
@@ -59,8 +59,8 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         if(!isset($_FILES['csvfile'])) return false;
         if($_FILES['csvfile']['tmp_name'] == '') return false;
         if(substr($_FILES['csvfile']['name'], strlen($_FILES['csvfile']['name']) - 4, 4) != '.csv') return false;
-        if(file_exists(JPATH_COMPONENT . '/tmp/import.csv')) unlink(JPATH_COMPONENT . '/tmp/import.csv');
-        copy($_FILES['csvfile']['tmp_name'], JPATH_COMPONENT . '/tmp/import.csv');
+        if(file_exists(JPATH_COMPONENT . DS . 'tmp' . DS . 'import.csv')) unlink(JPATH_COMPONENT . DS . 'tmp' . DS . 'import.csv');
+        copy($_FILES['csvfile']['tmp_name'], JPATH_COMPONENT . DS . 'tmp' . DS . 'import.csv');
 
         $this->onExecuteAfter('uploadImportCSVFile');
         return true;
@@ -73,14 +73,14 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         if($encoding == 'cp1251') setLocale(LC_ALL, 'ru_RU.CP1251');
 
         if($_FILES['photos_zip']['tmp_name'] != '') {
-            $import_dir = JPATH_ROOT . '/media/com_ksenmart/import/';
+            $import_dir = JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'import' . DS ;
             JFolder::delete($import_dir);
             JFolder::create($import_dir, 0777);
             copy($_FILES['photos_zip']['tmp_name'], $import_dir . 'import.zip');
             $result = JArchive::extract(JPath::clean($import_dir . 'import.zip'), JPath::clean($import_dir));
         }
         $unic = JRequest::getVar('unic');
-        $f = fopen(JPATH_COMPONENT . '/tmp/import.csv', "rt") or die("Ошибка!");
+        $f = fopen(JPATH_COMPONENT . DS . 'tmp' . DS . 'import.csv', "rt") or die("Ошибка!");
         $info = array('insert' => '', 'update' => '');
         $relatives = array();
         for($k = 0; $data = fgetcsv($f, 10000, ";"); $k++) {
@@ -443,22 +443,22 @@ class KsenMartModelExportImport extends JModelKSAdmin {
 							if (strpos($photo, 'http://') !== false)
 							{
 								if($photo_content = file_get_contents($photo)) {
-									if (file_put_contents(JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file, $photo_content)){
+									if (file_put_contents(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . 'products' . DS . 'original' . DS . $file, $photo_content)){
 										$copied = true;
 									}
 								}						
 							}
 							else
 							{
-								if(file_exists(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo)) {
-									if(copy(JPATH_ROOT . '/media/com_ksenmart/import/' . $photo, JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file)) {
+								if(file_exists(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'import' . DS  . $photo)) {
+									if(copy(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'import' . DS  . $photo, JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . 'products' . DS . 'original' . DS .  $file)) {
 										$copied = true;
 									}
 								}
 							}
 							if ($copied)
 							{
-								$mime = mime_content_type(JPATH_ROOT . '/media/com_ksenmart/images/products/original/' . $file);
+								$mime = mime_content_type(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . 'products' . DS . 'original' . DS .  $file);
 								$qvalues = array(
 									$product_id,
 									$this->_db->quote('image'),
@@ -604,9 +604,9 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         }
 
         fclose($f);
-        $dir = scandir(JPATH_COMPONENT . '/tmp/');
+        $dir = scandir(JPATH_COMPONENT . DS . 'tmp' . DS );
         foreach($dir as $d)
-            if($d != '.' && $d != '..') unlink(JPATH_COMPONENT . '/tmp/' . $d);
+            if($d != '.' && $d != '..') unlink(JPATH_COMPONENT . DS . 'tmp' . DS  . $d);
 
         $this->onExecuteAfter('getImportInfo', array(&$info));
         return $info;
@@ -650,10 +650,10 @@ class KsenMartModelExportImport extends JModelKSAdmin {
     function delPhoto($filename, $folder) {
         $this->onExecuteBefore('delPhoto', array(&$filename, &$folder));
 
-        $files = scandir(JPATH_ROOT . '/media/com_ksenmart/images/' . $folder);
+        $files = scandir(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . $folder);
         foreach($files as $file) {
-            if($file != '.' && $file != '..' && is_dir(JPATH_ROOT . '/media/com_ksenmart/images/' . $folder . '/' . $file))
-                if(file_exists(JPATH_ROOT . '/media/com_ksenmart/images/' . $folder . '/' . $file . '/' . $filename)) unlink(JPATH_ROOT . '/media/com_ksenmart/images/' . $folder . '/' . $file . '/' . $filename);
+            if($file != '.' && $file != '..' && is_dir(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS .  $folder .  DS . $file))
+                if(file_exists(JPATH_ROOT  . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS  . $folder  . DS .  $file . DS . $filename)) unlink(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS  . $folder . DS . $file . DS . $filename);
         }
         $query = $this->_db->getQuery(true);
         $query->delete('#__ksenmart_files');
