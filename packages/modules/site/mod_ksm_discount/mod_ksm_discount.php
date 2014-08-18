@@ -14,9 +14,9 @@ KsenmartHtmlHelper::AddHeadTags();
 
 $km_params = JComponentHelper::getParams('com_ksenmart');
 $document  = JFactory::getDocument();
-//$document->addScript(JURI::base().'modules/mod_km_discount/js/default.js', 'text/javascript', true);
+//$document->addScript(JURI::base().'modules/mod_ksm_discount/js/default.js', 'text/javascript', true);
 if($km_params->get('modules_styles', true)) {
-    $document->addStyleSheet(JURI::base().'modules/mod_km_discount/css/default.css');
+    $document->addStyleSheet(JURI::base().'modules/mod_ksm_discount/css/default.css');
 }
 
 //какие скидки существуют
@@ -25,5 +25,5 @@ $discounts = JRequest::getVar('kmdiscounts', array());
 if(!empty($discounts)){
     require_once dirname(__FILE__) . DS . 'helper.php';
 	$discounts = ModKMDiscountHelper::getDiscounts($discounts);
-    require JModuleHelper::getLayoutPath('mod_km_discount', $params->get('layout', 'default'));
+    require JModuleHelper::getLayoutPath('mod_ksm_discount', $params->get('layout', 'default'));
 }
