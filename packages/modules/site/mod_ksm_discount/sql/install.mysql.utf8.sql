@@ -5,7 +5,7 @@ SET
 	`position` = 'content_bottom', 
 	`published` = '1'
 WHERE 
-	`module` = 'mod_km_discount'
+	`module` = 'mod_ksm_discount'
 ;
 INSERT INTO 
 	`#__modules_menu` 
@@ -14,6 +14,6 @@ INSERT INTO
 		`menuid`
 	) 
 VALUES (
-	(SELECT `id` FROM `#__modules` WHERE `module` = 'mod_km_discount'), 
+	(SELECT `id` FROM `#__modules` WHERE `module` = 'mod_ksm_discount'), 
 	'0'
 );

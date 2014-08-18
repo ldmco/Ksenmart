@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5.0" method="upgrade">
-	<name>mod_ksm_discount</name>
+	<name>MOD_KSM_DISCOUNT</name>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
@@ -8,7 +8,7 @@
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <version>2.0.1</version>
     <creationDate>August 2014</creationDate>
-	<description>Модуль Скидок KsenMart 2.0</description>
+	<description>MOD_KSM_DISCOUNT_DESC</description>
 	<files>
 		<filename module="mod_ksm_discount">mod_ksm_discount.php</filename>
 		<folder>tmpl</folder>
@@ -19,6 +19,13 @@
 		<filename>mod_ksm_discount.xml</filename>
         <folder>sql</folder>
     </files>
+	
+	<media folder="media" destination="mod_ksm_discount">
+        <folder>css</folder>
+        <folder>js</folder>
+        <filename>index.html</filename>
+    </media>
+	
     <languages folder="language">
 		<language tag="ru-RU">ru-RU.mod_ksm_discount.ini</language>
 		<language tag="ru-RU">ru-RU.mod_ksm_discount.sys.ini</language>
