@@ -1,10 +1,9 @@
 <?php defined('_JEXEC') or die;
 /*
- *   Модуль отображения скидок
- *   
+ *   Модуль отображения скидок     Ksenmart 3.1.4
  */
 
-JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart', array('common'), array(), array('angularJS' => 0)));
+JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart.KSM', array('common'), array(), array('angularJS' => 0)));
 
 KSLoader::loadLocalHelpers(array('common'));
 if (!class_exists('KsenmartHtmlHelper')) {
@@ -13,10 +12,9 @@ if (!class_exists('KsenmartHtmlHelper')) {
 KsenmartHtmlHelper::AddHeadTags();
 
 $km_params = JComponentHelper::getParams('com_ksenmart');
-$document  = JFactory::getDocument();
-//$document->addScript(JURI::base().'modules/mod_ksm_discount/js/default.js', 'text/javascript', true);
+JHtml::script('mod_ksm_discount/default.js', false, true);
 if($km_params->get('modules_styles', true)) {
-    $document->addStyleSheet(JURI::base().'modules/mod_ksm_discount/css/default.css');
+	JHtml::stylesheet('mod_ksm_discount/default.css', false, true, false);
 }
 
 //какие скидки существуют
