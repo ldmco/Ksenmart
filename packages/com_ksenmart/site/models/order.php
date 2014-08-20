@@ -267,7 +267,7 @@ class KsenMartModelOrder extends JModelKSList {
         $query
             ->select('
                 o.id,
-                o.cost,
+                o.cost AS order_price,
                 o.roistat,
                 o.discounts,
                 o.user_id,
@@ -278,13 +278,16 @@ class KsenMartModelOrder extends JModelKSList {
                 o.date_add,
                 r.title AS region,
                 p.title AS payment,
-                s.title AS shipping
+                s.title AS shipping,
+                SUM(oi.purchase_price) AS cost
             ')
             ->from($this->_db->qn('#__ksenmart_orders', 'o'))
+            ->leftjoin($this->_db->qn('#__ksenmart_order_items', 'oi') . ' ON ' . $this->_db->qn('o.id') . '=' . $this->_db->qn('oi.order_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_regions', 'r') . ' ON ' . $this->_db->qn('r.id') . '=' . $this->_db->qn('o.region_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_payments', 'p') . ' ON ' . $this->_db->qn('p.id') . '=' . $this->_db->qn('o.payment_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_shippings', 's') . ' ON ' . $this->_db->qn('s.id') . '=' . $this->_db->qn('o.shipping_id'))
             ->where('DATE_FORMAT(' . $this->_db->qn('o.date_add') . ', \'%Y-%m-%d\') > FROM_UNIXTIME(' . $this->_db->q($editDate) . ', \'%Y-%m-%d\')')
+            ->group($this->_db->qn('oi.order_id'))
         ;
         $this->_db->setQuery($query);
         $orders = $this->_db->loadObjectList();
@@ -294,10 +297,10 @@ class KsenMartModelOrder extends JModelKSList {
             $date = new JDate($order->date_add);
             $order->date_create  = $date->toUnix();
             $order->date_update  = $order->date_create;
+            $order->price        = $order->order_price;
+            
+            unset($order->order_price);
             unset($order->date_add);
-
-            $order->price        = $order->cost;
-            $order->cost         = 0;
 
             $order->fields = array();
             foreach ($order as $key => &$field) {
