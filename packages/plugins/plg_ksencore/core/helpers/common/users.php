@@ -205,21 +205,21 @@ class KSUsers {
                 
                 foreach ($object as $item) {
                     if (!empty($item->logo)) {
-                        $item->logo_original = 'media/com_ksenmart/images/users/original/' . $item->logo;
-                        $item->logo_thumb = 'media/com_ksenmart/images/users/thumb/' . $item->logo;
+                        $item->logo_original = 'media/com_ksen/images/users/original/' . $item->logo;
+                        $item->logo_thumb = 'media/com_ksen/images/users/thumb/' . $item->logo;
                     } else {
-                        $item->logo_thumb = 'media/com_ksenmart/images/users/default.png';
-                        $item->logo_original = 'media/com_ksenmart/images/users/default.png';
+                        $item->logo_thumb = 'media/com_ksen/images/users/default.png';
+                        $item->logo_original = 'media/com_ksen/images/users/default.png';
                     }
                     unset($item->logo);
                 }
             } elseif (is_object($object)) {
                 if (!empty($object->logo)) {
-                    $object->logo_original = 'media/com_ksenmart/images/users/original/' . $object->logo;
-                    $object->logo_thumb = 'media/com_ksenmart/images/users/thumb/' . $object->logo;
+                    $object->logo_original = 'media/com_ksen/images/users/original/' . $object->logo;
+                    $object->logo_thumb = 'media/com_ksen/images/users/thumb/' . $object->logo;
                 } else {
-                    $object->logo_thumb = 'media/com_ksenmart/images/users/default.png';
-                    $object->logo_original = 'media/com_ksenmart/images/users/default.png';
+                    $object->logo_thumb = 'media/com_ksen/images/users/default.png';
+                    $object->logo_original = 'media/com_ksen/images/users/default.png';
                 }
                 unset($object->logo);
             }
