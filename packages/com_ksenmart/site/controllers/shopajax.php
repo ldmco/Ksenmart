@@ -395,6 +395,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			$session = & JFactory::getSession();
 			$order_id = $session->get('shop_order_id', 0);
 			if ($order_id != 0) {
+				$db = JFactory::getDBO();
 				$query = "update #__ksenmart_orders set user_id='$user->id' where id='$order_id'";
 				$db->setQuery($query);
 				$db->Query();
@@ -404,7 +405,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			// Login failed !
 			$data['remember'] = (int) $options['remember'];
 			$app->setUserState('users.login.form.data', $data);
-			$app->close('login');
+			$app->close('error');
 		}
 	}
 	
