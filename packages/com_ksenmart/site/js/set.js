@@ -32,12 +32,12 @@ jQuery(document).ready(function() {
         return false;
     });
 
-    jQuery('#item .unit #comment_form img').click(function() {
+    jQuery('body').on('click', '#comment_form img', function() {
         var rate = jQuery(this).attr('rate');
-        jQuery('#item .unit #comment_form img').attr('src', URI_ROOT + 'components/com_ksenmart/images/star2-small.png');
+        jQuery('#comment_form img').attr('src', URI_ROOT + 'components/com_ksenmart/images/star2-small.png');
         for (var k = 1; k <= rate; k++)
-            jQuery('#item .unit #comment_form img[rate="' + k + '"]').attr('src', URI_ROOT + 'components/com_ksenmart/images/star-small.png');
-        jQuery('#item .unit #comment_form input[name="comment_rate"]').val(rate);
+            jQuery('#comment_form img[rate="' + k + '"]').attr('src', URI_ROOT + 'components/com_ksenmart/images/star-small.png');
+        jQuery('#comment_form input[name="comment_rate"]').val(rate);
     });
 
     jQuery('#item .unit .reviews .show-all a').click(function() {
