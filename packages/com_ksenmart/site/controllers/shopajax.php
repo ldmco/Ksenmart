@@ -392,7 +392,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			$app->setUserState('users.login.form.data', array());
 
 			$user = JFactory::getUser();
-			$session = & JFactory::getSession();
+			$session = JFactory::getSession();
 			$order_id = $session->get('shop_order_id', 0);
 			if ($order_id != 0) {
 				$db = JFactory::getDBO();
