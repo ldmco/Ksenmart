@@ -183,6 +183,7 @@ function KMSetFilter(filter_url, replace_content) {
                 else
                     jQuery(this).hide();
             });
+			form.show();
         }
     });
 }
