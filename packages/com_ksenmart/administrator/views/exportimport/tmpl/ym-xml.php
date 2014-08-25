@@ -50,8 +50,8 @@ $cats_where = "pc.category_id in (" . implode(',', $cats) . ")";
 $query = "select p.*,pc.category_id,(select filename from {$config->dbprefix}ksenmart_files where owner_id=p.id and owner_type='product' and media_type='image' order by ordering limit 1) as picture,(select title from {$config->dbprefix}ksenmart_manufacturers where id=p.manufacturer) as manufacturer_name,(select code from {$config->dbprefix}ksenmart_currencies where id=p.price_type) as code from {$config->dbprefix}ksenmart_products as p inner join {$config->dbprefix}ksenmart_products_categories as pc on pc.product_id=p.id where p.published='1' and p.price>0 and type='product' and ($cats_where) group by p.id";
 $res = mysql_query($query);
 while ($row = mysql_fetch_array($res)) {
-    if ($row['picture'] != '') $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/ksenmart/images/products/original/' . $row['picture'];
-    else $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/ksenmart/images/products/original/no.jpg';
+    if ($row['picture'] != '') $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/com_ksenmart/images/products/original/' . $row['picture'];
+    else $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/com_ksenmart/images/products/original/no.jpg';
     $offers.= '<offer id="' . $row['id'] . '" available="' . ($row['in_stock'] > 0 ? 'true' : 'false') . '" bid="1">
 		<url>http://' . $_SERVER['HTTP_HOST'] . '/index.php?option=com_ksenmart&amp;view=product&amp;id=' . $row['id'] . ':' . $row['alias'] . $Itemid . '</url>
 		<price>' . $row['price'] . '</price>
