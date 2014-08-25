@@ -53,7 +53,7 @@ while ($row = mysql_fetch_array($res)) {
     if ($row['picture'] != '') $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/ksenmart/images/products/original/' . $row['picture'];
     else $row['picture'] = 'http://' . $_SERVER['HTTP_HOST'] . '/media/ksenmart/images/products/original/no.jpg';
     $offers.= '<offer id="' . $row['id'] . '" available="' . ($row['in_stock'] > 0 ? 'true' : 'false') . '" bid="1">
-		<url>http://' . $_SERVER['HTTP_HOST'] . '/index.php?option=com_ksenmart&amp;view=shopproduct&amp;id=' . $row['id'] . ':' . $row['alias'] . $Itemid . '</url>
+		<url>http://' . $_SERVER['HTTP_HOST'] . '/index.php?option=com_ksenmart&amp;view=product&amp;id=' . $row['id'] . ':' . $row['alias'] . $Itemid . '</url>
 		<price>' . $row['price'] . '</price>
 		<currencyId>' . $row['code'] . '</currencyId>
 		<categoryId>' . $row['category_id'] . '</categoryId>
