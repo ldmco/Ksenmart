@@ -563,7 +563,6 @@ class KsenMartModelcatalog extends JModelKSList {
         $query
             ->select('p.manufacturer')
             ->from('#__ksenmart_products as p')
-            ->order('p.' . $this->getState('list.ordering') . ' ' . $this->getState('list.direction'))
             ->group('p.manufacturer')
         ;
         if ($this->_params->get('show_out_stock') != 1) {
