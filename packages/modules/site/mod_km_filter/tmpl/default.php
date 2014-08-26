@@ -34,7 +34,7 @@
 		<div class="properties">
 		<?php foreach($properties as $property){ ?>
 		<?php if(!empty($property->values)){ ?>
-		<div class="property_<?php echo $property->id?> property">
+		<div class="property_<?php echo $property->property_id?> property">
 			<ul class="nav nav-list clearfix">
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php foreach($property->values as $value){ ?>
@@ -42,13 +42,13 @@
 					<a href="javascript:void(0);" title="<?php echo $value->title; ?>">
 					<?php if($value->image!=''){ ?>					
 					<label class="item image_item <?php if ($value->selected) echo 'active';?>">
-						<input onclick="KMChangeFilter(this,'property_<?php echo $property->id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
+						<input onclick="KMChangeFilter(this,'property_<?php echo $property->property_id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
 						<div><img src="<?php echo JURI::root().$value->image; ?>" alt="<?php echo $value->title; ?>" /></div>
 						<span class="delta">&#x25C6;</span>
 					</label>
 					<?php }else{ ?>
 					<label class="item <?php if ($value->selected) echo 'active'; ?>">
-						<input onclick="KMChangeFilter(this,'property_<?php echo $property->id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
+						<input onclick="KMChangeFilter(this,'property_<?php echo $property->property_id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
 						<span><?php echo $value->title; ?></span>
 					</label>						
 					<?php } ?>
