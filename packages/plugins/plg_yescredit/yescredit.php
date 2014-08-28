@@ -183,7 +183,7 @@ class plgKMPaymentYescredit extends KMPaymentPlugin {
 		return $html;
 	}
 	
-	function onAfterDisplayShopopencartDefault_congratulation($view, $tpl = null, $html) {
+	function onAfterDisplayShopopencartDefault_congratulation($view, &$tpl = null, &$html) {
 		if (empty($view->order)) 
 		return;
 		if (empty($view->order->payment_id)) 
@@ -248,7 +248,7 @@ class plgKMPaymentYescredit extends KMPaymentPlugin {
 		return true;
 	}
 	
-	function onBeforeDisplayShopopencartDefault_total($view, $tpl = null, $html) {
+	function onBeforeDisplayShopopencartDefault_total($view, &$tpl = null, &$html) {
 		if (empty($view->cart)) 
 		return;
 		

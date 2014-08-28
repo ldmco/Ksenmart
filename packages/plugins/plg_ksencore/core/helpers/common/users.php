@@ -101,7 +101,7 @@ class KSUsers {
                 $user->region_id = $user_region;
             }
 
-            if(is_object($user->settings)){
+            if(!is_object($user->settings)){
                $user->settings = '{"catalog_layout":"' . $params->get('catalog_default_view', 'grid') . '"}';
             }
             $user->settings = json_decode($user->settings);

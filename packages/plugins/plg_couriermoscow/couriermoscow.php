@@ -75,7 +75,7 @@ class plgKMShippingCourierMoscow extends KSMShippingPlugin {
 		return;
 	}
 	
-	public function onAfterDisplayKSMCartDefault_shipping($view, $tpl = null, $html) {
+	public function onAfterDisplayKSMCartDefault_shipping($view, &$tpl = null, &$html) {
 		if (empty($view->cart)) 
 		return;
 		if (empty($view->cart->shipping_id)) 

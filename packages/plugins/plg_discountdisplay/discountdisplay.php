@@ -10,7 +10,7 @@ class plgKMPluginsDiscountdisplay extends KMPlugin {
         parent::__construct($subject, $config);
     }
     
-    function onBeforeDisplayKSMCartDefault_total($view, $tpl = null, $html) {
+    function onBeforeDisplayKSMCartDefault_total($view, &$tpl = null, &$html) {
         if (empty($view->cart)) 
         return;
         $discount = 0;

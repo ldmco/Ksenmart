@@ -144,7 +144,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		return true;
 	}
 	
-	function onAfterDisplayKSMCartDefault_content($view, $tpl = null, $html) {
+	function onAfterDisplayKSMCartDefault_content($view, &$tpl = null, &$html) {
 		$session = JFactory::getSession();
 		$coupon_id = $session->get('ksenmart.coupon_id', null);
 		if (!empty($coupon_id)) {
@@ -164,7 +164,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		}
 	}
 	
-	function onBeforeDisplayKSMCartDefault_shipping($view, $tpl = null, $html) {
+	function onBeforeDisplayKSMCartDefault_shipping($view, &$tpl = null, &$html) {
 		$document = JFactory::getDocument();
 		$session = JFactory::getSession();
 		$coupon_id = $session->get('ksenmart.coupon_id', null);
@@ -223,7 +223,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		}
 	}
 	
-	function onAfterDisplayAdminKSMOrdersOrder_info($view, $tpl = null, $html) {
+	function onAfterDisplayAdminKSMOrdersOrder_info($view, &$tpl = null, &$html) {
 		if (empty($view->order->discounts)) 
 		return;
 		$view->order->discounts = json_decode($view->order->discounts, true);
@@ -363,7 +363,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		$coupon_id = $session->get('ksenmart.coupon_id', null);
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('id')->from('#__ksenmart_discount_coupons')->where('id=' . $coupon_id)->where('discount_id=' . $discount_id);
+		$query->select('id')->from('#__ksenmart_discount_coupons')->where('id=' . (int)$coupon_id)->where('discount_id=' . $discount_id);
 		$db->setQuery($query);
 		$coupon_id = $db->loadResult();
 		if (empty($coupon_id)) 
