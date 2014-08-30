@@ -316,6 +316,7 @@ class KSUsers {
             if (!empty($fields)) {
                 
                 foreach ($fields as $field) {
+					$user->{'field_' . $field->id} = new stdClass();
                     $user->{'field_' . $field->id}->value = null;
                     $field_ids[] = $field->id;
                 }

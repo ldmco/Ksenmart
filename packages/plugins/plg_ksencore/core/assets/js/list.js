@@ -137,7 +137,7 @@ var KMList = function(variables) {
                 }
                 data['items'] = items;
                 jQuery.ajax({
-                    url: 'index.php?option='+KS.extension,
+                    url: 'index.php?option='+KS.option,
                     data: data,
                     dataType: 'json',
                     success: function(responce) {
@@ -328,7 +328,7 @@ var KMList = function(variables) {
                 data[filters[k].name] = filters[k].value;
         }
         jQuery.ajax({
-            url: 'index.php?option='+KS.extension+'&tmpl=ksenmart',
+            url: 'index.php?option='+KS.option+'&tmpl=ksenmart',
             data: data,
             dataType: 'json',
             async: false,
@@ -394,7 +394,7 @@ var KMList = function(variables) {
         data['task'] = 'save_list_items';
         data['table'] = List.table;
         jQuery.ajax({
-            url: 'index.php?option='+KS.extension,
+            url: 'index.php?option='+KS.option,
             data: data,
             dataType: 'json',
             async: false,
@@ -422,7 +422,7 @@ var KMList = function(variables) {
         data['task'] = 'delete_list_items';
         data['view'] = List.view;
         jQuery.ajax({
-            url: 'index.php?option='+KS.extension,
+            url: 'index.php?option='+KS.option,
             data: data,
             dataType: 'json',
             async: false,
@@ -439,7 +439,7 @@ var KMList = function(variables) {
         data['task'] = 'copy_list_items';
         data['view'] = List.view;
         jQuery.ajax({
-            url: 'index.php?option='+KS.extension,
+            url: 'index.php?option='+KS.option,
             data: data,
             dataType: 'json',
             async: false,
