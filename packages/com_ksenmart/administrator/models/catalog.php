@@ -569,8 +569,9 @@ class KsenMartModelCatalog extends JModelKSAdmin {
                     $this->_db->setQuery($query);
                     $value_row = $this->_db->loadObject();
                     if(empty($value_row)) {
+						$p_alias = KSFunctions::GenAlias($text);							
                         $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title')->values($property_id . ',' . $text);
+                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
                         $this->_db->setQuery($query);
                         $this->_db->query();
                         $property['value_id'] = $this->_db->insertid();
@@ -810,8 +811,9 @@ class KsenMartModelCatalog extends JModelKSAdmin {
                     $this->_db->setQuery($query);
                     $value_row = $this->_db->loadObject();
                     if(empty($value_row)) {
+						$p_alias = KSFunctions::GenAlias($text);							
                         $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title')->values($property_id . ',' . $text);
+                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
                         $this->_db->setQuery($query);
                         $this->_db->query();
                         $property['value_id'] = $this->_db->insertid();
