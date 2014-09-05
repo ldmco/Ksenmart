@@ -685,8 +685,6 @@ class KsenMartModelCart extends JModelKSList {
             $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');
         }
         catch (exception $e) {}
-        
-        $order_items->note            = $jinput->get('note', null, 'string');
 
         try {
             $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');
