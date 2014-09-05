@@ -134,6 +134,12 @@ class KSMOrders {
         if (!empty($order->address_fields)) {
             $order->address_fields = implode(', ', $order->address_fields);
         }
+		$order->customer_name = '';
+		if(isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name .= $order->customer_fields['name'];
+		if(isset($order->customer_fields['last_name']) && !empty($order->customer_fields['last_name'])) $order->customer_name .= $order->customer_fields['last_name'] . ' ';
+		if(isset($order->customer_fields['first_name']) && !empty($order->customer_fields['first_name'])) $order->customer_name .= $order->customer_fields['first_name'] . ' ';
+		if(isset($order->customer_fields['middle_name']) && !empty($order->customer_fields['middle_name'])) $order->customer_name .= $order->customer_fields['middle_name'];
+		
         $mail = JFactory::getMailer();
         $params = JComponentHelper::getParams('com_ksenmart');
         $sender = array($params->get('shop_email'), $params->get('shop_name'));
