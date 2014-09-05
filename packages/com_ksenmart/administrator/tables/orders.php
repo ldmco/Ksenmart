@@ -1,20 +1,12 @@
-<?php 
-defined( '_JEXEC' ) or die;
+<?php defined('_JEXEC') or die;
 
-if (!class_exists('KsenmartTable')){
-	require JPATH_COMPONENT_ADMINISTRATOR . DS . 'tables' .DS.'ksenmart.php' ;
+if (!class_exists('KsenTable')) {
+    require KSC_ADMIN_PATH_CORE_TABLES . 'ksentable.php';
 }
 
-class KsenmartTableOrders extends KsenmartTable
-{
-
-	function __construct(&$_db)
-	{
-		parent::__construct('#__ksenmart_orders', 'id', $_db);
-	}
-
-	function bind($src, $ignore=array()){
-		return parent::bind($src, $ignore);
-	}
-	
+class KsenmartTableOrders extends KsenTable {
+    
+    public function __construct(&$_db) {
+        parent::__construct('#__ksenmart_orders', 'id', $_db);
+    }
 }
