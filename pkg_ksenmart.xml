@@ -7,7 +7,7 @@
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.1.2a</version>
+    <version>1.1.3-beta</version>
     <description>COM_KSENMART_DESC</description>
     <creationDate>17 February 2014</creationDate>
 
@@ -37,7 +37,7 @@
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>
 		<file type="plugin" id="viewproducts" group="kmdiscountactions">plugins/plg_viewproducts.zip</file>
-		<file type="plugin" id="geolocation" group="kmplugins">plugins/plg_geolocation.zip</file>
+		<file type="plugin" id="roistat" group="system">plugins/plg_roistat.zip</file>
 
 		<file type="module" id="mod_km_categories" client="administrator">modules/admin/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_commentrates" client="administrator">modules/admin/mod_km_commentrates.zip</file>
@@ -59,7 +59,7 @@
 		<file type="module" id="mod_ks_settings_groups" client="administrator">modules/admin/mod_ks_settings_groups.zip</file>
 		<file type="module" id="mod_ksm_news" client="administrator">modules/admin/mod_ksm_news.zip</file>
 
-		<file type="module" id="mod_km_discount" client="site">modules/site/mod_km_discount.zip</file>
+		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 		<file type="module" id="mod_km_categories" client="site">modules/site/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_contacts" client="site">modules/site/mod_km_contacts.zip</file>
 		<file type="module" id="mod_km_filter" client="site">modules/site/mod_km_filter.zip</file>
