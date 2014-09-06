@@ -183,7 +183,7 @@ class plgKMPaymentYescredit extends KMPaymentPlugin {
 		return $html;
 	}
 	
-	function onAfterDisplayShopopencartDefault_congratulation($view, &$tpl = null, &$html) {
+	function onAfterDisplayCartDefault_congratulation($view, &$tpl = null, &$html) {
 		if (empty($view->order)) 
 		return;
 		if (empty($view->order->payment_id)) 
@@ -226,7 +226,7 @@ class plgKMPaymentYescredit extends KMPaymentPlugin {
 		return true;
 	}
 	
-	function onBeforeViewShopopencart($view) {
+	function onBeforeViewCart($view) {
 		$document = JFactory::getDocument();
 		$db = JFactory::getDBO();
 		$script = 'var yescredit_payment_min_orderprice = {};';
@@ -248,7 +248,7 @@ class plgKMPaymentYescredit extends KMPaymentPlugin {
 		return true;
 	}
 	
-	function onBeforeDisplayShopopencartDefault_total($view, &$tpl = null, &$html) {
+	function onBeforeDisplayCartDefault_total($view, &$tpl = null, &$html) {
 		if (empty($view->cart)) 
 		return;
 		
