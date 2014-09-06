@@ -172,9 +172,8 @@ class KsenMartModelOrder extends JModelKSList {
             foreach($properties as $property) {
                 $value = $jinput->get('property_' . $prd_id . '_' . $property->property_id, null, 'string');
                 if(!empty($value)){
-                    $item_properties[] = array(
-                        'title' => $property->property_id, 
-                        'value' => $value
+                    $item_properties[$property->property_id] = array(
+                        'value_id' => $value
                     );
                 }
             }
@@ -185,9 +184,8 @@ class KsenMartModelOrder extends JModelKSList {
             foreach($properties as $property) {
                 $value = $jinput->get('property_' . $property->property_id, null, 'string');
                 if(!empty($value)){
-                    $item_properties[] = array(
-                        'title' => $property->property_id, 
-                        'value' => $value
+                    $item_properties[$property->property_id] = array(
+                        'value_id' => $value
                     );
                 }
             }
