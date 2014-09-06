@@ -87,36 +87,18 @@ class KsenMartModelOrder extends JModelKSList {
 
     public function getProduct() {
         $id = JRequest::getVar('id', 0);
-        $row = KSMProducts::getProduct($id);
-        $query = "select kp.*,kpp.value as `values` from #__ksenmart_properties as kp,#__ksenmart_product_properties as kpp where kpp.product='$row->id' and kp.id=kpp.property_id and kp.type!='text' and kpp.value!='' order by kp.ordering";
-        $this->_db->setQuery($query);
-        $properties = $this->_db->loadObjectList();
-        for($i = 0; $i < count($properties); $i++) {
-            if($properties[$i]->type == 'select' || $properties[$i]->type == 'radio') {
-                $properties[$i]->values = str_replace('||', ',', $properties[$i]->values);
-                $properties[$i]->values = str_replace('|', '', $properties[$i]->values);
-                $query = "select * from #__ksenmart_property_values where id in ({$properties[$i]->values})";
-                $this->_db->setQuery($query);
-                $properties[$i]->values = $this->_db->loadObjectList();
-                for($k = 0; $k < count($properties[$i]->values); $k++) {
-                    if(JRequest::getVar('property_' . $properties[$i]->id, '') == $properties[$i]->values[$k]->id) $properties[$i]->values[$k]->selected = 1;
-                    else  $properties[$i]->values[$k]->selected = 0;
-                }
-            } else {
-                if(JRequest::getVar('property_' . $properties[$i]->id, '') == 1) $properties[$i]->selected = 1;
-                else  $properties[$i]->selected = 0;
-            }
-        }
-        $row->properties = $properties;
-        $this->_product = $row;
+        $this->_product = KSMProducts::getProduct($id);
         return $row;
     }
 
     public function createOrder($flag = 2) {
+        $this->onExecuteBefore('createOrder', array($flag));
+
         $params         = JComponentHelper::getParams('com_ksenmart');
         $session        = JFactory::getSession();
         $jinput         = JFactory::getApplication()->input;
         $user           = JFactory::getUser();
+
         $user_id        = $user->id;
         $order_id       = $session->get('shop_order_id', null);
         $name           = $jinput->get('name', null, 'string');
@@ -132,7 +114,7 @@ class KsenMartModelOrder extends JModelKSList {
         $note           = $jinput->get('note', null, 'string');
         $prd_id         = $jinput->get('id', 0, 'int');
         $count          = $jinput->get('count', 1, 'int');
-        $roistat        = $this->input->get('roistat_visit', 0, 'int');
+        $roistat        = $jinput->get('roistat_visit', 0, 'int');
 
         if(!empty($prd_id)){
             $prd        = KSMProducts::getProduct($prd_id);
@@ -240,6 +222,8 @@ class KsenMartModelOrder extends JModelKSList {
         } else {
             $session->set('shop_order_id', $order_id);
         }
+
+        $this->onExecuteAfter('createOrder', array(&$order_id));
         return $order_id;
     }
     
