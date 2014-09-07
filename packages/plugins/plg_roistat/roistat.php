@@ -14,6 +14,11 @@ class plgSystemRoistat extends JPlugin {
     protected $autoloadLanguage = true;
     private $project = null;
 
+    public function __construct(&$subject, $config = array()){
+        parent::__construct($subject, $config);
+        $this->loadLanguage('plg_system_roistat.sys');
+    }
+
     public function onAfterGetKSMFormOrder($form, $instance) {
         $likes_xml = '
             <field
