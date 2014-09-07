@@ -307,6 +307,7 @@ class KsenMartModelProfile extends JModelKSList {
         $jinput  = JFactory::getApplication()->input;
         $user    = KSUsers::getUser();
         $city    = $jinput->get('city', null, 'string');
+		$zip     = $jinput->get('zip', null, 'string');
         $street  = $jinput->get('street', null, 'string');
         $house   = $jinput->get('house', null, 'string');
 		$entrance = $jinput->get('entrance', null, 'string');
@@ -317,6 +318,7 @@ class KsenMartModelProfile extends JModelKSList {
         $address = new stdClass();
         $address->user_id   = $user->id;
         $address->city      = $city;
+		$address->zip       = $zip;
         $address->street    = $street;
         $address->house     = $house;
 		$address->entrance  = $entrance;
@@ -385,22 +387,12 @@ class KsenMartModelProfile extends JModelKSList {
             
             $this->_db->updateObject('#__ksen_user_addresses', $address, 'user_id');
             
-            $query  = $this->_db->getQuery(true);
-            $fields = array(
-                KSDb::quoteName('default') . '=1'
-            );
-            $conditions = array(
-                KSDb::quoteName('user_id') . '='.$this->_db->escape($user->id), 
-                KSDb::quoteName('id') . '='.$this->_db->escape($id)
-            );
+            $address          = new stdClass();
+			$address->id      = $id;
+            $address->user_id = $user->id;
+            $address->default = 1;
             
-            $query
-                ->update(KSDb::quoteName('#__ksen_user_addresses'))
-                ->set($fields)
-                ->where($conditions)
-            ;
-            $this->_db->setQuery($query);
-            $this->_db->queryBatch($query);
+            $this->_db->updateObject('#__ksen_user_addresses', $address, 'id');
             $this->_db->transactionCommit();
             
             $this->onExecuteAfter('setDefaultAddress');
@@ -851,6 +843,7 @@ class KsenMartModelProfile extends JModelKSList {
             
             $address->id        = $id;
             $address->city      = $jinput->get('city', null, 'string');
+			$address->zip       = $jinput->get('zip', null, 'string');
             $address->street    = $jinput->get('street', null, 'string');
             $address->house     = $jinput->get('house', null, 'string');
 			$address->entrance  = $jinput->get('entrance', null, 'string');
