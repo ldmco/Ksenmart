@@ -10,7 +10,7 @@ class JFormFieldShippingCustomerFields extends JFormField {
 				'-1' => array(
 					'position' => 'customer',
 					'type' => 'text',
-					'title' => 'first_name',
+					'title' => 'name',
 					'required' => 1,
 					'system' => 1,
 					'ordering' => 1,

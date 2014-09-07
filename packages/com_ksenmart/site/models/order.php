@@ -87,36 +87,18 @@ class KsenMartModelOrder extends JModelKSList {
 
     public function getProduct() {
         $id = JRequest::getVar('id', 0);
-        $row = KSMProducts::getProduct($id);
-        $query = "select kp.*,kpp.value as `values` from #__ksenmart_properties as kp,#__ksenmart_product_properties as kpp where kpp.product='$row->id' and kp.id=kpp.property_id and kp.type!='text' and kpp.value!='' order by kp.ordering";
-        $this->_db->setQuery($query);
-        $properties = $this->_db->loadObjectList();
-        for($i = 0; $i < count($properties); $i++) {
-            if($properties[$i]->type == 'select' || $properties[$i]->type == 'radio') {
-                $properties[$i]->values = str_replace('||', ',', $properties[$i]->values);
-                $properties[$i]->values = str_replace('|', '', $properties[$i]->values);
-                $query = "select * from #__ksenmart_property_values where id in ({$properties[$i]->values})";
-                $this->_db->setQuery($query);
-                $properties[$i]->values = $this->_db->loadObjectList();
-                for($k = 0; $k < count($properties[$i]->values); $k++) {
-                    if(JRequest::getVar('property_' . $properties[$i]->id, '') == $properties[$i]->values[$k]->id) $properties[$i]->values[$k]->selected = 1;
-                    else  $properties[$i]->values[$k]->selected = 0;
-                }
-            } else {
-                if(JRequest::getVar('property_' . $properties[$i]->id, '') == 1) $properties[$i]->selected = 1;
-                else  $properties[$i]->selected = 0;
-            }
-        }
-        $row->properties = $properties;
-        $this->_product = $row;
-        return $row;
+        $this->_product = KSMProducts::getProduct($id);
+        return $this->_product;
     }
 
     public function createOrder($flag = 2) {
+        $this->onExecuteBefore('createOrder', array($flag));
+
         $params         = JComponentHelper::getParams('com_ksenmart');
         $session        = JFactory::getSession();
         $jinput         = JFactory::getApplication()->input;
         $user           = JFactory::getUser();
+
         $user_id        = $user->id;
         $order_id       = $session->get('shop_order_id', null);
         $name           = $jinput->get('name', null, 'string');
@@ -132,7 +114,7 @@ class KsenMartModelOrder extends JModelKSList {
         $note           = $jinput->get('note', null, 'string');
         $prd_id         = $jinput->get('id', 0, 'int');
         $count          = $jinput->get('count', 1, 'int');
-        $roistat        = $this->input->get('roistat_visit', 0, 'int');
+        $roistat        = $jinput->get('roistat_visit', 0, 'int');
 
         if(!empty($prd_id)){
             $prd        = KSMProducts::getProduct($prd_id);
@@ -190,9 +172,8 @@ class KsenMartModelOrder extends JModelKSList {
             foreach($properties as $property) {
                 $value = $jinput->get('property_' . $prd_id . '_' . $property->property_id, null, 'string');
                 if(!empty($value)){
-                    $item_properties[] = array(
-                        'title' => $property->property_id, 
-                        'value' => $value
+                    $item_properties[$property->property_id] = array(
+                        'value_id' => $value
                     );
                 }
             }
@@ -203,9 +184,8 @@ class KsenMartModelOrder extends JModelKSList {
             foreach($properties as $property) {
                 $value = $jinput->get('property_' . $property->property_id, null, 'string');
                 if(!empty($value)){
-                    $item_properties[] = array(
-                        'title' => $property->property_id, 
-                        'value' => $value
+                    $item_properties[$property->property_id] = array(
+                        'value_id' => $value
                     );
                 }
             }
@@ -240,6 +220,8 @@ class KsenMartModelOrder extends JModelKSList {
         } else {
             $session->set('shop_order_id', $order_id);
         }
+
+        $this->onExecuteAfter('createOrder', array(&$order_id));
         return $order_id;
     }
     
@@ -267,7 +249,7 @@ class KsenMartModelOrder extends JModelKSList {
         $query
             ->select('
                 o.id,
-                o.cost,
+                o.cost AS order_price,
                 o.roistat,
                 o.discounts,
                 o.user_id,
@@ -278,13 +260,16 @@ class KsenMartModelOrder extends JModelKSList {
                 o.date_add,
                 r.title AS region,
                 p.title AS payment,
-                s.title AS shipping
+                s.title AS shipping,
+                SUM(oi.purchase_price) AS cost
             ')
             ->from($this->_db->qn('#__ksenmart_orders', 'o'))
+            ->leftjoin($this->_db->qn('#__ksenmart_order_items', 'oi') . ' ON ' . $this->_db->qn('o.id') . '=' . $this->_db->qn('oi.order_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_regions', 'r') . ' ON ' . $this->_db->qn('r.id') . '=' . $this->_db->qn('o.region_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_payments', 'p') . ' ON ' . $this->_db->qn('p.id') . '=' . $this->_db->qn('o.payment_id'))
             ->leftjoin($this->_db->qn('#__ksenmart_shippings', 's') . ' ON ' . $this->_db->qn('s.id') . '=' . $this->_db->qn('o.shipping_id'))
             ->where('DATE_FORMAT(' . $this->_db->qn('o.date_add') . ', \'%Y-%m-%d\') > FROM_UNIXTIME(' . $this->_db->q($editDate) . ', \'%Y-%m-%d\')')
+            ->group($this->_db->qn('oi.order_id'))
         ;
         $this->_db->setQuery($query);
         $orders = $this->_db->loadObjectList();
@@ -294,10 +279,10 @@ class KsenMartModelOrder extends JModelKSList {
             $date = new JDate($order->date_add);
             $order->date_create  = $date->toUnix();
             $order->date_update  = $order->date_create;
+            $order->price        = $order->order_price;
+            
+            unset($order->order_price);
             unset($order->date_add);
-
-            $order->price        = $order->cost;
-            $order->cost         = 0;
 
             $order->fields = array();
             foreach ($order as $key => &$field) {

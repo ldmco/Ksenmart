@@ -20,8 +20,8 @@ JHtml::_('behavior.formvalidation');
 			<td width="250" class="left-column">
 				<div id="tree">
 					<ul>
-						<?php echo KSSystem::loadModules('km-list-left'); ?>
 						<?php echo KSSystem::loadModules('ks-list-left'); ?>
+						<?php echo KSSystem::loadModules('km-list-left'); ?>
 					</ul>	
 				</div>
 			</td>

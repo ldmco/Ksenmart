@@ -59,7 +59,7 @@
 	<div class="control-group">
 		<label class="control-label require" for="inputEmail"><?php echo $field->title; ?></label>
 		<div class="controls">
-			<input type="text" name="field[<?php echo $key; ?>]" class="inputbox" value="<?php echo $this->user->{'field_'.$field->id}->value; ?>" placeholder="<?php echo $field->title; ?>" />
+			<input type="text" name="field[<?php echo $field->id; ?>]" class="inputbox" value="<?php echo $this->user->{'field_'.$field->id}->value; ?>" placeholder="<?php echo $field->title; ?>" />
 		</div>
 	</div>		
 	<?php } ?>

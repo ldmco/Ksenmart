@@ -39,14 +39,15 @@ class modKsenmartCategoriesHelper {
         $categories = $params->get('categories', array());
         $sql = $db->getQuery(true);
         $sql
-            ->select('*')
-            ->from('#__ksenmart_categories')
-            ->where('published=1')
-            ->order('ordering')
+            ->select('kc.*')
+            ->from('#__ksenmart_categories as kc')
+            ->where('kc.published=1')
+            ->order('kc.ordering')
         ;
         if($categories){
-            $sql->where('id IN(' . implode(', ', $categories) . ') OR parent_id IN(' . implode(', ', $categories) . ')');
+            $sql->where('kc.id IN(' . implode(', ', $categories) . ') OR kc.parent_id IN(' . implode(', ', $categories) . ')');
         }
+		KSMedia::setItemMainImageToQuery($sql, 'category', 'kc.');
 
         $db->setQuery($sql);
         
@@ -54,6 +55,9 @@ class modKsenmartCategoriesHelper {
         $top_parent = (object)array('id' => 0, 'children' => array(),);
         $menu = array(0 => $top_parent);
         foreach ($rows as $k => $v) {
+            if (!empty($v->folder)) {
+                $v->img = KSMedia::resizeImage($v->filename, $v->folder, $params->get('img_width', 200),  $params->get('img_height', 200), json_decode($v->params, true));
+            }		
             if (isset($menu[$k])) $v->children = $menu[$k]->children;
             else $v->children = array();
             $menu[$k] = $v;

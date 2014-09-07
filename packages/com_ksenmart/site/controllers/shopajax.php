@@ -392,9 +392,10 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			$app->setUserState('users.login.form.data', array());
 
 			$user = JFactory::getUser();
-			$session = & JFactory::getSession();
+			$session = JFactory::getSession();
 			$order_id = $session->get('shop_order_id', 0);
 			if ($order_id != 0) {
+				$db = JFactory::getDBO();
 				$query = "update #__ksenmart_orders set user_id='$user->id' where id='$order_id'";
 				$db->setQuery($query);
 				$db->Query();
@@ -404,11 +405,12 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			// Login failed !
 			$data['remember'] = (int) $options['remember'];
 			$app->setUserState('users.login.form.data', $data);
-			$app->close('login');
+			$app->close('error');
 		}
 	}
 	
 	public function site_reg() {
+		$app = JFactory::getApplication();
 		$db = JFactory::getDBO();
 		$user = new JUser;
 		$data = array();
@@ -418,6 +420,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		$middle_name = JRequest::getVar('middle_name', '');
 		$password = JRequest::getVar('password', '');
 		$subscribe = JRequest::getVar('subscribe', 0);
+		$fields = JRequest::getVar('fields', array());
 		$ajax = JRequest::getVar('ajax', false);
 		$name = '';
 		if (!empty($last_name)) $name .= $last_name.' ';
@@ -438,17 +441,28 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		$data['activation'] = '';
 		$data['block'] = 0;
 		if (!$user->bind($data)) {
-			print_r($user->getError());
-			exit();
+			if ($ajax){
+				print_r($user->getError());
+				exit();
+			} else {
+				$app->enqueueMessage($user->getError(), 'warning');
+				$this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=profile&layout=registration&Itemid='.KSSystem::getShopItemid()));
+				return false;
+			}
 		}
 		
 		JPluginHelper::importPlugin('user');
 		if (!$user->save()) {
-			print_r($user->getError());
-			exit();
+			if ($ajax){
+				print_r($user->getError());
+				exit();
+			} else {
+				$app->enqueueMessage($user->getError(), 'warning');
+				$this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=profile&layout=registration&Itemid='.KSSystem::getShopItemid()));
+				return false;
+			}
 		}
 		
-		$app = JFactory::getApplication();
 		$options = array();
 		$options['remember'] = true;
 		$options['return'] = '';
@@ -475,6 +489,17 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		$query = "insert into #__ksen_users (`id`,`first_name`,`last_name`,`middle_name`) values ('$user->id','$first_name','$last_name','$middle_name')";
 		$db->setQuery($query);
 		$db->Query();
+		foreach($fields as $key=>$value){
+			$values = array(
+				'user_id' => $user->id,
+				'field_id' => $key,
+				'value' => $db->quote($value)
+			);
+			$query = $db->getQuery(true);
+			$query->insert('#__ksen_user_fields_values')->columns(implode(',', array_keys($values)))->values(implode(',', $values));
+			$db->setQuery($query);
+			$db->query();			
+		}		
 		
 		$session = JFactory::getSession();
 		$order_id = $session->get('shop_order_id', 0);

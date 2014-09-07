@@ -1,0 +1,43 @@
+.mod_ksm_roistat label.control-label {
+	width: 160px;
+	text-align: right;
+}
+
+.mod_ksm_roistat .info{
+	font-size: 16px;
+}
+
+table.cat td.mod_ksm_roistat .inputbox{
+	float: left;
+	width: 185px;
+	padding: 5px 5px 5px 9px;
+	color: #4C4C4C;
+	font-size: 15px;
+	height: 20px;
+	font-family: "Trebuchet MS";
+	background: url(../../../plugins/system/ksencore/core/assets/css/i/inputbox.png) top left no-repeat;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #F3F3F3;
+	margin: 0 20px 0 0;
+}
+
+.btn.btn-connect:focus,
+.btn.btn-connect:active,
+.btn.btn-connect{
+	color: #FFF;
+	outline: none;
+	background-image: none;
+	background-color: #B9CE01;
+	border-color: #B9CE01;
+	box-shadow: none;
+	text-shadow: none;
+	font-family: "Trebuchet MS";
+}
+
+.btn.btn-connect:hover{
+	background-color: #1D86BA;
+	border-color: #1D86BA;
+	color: #FFF;
+}

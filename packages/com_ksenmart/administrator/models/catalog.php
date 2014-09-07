@@ -142,7 +142,18 @@ class KsenMartModelCatalog extends JModelKSAdmin {
             $table->load($product);
             $table->id = null;
             $table->date_added = JFactory::getDate()->toSql();
-            $table->title .= ' (1)';
+			$same_title = false;
+			$i = 1;
+			$title = $table->title;
+			while(!$same_title){
+				$title = $table->title.' ('.$i.')';
+				$query = $this->_db->getQuery(true);
+				$query->select('count(id)')->from('#__ksenmart_products')->where('title='.$this->_db->quote($title));
+				$this->_db->setQuery($query);
+				$same_title = !$this->_db->loadResult();	
+				$i++;
+			}
+			$table->title = $title;
             $table->alias = KSFunctions::GenAlias($table->title);
             if($parent_id != 0) $table->parent_id = $parent_id;
             if($childs_group != 0) $table->childs_group = $childs_group;
@@ -569,8 +580,9 @@ class KsenMartModelCatalog extends JModelKSAdmin {
                     $this->_db->setQuery($query);
                     $value_row = $this->_db->loadObject();
                     if(empty($value_row)) {
+						$p_alias = KSFunctions::GenAlias($text);							
                         $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title')->values($property_id . ',' . $text);
+                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
                         $this->_db->setQuery($query);
                         $this->_db->query();
                         $property['value_id'] = $this->_db->insertid();
@@ -810,8 +822,9 @@ class KsenMartModelCatalog extends JModelKSAdmin {
                     $this->_db->setQuery($query);
                     $value_row = $this->_db->loadObject();
                     if(empty($value_row)) {
+						$p_alias = KSFunctions::GenAlias($text);							
                         $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title')->values($property_id . ',' . $text);
+                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
                         $this->_db->setQuery($query);
                         $this->_db->query();
                         $property['value_id'] = $this->_db->insertid();

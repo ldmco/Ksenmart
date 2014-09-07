@@ -1,4 +1,6 @@
-/* TrackBar */
+.mod_ksm_filter form{
+	display:none;
+}
 .mod_ksm_filter .tracker {
 	background:repeat-x url(../images/b_bg_off.png) center left;
 	height:20px;

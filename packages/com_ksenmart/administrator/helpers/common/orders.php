@@ -23,7 +23,7 @@ class KSMOrders {
                 ')->from('#__ksenmart_orders AS o')->leftjoin('#__ksenmart_order_statuses AS os ON o.status_id=os.id')->where('o.id=' . $db->escape($oid));
             $db->setQuery($query);
             $order = $db->loadObject();
-            KSMOrders::setUserInfoField2Order($order);
+            self::setUserInfoField2Order($order);
             
             $query = $db->getQuery(true);
             $query->select('*')->from('#__ksenmart_order_items')->where('order_id=' . $oid);
@@ -54,7 +54,7 @@ class KSMOrders {
             foreach ($order as & $item) {
                 if (!empty($item->properties)) {
                     $item->properties = json_decode($item->properties);
-                    foreach ($item->properties as & $property) {
+                    foreach ($item->properties as $key => &$property) {
                         
                         $db = JFactory::getDBO();
                         $query = $db->getQuery(true);
@@ -65,9 +65,9 @@ class KSMOrders {
                             pv.title AS prop_value_title
                         ');
                         $query->from('#__ksenmart_order_items AS o');
-                        $query->leftjoin('#__ksenmart_properties AS p ON p.id=' . $db->escape($property->title));
-                        $query->leftjoin('#__ksenmart_property_values AS pv ON pv.id=' . $db->escape($property->value));
-                        $query->where('o.order_id=' . $db->escape($oid));
+                        $query->leftjoin('#__ksenmart_properties AS p ON p.id=' . $db->q($key));
+                        $query->leftjoin('#__ksenmart_property_values AS pv ON pv.id=' . $db->q($property->value_id));
+                        $query->where('o.order_id=' . $db->q($oid));
                         
                         $db->setQuery($query);
                         
@@ -101,7 +101,7 @@ class KSMOrders {
             $order = $db->loadObjectList();
             
             if (!empty($order)) {
-                KSMOrders::setOrderItemsProperties($order, $oid);
+                self::setOrderItemsProperties($order, $oid);
                 foreach ($order as $o_item) {
                     $o_item->product = KSMProducts::getProduct($o_item->product_id);
                 }
@@ -130,10 +130,16 @@ class KSMOrders {
         JRequest::setVar('id', $order_id);
         $model = KSSystem::getModel('orders');
         $order = $model->getOrder();
-        KSMOrders::setOrderItemsProperties($order, $order_id);
+        self::setOrderItemsProperties($order, $order_id);
         if (!empty($order->address_fields)) {
             $order->address_fields = implode(', ', $order->address_fields);
         }
+        $order->customer_name = '';
+        if(isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name .= $order->customer_fields['name'];
+        if(isset($order->customer_fields['last_name']) && !empty($order->customer_fields['last_name'])) $order->customer_name .= $order->customer_fields['last_name'] . ' ';
+        if(isset($order->customer_fields['first_name']) && !empty($order->customer_fields['first_name'])) $order->customer_name .= $order->customer_fields['first_name'] . ' ';
+        if(isset($order->customer_fields['middle_name']) && !empty($order->customer_fields['middle_name'])) $order->customer_name .= $order->customer_fields['middle_name'];
+        
         $mail = JFactory::getMailer();
         $params = JComponentHelper::getParams('com_ksenmart');
         $sender = array($params->get('shop_email'), $params->get('shop_name'));

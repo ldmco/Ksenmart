@@ -38,7 +38,7 @@
 	</td>
 	<td>
 		<div class="pricee">
-			<?php echo $this->item->val_price; ?>
+			<?php echo $this->item->product->val_price; ?>
 		</div>	
 	</td>
 	<td>

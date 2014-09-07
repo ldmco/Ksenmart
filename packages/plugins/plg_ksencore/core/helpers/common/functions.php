@@ -226,7 +226,7 @@ class KSFunctions {
         $params = JComponentHelper::getParams('com_ksenmart');
         $Itemid = KSSystem::getShopItemid();
         if($params->get('order_process', 0) == 1) {
-            $session = &JFactory::getSession();
+            $session = JFactory::getSession();
             $order_id = $session->get('shop_order_id', 0);
             if($order_id == 0) $add_link_cart = JRoute::_('index.php?option=com_ksenmart&view=order&Itemid=' . $Itemid);
             else  $add_link_cart = JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid=' . $Itemid);

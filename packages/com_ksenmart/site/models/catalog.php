@@ -554,16 +554,10 @@ class KsenMartModelcatalog extends JModelKSList {
         
         $where = $this->getFilterDefaultParams();
 
-        if (count($this->_properties) > 0 || $this->_title != ''){
-            $where[] = "(p.parent_id!=0)";
-        }else{
-            $where[] = "(p.parent_id=0)";
-        }
         $query = $this->_db->getQuery(true);
         $query
             ->select('p.manufacturer')
             ->from('#__ksenmart_products as p')
-            ->order('p.' . $this->getState('list.ordering') . ' ' . $this->getState('list.direction'))
             ->group('p.manufacturer')
         ;
         if ($this->_params->get('show_out_stock') != 1) {

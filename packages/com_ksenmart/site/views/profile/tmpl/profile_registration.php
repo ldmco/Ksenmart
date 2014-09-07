@@ -16,6 +16,13 @@
 			<input type="text" class="inputbox" name="middle_name" value="" placeholder="Ваше отчество" />
 		</div>
 	</div>	
+	<?php foreach($this->fields as $field): ?>
+	<div class="control-group">
+		<div class="controls">
+			<input type="text" class="inputbox" name="fields[<?php echo $field->id; ?>]" value="" placeholder="<?php echo $field->title; ?>" />
+		</div>
+	</div>		
+	<?php endforeach; ?>	
 	<div class="control-group">
 		<div class="controls">
 			<input type="email" class="inputbox" name="login" value="" placeholder="Эл. почта" required="true" />

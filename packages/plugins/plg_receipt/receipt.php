@@ -60,7 +60,7 @@ class plgKMPaymentReceipt extends KMPaymentPlugin {
 		return $html;
 	}
 	
-	function onAfterDisplayKSMCartDefault_congratulation($view, $tpl = null, $html) {
+	function onAfterDisplayKSMCartDefault_congratulation($view, &$tpl = null, &$html) {
 		if (empty($view->order)) 
 		return;
 		if (empty($view->order->payment_id)) 
@@ -123,7 +123,7 @@ class plgKMPaymentReceipt extends KMPaymentPlugin {
 		$html.= '</center>';
 		$html.= '<script>';
 		$html.= '	jQuery(".payment_form .button").click(function(){';
-		$html.= '		window.open(URI_ROOT+"index.php?option=com_ksenmart&view=opencart&layout=receipt&id=' . $view->order->id . '&tmpl=component","","width=750,height=650,menubar=no,location=no,resizable=yes,scrollbars=no");';
+		$html.= '		window.open(URI_ROOT+"index.php?option=com_ksenmart&view=cart&layout=receipt&id=' . $view->order->id . '&tmpl=component","","width=750,height=650,menubar=no,location=no,resizable=yes,scrollbars=no");';
 		$html.= '		return false;';
 		$html.= '	});';
 		$html.= '</script>';

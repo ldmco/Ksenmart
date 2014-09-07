@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5.0" method="upgrade">
     <name>MOD_KM_CATEGORIES</name>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <creationDate>March 2014</creationDate>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
@@ -48,9 +48,19 @@
                 <field name="categories" type="sql"
                     query="SELECT id, title FROM #__ksenmart_categories WHERE published=1 ORDER BY ordering"
                     key_field="id" value_field="title"
-                    label="MOD_KM_FILTER_PROPERTIES_LBL"
+                    label="MOD_KM_CATEGORIES_CATS_LABEL"
                     multiple="true"
                 />
+				
+                <field name="img_width" type="text"
+                        default="200"
+                        label="MOD_KM_CATEGORIES_IMG_WIDTH_LABEL"
+                        description="MOD_KM_CATEGORIES_IMG_WIDTH_DESC" />	
+						
+                <field name="img_height" type="text"
+                        default="200"
+                        label="MOD_KM_CATEGORIES_IMG_HEIGHT_LABEL"
+                        description="MOD_KM_CATEGORIES_IMG_HEIGHT_DESC" />	
 
                 <field name="layout" type="modulelayout"
                         label="JFIELD_ALT_LAYOUT_LABEL"

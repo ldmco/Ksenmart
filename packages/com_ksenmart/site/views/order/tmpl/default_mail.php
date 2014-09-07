@@ -4,7 +4,7 @@
 	</tr>
 	<tr>
 		<td>Имя:</td>
-		<td><?php echo $this->order->customer_fields['name']; ?></td>
+		<td><?php echo $this->order->customer_name; ?></td>
 	</tr>							
 	<tr>
 		<td>E-mail:</td>

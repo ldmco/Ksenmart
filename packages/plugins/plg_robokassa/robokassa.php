@@ -40,7 +40,7 @@ class plgKMPaymentRobokassa extends KMPaymentPlugin {
 		return $html;
 	}
 	
-	function onAfterDisplayKSMCartDefault_congratulation($view, $tpl = null, $html) {
+	function onAfterDisplayKSMCartDefault_congratulation($view, &$tpl = null, &$html) {
 		if (empty($view->order)) 
 		return;
 		if (empty($view->order->payment_id)) 

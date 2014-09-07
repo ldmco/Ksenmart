@@ -1,4 +1,4 @@
-var $pimg, jcrop_api;
+var $pimg, jcrop_api, maskList, maskOpts;
 
 function cropImg(class_j){
     var 
@@ -329,8 +329,8 @@ jQuery(document).ready(function(){
 		});	
 	});
     
-    var maskList = jQuery.masksSort(jQuery.masksLoad(URI_ROOT+"components/com_ksenmart/js/phone-codes.json"), ['#'], /[0-9]|#/, "mask");
-    var maskOpts = {
+    maskList = jQuery.masksSort(jQuery.masksLoad(URI_ROOT + "components/com_ksenmart/js/phone-codes.json"), ['#'], /[0-9]|#/, "mask");
+    maskOpts = {
         inputmask: {
             definitions: {
                 '#': {
@@ -360,19 +360,9 @@ jQuery(document).ready(function(){
         }
     };
 
-    jQuery('#phone_mask').change(function() {
-        if (jQuery('#phone_mask').is(':checked')) {
-            jQuery('#customer_phone').inputmasks(maskOpts);
-        } else {
-            jQuery('#customer_phone').inputmask("+[####################]", maskOpts.inputmask)
-            .attr("placeholder", jQuery('#customer_phone').inputmask("getemptymask"));
-            jQuery("#descr").html("Введите номер");
-        }
-    });
+    jQuery('#customer_phone').inputmasks(maskOpts);
 
     setTab();
-
-    jQuery('#phone_mask').change();
     
     jQuery('.cancel_edit').on('click', function(){
         cancel_review_edit(jQuery(this));

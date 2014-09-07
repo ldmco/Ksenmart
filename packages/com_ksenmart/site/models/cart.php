@@ -442,7 +442,7 @@ class KsenMartModelCart extends JModelKSList {
                     foreach($related as $r) {
                         $value = JRequest::getVar('property_' . $r->relative_id . '_' . $property->id, '');
                         if(!empty($value)){
-                            $item_properties[] = array('title' => $property->id, 'value' => $value);
+                            $item_properties[$property->id] = array('value_id' => $value);
                         }
                     }
                 }
@@ -453,7 +453,7 @@ class KsenMartModelCart extends JModelKSList {
                 foreach($properties as $property) {
                     $value = JRequest::getVar('property_' . $id . '_' . $property->id, '');
                     if(!empty($value)){
-                        $item_properties[] = array('title' => $property->id, 'value' => $value);
+                        $item_properties[$property->id] = array('value_id' => $value);
                     }
                 }
             }
@@ -685,8 +685,6 @@ class KsenMartModelCart extends JModelKSList {
             $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');
         }
         catch (exception $e) {}
-        
-        $order_items->note            = $jinput->get('note', null, 'string');
 
         try {
             $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');

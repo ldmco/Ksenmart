@@ -7,8 +7,19 @@
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.1.2a</version>
-    <description>COM_KSENMART_DESC</description>
+    <version>1.1.3-beta</version>
+    <description><![CDATA[
+    	<div class="text-left" style="font-size: 15px;">
+	    	Официальный сайт <a href="https://github.com/ldmco/KsenMart" target="_blank" title="Официальный сайт KsenMart">KsenMart <span class="icon-out-2 small"></span></a>
+	    	<br />
+	    	Мы на <a href="https://github.com/ldmco/KsenMart" target="_blank" title="Мы на Github">Github <span class="icon-out-2 small"></span></a>
+	    	<br />
+	    	<br />
+	    	Что такое <a href="http://roistat.com/" target="_blank" title="Что такое ROIStat">ROIStat <span class="icon-out-2 small"></span></a>
+	    	<br />
+	    	<a href="index.php?option=com_ksenmart&view=exportimport" title="Настройки ROIStat">Настройки ROIStat</a>
+    	</div>
+    	]]></description>
     <creationDate>17 February 2014</creationDate>
 
     <updateservers>
@@ -16,6 +27,9 @@
     </updateservers>
 
 	<files folder="packages">
+		
+		<file type="plugin" id="roistat" group="system">plugins/plg_roistat.zip</file>
+
 		<file type="component" id="com_ksen">com_ksen.zip</file>
 		<file type="component" id="com_ksenmart">com_ksenmart.zip</file>
 
@@ -37,7 +51,6 @@
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>
 		<file type="plugin" id="viewproducts" group="kmdiscountactions">plugins/plg_viewproducts.zip</file>
-		<file type="plugin" id="geolocation" group="kmplugins">plugins/plg_geolocation.zip</file>
 
 		<file type="module" id="mod_km_categories" client="administrator">modules/admin/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_commentrates" client="administrator">modules/admin/mod_km_commentrates.zip</file>
@@ -59,7 +72,7 @@
 		<file type="module" id="mod_ks_settings_groups" client="administrator">modules/admin/mod_ks_settings_groups.zip</file>
 		<file type="module" id="mod_ksm_news" client="administrator">modules/admin/mod_ksm_news.zip</file>
 
-		<file type="module" id="mod_km_discount" client="site">modules/site/mod_km_discount.zip</file>
+		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 		<file type="module" id="mod_km_categories" client="site">modules/site/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_contacts" client="site">modules/site/mod_km_contacts.zip</file>
 		<file type="module" id="mod_km_filter" client="site">modules/site/mod_km_filter.zip</file>

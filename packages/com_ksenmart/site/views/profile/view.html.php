@@ -29,6 +29,7 @@ class KsenMartViewProfile extends JViewKS {
                 if(!JFactory::getConfig()->get('config.caching', 0)){
                     $path->addItem(JText::_('KSM_PROFILE__REGISTRATION_PATHWAY_ITEM'), '');
                 }
+				$this->fields = KSUsers::getFields();
                 $this->setLayout('profile_registration');
             break;
             case 'profile_order':
