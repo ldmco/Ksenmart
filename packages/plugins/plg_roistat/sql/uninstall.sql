@@ -1,1 +1,0 @@
-DELETE FROM `#__ksenmart_exportimport_types` WHERE `name` = 'roistat';
