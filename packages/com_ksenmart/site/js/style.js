@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 			return false;
 		phone=phone_country+'-'+phone_code+'-'+phone;	
 		jQuery.ajax({
-			url:'index.php?option=com_ksenmart&task=shopajax.callback&phone='+phone,
+			url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.callback&phone='+phone,
 			success:function(data){
 				jQuery('.callback input.phone_code').val('');
 				jQuery('.callback input.phone').val('');
@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 			return false;
 		}	
 		jQuery.ajax({
-			url:'index.php?option=com_ksenmart&task=shopajax.question&email='+email+'&question='+question,
+            url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.question&email=' + email + '&question=' + question,
 			success:function(data){
 				jQuery(".ask-form").fadeOut(400);
 				jQuery('.ask-form .inputbox').val('');
