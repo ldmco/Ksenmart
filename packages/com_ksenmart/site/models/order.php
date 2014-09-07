@@ -88,7 +88,7 @@ class KsenMartModelOrder extends JModelKSList {
     public function getProduct() {
         $id = JRequest::getVar('id', 0);
         $this->_product = KSMProducts::getProduct($id);
-        return $row;
+        return $this->_product;
     }
 
     public function createOrder($flag = 2) {

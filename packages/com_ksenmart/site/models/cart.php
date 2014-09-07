@@ -453,7 +453,6 @@ class KsenMartModelCart extends JModelKSList {
                 foreach($properties as $property) {
                     $value = JRequest::getVar('property_' . $id . '_' . $property->id, '');
                     if(!empty($value)){
-                        exit();
                         $item_properties[$property->id] = array('value_id' => $value);
                     }
                 }
