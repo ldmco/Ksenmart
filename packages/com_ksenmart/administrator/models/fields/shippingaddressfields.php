@@ -55,7 +55,7 @@ class JFormFieldShippingAddressFields extends JFormField {
 				'-6' => array(
 					'position' => 'address',
 					'type' => 'text',
-					'title' => 'flat',
+					'title' => 'floor',
 					'required' => 1,
 					'system' => 1,
 					'ordering' => 6,
@@ -64,7 +64,7 @@ class JFormFieldShippingAddressFields extends JFormField {
 				'-7' => array(
 					'position' => 'address',
 					'type' => 'text',
-					'title' => 'floor',
+					'title' => 'flat',
 					'required' => 1,
 					'system' => 1,
 					'ordering' => 7,
