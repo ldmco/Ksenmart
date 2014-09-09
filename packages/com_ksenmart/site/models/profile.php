@@ -113,7 +113,8 @@ class KsenMartModelProfile extends JModelKSList {
             $columns = array('id', 'field_id', 'user_id', 'value');
             
             foreach($f_values as $key => $value){
-                $values = array($km_user->{'field_'.$key}->id, $key, $user->id, $this->_db->quote($value));
+				$field_id = !empty($km_user->{'field_'.$key}->id) ? $km_user->{'field_'.$key}->id : 'NULL';
+                $values = array($field_id, $key, $user->id, $this->_db->quote($value));
                 $tmp = '('.implode(',', $values).')';
                 $query->values(implode(',', $values));
             }
