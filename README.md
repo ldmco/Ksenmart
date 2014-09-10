@@ -1,4 +1,4 @@
-KsenMart
+KsenMart [![release-3.1.5--beta](http://img.shields.io/badge/release-3.1.5--beta-blue.svg)](https://github.com/ldmco/KsenMart/releases/tag/v3.1.5-beta)
 ========
 
 ## KsenMart - Component for CMS Joomla 
