@@ -118,8 +118,10 @@ class KSUsers {
     }
 
     private static function getEmptyUserObject(){
+
+        global $ext_name_com;
         $session = JFactory::getSession();
-        $params  = JComponentHelper::getParams('com_ksenmart');
+        $params  = JComponentHelper::getParams($ext_name_com);
         $user    = new stdClass();
         
         $user->id = 0;
@@ -147,7 +149,6 @@ class KSUsers {
         
         $user->folder = 'users';
         $user->filename = 'no.jpg';
-        $params = JComponentHelper::getParams('com_ksenmart');
         $user->small_img = KSMedia::resizeImage($user->filename, $user->folder, $params->get('admin_product_thumb_image_width', 36) , $params->get('admin_product_thumb_image_heigth', 36));
         $user->medium_img = KSMedia::resizeImage($user->filename, $user->folder, $params->get('admin_product_medium_image_width', 120) , $params->get('admin_product_medium_image_heigth', 120));
         
