@@ -22,7 +22,9 @@ class KSMedia {
         $iparams['background_type'] = $params->get('background_type', 'file');
         natsort($iparams);
         $dst_file = basename($file);
-        foreach ($iparams as $iparam) $dst_file = $iparam . '-' . $dst_file;
+        foreach ($iparams as $iparam) {
+            $dst_file = JString::str_ireplace('/', '.', $iparam) . '-' . $dst_file;
+        }
         
         if (!class_exists('SimpleImage')) {
             require dirname(__file__) . DS . '..' . DS . 'additional' . DS . 'simpleimage.php';
