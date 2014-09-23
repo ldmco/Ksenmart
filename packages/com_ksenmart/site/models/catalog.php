@@ -129,7 +129,7 @@ class KsenMartModelcatalog extends JModelKSList {
         
         $this->_ids = array();
         
-        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+        if ($this->_price_less >= 0 && !empty($this->_price_more)) {
             $this->_ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
         }
         if (count($this->_categories) > 0) {
@@ -305,7 +305,7 @@ class KsenMartModelcatalog extends JModelKSList {
     private function getIdsByMMPrices($price_less, $price_more){
         $this->onExecuteBefore('getIdsByMMPrices', array(&$price_less, &$price_more));
         
-        if(!empty($price_less) && !empty($price_more)){
+        if($price_less >= 0 && !empty($price_more)){
             $where          = array('p.published=1');
             $price_where_l  = array();
             $price_where_m  = array();
@@ -481,7 +481,7 @@ class KsenMartModelcatalog extends JModelKSList {
         $this->onExecuteBefore('getFilterProperties');
         
         $this->_ids = array();
-        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+        if ($this->_price_less >= 0 && !empty($this->_price_more)) {
             $ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
         }
         if (count($this->_categories) > 0) {
@@ -539,7 +539,7 @@ class KsenMartModelcatalog extends JModelKSList {
         $this->onExecuteBefore('getFilterManufacturers');
         
 		$this->_ids = array();
-        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+        if ($this->_price_less >= 0 && !empty($this->_price_more)) {
             $this->_ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
         }
         if (count($this->_categories) > 0) {
@@ -616,7 +616,7 @@ class KsenMartModelcatalog extends JModelKSList {
         $this->onExecuteBefore('getFilterCountries', array(&$this));
         
 		$this->_ids = array();
-        if (!empty($this->_price_less) && !empty($this->_price_more)) {
+        if ($this->_price_less >= 0 && !empty($this->_price_more)) {
             $this->_ids = $this->getIdsByMMPrices($this->_price_less, $this->_price_more);
         }
         if (count($this->_categories) > 0) {
