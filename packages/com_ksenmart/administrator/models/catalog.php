@@ -666,6 +666,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
         $tableProducts = $this->getTable('Products');
         $tableProducts->load($data['id']);
+        $tableProducts->bindCheckStore($data);
         $tagsObserver = $tableProducts->getObserverOfClass('JTableObserverTags');
         $result = $tagsObserver->setNewTags($data['tags'], true);
 
