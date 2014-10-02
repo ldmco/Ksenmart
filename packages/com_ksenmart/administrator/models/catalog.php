@@ -446,7 +446,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
         if(count($product->categories)) {
             $query = $this->_db->getQuery(true);
-            $query->select('p.*')->from('#__ksenmart_properties as p')->innerjoin('#__ksenmart_product_categories_properties as cp on cp.property_id=p.id')->where('cp.category_id in (' . implode(',', array_keys($product->categories)) . ')');
+            $query->select('p.*')->from('#__ksenmart_properties as p')->innerjoin('#__ksenmart_product_categories_properties as cp on cp.property_id=p.id')->where('cp.category_id in (' . implode(',', array_keys($product->categories)) . ')')->where('p.published=1');
             $this->_db->setQuery($query);
             $product->properties = $this->_db->loadObjectList('id');
             foreach($product->properties as &$p) $p->values = array();
