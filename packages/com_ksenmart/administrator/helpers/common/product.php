@@ -251,7 +251,7 @@ class KSMProducts extends KSMainhelper  {
                     pv.id,
                     pv.title,
                     pv.image,
-                    pv.property_id,
+                    ppv.property_id,
                     ppv.price,
                     ppv.text
                 ')->from('#__ksenmart_property_values AS pv')->leftjoin('#__ksenmart_product_properties_values AS ppv ON ppv.value_id=pv.id');
