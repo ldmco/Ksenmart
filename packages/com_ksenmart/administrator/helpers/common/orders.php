@@ -133,7 +133,9 @@ class KSMOrders {
         self::setOrderItemsProperties($order, $order_id);
         if (!empty($order->address_fields)) {
             $order->address_fields = implode(', ', $order->address_fields);
-        }
+        } else {
+			$order->address_fields = '';
+		}
         $order->customer_name = '';
         if(isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name .= $order->customer_fields['name'];
         if(isset($order->customer_fields['last_name']) && !empty($order->customer_fields['last_name'])) $order->customer_name .= $order->customer_fields['last_name'] . ' ';
