@@ -27,7 +27,7 @@
     				<div class="controls">
                         <?php $i=0;foreach($property->values as $value){ ?>
                         <label class="<?php echo $property->view; ?>">
-                            <input type="<?php echo $property->view; ?>" data-prop_id="<?php echo $property->property_id; ?>" name="property_<?php echo $this->product->id; ?>_<?php echo $property->property_id; ?>" value="<?php echo $value->id; ?>"<?php echo $i==0?' required="true"':''; ?> />
+                            <input type="<?php echo $property->view; ?>" data-prop_id="<?php echo $property->property_id; ?>" name="property_<?php echo $this->product->id; ?>_<?php echo $property->property_id; ?>" value="<?php echo $value->id; ?>"<?php echo $property->view == 'radio'?($i==0?' required="true"':''):''; ?> />
                             <?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?>
                         </label>
                         <?php $i++;} ?>

@@ -572,24 +572,26 @@ class KsenMartModelCatalog extends JModelKSAdmin {
             }
             switch($type) {
                 case 'text':
-                    $property['product_id'] = $id;
-                    $property['property_id'] = $property_id;
-                    $text = $this->_db->quote($property['text']);
-                    $query = $this->_db->getQuery(true);
-                    $query->select('*')->from('#__ksenmart_property_values')->where('title=' . $text);
-                    $this->_db->setQuery($query);
-                    $value_row = $this->_db->loadObject();
-                    if(empty($value_row)) {
-						$p_alias = KSFunctions::GenAlias($text);							
-                        $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
-                        $this->_db->setQuery($query);
-                        $this->_db->query();
-                        $property['value_id'] = $this->_db->insertid();
-                    } else {
-                        $property['value_id'] = $value_row->id;
-                    }
-                    $values[] = $property;
+					if(!empty($property['text'])){
+						$property['product_id'] = $id;
+						$property['property_id'] = $property_id;
+						$text = $this->_db->quote($property['text']);
+						$query = $this->_db->getQuery(true);
+						$query->select('*')->from('#__ksenmart_property_values')->where('title=' . $text);
+						$this->_db->setQuery($query);
+						$value_row = $this->_db->loadObject();
+						if(empty($value_row)) {
+							$p_alias = KSFunctions::GenAlias($text);							
+							$query = $this->_db->getQuery(true);
+							$query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $text . ',' . $this->_db->quote($p_alias));
+							$this->_db->setQuery($query);
+							$this->_db->query();
+							$property['value_id'] = $this->_db->insertid();
+						} else {
+							$property['value_id'] = $value_row->id;
+						}
+						$values[] = $property;
+					}
                     break;
                 case 'select':
                     foreach($property as $tmpkey => $tmpvalue) {
