@@ -76,7 +76,7 @@ class KSMProducts extends KSMainhelper  {
             $row->rate = KSMProducts::getProductRate($row->id);
             
             if (!empty($row->folder)) {
-                $row->img_link = JURI::root() . 'media/com_ksenmart/images/' . $row->folder . '/original/' . $row->filename;
+				$row->img_link = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
             } else {
                 $row->img_link = JURI::root() . 'media/com_ksenmart/images/products/no.jpg';
             }
