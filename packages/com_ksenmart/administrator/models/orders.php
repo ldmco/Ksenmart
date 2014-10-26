@@ -246,6 +246,13 @@ class KsenMartModelOrders extends JModelKSAdmin {
                     $this->setError($table->getError());
                     return false;
                 }
+				
+				if($data['status_id'] == 4 && $this->params->get('use_stock', 1)){
+					$query = $this->_db->getQuery(true);
+					$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$v['count'])->where('id='.$v['product_id']);
+					$this->_db->setQuery($query);
+					$this->_db->query();
+				}
 
                 $in[] = $table->id;
             }
