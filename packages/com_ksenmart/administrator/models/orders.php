@@ -225,7 +225,10 @@ class KsenMartModelOrders extends JModelKSAdmin {
         $table = $this->getTable('orders');
         if(empty($data['id'])) {
             $data['date_add'] = JFactory::getDate()->toSql();
-        }
+        } else {
+			$order = KSSystem::loadDbItem($data['id'], 'orders');
+			$old_status = $order->status_id;
+		}
 
         if(!$table->bindCheckStore($data)) {
             $this->setError($table->getError());
@@ -247,9 +250,12 @@ class KsenMartModelOrders extends JModelKSAdmin {
                     return false;
                 }
 				
-				if($data['status_id'] == 4 && $this->params->get('use_stock', 1)){
+				if(($data['status_id'] == 4 && $old_status != 4) || ($old_status == 4 && $data['status_id'] != 4) && $this->params->get('use_stock', 1)){
 					$query = $this->_db->getQuery(true);
-					$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$v['count'])->where('id='.$v['product_id']);
+					if($data['status_id'] == 4)
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$v['count'])->where('id='.$v['product_id']);
+					else
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock-'.$v['count'])->where('id='.$v['product_id']);
 					$this->_db->setQuery($query);
 					$this->_db->query();
 				}
