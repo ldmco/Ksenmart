@@ -26,5 +26,19 @@
 			<option
 				value="1">JYES</option>
 		</field>
+		
+		<field
+			name="review_notice"
+			type="radio"
+			default="0"
+			label="KSM_SHOPREVIEWS_REVIEW_NOTICE_LABEL"
+			description="KSM_SHOPREVIEWS_REVIEW_NOTICE_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
 	</fieldset>
 </config>

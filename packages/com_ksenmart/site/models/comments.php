@@ -143,6 +143,19 @@ class KsenMartModelComments extends JModelKSList {
         try{
             $result = $this->_db->insertObject('#__ksenmart_comments', $comment_object);
             
+			if($params->get('review_notice', false)){
+				$mail = JFactory::getMailer();
+				$sender = array($params->get('shop_email'), $params->get('shop_name'));
+				$content = KSSystem::loadTemplate(array('comment' => $comment_object), 'comments', 'default', 'mail');
+				
+				$mail->isHTML(true);
+				$mail->setSender($sender);
+				$mail->Subject = 'Новый отзыв';
+				$mail->Body = $content;
+				$mail->AddAddress($params->get('shop_email'), $params->get('shop_name'));
+				$mail->Send();
+			}
+			
             $this->onExecuteAfter('addComment', array(&$result));
             return true;
         }catch(Exception $e){}
