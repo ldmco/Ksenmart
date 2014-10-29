@@ -378,7 +378,7 @@ class KsenMartModelProduct extends JModelKSList {
         for ($k = 0;$k < count($rows);$k++) {
             $rows[$k]->img_small = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('mini_thumb_width', 130), $this->params->get('mini_thumb_height', 80), json_decode($rows[$k]->params, true));
             $rows[$k]->img = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
-            $rows[$k]->img_link = JURI::root() . 'media/com_ksenmart/images/' . $rows[$k]->folder . '/original/' . $rows[$k]->filename;
+            $rows[$k]->img_link = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('full_width', 900), $this->params->get('full_height', 900));
         }
         
         $this->onExecuteAfter('getImages', array(&$rows));

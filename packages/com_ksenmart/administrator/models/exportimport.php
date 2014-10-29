@@ -288,6 +288,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                     foreach($cats as $cat) $prd_cats[] = $cat->category_id;
                 }
 
+                if(!isset($product_data['price'])) $product_data['price'] = 0;
                 if(!isset($product_data['product_code'])) $product_data['product_code'] = '';
                 if(!isset($product_data['product_packaging'])) $product_data['product_packaging'] = 1;
                 if(!isset($product_data['in_stock'])) $product_data['in_stock'] = 1;
