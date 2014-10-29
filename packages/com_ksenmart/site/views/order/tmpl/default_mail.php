@@ -14,6 +14,10 @@
 		<td>Адрес доставки:</td>
 		<td><?php echo $this->order->address_fields; ?></td>
 	</tr>
+	<tr>
+		<td>Номер телефона:</td>
+		<td><?php echo $this->order->customer_fields['phone']; ?></td>
+	</tr>
 </table>	
 <h2>Заказ</h2>
 <table id="cart_content_tbl" cellspacing="0">
