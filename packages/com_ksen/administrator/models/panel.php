@@ -17,9 +17,6 @@ class KsenModelPanel extends JModelKSAdmin {
         $widget_type=$app->getUserStateFromRequest($this->context . '.widget_type', 'widget_type','all');
         $this->setState('widget_type',$widget_type);
 		
-		$lang = JFactory::getLanguage();
-		$lang->load($extension . '.sys', JPATH_ADMINISTRATOR.'/components/'.$extension, null , false, false) || $lang->load($extension . '.sys', JPATH_ADMINISTRATOR.'/components/'.$extension, $lang->getDefault() , false, false);
-		
         $this->onExecuteAfter('populateState');
     }
 

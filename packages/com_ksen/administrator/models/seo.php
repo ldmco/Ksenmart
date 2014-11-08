@@ -16,8 +16,6 @@ class KsenModelSeo extends JModelKSAdmin {
 		
         $extension=$app->getUserStateFromRequest('com_ksen.extension', 'extension','com_ksen');
         $this->setState('extension',$extension);
-		$lang = JFactory::getLanguage();
-		$lang->load($extension . '.sys', JPATH_ADMINISTRATOR.'/components/'.$extension, null , false, false) || $lang->load($extension . '.sys', JPATH_ADMINISTRATOR.'/components/'.$extension, $lang->getDefault() , false, false);
 		
 		$seo_type=$app->getUserStateFromRequest('com_ksen.seo.seo_type', 'seo_type','text');
 		$this->setState('seo_type',$seo_type);
