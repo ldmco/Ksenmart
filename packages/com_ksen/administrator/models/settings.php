@@ -3,21 +3,21 @@
 KSSystem::import('models.modelksadmin');
 class KsenModelSettings extends JModelKSAdmin {
     
-    protected function populateState($ordering = null, $direction = null){
+    protected function populateState($ordering = null, $direction = null) {
         $this->onExecuteBefore('populateState');
         
         $app = JFactory::getApplication();
-
-        $extension=$app->getUserStateFromRequest('com_ksen.extension', 'extension','com_ksen');
-        $this->setState('extension',$extension);		
-		
+        
+        $extension = $app->getUserStateFromRequest('com_ksen.extension', 'extension', 'com_ksen');
+        $this->setState('extension', $extension);
+        
         $this->onExecuteAfter('populateState');
     }
     
-    function getForm($data = array() , $loadData = true) {
-		$extension = $this->getState('extension');
-		
-		$path = JPATH_ADMINISTRATOR.'/components/'.$extension;
+    function getForm($data = array(), $loadData = true) {
+        $extension = $this->getState('extension');
+        
+        $path = JPATH_ADMINISTRATOR . '/components/' . $extension;
         $forms = array();
         $user = JFactory::getUser();
         $views = scandir($path . '/views/');
@@ -25,10 +25,7 @@ class KsenModelSettings extends JModelKSAdmin {
         foreach ($views as $view) {
             if ($view != '.' && $view != '..' && is_dir($path . '/views/' . $view) && file_exists($path . '/views/' . $view . '/config.xml')) {
                 $xml = file_get_contents($path . '/views/' . $view . '/config.xml');
-                $form = $this->loadForm($extension.'.' . $view, $xml, array(
-                    'control' => 'jform',
-                    'load_data' => $loadData
-                ) , false, '/config');
+                $form = $this->loadForm($extension . '.' . $view, $xml, array('control' => 'jform', 'load_data' => $loadData), false, '/config');
                 if (!empty($form)) {
                     $forms[$view] = $form;
                 }
@@ -41,18 +38,16 @@ class KsenModelSettings extends JModelKSAdmin {
     function getComponent() {
         $this->onExecuteBefore('getComponent');
         
-		$extension = $this->getState('extension');
+        $extension = $this->getState('extension');
         $result = JComponentHelper::getComponent($extension);
         
-        $this->onExecuteAfter('getComponent', array(&$result
-        ));
+        $this->onExecuteAfter('getComponent', array(&$result));
         
         return $result;
     }
     
     public function save($data) {
-        $this->onExecuteBefore('save', array(&$data
-        ));
+        $this->onExecuteBefore('save', array(&$data));
         
         $table = JTable::getInstance('extension');
         // Save the rules.
@@ -107,8 +102,7 @@ class KsenModelSettings extends JModelKSAdmin {
         // Clean the component cache.
         $this->cleanCache('_system');
         
-        $this->onExecuteAfter('save', array(&$data
-        ));
+        $this->onExecuteAfter('save', array(&$data));
         
         return true;
     }
