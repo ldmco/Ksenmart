@@ -20,10 +20,10 @@
 						<?php echo $this->form->getLabel('title'); ?>
 						<?php echo $this->form->getInput('title'); ?>
 						<span class="linka" rel="meta-data">
-							<a><?php echo JText::_('ksm_metadata')?></a>
+							<a><?php echo JText::_('KSM_METADATA'); ?></a>
 						</span>
 						<span class="linka" rel="alias">
-							<a><?php echo JText::_('ksm_alias')?></a>
+							<a><?php echo JText::_('KSM_ALIAS'); ?></a>
 						</span>
 					</div>
 					<div class="row meta-data" style="display: none">
@@ -55,10 +55,15 @@
 							<?php echo $this->form->getInput('price_type'); ?>
 						</div>
 						<span class="linka" rel="old_price"><a><?php echo JText::_('KSM_CATALOG_PRODUCT_OLD_PRICE_LBL'); ?></a></span>
+						<span class="linka" rel="purchase_price"><a><?php echo JText::_('KSM_CATALOG_PRODUCT_PURCHASE_PRICE_LBL'); ?></a></span>
 					</div>
 					<div class="row old_price" style="display: none;">
 						<?php echo $this->form->getLabel('old_price'); ?> 
 						<?php echo $this->form->getInput('old_price'); ?> 
+					</div>
+					<div class="row purchase_price" style="display: none;">
+						<?php echo $this->form->getLabel('purchase_price'); ?> 
+						<?php echo $this->form->getInput('purchase_price'); ?> 
 					</div>
 					<div class="row">
 						<div class="col">
@@ -124,7 +129,7 @@
 					</div>
 					<?php endif;?>
 					<div class="row">
-						<?php echo $this->form->getInput('properties');?>
+						<?php echo $this->form->getInput('properties'); ?>
 					</div>	
 				</td>	
 				<td class="rightcol">
