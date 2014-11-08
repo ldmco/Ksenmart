@@ -44,8 +44,6 @@
                     <?php foreach($item->properties as $item_property) { ?>
                         <?php if(!empty($item_property->value)) { ?>
                             <br /><span><?php echo $item_property->title; ?>:</span> <?php echo $item_property->value; ?>
-                        <?php } else { ?>
-                            <br /><span><?php echo $item_property->title; ?></span>
                         <?php } ?>
                     <?php } ?>
     			</td>

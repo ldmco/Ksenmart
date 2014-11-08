@@ -63,56 +63,6 @@ class plgSystemKsenCore extends JPlugin {
         
         if ($this->params->get('angularJS', 1) && $config['angularJS']) {
             
-            KSSystem::addJS(array(
-                'hammer.min'
-            ));
-            $document->addScript('//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js');
-            $document->addScript('//code.angularjs.org/1.2.13/i18n/angular-locale_ru.js');
-            $document->addStylesheet(JUri::root() . 'administrator/modules/mod_ks_mainmenu/css/default.css');
-
-            KSSystem::addJS(array(
-                'angular-ui-router.min',
-                'angular-animate',
-                'angular-sanitize',
-                'angular-file-upload',
-                'angular-hammer',
-                'ui-bootstrap-custom-0.10.0.min', 
-                'ui-bootstrap-custom-tpls-0.10.0.min',
-                'app',
-                'states'
-                
-            ));
-            $document->addScript('components/' . $ext_name_com . '/assets/js/app.js');
-            $document->addScript('components/' . $ext_name_com . '/assets/js/states.js');
-            
-            KSSystem::addCSS(array('ng-table'));
-            KSSystem::addJS(array(
-                'directives/ngRepeatReorder',
-                'directives/ng-table',
-                'directives/loadingContainer',
-                'directives/progressRouter',
-                'directives/ngThumb',
-                'directives/ngBindModel',
-                'directives/sortable',
-                'directives/ngJlangBind',
-
-                'filtres/filterItems',
-                'filtres/categoriesFilter',
-
-                'controllers/ModalCtrl',
-                'controllers/ModalInnerCtrl',
-                'controllers/CategoryChangeCtrl',
-                'controllers/ProductRelationsCtrl',
-                'controllers/getFileUploadCtrl',
-                'controllers/KSListCtrl',
-                'controllers/KSForm',
-                'controllers/ProductChildsCtrl',
-                'controllers/KSMainMenuCtrl',
-                'controllers/KSListInnerCtrl',
-                'controllers/KSFieldCtrl',
-                'controllers/KSFieldTreeCtrl',
-                'factories/ItemsFactory'
-            ));
         }
         
         $script = '

@@ -50,6 +50,7 @@ jQuery(document).ready(function() {
             window.location.href = url;
     });
 
+    var properties = {};
     jQuery('[name*="property_"]').on('change', function() {
         var form = jQuery(this).parents('form');
         var val_prop_id = jQuery(this).val();
@@ -58,6 +59,37 @@ jQuery(document).ready(function() {
         var id = form.find('[name="id"]').val();
         var count = form.find('[name="count"]').val();
         var product_packaging = form.find('[name="product_packaging"]').val();
+        var propertiesE = form.find('select option, input[type="radio"], input[type="checkbox"]');
+
+        propertiesE.each(function(indx, element) {
+            var jqEl = jQuery(element);
+            var valueId = jqEl.val();
+            var propId = 0;
+
+            if (element.localName == 'option') {
+                propId = jqEl.parents('select').data().prop_id;
+            } else {
+                propId = jqEl.data().prop_id;
+            }
+            if (val_prop_id == valueId && (element.checked || element.selected)) {
+                if (valueId != '') {
+                    if (typeof properties[propId] == 'undefined') {
+                        properties[propId] = {};
+                    }
+                    properties[propId][valueId] = {
+                        'propId': propId,
+                        'valueId': valueId,
+                        'checked': element.checked
+                    };
+                }
+            } else if (typeof element.checked != 'undefined' && !element.checked && typeof properties[propId] != 'undefined') {
+                if (typeof properties[propId][valueId] != 'undefined' && !element.checked) {
+                    delete properties[propId][valueId];
+                }
+            } else if (typeof properties[propId] != 'undefined' && !element.selected && typeof element.selected != 'undefined') {
+                delete properties[propId][valueId];
+            }
+        });
 
         jQuery.ajax({
             type: 'POST',
@@ -68,7 +100,8 @@ jQuery(document).ready(function() {
                 price: price,
                 id: id,
                 count: count,
-                product_packaging: product_packaging
+                product_packaging: product_packaging,
+                properties: properties
             },
             success: function(data) {
                 data = data.split('^^^');

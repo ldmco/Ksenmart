@@ -216,6 +216,26 @@
 		description="KSM_PRODUCT_IMAGES_CONFIG_DESC">
 
 		<field
+			name="full_width"
+			type="text"
+			default="900"
+			label="KSM_PRODUCT_FULLWIDTH_LABEL"
+			description="KSM_PRODUCT_FULLWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+			
+		<field
+			name="full_height"
+			type="text"
+			default="900"
+			label="KSM_PRODUCT_FULLHEIGHT_LABEL"
+			description="KSM_PRODUCT_FULLHEIGHT_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+			/>
+		
+		<field
 			name="thumb_width"
 			type="text"
 			default="220"

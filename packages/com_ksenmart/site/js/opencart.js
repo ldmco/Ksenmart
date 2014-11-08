@@ -142,12 +142,14 @@ jQuery('.quantt input').on('mouseout',function(e){
         e.preventDefault();
         var id = jQuery(this).data().id;
         var city = jQuery(this).data().city;
+		var zip  = jQuery(this).data().zip;
         var street = jQuery(this).data().street;
         var house = jQuery(this).data().house;
         var floor = jQuery(this).data().floor;
         var flat = jQuery(this).data().flat;
 
         jQuery('.address_fields_b').find('[name="address_fields[city]"]').val(city);
+		jQuery('.address_fields_b').find('[name="address_fields[zip]"]').val(zip);
         jQuery('.address_fields_b').find('[name="address_fields[street]"]').val(street);
         jQuery('.address_fields_b').find('[name="address_fields[house]"]').val(house);
         jQuery('.address_fields_b').find('[name="address_fields[floor]"]').val(floor);
@@ -161,6 +163,7 @@ jQuery('.quantt input').on('mouseout',function(e){
             data: {
                 id: id,
                 city: city,
+				zip: zip,
                 street: street,
                 house: house,
                 floor: floor,

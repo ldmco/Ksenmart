@@ -180,7 +180,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
                 $ptable->id = null;
                 if($ptable->check()) {
                     if($ptable->store()) {
-                        copy(JPATH_ROOT . DS . 'media' . DS . 'ksenmart' . DS . 'images' . DS . $ptable->folder . DS . 'original' . DS . $old_filename, JPATH_ROOT . DS . 'media' . DS . 'ksenmart' . DS . 'images' . DS . $ptable->folder . DS . 'original' . DS . $filename);
+                        copy(JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . $ptable->folder . DS . 'original' . DS . $old_filename, JPATH_ROOT . DS . 'media' . DS . 'com_ksenmart' . DS . 'images' . DS . $ptable->folder . DS . 'original' . DS . $filename);
                     } else  return false;
                 }
             }
@@ -446,7 +446,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
         if(count($product->categories)) {
             $query = $this->_db->getQuery(true);
-            $query->select('p.*')->from('#__ksenmart_properties as p')->innerjoin('#__ksenmart_product_categories_properties as cp on cp.property_id=p.id')->where('cp.category_id in (' . implode(',', array_keys($product->categories)) . ')');
+            $query->select('p.*')->from('#__ksenmart_properties as p')->innerjoin('#__ksenmart_product_categories_properties as cp on cp.property_id=p.id')->where('cp.category_id in (' . implode(',', array_keys($product->categories)) . ')')->where('p.published=1');
             $this->_db->setQuery($query);
             $product->properties = $this->_db->loadObjectList('id');
             foreach($product->properties as &$p) $p->values = array();
@@ -572,24 +572,26 @@ class KsenMartModelCatalog extends JModelKSAdmin {
             }
             switch($type) {
                 case 'text':
-                    $property['product_id'] = $id;
-                    $property['property_id'] = $property_id;
-                    $text = $this->_db->quote($property['text']);
-                    $query = $this->_db->getQuery(true);
-                    $query->select('*')->from('#__ksenmart_property_values')->where('title=' . $text);
-                    $this->_db->setQuery($query);
-                    $value_row = $this->_db->loadObject();
-                    if(empty($value_row)) {
-						$p_alias = KSFunctions::GenAlias($text);							
-                        $query = $this->_db->getQuery(true);
-                        $query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $this->_db->quote($text) . ',' . $this->_db->quote($p_alias));
-                        $this->_db->setQuery($query);
-                        $this->_db->query();
-                        $property['value_id'] = $this->_db->insertid();
-                    } else {
-                        $property['value_id'] = $value_row->id;
-                    }
-                    $values[] = $property;
+					if(!empty($property['text'])){
+						$property['product_id'] = $id;
+						$property['property_id'] = $property_id;
+						$text = $this->_db->quote($property['text']);
+						$query = $this->_db->getQuery(true);
+						$query->select('*')->from('#__ksenmart_property_values')->where('title=' . $text);
+						$this->_db->setQuery($query);
+						$value_row = $this->_db->loadObject();
+						if(empty($value_row)) {
+							$p_alias = KSFunctions::GenAlias($text);							
+							$query = $this->_db->getQuery(true);
+							$query->insert('#__ksenmart_property_values')->columns('property_id,title,alias')->values($property_id . ',' . $text . ',' . $this->_db->quote($p_alias));
+							$this->_db->setQuery($query);
+							$this->_db->query();
+							$property['value_id'] = $this->_db->insertid();
+						} else {
+							$property['value_id'] = $value_row->id;
+						}
+						$values[] = $property;
+					}
                     break;
                 case 'select':
                     foreach($property as $tmpkey => $tmpvalue) {
@@ -666,6 +668,7 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
         $tableProducts = $this->getTable('Products');
         $tableProducts->load($data['id']);
+        $tableProducts->bindCheckStore($data);
         $tagsObserver = $tableProducts->getObserverOfClass('JTableObserverTags');
         $result = $tagsObserver->setNewTags($data['tags'], true);
 

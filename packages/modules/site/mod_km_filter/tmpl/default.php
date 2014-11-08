@@ -1,9 +1,10 @@
 <?php defined('_JEXEC') or die; ?>
+<?php $view = JFactory::getApplication()->input->get('view', 'catalog', 'string'); ?>
 <div class="mod_ksm_filter well noTransition <?php echo $class_sfx; ?>">
 	<?php if($module->showtitle){ ?>
 	<h3><?php echo $module->title; ?></h3>
 	<?php } ?>
-	<form action="<?php echo $form_action; ?>" method="get">
+	<form action="<?php echo $form_action; ?>" method="get"<?php echo $view == 'catalog' ? 'class="hide"' : ''; ?>>
 		<div class="prices">
 			<fieldset>
 				<div class="inputs">

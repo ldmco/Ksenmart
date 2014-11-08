@@ -1,6 +1,6 @@
 <?php defined( '_JEXEC' ) or die; ?>
 <li>
-<div class="km-list-left-module km-user-fields mod_km_userfields">
+<div class="km-list-left-module km-user-fields mod_ks_userfields">
 	<div class="km-list-left-module-title">
 		<label><?php echo JText::_('mod_ks_userfields_title')?></label>
 		<a class="sh hides" href="#"></a>

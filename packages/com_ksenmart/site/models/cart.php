@@ -633,7 +633,7 @@ class KsenMartModelCart extends JModelKSList {
         if($params->get('use_stock', 1)) {
             $product_object = new stdClass();
             $product_object->id          = $item->product_id;
-            $product_object->in_stock    = $item->in_stock-$diff_count;
+            $product_object->in_stock    = $prd->in_stock-$diff_count;
     
             try{
                 $result = $this->_db->updateObject('#__ksenmart_products', $product_object, 'id');

@@ -1,6 +1,6 @@
 <?php defined( '_JEXEC' ) or die; ?>
 <li>
-<div class="km-list-left-module km-user-groups mod_km_usergroups">
+<div class="km-list-left-module km-user-groups mod_ks_usergroups">
 	<div class="km-list-left-module-title">
 		<label><?php echo JText::_('mod_ks_usergroups_title')?></label>
 		<a class="sh hides" href="#"></a>

@@ -596,7 +596,7 @@ class KSSystem {
      * @param mixed $array
      * @return
      */
-    public function key_implode($separator, $array) {
+    public static function key_implode($separator, $array) {
         $keys = array_keys($array);
         
         
@@ -720,7 +720,7 @@ class KSSystem {
         return $html;
     }
     
-    public function loadPluginTemplate($plugin_name, $plugin_type, $view, $template_name) {
+    public static function loadPluginTemplate($plugin_name, $plugin_type, $view, $template_name) {
         $html = '';
         
         $template_file = $template_name . '.php';

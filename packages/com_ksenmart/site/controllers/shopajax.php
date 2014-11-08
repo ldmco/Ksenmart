@@ -640,24 +640,42 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		exit(0);
 	}
 	
-	function get_product_price_with_properties() {
+	public function get_product_price_with_properties() {
 		$db = JFactory::getDBO();
-		$pid = JRequest::getVar('id', 0);
-		$val_prop_id = JRequest::getVar('val_prop_id', 0);
-		$prop_id = JRequest::getVar('prop_id', 0);
+		$pid = $this->input->get('id', 0, 'int');
+		$val_prop_id = $this->input->get('val_prop_id', 0, 'int');
+		$prop_id = $this->input->get('prop_id', 0, 'int');
 		$properties = KSMProducts::getProperties($pid, $prop_id, $val_prop_id);
-		$price = KSMProducts::getProductPrices($pid)->price;
-		$price_type = KSMProducts::getProductPrices($pid)->price_type;
+		$productProperties = KSMProducts::getProperties($pid);
+		$prices = KSMProducts::getProductPrices($pid);
 		
-		
+		$selectedProperties = $this->input->get('properties', array(), 'array');
+		$price = $prices->price;
+		$price_type = $prices->price_type;
+		$checked = array();
+
+		foreach ($productProperties as $property) {
+			foreach ($selectedProperties as $selectedPropId => $selectedProperty) {
+				foreach ($selectedProperty as $selectedValueId => $selectedValue) {
+					if(isset($selectedValue['checked'])){
+						$checked[$selectedValue['valueId']] = $selectedValue['checked'];
+					}
+					if($property->property_id == $selectedValue['propId'] && ($val_prop_id != $property->values[$selectedValueId]->id)){
+						$edit_priceC = $property->values[$selectedValueId]->price;
+						$edit_price_symC = substr($edit_priceC, 0, 1);
+						$this->getCalcPriceAsProperties($edit_price_symC, $edit_priceC, $price);
+						$property->values[$selectedValueId]->id . '-' .$price . "\n\t";
+					}
+				}
+			}
+		}
+
 		foreach ($properties as $property) {
-			$edit_price = 0;
-			
+
 			if ($property->edit_price) {
-				
 				if ($property->view == 'checkbox') {
-					if ($val_prop_id == 1) {
-						$value = array_pop($property->values);
+					$value = array_pop($property->values);
+					if ($checked[$value->id]) {
 						$edit_price = $value->price;
 					}
 				} elseif ($property->view == 'select' || $property->view == 'radio') {
@@ -668,26 +686,30 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 			}
 			
 			$edit_price_sym = substr($edit_price, 0, 1);
-			
-			switch ($edit_price_sym) {
-				case '+':
-					$price+= substr($edit_price, 1, strlen($edit_price) - 1);
-				break;
-				case '-':
-					$price-= substr($edit_price, 1, strlen($edit_price) - 1);
-				break;
-				case '/':
-					$price = $price / substr($edit_price, 1, strlen($edit_price) - 1);
-				break;
-				case '*':
-					$price = $price * substr($edit_price, 1, strlen($edit_price) - 1);
-				break;
-				default:
-					$price+= $edit_price;
-			}
+			$this->getCalcPriceAsProperties($edit_price_sym, $edit_price, $price);
 		}
 		$price = KSMPrice::getPriceInCurrentCurrency($price, $price_type);
 		exit($price . '^^^' . $price);
+	}
+
+	private function getCalcPriceAsProperties($edit_price_sym, $edit_price, &$price) {
+		switch ($edit_price_sym) {
+			case '+':
+				$price += substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '-':
+				$price -= substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '/':
+				$price = $price / substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '*':
+				$price = $price * substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			default:
+				$price += $edit_price;
+		}
+		return $price;
 	}
 	
 	function validate_in_stock() {

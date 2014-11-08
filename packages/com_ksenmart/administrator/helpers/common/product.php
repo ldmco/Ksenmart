@@ -1,6 +1,14 @@
 <?php defined('_JEXEC') or die;
 
-class KSMProducts {
+if(!class_exists('KSMainhelper')) { 
+    require (JPATH_ROOT . DS . 'plugins' . DS . 'system' . DS . 'ksencore' . DS . 'core' . DS . 'helpers' . DS . 'mainhelper.php');
+}
+
+class KSMProducts extends KSMainhelper  {
+    
+	private $ext_name_com   = 'com_ksenmart';
+    private $ext_prefix     = 'KSM';
+	private $helper_name    = 'Products';
     
     private static function setProductMainImageToQuery($query) {
         $query->select('(select f.filename from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as filename');
@@ -18,6 +26,7 @@ class KSMProducts {
         $old_ext_name = $ext_name;
         $ext_name = 'ksenmart';
         
+		
         $db = JFactory::getDBO();
         $params = JComponentHelper::getParams('com_ksenmart');
         $query = $db->getQuery(true);
@@ -67,7 +76,7 @@ class KSMProducts {
             $row->rate = KSMProducts::getProductRate($row->id);
             
             if (!empty($row->folder)) {
-                $row->img_link = JURI::root() . 'media/com_ksenmart/images/' . $row->folder . '/original/' . $row->filename;
+				$row->img_link = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
             } else {
                 $row->img_link = JURI::root() . 'media/com_ksenmart/images/products/no.jpg';
             }
@@ -77,6 +86,9 @@ class KSMProducts {
             $row->tags->getItemTags('com_ksenmart.product', $row->id);
         }
         $ext_name = $old_ext_name;
+		
+		self::onExecuteAfter('getProduct','KSM','Products', array(&$row));
+		
         return $row;
     }
 
@@ -239,7 +251,7 @@ class KSMProducts {
                     pv.id,
                     pv.title,
                     pv.image,
-                    pv.property_id,
+                    ppv.property_id,
                     ppv.price,
                     ppv.text
                 ')->from('#__ksenmart_property_values AS pv')->leftjoin('#__ksenmart_product_properties_values AS ppv ON ppv.value_id=pv.id');

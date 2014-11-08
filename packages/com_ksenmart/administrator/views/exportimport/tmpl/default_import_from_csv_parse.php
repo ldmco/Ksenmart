@@ -1,6 +1,4 @@
-<?php	 		 		 	
-defined( '_JEXEC' ) or die;
-?>
+<?php defined('_JEXEC') or die; ?>
 <form method="post" class="form" enctype="multipart/form-data">
 	<table class="cat" width="100%" cellspacing="0">	
 		<thead>
@@ -22,7 +20,7 @@ defined( '_JEXEC' ) or die;
 				</div>
 				<div class="row">
 					<label class="inputname" style="width:200px;"><?php echo JText::_('ksm_exportimport_product_parent')?></label>
-					<select class="sel" id="parent" name="parent">
+					<select class="sel" id="parent" name="parent_id">
 						<?php echo $this->options?>
 					</select>
 				</div>				
