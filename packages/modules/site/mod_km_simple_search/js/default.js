@@ -46,6 +46,22 @@ jQuery(document).ready(function(){
             success_wrapp_block.fadeOut(400);
         }
     }
+	
+	jQuery('#simple-search-form').on('submit', function(){
+		var page_url = 'index.php?option=com_ksenmart&view=search&value='+value+'&Itemid=' + shopItemid;
+		jQuery.ajax({
+			url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.get_route_link&tmpl=ksenmart',
+			async: false,
+			data: {
+				url: page_url
+			},
+			success: function(data) {
+				window.location = data;
+			}
+		});
+		
+		return false;
+	});
     
     success_block.on('click', '.relevants .item', function(){
         var a = jQuery(this).find('a');
