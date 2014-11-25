@@ -5,7 +5,6 @@ DROP TABLE
 `#__ksenmart_countries`, 
 `#__ksenmart_currencies`, 
 `#__ksenmart_discounts`, 
-`#__ksenmart_exportimport_types`, 
 `#__ksenmart_manufacturers`, 
 `#__ksenmart_orders`, 
 `#__ksenmart_order_items`, 

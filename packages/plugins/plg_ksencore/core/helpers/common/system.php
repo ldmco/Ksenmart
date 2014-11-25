@@ -554,13 +554,17 @@ class KSSystem {
      * @param mixed $fields
      * @param bool $published
      * @param bool $implode_keys
+     * @param bool $single
      * @return
      */
     public static function getTableByIds(array $ids, $table, array $fields, $published = true, $implode_keys = false, $single = false) {
         if (!empty($ids) && is_array($ids)) {
+            if (empty(self::$ext_name)) {
+                self::setGlobalVar('ext_name');
+            }
             $db = JFactory::getDBO();
             $query = $db->getQuery(true);
-            $query->select($fields)->from('#__ksenmart_' . $table . ' AS t');
+            $query->select($fields)->from($db->qn('#__' . self::$ext_name . '_' . $table, 't'));
             
             if ($implode_keys) {
                 $query->where('(t.id IN (' . KSSystem::key_implode(', ', $ids) . '))');
@@ -582,7 +586,6 @@ class KSSystem {
                 return $object;
             }
         }
-        
         
         return new stdClass;
     }
