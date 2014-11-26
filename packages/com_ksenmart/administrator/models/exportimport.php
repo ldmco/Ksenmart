@@ -522,6 +522,13 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                                 $prop_values = '';
                                 foreach($prop_vals as $prop_val) {
                                     if($prop_val != '') {
+										$val_parts = explode('=', $prop_val);
+										if(count($val_parts) == 2){
+											$prop_val = $val_parts[0];
+											$val_price = $val_parts[1];
+										} else {
+											$val_price = '';
+										}
                                         $query = $this->_db->getQuery(true);
                                         $query->select('*')->from('#__ksenmart_property_values')->where('property_id=' . $property->id)->where('title=' . $this->_db->quote($prop_val));
                                         $this->_db->setQuery($query);
@@ -546,12 +553,18 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                                             $qvalues = array(
                                                 $product_id,
                                                 $property->id,
-                                                $prop_value_id);
+                                                $prop_value_id,
+												$this->_db->quote($val_price));
                                             $query = $this->_db->getQuery(true);
-                                            $query->insert('#__ksenmart_product_properties_values')->columns('product_id,property_id,value_id')->values(implode(',', $qvalues));
+                                            $query->insert('#__ksenmart_product_properties_values')->columns('product_id,property_id,value_id,price')->values(implode(',', $qvalues));
                                             $this->_db->setQuery($query);
                                             $this->_db->query();
-                                        }
+                                        } else {
+											$query = $this->_db->getQuery(true);
+											$query->update('#__ksenmart_product_properties_values')->set('price=' . $this->_db->quote($val_price))->where('id=' . $prod_prop_value->id);
+											$this->_db->setQuery($query);
+                                            $this->_db->query();
+										}
                                     }
                                 }
                         }
