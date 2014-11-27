@@ -141,7 +141,6 @@ class KsenMartModelOrder extends JModelKSList {
             
             try{
                 $this->_db->insertObject('#__ksenmart_orders', $orders);
-                $this->_db->query();
                 $order_id = $this->_db->insertid();
             }catch(Exception $e){}
             
