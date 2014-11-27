@@ -84,3 +84,48 @@
 		<td id="cart_total" align="center"><?php echo $this->order->costs['total_cost_val']; ?></td>
 	</tr>
 </table>
+<?php $this->params = JComponentHelper::getParams('com_ksenmart'); ?>
+<?php if($this->params->get('printforms_company_logo', null) && JURI::root() . $this->params->get('printforms_company_logo')): ?>
+<a href="<?php echo JURI::root(); ?>" title="<?php echo $this->params->get('printforms_companyname'); ?>">
+	<img src="<?php echo JURI::root() . $this->params->get('printforms_company_logo'); ?>" alt="<?php echo $this->params->get('printforms_companyname'); ?>" />
+</a>
+<?php endif; ?>
+<?php if($this->params->get('printforms_companyname')): ?>
+<p><b>Название компании: </b><?php echo $this->params->get('printforms_companyname'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_companyaddress')): ?>
+<p><b>Адрес компании: </b><?php echo $this->params->get('printforms_companyaddress'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_companyphone')): ?>
+<p><b>Телефон компании: </b><?php echo $this->params->get('printforms_companyphone'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_ceo_name')): ?>
+<p><b>Директор компании: </b><?php echo $this->params->get('printforms_ceo_name'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_buh_name')): ?>
+<p><b>Бухгалтер компании: </b><?php echo $this->params->get('printforms_buh_name'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_bank_account_number')): ?>
+<p><b>Расчетный счет: </b><?php echo $this->params->get('printforms_bank_account_number'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_inn')): ?>
+<p><b>ИНН: </b><?php echo $this->params->get('printforms_inn'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_kpp')): ?>
+<p><b>КПП: </b><?php echo $this->params->get('printforms_kpp'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_bankname')): ?>
+<p><b>Наименование банка: </b><?php echo $this->params->get('printforms_bankname'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_bank_kor_number')): ?>
+<p><b>Корреспондентский счет: </b><?php echo $this->params->get('printforms_bank_kor_number'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_bik')): ?>
+<p><b>БИК: </b><?php echo $this->params->get('printforms_bik'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_ip_name')): ?>
+<p><b>Индивидуальный предприниматель: </b><?php echo $this->params->get('printforms_ip_name'); ?></p>
+<?php endif; ?>
+<?php if($this->params->get('printforms_ip_registration')): ?>
+<p><b>Реквизиты: </b><?php echo $this->params->get('printforms_ip_registration'); ?></p>
+<?php endif; ?>
