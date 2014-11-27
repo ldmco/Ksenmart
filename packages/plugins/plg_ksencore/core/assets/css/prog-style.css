@@ -952,26 +952,27 @@ margin:0xp;
 	box-sizing: border-box;
 }
 .form .inputbox_205 {
-width: 205px;
-padding: 5px 5px 5px 9px;
-color: #4c4c4c;
-font-size: 15px;
-height: 20px;
-font-family: "Trebuchet MS";
-background: url(i/inputbox.png) top left no-repeat;
-border-top: none;
-border-left: none;
-border-bottom: none;
-border-right: 1px solid #F3F3F3;
-margin: 0 20px 0 0;
+	width: 205px;
+	padding: 5px 5px 5px 9px;
+	color: #4c4c4c;
+	font-size: 15px;
+	height: 20px;
+	font-family: "Trebuchet MS";
+	background: url(i/inputbox.png) top left no-repeat;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #F3F3F3;
+	margin: 0 20px 0 0;
 }
 
-.form  .inputname{
-float: left;
-width: 180px;
-margin: 3px 10px 0 0;
-font-size: 15px;
-color: #4c4c4c;
+.form .inputname{
+	float: left;
+	width: 250px;
+	margin: 3px 10px 0 0;
+	font-size: 15px;
+	color: #4c4c4c;
+	word-break: break-word;
 }
 
 .form .positions .position img{
