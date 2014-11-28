@@ -309,7 +309,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                         'title' => $this->_db->quote($product_data['title']),
                         'alias' => $this->_db->quote($alias),
                         'price' => $this->_db->quote($product_data['price']),
-                        'old_price' => $product_data['old_price'],
+                        'old_price' => $this->_db->quote($product_data['old_price']),
                         'price_type' => $product_data['price_type'],
                         'in_stock' => $product_data['in_stock'],
                         'product_code' => $this->_db->quote($product_data['product_code']),
