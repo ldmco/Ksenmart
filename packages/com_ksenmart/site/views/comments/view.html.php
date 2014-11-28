@@ -35,7 +35,6 @@ class KsenMartViewComments extends JViewKS {
             $user           = KSUsers::getUser();
             $this->params   = JComponentHelper::getParams('com_ksenmart');
             $model          = $this->getModel();
-            $id             = JRequest::getInt('id', 0, 'get');
             
             $shop_name = $this->params->get('shop_name');
             if(empty($shop_name)){

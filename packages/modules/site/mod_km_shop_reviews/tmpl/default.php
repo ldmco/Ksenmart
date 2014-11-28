@@ -7,7 +7,7 @@
     <?php foreach($reviews as $review){ ?>
         <article class="row-fluid item">
             <div class="span4 avatar">
-                <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=shopcomments&layout=shopreview&id='.$review->id); ?>" title="<?php echo $review->name; ?>">
+                <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=shopreview&id='.$review->id); ?>" title="<?php echo $review->name; ?>">
                     <img src="<?php echo JURI::root().$review->logo_thumb; ?>" alt="<?php echo $review->name; ?>" class="border_ksen" />
                 </a>
             </div>
@@ -26,13 +26,13 @@
                     <?php echo mb_substr($review->comment, 0, $params->get('count_symbol', 200)); ?>
                 </div>
                 <div class="read_more">
-                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=shopcomments&layout=shopreview&id='.$review->id); ?>" title="Подробнее">Подробнее</a>
+                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=shopreview&id='.$review->id); ?>" title="Подробнее">Подробнее</a>
                 </div>
             </div>
         </article>
     <?php } ?>
     <div class="row-fluid text-center">
-        <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=shopcomments&layout=shopreviews'); ?>" title="<?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?>"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?></a>
+        <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=shopreviews'); ?>" title="<?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?>"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?></a>
     </div>
 </section>
 <?php } ?>
