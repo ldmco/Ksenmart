@@ -94,7 +94,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                 if(isset($_POST['parent_id']) && $_POST['parent_id'] != '') $product_data['parent_id'] = $this->encode($data[$_POST['parent_id']]);
                 if(isset($_POST['categories']) && $_POST['categories'] != '') $product_data['categories'] = $this->encode($data[$_POST['categories']]);
                 if(isset($_POST['childs_group']) && $_POST['childs_group'] != '') $product_data['childs_group'] = $this->encode($data[$_POST['childs_group']]);
-                if(isset($_POST['price']) && $_POST['price'] != '') $product_data['price'] = (float)str_replace(' ', '', $this->encode($data[$_POST['price']]));
+                if(isset($_POST['price']) && $_POST['price'] != '') $product_data['price'] = str_replace(' ', '', $this->encode($data[$_POST['price']]));
                 if(isset($_POST['promotion_price']) && $_POST['promotion_price'] != '') $product_data['promotion_price'] = (float)str_replace(' ', '', $this->encode($data[$_POST['promotion_price']]));
                 if(isset($_POST['price_type']) && $_POST['price_type'] != '') $product_data['price_type'] = str_replace(' ', '', $this->encode($data[$_POST['price_type']]));
                 if(isset($_POST['product_code']) && $_POST['product_code'] != '') $product_data['product_code'] = $this->encode($data[$_POST['product_code']]);
@@ -308,8 +308,8 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                         'childs_group' => $product_data['childs_group'],
                         'title' => $this->_db->quote($product_data['title']),
                         'alias' => $this->_db->quote($alias),
-                        'price' => $product_data['price'],
-                        'old_price' => $product_data['old_price'],
+                        'price' => $this->_db->quote($product_data['price']),
+                        'old_price' => $this->_db->quote($product_data['old_price']),
                         'price_type' => $product_data['price_type'],
                         'in_stock' => $product_data['in_stock'],
                         'product_code' => $this->_db->quote($product_data['product_code']),
@@ -522,6 +522,13 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                                 $prop_values = '';
                                 foreach($prop_vals as $prop_val) {
                                     if($prop_val != '') {
+										$val_parts = explode('=', $prop_val);
+										if(count($val_parts) == 2){
+											$prop_val = $val_parts[0];
+											$val_price = $val_parts[1];
+										} else {
+											$val_price = '';
+										}
                                         $query = $this->_db->getQuery(true);
                                         $query->select('*')->from('#__ksenmart_property_values')->where('property_id=' . $property->id)->where('title=' . $this->_db->quote($prop_val));
                                         $this->_db->setQuery($query);
@@ -546,12 +553,18 @@ class KsenMartModelExportImport extends JModelKSAdmin {
                                             $qvalues = array(
                                                 $product_id,
                                                 $property->id,
-                                                $prop_value_id);
+                                                $prop_value_id,
+												$this->_db->quote($val_price));
                                             $query = $this->_db->getQuery(true);
-                                            $query->insert('#__ksenmart_product_properties_values')->columns('product_id,property_id,value_id')->values(implode(',', $qvalues));
+                                            $query->insert('#__ksenmart_product_properties_values')->columns('product_id,property_id,value_id,price')->values(implode(',', $qvalues));
                                             $this->_db->setQuery($query);
                                             $this->_db->query();
-                                        }
+                                        } else {
+											$query = $this->_db->getQuery(true);
+											$query->update('#__ksenmart_product_properties_values')->set('price=' . $this->_db->quote($val_price))->where('id=' . $prod_prop_value->id);
+											$this->_db->setQuery($query);
+                                            $this->_db->query();
+										}
                                     }
                                 }
                         }

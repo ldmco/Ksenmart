@@ -45,6 +45,7 @@
 	height: 155px;
 	background:transparent url(../images/icons/img-hover.png) center no-repeat!important;
 }
+.catalog .item .img span.act,
 .catalog .item .img span.hit,
 .catalog .item .img span.new,
 .catalog .item .img span.super {
@@ -54,6 +55,10 @@
 	width:30px;
 	height:87px;
 	display: block;
+}
+.catalog .item .img span.act {
+    z-index: 98;
+	background: url(../images/icons/action.png) top center no-repeat;
 }
 .catalog .item .img span.hit {
     z-index: 98;
