@@ -15,13 +15,12 @@ class KsenMartViewComments extends JViewKS {
         $layout          = $this->getLayout();
         
         $document->setTitle($doc_title);
+		$document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/shop_reviews.css');
         
-        if($layout == 'shopreviews'){
+        if($layout == 'reviews'){
             if(!JFactory::getConfig()->get('config.caching', 0)) {
                 $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'));
             }
-            
-            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/shop_reviews.css');
             
             $reviews        = $this->get('ShopReviewsList');
             $user           = KSUsers::getUser();
@@ -30,7 +29,7 @@ class KsenMartViewComments extends JViewKS {
             $this->assignRef('reviews', $reviews);
             $this->assignRef('user', $user);
             $this->assignref('show_shop_review', $isset_review);
-        }elseif($layout == 'shopreview'){
+        }elseif($layout == 'review'){
             
             $user           = KSUsers::getUser();
             $this->params   = JComponentHelper::getParams('com_ksenmart');
@@ -40,8 +39,6 @@ class KsenMartViewComments extends JViewKS {
             if(empty($shop_name)){
                 $shop_name = 'KsenMart';
             }
-            
-            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/shop_reviews.css');
             
             $review         = $model->getShopReviewById($id);
             $isset_review   = KSSystem::issetReview($user->id);
@@ -56,7 +53,7 @@ class KsenMartViewComments extends JViewKS {
                 $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->name, $shop_name));
             }
             
-        }elseif($layout != 'shopreviews'){
+        }elseif($layout != 'reviews'){
             if($id == 0) {
                 if(!JFactory::getConfig()->get('config.caching', 0)){
                     $path->addItem(JText::_('KSM_REVIEWS_LIST_PATH_TITLE'));

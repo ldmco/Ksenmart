@@ -35,6 +35,7 @@ class KsenMartModelComments extends JModelKSList {
                 c.type
             ')
             ->from('#__ksenmart_comments AS c')
+            ->where('c.type="review"')
             ->where('c.published=1')
             ->order('c.date_add')
         ;
@@ -44,9 +45,9 @@ class KsenMartModelComments extends JModelKSList {
         
         for ($k = 0; $k < count($comments); $k++) {
             $comments[$k]->user = KSUsers::getUser($comments[$k]->user);
-            /*$query = "select p.*,(select i.file from #__ksenmart_images as i where i.owner_id=p.id and i.owner_type=p.type order by i.ordering limit 1) as image from #__ksenmart_products as p where p.id='{$comments[$k]->product}'";
-            $this->_db->setQuery($query);
-            $comments[$k]->product = $this->_db->loadObject();*/
+			if(isset($comments[$k]->product) && $comments[$k]->product > 0){
+				$comments[$k]->product = KSMProducts::getProduct($comments[$k]->product);
+			}
         }
         $this->_pagination = new JPagination($this->_total, $limitstart, $this->_limit);
         
@@ -70,12 +71,12 @@ class KsenMartModelComments extends JModelKSList {
                 't.rate',
                 't.date_add',
                 't.type'
-        ));
+        ), true, false, true);
         if(!empty($comment)){
             $comment->user = KSUsers::getUser($comment->user);
-            $query = "select p.*,(select i.file from #__ksenmart_images as i where i.owner_id=p.id and i.owner_type=p.type order by i.ordering limit 1) as image from #__ksenmart_products as p where p.id='{$comment->product}'";
-            $this->_db->setQuery($query);
-            $comment->product = $this->_db->loadObject();
+			if(isset($comment->product) && $comment->product > 0){
+				$comment->product = KSMProducts::getProduct($comment->product);
+			}
             
             $this->onExecuteAfter('getComment', array(&$comment));
             return $comment;
