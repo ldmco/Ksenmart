@@ -528,6 +528,9 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         $id = $table->id;
         KSMedia::saveItemMedia($id, $data, 'product', 'products');
 
+        $tagsObserver = $table->getObserverOfClass('JTableObserverTags');
+        $result = $tagsObserver->setNewTags($data['tags'], true);
+
         JArrayHelper::toInteger($data['categories']);
         $default_category = 0;
         if(isset($data['categories']['default'])) {
@@ -665,12 +668,6 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
         $on_close = 'window.parent.ProductsList.refreshList();';
         $return = array('id' => $id, 'on_close' => $on_close);
-
-        $tableProducts = $this->getTable('Products');
-        $tableProducts->load($data['id']);
-        $tableProducts->bindCheckStore($data);
-        $tagsObserver = $tableProducts->getObserverOfClass('JTableObserverTags');
-        $result = $tagsObserver->setNewTags($data['tags'], true);
 
         $this->onExecuteAfter('saveProduct', array(&$return));
         return $return;
