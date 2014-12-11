@@ -58,6 +58,7 @@
 			class="active"
 			upload_to="media/com_ksenmart/images/payments/original"
 			upload_folder="payments"
+			extension="com_ksenmart"
 		/>			
 
 		<field 
