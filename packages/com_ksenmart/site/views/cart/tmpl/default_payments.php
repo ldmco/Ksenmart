@@ -14,7 +14,7 @@
     			<div class="payment">
     				<label class="radio clearfix checkbox">
 						<?php if (!empty($payment->icon)):?>
-                        <span class="icon"><img src="<?php echo $payment->icon; ?>" width="40px" /></span>
+                        <span class="icon"><img src="<?php echo $payment->icon; ?>" width="120px" /></span>
 						<?php endif;?>
     					<input type="radio" name="payment_id" value="<?php echo $payment->id;?>" required="true" onclick="KMCartChangePayment(this);" <?php echo ($payment->selected?'checked':''); ?> /> <?php echo JText::_($payment->title); ?>
     				</label>

@@ -296,7 +296,7 @@ class KsenMartModelCart extends JModelKSList {
             $rows = $this->_db->loadObjectList();
             
             foreach($rows as $row) {
-                $row->icon    = !empty($row->filename)?KSMedia::resizeImage($row->filename, $row->folder, 40, 20, json_decode($row->params_f, true)):'';
+                $row->icon    = !empty($row->filename)?KSMedia::resizeImage($row->filename, $row->folder, 160, 80, json_decode($row->params_f, true)):'';
                 $row->regions = json_decode($row->regions, true);
                 foreach($row->regions as $country) {
                     if(in_array($this->_region_id, $country)) {
