@@ -1,2 +1,2 @@
-ALTER TABLE `#__orders` MODIFY `customer_fields` text DEFAULT '{}';
-ALTER TABLE `#__orders` MODIFY `address_fields` text DEFAULT '{}';
+ALTER TABLE `#__ksenmart_orders` MODIFY `customer_fields` TEXT;
+ALTER TABLE `#__ksenmart_orders` MODIFY `address_fields` TEXT;
