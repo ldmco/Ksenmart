@@ -45,6 +45,7 @@
 		<file type="plugin" id="onorder" group="kmdiscount">plugins/plg_onorder.zip</file>
 		<file type="plugin" id="receipt" group="kmpayment">plugins/plg_receipt.zip</file>
 		<file type="plugin" id="robokassa" group="kmpayment">plugins/plg_robokassa.zip</file>
+		<file type="plugin" id="walletone" group="kmpayment">plugins/plg_kmpayment_walletone.zip</file>
 		<file type="plugin" id="sitevisits" group="kmdiscountactions">plugins/plg_sitevisits.zip</file>
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>
