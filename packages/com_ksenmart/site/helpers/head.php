@@ -24,27 +24,29 @@ class KsenmartHtmlHelper {
         
         $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
         
-        if($params->get('include_css', 1)) {
+        if($params->get('include_bscss', 1)) {
             $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap.min.css');
+        }
+        if($params->get('include_css', 1)) {
             $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap-responsive.min.css');
             $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/template.css');
         }
         
         $js = "
-		var URI_ROOT='" . JURI::root() . "';
-		var km_cart_link='" . JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid=' . KSSystem::getShopItemid()) . "';
-		var shopItemid='" . KSSystem::getShopItemid() . "';
-		var order_type='ordering';
-		var order_dir='asc';	
-		var limit=" . $params->get('site_product_limit', 30) . ";
-		var limitstart=0;	
-		var use_pagination=" . $params->get('site_use_pagination', 0) . ";
-		var order_process=" . $params->get('order_process', 0) . ";
-		var cat_id=" . JRequest::getInt('id', 0) . ";
-		var user_id=" . JFactory::getUser()->id . ";
-		var page=1;
-		var session_id='" . $session->getId() . "';
-		";
+        var URI_ROOT='" . JURI::root() . "';
+        var km_cart_link='" . JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid=' . KSSystem::getShopItemid()) . "';
+        var shopItemid='" . KSSystem::getShopItemid() . "';
+        var order_type='ordering';
+        var order_dir='asc';    
+        var limit=" . $params->get('site_product_limit', 30) . ";
+        var limitstart=0;   
+        var use_pagination=" . $params->get('site_use_pagination', 0) . ";
+        var order_process=" . $params->get('order_process', 0) . ";
+        var cat_id=" . JRequest::getInt('id', 0) . ";
+        var user_id=" . JFactory::getUser()->id . ";
+        var page=1;
+        var session_id='" . $session->getId() . "';
+        ";
         $document->addScriptDeclaration($js);
         self::$_headAdded = true;
         KSSystem::loadPlugins();

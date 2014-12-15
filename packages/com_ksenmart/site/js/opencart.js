@@ -1,4 +1,4 @@
-﻿var maskList, maskOpts;
+var maskList, maskOpts;
 jQuery(document).ready(function() {
 
     jQuery('#order_info_show').on('click', function() {

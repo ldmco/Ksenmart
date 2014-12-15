@@ -144,6 +144,20 @@
 		</field>
 
 		<field
+			name="include_bscss"
+			type="radio"
+			default="1"
+			label="KSM_PRODUCT_INCLUDE_BSCSS_LABEL"
+			description="KSM_PRODUCT_INCLUDE_BSCSS_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+
+		<field
 			name="include_bsjs"
 			type="radio"
 			default="1"
