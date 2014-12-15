@@ -41,6 +41,7 @@
 		<file type="plugin" id="dobeforecache" group="kmplugins">plugins/plg_dobeforecache.zip</file>
 		<file type="plugin" id="fixed" group="kmdiscount">plugins/plg_fixed.zip</file>
 		<file type="plugin" id="fixedregions" group="kmshipping">plugins/plg_fixedregions.zip</file>
+		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_kmshipping_redexpress.zip</file>
 		<file type="plugin" id="onorder" group="kmdiscount">plugins/plg_onorder.zip</file>
 		<file type="plugin" id="receipt" group="kmpayment">plugins/plg_receipt.zip</file>
 		<file type="plugin" id="robokassa" group="kmpayment">plugins/plg_robokassa.zip</file>
