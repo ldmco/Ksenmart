@@ -7,7 +7,6 @@ if (!class_exists('KMPaymentPlugin')) {
 class plgKMPaymentWalletone extends KMPaymentPlugin {
     
     private $_params = array('merchant_id' => null, 'secretKey' => null);
-    private $_fields = [];
     
     public function __construct(&$subject, $config = array()) {
         parent::__construct($subject, $config);
@@ -40,7 +39,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         $view->payment_form_params->title = 'Оплата заказа №' . $view->order->id . ' на сайте ' . JFactory::getConfig()->get('sitename');
         
         $view->user = KSUsers::getUser();
-        KSMWalletone::_setFields([
+        KSMWalletone::_setFields(array(
         	'WMI_MERCHANT_ID' => $payment->params['merchant_id'], 
         	'WMI_PAYMENT_AMOUNT' => $view->order->cost, 
         	'WMI_PAYMENT_NO' => $view->order->id, 
@@ -51,7 +50,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         	'WMI_CUSTOMER_EMAIL' => $view->order->customer_fields->email,
         	'WMI_FAIL_URL' => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_error'),
         	'WMI_SUCCESS_URL' => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_success'),
-        ]);
+        ));
         $view->payment_form_params->sign = KSMWalletone::getHash($payment->params['secretKey']);
         
         $html.= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'default_paymentform');

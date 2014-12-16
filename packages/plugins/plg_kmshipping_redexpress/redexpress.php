@@ -22,7 +22,7 @@ class plgKMShippingRedexpress extends KSMShippingPlugin {
             $region    = KSMWalletone::getRegion($order->region_id);
             $country   = KSMWalletone::getCountry($region->country_id);
 
-    		KSMWalletone::_setFields([
+    		KSMWalletone::_setFields(array(
                 'WMI_DELIVERY_REQUEST'     => true,
                 'WMI_DELIVERY_COUNTRY'     => $country->title,
                 'WMI_DELIVERY_REGION'      => $region->title,
@@ -31,7 +31,7 @@ class plgKMShippingRedexpress extends KSMShippingPlugin {
                 'WMI_DELIVERY_CONTACTINFO' => $order->customer_fields->phone,
                 'WMI_DELIVERY_COMMENTS'    => $order->note,
                 'WMI_DELIVERY_ORDERID'     => $order->id,
-            ]);
+            ));
         }
 	}
 }
