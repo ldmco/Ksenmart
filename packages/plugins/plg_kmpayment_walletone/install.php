@@ -16,7 +16,7 @@ class plgKMPaymentWalletoneInstallerScript {
     }
 
     public function update($parent) {
-    	if(version_compare($parent->get('manifest')->version, '1.0', '==')){
+    	if(version_compare($parent->get('manifest')->version, '1.0.0', '==')){
 	        if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
 	        $app = JFactory::getApplication();
@@ -29,7 +29,7 @@ class plgKMPaymentWalletoneInstallerScript {
 
         	$db = $parent->get('db');
 	        $table = JTable::getInstance('extension');
-	        $table->load(array('name' => 'walletone', 'folder' => 'kmpayment'));
+	        $table->load(array('element' => 'walletone', 'folder' => 'kmpayment'));
 	        $table->save(array(
                 'enabled' => 1
             ));
