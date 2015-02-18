@@ -65,6 +65,15 @@
 		/>		
 		
 		<field
+			name="phone_code"
+			type="text"
+			default=""
+			label="KSM_COUNTRIES_COUNTRY_PHONE_CODE_LBL"
+			description ="KSM_COUNTRIES_COUNTRY_PHONE_CODE_DESC"
+			class="inputbox"
+			labelclass="inputname"
+		/>			
+		<field
 			type="editor"
 			name="content" 
 			label="KSM_COUNTRIES_COUNTRY_DESCRIPTION_LBL"

@@ -97,8 +97,14 @@ class KsenMartModelCatalog extends JModelKSAdmin {
 
     function deleteListItems($ids) {
         $this->onExecuteBefore('deleteListItems', array(&$ids));
-
+		
+		$tags = new JHelperTags;
+		$table = $this->getTable('products');
+		$tags->typeAlias = 'com_ksenmart.product';
+		
         foreach($ids as $id) {
+			$table->load($id);
+			$tags->deleteTagData($table, $id);	
             $query = $this->_db->getQuery(true);
             $query->delete('#__ksenmart_product_properties_values')->where('product_id=' . $id);
             $this->_db->setQuery($query);

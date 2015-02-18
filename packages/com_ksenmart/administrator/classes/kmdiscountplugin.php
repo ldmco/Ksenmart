@@ -11,11 +11,11 @@ abstract class KMDiscountPlugin extends KMPlugin {
     function __construct(&$subject, $config) {
         parent::__construct($subject, $config);
     }
-
+	
 	function onAfterExecuteHelperKSMProductsgetProduct($product){    
 		$db = JFactory::getDBO();		
 		$query = $db->getQuery(true);
-        $query->select('*')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where("type<>".$db->quote('onorder'))->where('enabled=1');
+        $query->select('*')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where("type!=".$db->quote('onorder'))->where("type!=".$db->quote('coupons'))->where('enabled=1');
         $db->setQuery($query);
         $discounts = $db->loadObjectList();
 		
@@ -209,25 +209,19 @@ abstract class KMDiscountPlugin extends KMPlugin {
     }
 
     function onCheckDiscountCountry($discount_id = null) {
-        /*if(empty($discount_id)) return true;
+        if(empty($discount_id)) return true;
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query->select('countries')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
+        $query->select('regions')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
         $db->setQuery($query);
-        $countries = $db->loadResult();
-        if(empty($countries)) return true;
-        $countries = json_decode($countries, true);
-        if(!count($countries)) return true;
-        if(!class_exists('SxGeo')) include (JPATH_ROOT . '/components/com_ksenmart/helpers/geo.php');
-        $SxGeo = new SxGeo(JPATH_ROOT . '/components/com_ksenmart/helpers/SxGeoCity.dat', SXGEO_BATCH | SXGEO_MEMORY);
-        $data = $SxGeo->getCityFull($_SERVER['REMOTE_ADDR']);
-        if(!isset($data['country']) || empty($data['country'])) return false;
-        $query = $db->getQuery(true);
-        $query->select('id')->from('#__ksenmart_countries')->where('code=' . $db->quote($data['country']));
-        $db->setQuery($query);
-        $country_id = $db->loadResult();
-        if(!in_array($country_id, $countries)) return false;*/
-        return true;
+        $regions = $db->loadResult();
+        if(empty($regions)) return true;
+        
+		$app = JFactory::getApplication();
+		$user = KSUsers::getUser();
+		$region_id  = (int)$app->getUserState('com_ksenmart.region_id', $user->region_id);
+		
+		return $this->checkRegion($regions, $region_id);
     }
 
     function onCheckDiscountManufacturers($discount_id = null, $product_id = null) {

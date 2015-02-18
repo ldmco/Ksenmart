@@ -24,4 +24,18 @@ abstract class KMPlugin extends JPlugin {
         
         return $currency_code;
     }
+	
+	function checkRegion($regions,$region_id)
+	{
+		$regions=json_decode($regions,true);
+		if (!is_array($regions) || !count($regions))
+			return true;
+		
+		foreach($regions as $country)
+			if (in_array($region_id,$country))
+				return true;
+					
+		return false;
+	}	
+	
 }

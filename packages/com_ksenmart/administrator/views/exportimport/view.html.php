@@ -17,6 +17,11 @@ class KsenMartViewExportImport extends JViewKSAdmin {
 				$data = $model->getYMFormData();
 				$this->form->bind($data);
 			break;
+			case 'export_to_csv':
+				$model = $this->getModel();
+				$model->form = 'exporttocsv';
+				$this->form = $model->getForm();
+			break;			
 			case 'import_from_csv':
 				
 				switch ($this->getLayout()) {
