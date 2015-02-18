@@ -91,26 +91,23 @@ class KsenMartModelCart extends JModelKSList {
                 ->select('
                     s.id,
                     s.title,
+					s.introcontent,
                     s.type,
                     s.regions,
                     s.days,
-                    s.params,
-                    f.filename,
-                    f.folder,
-                    f.params AS params_f,
                     s.ordering
                 ')
                 ->from('#__ksenmart_shippings AS s')
-                ->leftjoin('#__ksenmart_files AS f ON f.owner_type='.$this->_db->quote('shipping').' AND f.owner_id=s.id')
                 ->where('s.published=1')
                 ->order('s.ordering')
             ;
+			$query = KSMedia::setItemMainImageToQuery($query, 'shipping', 's.');
             
             $this->_db->setQuery($query);
             $rows = $this->_db->loadObjectList();
             
             foreach($rows as $row) {
-                $row->icon    = !empty($row->filename)?KSMedia::resizeImage($row->filename, $row->folder, 40, 20, json_decode($row->params_f, true)):'';
+                $row->icon    = !empty($row->filename)?KSMedia::resizeImage($row->filename, $row->folder, 20, 20, json_decode($row->params, true)):'';
                 $row->regions = json_decode($row->regions, true);
                 foreach($row->regions as $country) {
                     if(in_array($this->_region_id, $country)) {
@@ -209,7 +206,7 @@ class KsenMartModelCart extends JModelKSList {
     
     private function getFieldsOrder($position, $type){
         $this->onExecuteBefore('getFieldsOrder', array(&$position, &$type));
-
+		$app = JFactory::getApplication();
         if(!empty($position)){
             
             $fields     = $this->getFieldsCatOrder($position);
@@ -237,7 +234,7 @@ class KsenMartModelCart extends JModelKSList {
                         $field_name = $field->id;
                     }
 
-                    $field->value             = $this->_session->get($this->context . '.'.$type.'[' . $field_name . ']', $user_value);
+                    $field->value             = $app->getUserState($this->context . '.'.$type.'[' . $field_name . ']', $user_value);
                     $fields_new[$field->id]   = $field;
                     $field_o->{$field_name}   = $field->value;
                 }

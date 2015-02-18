@@ -1,9 +1,9 @@
 <?php defined('_JEXEC') or die(); ?>
 <div class="sort">
-	<ul class="breadcrumb noTransition">
-		<li><span><?php echo JText::_('KSM_SORT_BY'); ?>:</span></li>
+	<ul class="unstyled">
+		<li class="pull-left"><span><?php echo JText::_('KSM_SORT_BY'); ?>:</span></li>
 		<?php foreach($this->sort_links as $type => $sort_link): ?>
-		<li class="sortlink-<?php echo $type; ?>"><?php echo $sort_link['link']; ?> <span class="divider">/</span></li>
+		<li class="pull-left sortlink-<?php echo $type; ?>"><?php echo $sort_link['link']; ?> <span class="divider">/</span></li>
 		<?php endforeach; ?>
         <li class="pull-right layout_icon<?php echo $this->layout_view == 'grid'?' active':''; ?>">
             <a href="javascript:void(0);" class="layout_show" data-layout="grid">

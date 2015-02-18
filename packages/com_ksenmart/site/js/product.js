@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
         effect: 'slide, fade',
         crossfade: true,
         slideSpeed: 200,
-        fadeSpeed: 500,
+        fadeSpeed: 0,
         generateNextPrev: true,
         generatePagination: false,
         dynamicallyUpdateAnchors: false
@@ -60,6 +60,12 @@ jQuery(document).ready(function() {
         var count = form.find('[name="count"]').val();
         var product_packaging = form.find('[name="product_packaging"]').val();
         var propertiesE = form.find('select option, input[type="radio"], input[type="checkbox"]');
+		if (jQuery(this).is('[type="checkbox"]')){
+			jQuery(this).parents('.controls').find('[type="checkbox"]').each(function(){
+				if (jQuery(this).val() != val_prop_id)
+					jQuery(this).removeAttr('checked');
+			});
+		}
 
         propertiesE.each(function(indx, element) {
             var jqEl = jQuery(element);
@@ -179,7 +185,7 @@ jQuery(document).ready(function() {
         return false;
     });
 
-    jQuery('#item .options .row').click(function() {
+    jQuery('.unit .options .row').click(function() {
         jQuery(this).removeClass('row_active');
     });
 

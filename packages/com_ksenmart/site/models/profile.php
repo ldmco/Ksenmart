@@ -609,9 +609,9 @@ class KsenMartModelProfile extends JModelKSList {
             try {
                 $asd = $this->issetUserAvatatFile($uid);
                 if($asd){
-                    $result = $this->_db->updateObject('#__ksenmart_files', $object, 'owner_id');
+                    $result = $this->_db->updateObject('#__ksen_files', $object, 'owner_id');
                 }else{
-                    $result = $this->_db->insertObject('#__ksenmart_files', $object);
+                    $result = $this->_db->insertObject('#__ksen_files', $object);
                 }
                 
                 $this->onExecuteAfter('setUserAvatar', array(&$result));
@@ -627,7 +627,7 @@ class KsenMartModelProfile extends JModelKSList {
         $query = $this->_db->getQuery(true);
         $query
             ->select('f.id')
-            ->from('#__ksenmart_files AS f')
+            ->from('#__ksen_files AS f')
             ->where('owner_id = ' . (int)$uid)
         ;
 
@@ -877,17 +877,29 @@ class KsenMartModelProfile extends JModelKSList {
                     s.type,
                     s.regions,
                     s.days,
-                    s.params,
                     s.ordering
                 ')
                 ->from('#__ksenmart_shippings AS s')
-                ->where('s.regions LIKE \'%'.$this->_db->escape($region_id).'%\'')
                 ->where('s.published=1')
-                ->order('s.id')
+                ->order('s.ordering')
             ;
+			$query = KSMedia::setItemMainImageToQuery($query, 'shipping', 's.');
 
             $this->_db->setQuery($query);
-            $shippings = $this->_db->loadObjectList();
+            $db_shippings = $this->_db->loadObjectList();
+            foreach($db_shippings as $db_shipping) {
+				if (!$this->checkRegion($db_shipping->regions, $region_id)) 
+					continue;				
+                $db_shipping->icon = !empty($db_shipping->filename)?KSMedia::resizeImage($db_shipping->filename, $db_shipping->folder, 80, 80, json_decode($db_shipping->params, true)):'';			
+				$cart = new stdClass();
+				$cart->shipping_id = $db_shipping->id;
+				$cart->region_id = $region_id;
+				$cart->items = array();
+				JDispatcher::getInstance()->trigger('onAfterExecuteKSMCartGetcart', array(null, &$cart));
+				$db_shipping->sum = $cart->shipping_sum;
+				$db_shipping->sum_val = $cart->shipping_sum_val;
+				$shippings[] = $db_shipping;
+			}
         }
         
         $this->onExecuteAfter('getShippingsByRegionId', array(&$shippings));
@@ -908,19 +920,41 @@ class KsenMartModelProfile extends JModelKSList {
                     p.regions,
                     p.description,
                     p.params,
+                    f.filename,
+                    f.folder,
+                    f.params AS params_f,					
                     p.ordering
                 ')
                 ->from('#__ksenmart_payments AS p')
-                ->where('p.regions LIKE \'%'.$this->_db->escape($region_id).'%\'')
+				->leftjoin('#__ksenmart_files AS f ON f.owner_type='.$this->_db->quote('payment').' AND f.owner_id=p.id')
                 ->where('p.published=1')
-                ->order('p.id')
+                ->order('p.ordering')
             ;
 
             $this->_db->setQuery($query);
-            $payments = $this->_db->loadObjectList();
+            $db_payments = $this->_db->loadObjectList();
+            foreach($db_payments as $db_payment) {
+				if (!$this->checkRegion($db_payment->regions, $region_id)) 
+					continue;			
+                $db_payment->icon    = !empty($db_payment->filename)?KSMedia::resizeImage($db_payment->filename, $db_payment->folder, 80, 80, json_decode($db_payment->params_f, true)):'';			
+				$payments[] = $db_payment;
+			}			
         }
         
         $this->onExecuteAfter('getPaymentsByRegionId', array(&$payments));
         return $payments;
     }
+	
+	function checkRegion($regions,$region_id)
+	{
+		$regions=json_decode($regions,true);
+		if (!is_array($regions) || !count($regions))
+			return true;
+		
+		foreach($regions as $country)
+			if (in_array($region_id,$country))
+				return true;
+					
+		return false;
+	}		
 }

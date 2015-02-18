@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
     
-    var maskList = jQuery.masksSort(jQuery.masksLoad("components/com_ksenmart/js/phone-codes.json"), ['#'], /[0-9]|#/, "mask");
+    var maskList = jQuery.masksSort(jQuery.masksLoad(URI_ROOT + "components/com_ksenmart/js/phone-codes.json"), ['#'], /[0-9]|#/, "mask");
     var maskOpts = {
         inputmask: {
             definitions: {
@@ -31,16 +31,10 @@ jQuery(document).ready(function(){
         }
     };
 
-    jQuery('body').on('change', '#phone_mask', function() {
-        if (jQuery('#phone_mask').is(':checked')) {
-            jQuery('#customer_phone').inputmasks(maskOpts);
-        } else {
-            jQuery('#customer_phone').inputmask("+[####################]", maskOpts.inputmask)
-            .attr("placeholder", jQuery('#customer_phone').inputmask("getemptymask"));
-            jQuery("#descr").html("Введите номер");
-        }
-    });
-
-    jQuery('#phone_mask').change();
+    jQuery('#customer_phone').inputmasks(maskOpts);
+	
+	jQuery('.to-catalog').click(function(){
+		window.parent.jQuery('.km-iframe-close').click();
+	});
 	
 });

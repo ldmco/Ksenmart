@@ -1,9 +1,9 @@
 <?php defined('_JEXEC') or die(); ?>
 <?php
     $flag = true;
-	foreach($product->properties as $prop){
-       if($prop->type != 'text'){
-           if(count($prop->values) > 0){
+	foreach($this->product->properties as $prop){
+       if($prop->type == 'select' && ($prop->view == 'select' || $prop->view == 'checkbox' || $prop->view == 'radio')){
+           if(count($prop->values) > 1){
     	       $flag = false;
                break;
     	   }

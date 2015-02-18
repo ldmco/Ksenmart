@@ -112,8 +112,8 @@ class KsenMartViewCatalog extends JViewKS {
                     }
                 }
                 if($this->getLayout() != 'country') {
-                    $rows       = $this->get('Items');
                     $pagination = $this->get('Pagination');
+                    $rows       = $this->get('Items');
                     $sort_links = $this->get('SortLinks');
 
                     $this->assignRef('sort_links', $sort_links);
