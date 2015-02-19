@@ -46,12 +46,6 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field name="properties" type="sql"
-                    query="SELECT id as value,title as properties FROM #__ksenmart_properties WHERE published=1 ORDER BY ordering"
-                    label="MOD_KM_FILTER_PROPERTIES_LBL"
-                    multiple="true"
-                />
-                
                 <field name="layout" type="modulelayout"
                         label="JFIELD_ALT_LAYOUT_LABEL"
                         description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
@@ -72,16 +66,19 @@
                         default="900"
                         label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
                         description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-                <field name="step" type="text"
-                    default="5000"
-                    label="MOD_KM_FILTER_STEP_PRICE"
-                    description="MOD_KM_FILTER_STEP_PRICE" />
                 <field name="cachemode"
                         type="hidden"
                         default="static">
                         <option value="static"></option>
                 </field>
             </fieldset>
+			<fieldset name="common" addfieldpath="/plugins/system/ksencore/core/models/fields">
+				<field name="price" type="ksmfilterprice" title="MOD_KM_FILTER_PRICE" />
+				<field name="manufacturer" type="ksmfilterfield" title="MOD_KM_FILTER_MANUFACTURERS" />
+			</fieldset>			
+			<fieldset name="properties" addfieldpath="/plugins/system/ksencore/core/models/fields">
+                <field name="properties" type="ksmfilterproperties" />			
+			</fieldset>
         </fields>
     </config>
 </extension>

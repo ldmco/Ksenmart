@@ -3,9 +3,9 @@
 	<?php if($module->showtitle){ ?>
 	<h3><?php echo $module->title; ?></h3>
 	<?php } ?>
-	<form action="<?php echo $form_action; ?>" method="get">
+	<form action="<?php echo $form_action; ?>" method="get" class="row-fluid">
 		<?php if ($params->get('price', 'none')->view != 'none'){ ?>
-		<div class="prices tracks act">
+		<div class="prices tracks act span12">
 			<fieldset>
 				<?php if ($params->get('price')->view == 'slider'): ?>
 				<div class="inputs">
@@ -21,7 +21,7 @@
 		</div>	
 		<?php } ?>
 		<?php if (count($manufacturers) > 0 && $params->get('manufacturer', 'none')->view != 'none'){ ?>
-		<div class="manufacturers brands filter_box display-<?php echo $params->get('manufacturer', 'row')->display?>">
+		<div class="manufacturers brands filter_box display-<?php echo $params->get('manufacturer', 'row')->display?> span4">
 			<ul class="nav nav-list">
 				<li class="nav-header"><?php echo JText::_('MOD_KM_FILTER_MANUFACTURERS'); ?></li>
 				<?php if ($params->get('manufacturer')->view != 'list'): ?>
@@ -69,7 +69,7 @@
 		<div class="properties">
 		<?php foreach($properties as $property){ ?>
 		<?php if(!empty($property->values) && $property->view != 'none'){ ?>
-		<div class="property_<?php echo $property->id?> property filter_box display-<?php echo $property->display?>">
+		<div class="property_<?php echo $property->id?> property filter_box display-<?php echo $property->display?> span4">
 			<ul class="nav nav-list">
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php if ($property->view != 'list'): ?>
@@ -117,7 +117,7 @@
 		<?php } ?>	
 		</div>
 		<?php if(count($countries) > 0){ ?>
-		<div class="countries" style="display: none;">
+		<div class="countries span4" style="display: none;">
 			<ul class="nav nav-list">
 				<li class="nav-header"><?php echo JText::_('MOD_KM_FILTER_COUNTRIES'); ?></li>
 			<?php foreach($countries as $country) { ?>

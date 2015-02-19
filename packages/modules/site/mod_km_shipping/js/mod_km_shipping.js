@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
 
-	jQuery('#region').change(function(){
+	jQuery('#shipping_region').change(function(){
 		var region_id=jQuery(this).val();
 		jQuery.ajax({
 			url: URI_ROOT+'index.php?option=com_ksenmart&task=profile.getDataShippingModule&view=profile&tmpl=ksenmart',

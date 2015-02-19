@@ -13,9 +13,11 @@ if(!class_exists('KsenMartModelProfile')){
 
 require_once(dirname(__file__) . '/helper.php');
 
-$shippings   = ModKSMShippingHelper::getShippings();
 $session     = JFactory::getSession();
-$user_region = $session->get('user_region', KSUsers::getUser()->region_id);
+
+$app = JFactory::getApplication();
+$user = KSUsers::getUser();
+$user_region = (int)$app->getUserState('com_ksenmart.region_id', $user->region_id);
 $model       = new KsenMartModelProfile();
 $km_params   = JComponentHelper::getParams('com_ksenmart');
 
