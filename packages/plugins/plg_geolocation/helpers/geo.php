@@ -1,10 +1,10 @@
 <?php
 /***************************************************************************\
-| Sypex Geo                  version 2.2.2                                  |
+| Sypex Geo                  version 2.2.3                                  |
 | (c)2006-2014 zapimir       zapimir@zapimir.net       http://sypex.net/    |
 | (c)2006-2014 BINOVATOR     info@sypex.net                                 |
 |---------------------------------------------------------------------------|
-|     created: 2006.10.17 18:33              modified: 2014.05.29 01:01     |
+|     created: 2006.10.17 18:33              modified: 2014.06.20 18:57     |
 |---------------------------------------------------------------------------|
 | Sypex Geo is released under the terms of the BSD license                  |
 |   http://sypex.net/bsd_license.txt                                        |
@@ -123,7 +123,7 @@ class SxGeo {
 			while ($ipn >= substr($str, $min * $this->block_len, 3) && ++$min < $max){};
 		}
 		else {
-			return hexdec(bin2hex(substr($str, $min * $this->block_len + 3 , 3)));
+			$min++;
 		}
 		return hexdec(bin2hex(substr($str, $min * $this->block_len - $this->id_len, $this->id_len)));
 	}

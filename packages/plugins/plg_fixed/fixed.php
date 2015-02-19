@@ -43,7 +43,6 @@ class plgKMDiscountFixed extends KMDiscountPlugin {
 		return false;
 		$db = JFactory::getDBO();
 		$discount_set_value = 0;
-		
 		foreach ($cart->items as & $item) {
 			$query = $db->getQuery(true);
 			$query->select('params,sum')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="kmplugins" version="2.5.0" method="upgrade">
+    <name>KSM_PLUGIN_MODULES</name>
+    <creationDate>September 2014</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0</version>
+    <description>KSM_PLUGIN_MODULES_DESCRIPTION</description>
+
+    <files>
+		<filename plugin="modules">modules.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+		<folder>assets</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    
+    <languages folder="languages">
+		<language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_modules.sys.ini</language>
+    </languages>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+				<field name="modules" type="ksmodules" />
+			</fieldset>
+		</fields>
+	</config>		
+</extension>

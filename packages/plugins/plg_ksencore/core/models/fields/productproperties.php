@@ -6,7 +6,10 @@ class JFormFieldproductproperties extends JFormField {
 	protected $type = 'ProductProperties';
 	
 	public function getInput() {
+		$app = JFactory::getApplication();
 		$db = JFactory::getDbo();
+        $active_properties = $app->input->get('active_properties', array(), 'array');
+        JArrayHelper::toInteger($categories);		
 		$html = '';
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__ksenmart_properties');
@@ -61,7 +64,7 @@ class JFormFieldproductproperties extends JFormField {
 				case 'select':
 					$html.= '	<a href="#" class="sh show"></a>';
 					$html.= '</div>';
-					$html.= '<ul>';
+					$html.= '<ul class="property-ul" property_id="'.$property->id.'" style="'.(in_array($property->id, $active_properties) ? 'display:block;' : '').'">';
 					if (property_exists($property, 'values')) {
 						
 						foreach ($property->values as $property_value) {

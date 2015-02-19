@@ -156,7 +156,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 		$shipping->params = json_decode($shipping->params, true);
 		if (!isset($shipping->params[$cart->region_id])) 
 		return;
-		$cart->shipping_sum = $shipping->params[$cart->region_id];
+		$cart->shipping_sum = (float)$shipping->params[$cart->region_id];
 		$cart->shipping_sum_val = KSMPrice::showPriceWithTransform($cart->shipping_sum);
 		$cart->total_sum+= $cart->shipping_sum;
 		$cart->total_sum_val = KSMPrice::showPriceWithTransform($cart->total_sum);
@@ -183,7 +183,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 		$shipping->params = json_decode($shipping->params, true);
 		if (!isset($shipping->params[$order->region_id])) 
 		return;
-		$order->costs['shipping_cost'] = $shipping->params[$order->region_id];
+		$order->costs['shipping_cost'] = (float)$shipping->params[$order->region_id];
 		$order->costs['shipping_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['shipping_cost']);
 		$order->costs['total_cost']+= $order->costs['shipping_cost'];
 		$order->costs['total_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['total_cost']);
