@@ -2,7 +2,7 @@
 
 KSSystem::import('helpers.mainhelper');
 class KSMWalletone extends KSMainhelper {
-	private static $_fields = [];
+	private static $_fields = array();
 
     public static function _setFields(array $data){
     	if(!empty($data)){
@@ -15,7 +15,7 @@ class KSMWalletone extends KSMainhelper {
 
     public static function _getFields(){
     	if(empty(self::$_fields)){
-    		self::$_fields = [];
+    		self::$_fields = array();
     	}
     	return self::$_fields;
     }
@@ -61,30 +61,30 @@ class KSMWalletone extends KSMainhelper {
         return false;
     }
 
-    public static function getPayment($id, $pluginType, array $conditions = []){
+    public static function getPayment($id, $pluginType, array $conditions = array()){
     	JTable::addIncludePath(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'tables');
         $table      = JTable::getInstance('Payments', 'KsenMartTable');
-        $conditions = array_merge(['id' => $id, 'published' => 1, 'type' => $pluginType], $conditions);
+        $conditions = array_merge(array('id' => $id, 'published' => 1, 'type' => $pluginType), $conditions);
         
         $table->load($conditions);
         $payment = $table->getProperties();
         return JArrayHelper::toObject($payment);
     }
 
-    public static function getShipping($id, $pluginType, array $conditions = []){
+    public static function getShipping($id, $pluginType, array $conditions = array()){
 		JTable::addIncludePath(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'tables');
 		$table      = JTable::getInstance('Shippings', 'KsenMartTable');
-		$conditions = array_merge(['id' => $id, 'published' => 1, 'type' => $pluginType], $conditions);
+		$conditions = array_merge(array('id' => $id, 'published' => 1, 'type' => $pluginType), $conditions);
 
 		$table->load($conditions);
 		$shipping = $table->getProperties();
 		return JArrayHelper::toObject($shipping);
     }
 
-    public static function getOrder($id, array $conditions = []){
+    public static function getOrder($id, array $conditions = array()){
 		JTable::addIncludePath(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'tables');
 		$table      = JTable::getInstance('Orders', 'KsenMartTable');
-		$conditions = array_merge(['id' => $id], $conditions);
+		$conditions = array_merge(array('id' => $id), $conditions);
 
 		$table->load($conditions);
 		$order                    = $table->getProperties();
@@ -94,10 +94,10 @@ class KSMWalletone extends KSMainhelper {
 		return JArrayHelper::toObject($order);
     }
 
-    public static function getRegion($id, array $conditions = []){
+    public static function getRegion($id, array $conditions = array()){
 		JTable::addIncludePath(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'tables');
 		$table      = JTable::getInstance('Regions', 'KsenMartTable');
-		$conditions = array_merge(['id' => $id], $conditions);
+		$conditions = array_merge(array('id' => $id), $conditions);
 
 		$table->load($conditions);
 		$region = $table->getProperties();
@@ -105,10 +105,10 @@ class KSMWalletone extends KSMainhelper {
 		return JArrayHelper::toObject($region);
     }
 
-    public static function getCountry($id, array $conditions = []){
+    public static function getCountry($id, array $conditions = array()){
 		JTable::addIncludePath(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'tables');
 		$table      = JTable::getInstance('Countries', 'KsenMartTable');
-		$conditions = array_merge(['id' => $id], $conditions);
+		$conditions = array_merge(array('id' => $id), $conditions);
 
 		$table->load($conditions);
 		$country = $table->getProperties();
