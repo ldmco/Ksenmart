@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="plugin" group="kmpayment" version="2.5.0" method="upgrade">
     <name>KSM_PAYMENT_WALLETONE</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <creationDate>December 2014</creationDate>
     <author>Kirill Bereza</author>
     <authorEmail>takt.bereza@gmail.com</authorEmail>

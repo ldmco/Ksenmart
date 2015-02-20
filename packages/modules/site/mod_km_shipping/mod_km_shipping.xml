@@ -6,12 +6,13 @@
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
     <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <description>COM_KSENMART_DESC</description>
     <creationDate>10 March 2014</creationDate>
     <creationDate>March 2014</creationDate>
 	<description>Способы доставки и оплаты KsenMart</description>
-	<files>
+	
+    <files>
         <folder>tmpl</folder>
         <folder>js</folder>
 		<filename module="mod_km_shipping">mod_km_shipping.php</filename>
@@ -20,6 +21,7 @@
 		<filename>index.html</filename>
         <folder>sql</folder>
     </files>
+    
     <languages folder="language">
 		<language tag="ru-RU">ru-RU.mod_km_shipping.ini</language>
 		<language tag="ru-RU">ru-RU.mod_km_shipping.sys.ini</language>
