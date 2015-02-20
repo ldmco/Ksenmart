@@ -1,10 +1,7 @@
 <?php defined('_JEXEC') or die;
 
-if(!class_exists('KSMainhelper')) { 
-    require (JPATH_ROOT . DS . 'plugins' . DS . 'system' . DS . 'ksencore' . DS . 'core' . DS . 'helpers' . DS . 'mainhelper.php');
-}
-
-class KSMProducts extends KSMainhelper  {
+KSSystem::import('helpers.corehelper');
+class KSMProducts extends KSCoreHelper {
     
 	private $ext_name_com   = 'com_ksenmart';
     private $ext_prefix     = 'KSM';
@@ -87,7 +84,7 @@ class KSMProducts extends KSMainhelper  {
         }
         $ext_name = $old_ext_name;
 		
-		self::onExecuteAfter('getProduct','KSM','Products', array(&$row));
+		self::onExecuteAfter(array(&$row));
 		
         return $row;
     }

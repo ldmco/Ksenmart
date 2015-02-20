@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die;
 
-KSSystem::import('helpers.mainhelper');
-class KSMWalletone extends KSMainhelper {
+KSSystem::import('helpers.corehelper');
+class KSMWalletone extends KSCoreHelper {
 	private static $_fields = array();
 
     public static function _setFields(array $data){

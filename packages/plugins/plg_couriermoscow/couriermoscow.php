@@ -1,37 +1,30 @@
 <?php defined('_JEXEC') or die('Restricted access');
 
 if (!class_exists('KSMShippingPlugin')) {
-	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmshippingplugin.php');
+    require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmshippingplugin.php');
 }
 
 class plgKMShippingCourierMoscow extends KSMShippingPlugin {
-	
-	var $_params = array(
-		'city' => 0,
-		'area' => 0
-	);
-	
-	public function __construct(&$subject, $config) {
-		parent::__construct($subject, $config); 	}
-	
-	public function onDisplayParamsForm($name = '', $params = null) {
-		if ($name != $this->_name) 
-		return;
-		if (empty($params)) $params = $this->_params;
-		$currency_code = $this->getDefaultCurrencyCode();
-		$html = '';
-		$html.= '<div class="set">';
-		$html.= '	<h3 class="headname">' . JText::_('ksm_shipping_algorithm') . '</h3>';
-		$html.= '	<div class="row">';
-		$html.= '		<label class="inputname">' . JText::_('ksm_shipping_couriermoscow_city_price') . '</label>';
-		$html.= '		<input type="text" class="inputbox" name="jform[params][city]" value="' . $params['city'] . '">';
-		$html.= '	</div>';
-		$html.= '	<div class="row">';
-		$html.= '		<label class="inputname">' . JText::_('ksm_shipping_couriermoscow_area_price') . '</label>';
-		$html.= '		<input type="text" class="inputbox" name="jform[params][area]" value="' . $params['area'] . '">';
-		$html.= '	</div>';
-		$html.= '</div>';
-		$html.= '
+    
+    public $_params = array('city' => 0, 'area' => 0);
+    
+    public function onDisplayParamsForm($name = '', $params = null) {
+        if ($name != $this->_name) return;
+        if (empty($params)) $params = $this->_params;
+        $currency_code = $this->getDefaultCurrencyCode();
+        $html = '';
+        $html.= '<div class="set">';
+        $html.= '	<h3 class="headname">' . JText::_('ksm_shipping_algorithm') . '</h3>';
+        $html.= '	<div class="row">';
+        $html.= '		<label class="inputname">' . JText::_('ksm_shipping_couriermoscow_city_price') . '</label>';
+        $html.= '		<input type="text" class="inputbox" name="jform[params][city]" value="' . $params['city'] . '">';
+        $html.= '	</div>';
+        $html.= '	<div class="row">';
+        $html.= '		<label class="inputname">' . JText::_('ksm_shipping_couriermoscow_area_price') . '</label>';
+        $html.= '		<input type="text" class="inputbox" name="jform[params][area]" value="' . $params['area'] . '">';
+        $html.= '	</div>';
+        $html.= '</div>';
+        $html.= '
 		<script>
 		jQuery(document).ready(function(){
 			removeCountry(1);
@@ -44,59 +37,49 @@ class plgKMShippingCourierMoscow extends KSMShippingPlugin {
 		.ksm-slidemodule-countries a,.ksm-slidemodule-regions a {display:none;}
 		</style>
 		';
-		
-		return $html;
-	}
-	
-	function onAfterExecuteKSMCartGetcart($model, $cart = null) {
-		if (empty($cart)) 
-		return;
-		if (empty($cart->shipping_id)) 
-		return;
-		$app = JFactory::getApplication();
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $cart->shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
-		$db->setQuery($query);
-		$shipping = $db->loadObject();
-		if (empty($shipping)) 
-		return;
-		if (empty($cart->region_id)) 
-		return;
-		if (!$this->checkRegion($shipping->regions, $cart->region_id)) 
-		return;
-		$shipping->params = json_decode($shipping->params, true);
-		$distance = (int)$app->getUserStateFromRequest('com_ksenmart.distance', 'distance', 0);
-		$cart->shipping_sum = $shipping->params['city'] + $shipping->params['area'] * $distance;
-		$cart->shipping_sum_val = KSMPrice::showPriceWithTransform($cart->shipping_sum);
-		$cart->total_sum+= $cart->shipping_sum;
-		$cart->total_sum_val = KSMPrice::showPriceWithTransform($cart->total_sum);
-		
-		return;
-	}
-	
-	public function onAfterDisplayKSMCartDefault_shipping($view, &$tpl = null, &$html) {
-		if (empty($view->cart)) 
-		return;
-		if (empty($view->cart->shipping_id)) 
-		return;
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select('
+        
+        return $html;
+    }
+    
+    function onAfterExecuteKSMCartGetcart($model, $cart = null) {
+        if (empty($cart)) return;
+        if (empty($cart->shipping_id)) return;
+        $app = JFactory::getApplication();
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $cart->shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
+        $db->setQuery($query);
+        $shipping = $db->loadObject();
+        if (empty($shipping)) return;
+        if (empty($cart->region_id)) return;
+        if (!$this->checkRegion($shipping->regions, $cart->region_id)) return;
+        $shipping->params = json_decode($shipping->params, true);
+        $distance = (int)$app->getUserStateFromRequest('com_ksenmart.distance', 'distance', 0);
+        $cart->shipping_sum = $shipping->params['city'] + $shipping->params['area'] * $distance;
+        $cart->shipping_sum_val = KSMPrice::showPriceWithTransform($cart->shipping_sum);
+        $cart->total_sum+= $cart->shipping_sum;
+        $cart->total_sum_val = KSMPrice::showPriceWithTransform($cart->total_sum);
+        
+        return;
+    }
+    
+    public function onAfterDisplayKSMCartDefault_shipping($view, &$tpl = null, &$html) {
+        if (empty($view->cart)) return;
+        if (empty($view->cart->shipping_id)) return;
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->select('
                 s.id,
                 s.params,
                 s.regions
             ')->from('#__ksenmart_shippings AS s')->where('s.id=' . $view->cart->shipping_id)->where('s.type=' . $db->quote($this->_name))->where('s.published=1');
-		$db->setQuery($query);
-		$shipping = $db->loadObject();
-		if (empty($shipping)) 
-		return;
-		if (empty($view->cart->region_id)) 
-		return;
-		if (!$this->checkRegion($shipping->regions, $view->cart->region_id)) 
-		return;
-		
-		$html.= '
+        $db->setQuery($query);
+        $shipping = $db->loadObject();
+        if (empty($shipping)) return;
+        if (empty($view->cart->region_id)) return;
+        if (!$this->checkRegion($shipping->regions, $view->cart->region_id)) return;
+        
+        $html.= '
 		<div class="default_shipping-plugin-renew">
 			<script>
 			
@@ -180,53 +163,48 @@ class plgKMShippingCourierMoscow extends KSMShippingPlugin {
 			</script>
 		</div>
 		';
-	}
-	
-	public function onAfterExecuteKSMOrdersGetorder($model, $order = null) {
-		if (empty($order)) 
-		return;
-		if (empty($order->shipping_id)) 
-		return;
-		$app = JFactory::getApplication();
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $order->shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
-		$db->setQuery($query);
-		$shipping = $db->loadObject();
-		if (empty($shipping)) 
-		return;
-		if (empty($order->region_id)) 
-		return;
-		if (!$this->checkRegion($shipping->regions, $order->region_id)) 
-		return;
-		$shipping->params = json_decode($shipping->params, true);
-		$distance = (int)$app->getUserStateFromRequest('com_ksenmart.distance', 'distance', 0);
-		$order->costs['shipping_cost'] = $shipping->params['city'] + $shipping->params['area'] * $distance;
-		$order->costs['shipping_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['shipping_cost']);
-		$order->costs['total_cost']+= $order->costs['shipping_cost'];
-		$order->costs['total_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['total_cost']);
-		
-		return;
-	}
-	
-	public function onAfterGetKSMFormInputOrderAddress_fields($form, $field, $html) {
-		$region_id = $form->getValue('region_id');
-		$shipping_id = $form->getValue('shipping_id');
-		
-		if (empty($shipping_id)) 
-		return;
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
-		$db->setQuery($query);
-		$shipping = $db->loadObject();
-		if (empty($shipping)) 
-		return;
-		if (empty($region_id)) 
-		return;
-		if (!$this->checkRegion($shipping->regions, $region_id)) 
-		return;
-		$html.= '
+    }
+    
+    public function onAfterExecuteKSMOrdersGetorder($model, $order = null) {
+        $this->onAfterExecuteHelperKSMOrdersGetOrder($order);
+    }
+    
+    public function onAfterExecuteHelperKSMOrdersGetOrder($order = null) {
+        if (empty($order)) return;
+        if (empty($order->shipping_id)) return;
+        $app = JFactory::getApplication();
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $order->shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
+        $db->setQuery($query);
+        $shipping = $db->loadObject();
+        if (empty($shipping)) return;
+        if (empty($order->region_id)) return;
+        if (!$this->checkRegion($shipping->regions, $order->region_id)) return;
+        $shipping->params = json_decode($shipping->params, true);
+        $distance = (int)$app->getUserStateFromRequest('com_ksenmart.distance', 'distance', 0);
+        $order->costs['shipping_cost'] = $shipping->params['city'] + $shipping->params['area'] * $distance;
+        $order->costs['shipping_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['shipping_cost']);
+        $order->costs['total_cost']+= $order->costs['shipping_cost'];
+        $order->costs['total_cost_val'] = KSMPrice::showPriceWithTransform($order->costs['total_cost']);
+        
+        return;
+    }
+    
+    public function onAfterGetKSMFormInputOrderAddress_fields($form, $field, $html) {
+        $region_id = $form->getValue('region_id');
+        $shipping_id = $form->getValue('shipping_id');
+        
+        if (empty($shipping_id)) return;
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->select('id,params,regions')->from('#__ksenmart_shippings')->where('id=' . $shipping_id)->where('type=' . $db->quote($this->_name))->where('published=1');
+        $db->setQuery($query);
+        $shipping = $db->loadObject();
+        if (empty($shipping)) return;
+        if (empty($region_id)) return;
+        if (!$this->checkRegion($shipping->regions, $region_id)) return;
+        $html.= '
 		<script>
 		
 			KsenmartMap.MoscowParams={
@@ -318,7 +296,7 @@ class plgKMShippingCourierMoscow extends KSMShippingPlugin {
 
 		</script>
 		';
-		
-		return $html;
-	}
+        
+        return $html;
+    }
 }
