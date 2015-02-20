@@ -24,7 +24,7 @@
         </sql>
     </install>
     
-    <languages folder="languages">
+    <languages folder="language">
 		<language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_modules.sys.ini</language>
     </languages>
 	

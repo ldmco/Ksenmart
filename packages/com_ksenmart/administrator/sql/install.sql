@@ -139,7 +139,8 @@ CREATE TABLE IF NOT EXISTS `#__ksenmart_exportimport_types` (
 
 INSERT INTO `#__ksenmart_exportimport_types` (`id`, `name`) VALUES
 (1, 'import_from_csv'),
-(2, 'export_to_yandexmarket');
+(2, 'export_to_yandexmarket'),
+(3, 'export_to_csv');
 
 CREATE TABLE IF NOT EXISTS `#__ksenmart_manufacturers` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
