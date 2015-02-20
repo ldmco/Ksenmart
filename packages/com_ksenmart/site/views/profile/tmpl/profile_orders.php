@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die; ?>
 <div class="items">
-	<?php if (count($this->orders)>0) { ?>
+	<?php if (count($this->orders) > 0): ?>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -13,14 +13,14 @@
 		</thead>
 		<tbody>
 		<?php $kk = 0; ?>
-        <?php foreach($this->orders as $order) { ?>
+        <?php foreach($this->orders as $order): ?>
             <?php $this->order = $order; ?>
             <?php $kk++; ?>
 			<tr data-count="<?php echo $kk; ?>" class="order_tr">
 				<td><a href="javascript:void(0);">Заказ № <?php echo $this->order->id; ?></a></td>
 				<td><?php echo $this->order->shipping_title; ?></td>
 				<td><?php echo JText::_($this->order->status_name); ?></td>
-				<td><?php echo $this->order->cost_val; ?></td>
+				<td><?php echo $this->order->costs['total_cost_val']; ?></td>
 				<td><?php echo KSSystem::formatCommentDate($this->order->date_add); ?></td>
 			</tr>
 			<tr class="profile_order noTransition order_dropdows_<?php echo $kk; ?>" style="display: none;">
@@ -28,12 +28,12 @@
 					<?php echo $this->loadTemplate('orders_item'); ?>
 				</td>
 			</tr>
-		<?php } ?>
+		<?php endforeach; ?>
 		</tbody>
 	</table>
-	<?php }else{ ?>
+	<?php else: ?>
 		<div class="order-item">
 			<h2 align="center">У вас нет заказов</h2>
 		</div>
-	<?php } ?>
+	<?php endif; ?>
 </div>
