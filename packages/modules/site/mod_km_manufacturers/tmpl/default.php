@@ -1,10 +1,10 @@
 <?php defined('_JEXEC') or die; ?>
 <div class="ksm-manufacturers">
-	<ul>
+	<ul class="nav nav-list">
 		<?php foreach($manufacturers as $manufacturer): ?>
 		<li class="<?php echo ($manufacturer->selected?'active':''); ?>">
 			<span>
-			<?php if (property_exists($manufacturer,'small_img')):?>
+			<?php if (property_exists($manufacturer, 'small_img')):?>
 			<img src="<?php echo $manufacturer->small_img; ?>" alt="<?php echo $manufacturer->title; ?>">
 			<?php endif;?>
 			</span>
