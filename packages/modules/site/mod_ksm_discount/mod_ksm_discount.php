@@ -22,6 +22,6 @@ $discounts = JRequest::getVar('kmdiscounts', array());
 
 if(!empty($discounts)){
     require_once dirname(__FILE__) . DS . 'helper.php';
-	$discounts = ModKMDiscountHelper::getDiscounts($discounts);
+	$discounts = ModKMDiscountHelper::getDiscounts($discounts, $params);
     require JModuleHelper::getLayoutPath('mod_ksm_discount', $params->get('layout', 'default'));
 }

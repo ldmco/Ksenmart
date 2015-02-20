@@ -5,9 +5,9 @@ defined( '_JEXEC' ) or die;
 	<td class="comment_rate">
 		<?php for($k=1;$k<6;$k++):?>
 			<?php if (floor($this->item->rate)>=$k):?>
-				<img src="<?php echo JURI::base()?>components/com_ksenmart/css/i/c-star.png" alt="" />
+				<img src="<?php echo JURI::base()?>components/com_ksenmart/assets/images/c-star.png" alt="" />
 			<?php else:?>
-				<img src="<?php echo JURI::base()?>components/com_ksenmart/css/i/c-star2.png" alt="" />
+				<img src="<?php echo JURI::base()?>components/com_ksenmart/assets/images/c-star2.png" alt="" />
 			<?php endif;?>
 		<?php endfor;?>	
 	</td>

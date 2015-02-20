@@ -145,6 +145,9 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 	}
 	
 	function onAfterDisplayKSMCartDefault_content($view, &$tpl = null, &$html) {
+		if (!self::canDisplay())
+			return false;
+			
 		$session = JFactory::getSession();
 		$coupon_id = $session->get('ksenmart.coupon_id', null);
 		if (!empty($coupon_id)) {
@@ -165,6 +168,9 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 	}
 	
 	function onBeforeDisplayKSMCartDefault_shipping($view, &$tpl = null, &$html) {
+		if (!self::canDisplay())
+			return false;
+			
 		$document = JFactory::getDocument();
 		$session = JFactory::getSession();
 		$coupon_id = $session->get('ksenmart.coupon_id', null);
@@ -201,7 +207,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			$html.= '		<div class="controls">';
 			$html.= '		    <div class="control-group input-append">';
 			$html.= '			   <span>' . JText::_('ksm_discount_coupons_print_code_site') . '</span>';
-			$html.= '			   <input type="text" class="inputbox span12" name="discount_code" value="" />';
+			$html.= '			   <input type="text" class="inputbox span12" name="discount_code" value="" placeholder="' . JText::_('ksm_discount_coupons_placeholder') . '" />';
 			$html.= '			   <input type="button" class="st_button btn" value="' . JText::_('ksm_discount_coupons_recalculate') . '" />';
 			$html.= '		    </div>';
 			$html.= '        </div>';
@@ -468,4 +474,21 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		
 		return $content;
 	}
+	
+	function canDisplay(){
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('id,params')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('enabled=1');
+		$db->setQuery($query);
+		$discounts = $db->loadObjectList();
+		
+		$flag = false;
+		foreach ($discounts as $discount) {
+			if ($this->onCheckDiscountCountry($discount->id))
+				$flag = true;
+		}
+		
+		return $flag;
+	}
+	
 }

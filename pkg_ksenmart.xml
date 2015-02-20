@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" version="2.5" method="upgrade">
     <name>Компонент KsenMart</name>
     <packagename>ksenmart</packagename>
@@ -7,7 +7,7 @@
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.1.6-beta</version>
+    <version>1.1.7-beta</version>
     <description><![CDATA[
     	<div class="text-left" style="font-size: 15px;">
 	    	Официальный сайт <a href="https://github.com/ldmco/KsenMart" target="_blank" title="Официальный сайт KsenMart">KsenMart <span class="icon-out-2 small"></span></a>
@@ -41,11 +41,13 @@
 		<file type="plugin" id="dobeforecache" group="kmplugins">plugins/plg_dobeforecache.zip</file>
 		<file type="plugin" id="fixed" group="kmdiscount">plugins/plg_fixed.zip</file>
 		<file type="plugin" id="fixedregions" group="kmshipping">plugins/plg_fixedregions.zip</file>
-		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_kmshipping_redexpress.zip</file>
+		<file type="plugin" id="geolocation" group="kmshipping">plugins/plg_geolocation.zip</file>
+		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_redexpress.zip</file>
+		<file type="plugin" id="modules" group="kmdiscount">plugins/plg_modules.zip</file>
 		<file type="plugin" id="onorder" group="kmdiscount">plugins/plg_onorder.zip</file>
 		<file type="plugin" id="receipt" group="kmpayment">plugins/plg_receipt.zip</file>
 		<file type="plugin" id="robokassa" group="kmpayment">plugins/plg_robokassa.zip</file>
-		<file type="plugin" id="walletone" group="kmpayment">plugins/plg_kmpayment_walletone.zip</file>
+		<file type="plugin" id="walletone" group="kmpayment">plugins/plg_walletone.zip</file>
 		<file type="plugin" id="sitevisits" group="kmdiscountactions">plugins/plg_sitevisits.zip</file>
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>

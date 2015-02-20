@@ -54,7 +54,8 @@ class KsenMartControllerCart extends JControllerLegacy {
     }
     
     public function updateOrderUserField(){
-        $jinput         = JFactory::getApplication()->input;
+		$app = JFactory::getApplication();
+        $jinput         = $app->input;
         $session        = JFactory::getSession();
         $oid            = $session->get('shop_order_id', 0);
         $model          = $this->getModel('cart');
@@ -70,7 +71,7 @@ class KsenMartControllerCart extends JControllerLegacy {
         
         $fields->{$name} = $field_value;
 
-        $session->set('com_ksenmart.'.$type.'[' . $name . ']', $field_value);
+        $app->setUserState('com_ksenmart.'.$type.'[' . $name . ']', $field_value);
     }
     
     public function updateOrderField(){

@@ -15,7 +15,13 @@ class modKsenmartCategoriesHelper {
                 $active_id = $categories[0];
                 return $active_id;
             } else return false;
-        } else return false;
+        } elseif($view == 'product') {
+			$product_id = JRequest::getVar('id', 0);
+			$active_id = self::getProductCategory($product_id);	
+			if (!empty($active_id))
+				return $active_id;
+			else return false;
+		} else return false;
     }
     
     function get_path($active_id) {
@@ -113,4 +119,58 @@ class modKsenmartCategoriesHelper {
         
         return $this->tree;
     }
+	
+    function getDefaultCategory($product_id) {
+		$db = JFactory::getDBO();
+        $sql = $db->getQuery(true);
+        $sql->select('category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id))->where('pc.is_default=1');
+        $db->setQuery($sql);
+        $category = $db->loadResult();
+        
+        return $category;
+    }
+    
+    function getProductCategories($product_id) {
+		$db = JFactory::getDBO();
+        $sql = $db->getQuery(true);
+        $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id));
+        $db->setQuery($sql);
+        $categories = $db->loadObjectList();
+        
+        return $categories;
+    }	
+	
+    function getProductCategory($product_id) {
+        $final_categories = array();
+        $parent_ids = array();
+        $default_category = self::getDefaultCategory($product_id);
+        $product_categories = self::getProductCategories($product_id);
+        
+        foreach ($product_categories as $product_category) {
+            if (!empty($default_category)) {
+                $id_default_way = false;
+            } else {
+                $id_default_way = true;
+            }
+            $categories = array();
+            $parent = $product_category->category_id;
+            
+            while ($parent != 0) {
+                if ($parent == $default_category) {
+                    $id_default_way = true;
+                }
+                $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
+                $categories[] = $category->id;
+                $parent = $category->parent_id;
+            }
+            if ($id_default_way && count($categories) > count($final_categories)) {
+                $final_categories = $categories;
+            }
+        }
+        
+        $category_id = count($final_categories) ? $final_categories[0] : 0;
+        
+        return $category_id;
+    }
+	
 }

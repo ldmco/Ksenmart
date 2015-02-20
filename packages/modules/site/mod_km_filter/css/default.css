@@ -46,8 +46,8 @@
     z-index: 2;
 }
 
-.mod_ksm_filter .property  li.item_img {
-    padding: 3px 10px;
+.properties .display-inline li.item_img {
+    padding: 3px 10px 3px 0px;
 }
 
 .mod_ksm_filter .property  .nav li.active a {
@@ -70,8 +70,9 @@
 .mod_ksm_filter .property  .nav li.active a label:before{
     position: absolute;
     content: "x";
-    top: -5px;
-    right: -10px;
+	top: -8px;
+	right: -12px;
+	font-size: 12px;
 }
 
 .mod_ksm_filter .property  .image_item .delta{
@@ -126,9 +127,7 @@
     color: #333;
     font-size: 12px;
 }
-
-.mod_ksm_filter .item input[type="checkbox"] {
-	visibility: hidden;
-	width:0px;
-	height:0px;
+.filter_box.display-inline li {
+padding: 3px 30px 0 0;
+display: inline-block!important;
 }

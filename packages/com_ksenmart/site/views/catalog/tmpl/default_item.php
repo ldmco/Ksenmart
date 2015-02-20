@@ -1,27 +1,20 @@
 <?php defined('_JEXEC') or die(); ?>
 <?php
     $flag = true;
-    //print_r($this->params);
-    foreach($this->product->properties as $prop){
-       if($prop->type != 'text'){
-           if(count($prop->values) > 0){
-               $flag = false;
+	foreach($this->product->properties as $prop){
+       if($prop->type == 'select' && ($prop->view == 'select' || $prop->view == 'checkbox' || $prop->view == 'radio')){
+           if(count($prop->values) > 1){
+    	       $flag = false;
                break;
-           }
+    	   }
        }
-    }
+	}
 ?>
 <li class="span3 item noTransition" data-id="<?php echo $this->product->id; ?>">
     <div class="thumbnail">
         <form method="post" action="<?php echo $this->product->add_link_cart; ?>" class="clearfix">        
             <div class="img">
-                <a href="<?php echo $this->product->link; ?>" title="<?php echo $this->product->title; ?>">
-                    <img src="<?php echo $this->product->small_img; ?>" alt="<?php echo $this->product->title; ?>" class="span12" />
-                </a>
-                <?php echo ($this->product->hot == 1?'<span class="hit"></span>':'')?>
-                <?php echo ($this->product->recommendation == 1?'<span class="super"></span>':''); ?>
-                <?php echo ($this->product->new == 1?'<span class="new"></span>':''); ?>
-                <?php echo ($this->product->promotion == 1?'<span class="act"></span>':''); ?>
+				<?php echo $this->loadTemplate('item_image'); ?>
             </div>
             <div class="name">
                 <div class="pos_relative">

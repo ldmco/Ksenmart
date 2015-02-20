@@ -28,6 +28,12 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getInput('published'); ?>
 						</div>
 					</div>	
+					<div class="row">
+						<h3><?php echo $this->form->getLabel('introcontent'); ?></h3>
+					</div>
+					<div class="row">
+						<?php echo $this->form->getInput('introcontent'); ?>
+					</div>						
 					<div class="params-set">
 						<?php echo $this->paramsform;?>
 					</div>	

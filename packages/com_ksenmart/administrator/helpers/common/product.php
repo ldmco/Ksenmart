@@ -104,24 +104,18 @@ class KSMProducts extends KSCoreHelper {
         if ($pid > 0) {
             $db = JFactory::getDBO();
 
-            $query = $db->getQuery(true);
-            $query
-                ->select('category_id')
-                ->from('#__ksenmart_products_categories')
-                ->where('product_id=' . $db->q($pid))
-                ->where('is_default=1')
-            ;
-            $db->setQuery($query, 0, 1);
-            $cid = $db->loadResult();
+            $cid = self::getProductCategory($pid);	
 
             $query = $db->getQuery(true);
             $query
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id<' . $db->q($pid))
-                ->where('category_id=' . $db->q($cid))
                 ->order('product_id DESC')
             ;
+			if (!empty($cid))
+				$query->where('category_id=' . $db->q($cid));
+
             $db->setQuery($query, 0, 1);
             $prev_id = $db->loadResult();
 
@@ -130,23 +124,25 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MAX(product_id)')
                     ->from('#__ksenmart_products_categories')
-                    ->where('category_id=' . $db->q($cid))
-                    ->where('is_default=1')
                 ;
-                $db->setQuery($query, 0, 1);
+				if (!empty($cid))
+					$query->where('category_id=' . $db->q($cid));
+ 			    $db->setQuery($query, 0, 1);
                 $prev_id = $db->loadResult();
             }
+			if (empty($prev_id))
+				$prev_id = $pid;
 
             $query = $db->getQuery(true);
             $query
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id>' . $db->q($pid))
-                ->where('category_id=' . $db->q($cid))
-                ->where('is_default=1')
                 ->order('product_id ASC')
             ;
-            $db->setQuery($query, 0, 1);
+			if (!empty($cid))
+			   $query->where('category_id=' . $db->q($cid));
+			$db->setQuery($query, 0, 1);
             $next_id = $db->loadResult();
 
             if (empty($next_id)) {
@@ -154,12 +150,15 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MIN(product_id)')
                     ->from('#__ksenmart_products_categories')
-                    ->where('category_id=' . $db->q($cid))
-                    ->where('is_default=1')
                 ;
+				if (!empty($cid))
+					$query->where('category_id=' . $db->q($cid));				
                 $db->setQuery($query, 0, 1);
                 $next_id = $db->loadResult();
             }
+			if (empty($next_id))
+				$next_id = $pid;
+				
             $prev_link = self::generateProductLink($prev_id);
             $next_link = self::generateProductLink($next_id);
             
@@ -346,7 +345,7 @@ class KSMProducts extends KSCoreHelper {
                 foreach ($values as $value_id) {
                     $query = $db->getQuery(true);
                     $query->select('price')->from('#__ksenmart_product_properties_values');
-                    $query->where('property_id=' . $property_id)->where('value_id=' . $value_id);
+                    $query->where('property_id=' . $property_id)->where('value_id=' . $value_id)->where('product_id=' . $product_id);
                     $db->setQuery($query);
                     $under_price = $db->loadResult();
                     if ($under_price && !empty($under_price)) {
@@ -430,8 +429,62 @@ class KSMProducts extends KSCoreHelper {
                     pr.id
                 ')->from('#__ksenmart_products_relations AS pr')->where('pr.relation_type="set"')->where('pr.product_id=' . $db->escape($pid));
             $db->setQuery($query);
-            $rows = $db->loadResultArray();
+            $rows = $db->loadColumn();
         }
         return $rows;
     }
+	
+    function getDefaultCategory($product_id) {
+		$db = JFactory::getDBO();
+        $sql = $db->getQuery(true);
+        $sql->select('category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id))->where('pc.is_default=1');
+        $db->setQuery($sql);
+        $category = $db->loadResult();
+        
+        return $category;
+    }
+    
+    function getProductCategories($product_id) {
+		$db = JFactory::getDBO();
+        $sql = $db->getQuery(true);
+        $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id));
+        $db->setQuery($sql);
+        $categories = $db->loadObjectList();
+        
+        return $categories;
+    }	
+	
+    function getProductCategory($product_id) {
+        $final_categories = array();
+        $parent_ids = array();
+        $default_category = self::getDefaultCategory($product_id);
+        $product_categories = self::getProductCategories($product_id);
+        
+        foreach ($product_categories as $product_category) {
+            if (!empty($default_category)) {
+                $id_default_way = false;
+            } else {
+                $id_default_way = true;
+            }
+            $categories = array();
+            $parent = $product_category->category_id;
+            
+            while ($parent != 0) {
+                if ($parent == $default_category) {
+                    $id_default_way = true;
+                }
+                $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
+                $categories[] = $category->id;
+                $parent = $category->parent_id;
+            }
+            if ($id_default_way && count($categories) > count($final_categories)) {
+                $final_categories = $categories;
+            }
+        }
+        
+        $category_id = count($final_categories) ? $final_categories[0] : 0;
+        
+        return $category_id;
+    }
+	
 }

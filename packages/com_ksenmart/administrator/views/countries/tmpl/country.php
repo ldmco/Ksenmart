@@ -45,6 +45,10 @@ JHtml::_('behavior.tooltip');
 						<?php echo $this->form->getInput('code'); ?>	
 					</div>
 					<div class="row">
+						<?php echo $this->form->getLabel('phone_code'); ?>
+						<?php echo $this->form->getInput('phone_code'); ?>	
+					</div>					
+					<div class="row">
 						<h3><?php echo $this->form->getLabel('content'); ?></h3>
 					</div>
 					<div class="row">

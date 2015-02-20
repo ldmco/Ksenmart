@@ -15,6 +15,14 @@ class KsenMartControllerExportImport extends KsenMartController
 		$this->setRedirect('index.php?option=com_ksenmart&view=exportimport&layout=import_from_csv_parse&type=import_from_csv');
 		return true;
 	}
+	
+	function export_csv()
+	{
+		$data = JRequest::getVar('jform', array(), 'post', 'array');
+		$model=$this->getModel('exportimport');
+		$model->getExportCSV($data);
+		JFactory::getApplication()->close();	
+	}
 
 	function save_yandexmarket()
 	{

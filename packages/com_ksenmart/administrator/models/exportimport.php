@@ -741,4 +741,147 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         $this->onExecuteBefore('getYMFormData', array(&$data));
         return $data;
     }
+	
+	function getExportCSV($data){
+		$categories = isset($data['categories']) ? $data['categories'] : array();
+		$header = array(
+			JText::_('ksm_exportimport_product_name'),
+			JText::_('ksm_exportimport_product_parent'),
+			JText::_('ksm_exportimport_product_category'),
+			JText::_('ksm_exportimport_product_childs_group'),
+			JText::_('ksm_exportimport_product_price'),
+			JText::_('ksm_exportimport_product_promotion_price'),
+			JText::_('ksm_exportimport_product_currency'),
+			JText::_('ksm_exportimport_product_code'),
+			JText::_('ksm_exportimport_product_unit'),
+			JText::_('ksm_exportimport_product_packaging'),
+			JText::_('ksm_exportimport_product_in_stock'),
+			JText::_('ksm_exportimport_product_promotion'),
+			JText::_('ksm_exportimport_product_manufacturer'),
+			JText::_('ksm_exportimport_product_country'),
+			JText::_('ksm_exportimport_product_relative'),
+			JText::_('ksm_exportimport_product_photos')
+		);
+		$cats_tree = array();
+        $query = $this->_db->getQuery(true);
+        $query->select('id,title,parent_id')->from('#__ksenmart_categories');
+        $this->_db->setQuery($query);
+        $cats = $this->_db->loadObjectList();
+		foreach($cats as $cat){
+			$cat_tree = array($cat->title);
+			$parent = $cat->parent_id;
+			while ($parent != 0) {
+				$query = $this->_db->getQuery(true);
+				$query->select('title,parent_id')->from('#__ksenmart_categories')->where('id=' . $parent);
+				$this->_db->setQuery($query);
+				$category = $this->_db->loadObject();
+				$cat_tree[] = $category->title;
+				$parent = $category->parent_id;
+			}
+			$cat_tree = array_reverse($cat_tree);
+			$cats_tree[$cat->id] = implode(':', $cat_tree);
+		}
+        $query = $this->_db->getQuery(true);
+        $query->select('id,title')->from('#__ksenmart_properties')->where('published = 1');
+        $this->_db->setQuery($query);
+        $properties = $this->_db->loadObjectList();
+		foreach($properties as $property){
+			$header[] = $property->title;
+		}
+		$f = fopen(JPATH_COMPONENT.'/tmp/export.csv', 'w');
+		fputcsv($f, $header, ';');
+		
+        $query = $this->_db->getQuery(true);
+        $query->select('p.*,m.title as manufacturer_title,c.title as country_title')->from('#__ksenmart_products as p')->order('p.ordering');
+		$query->leftjoin('#__ksenmart_manufacturers as m on m.id = p.manufacturer');
+		$query->leftjoin('#__ksenmart_countries as c on c.id = m.country');
+		$query->select('(select title from #__ksenmart_products where id = p.parent_id) as parent_title');
+		$query->select('(select title from #__ksenmart_currencies where id = p.price_type) as currency_title');
+		$query->select('(select form1 from #__ksenmart_product_units where id = p.product_unit) as unit_title');
+        if(count($categories) > 0) {
+            $query->innerjoin('#__ksenmart_products_categories as pc on pc.product_id=p.id');
+            $query->where('pc.category_id in (' . implode(', ', $categories) . ')');
+        }
+		$query->where('p.type!='.$this->_db->quote('set'));
+        $query->group('p.id');	
+		$this->_db->setQuery($query);
+		$products = $this->_db->loadObjectList();
+		foreach($products as $product){
+			$cats = array();
+			$rels = '';
+			$photos = '';
+			
+			if($product->promotion && $product->old_price != 0) {
+				$product->promotion_price = $product->price;
+				$product->price = $product->old_price;
+			} else {
+				$product->promotion_price = 0;
+			}
+			
+			$query = $this->_db->getQuery(true);
+			$query->select('pc.category_id')->from('#__ksenmart_products_categories as pc')->where('pc.product_id='.$product->id);
+			$this->_db->setQuery($query);
+			$prd_cats = $this->_db->loadColumn();	
+			foreach($prd_cats as $prd_cat)
+				$cats[] = $cats_tree[$prd_cat];
+			$cats = implode(';', $cats);
+			
+			$query = $this->_db->getQuery(true);
+			$query->select('p.title')->from('#__ksenmart_products_relations as pr')
+			->leftjoin('#__ksenmart_products as p on p.id=pr.relative_id')
+			->where('pr.product_id='.$product->id)->where('pr.relation_type='.$this->_db->quote('relation'));
+			$this->_db->setQuery($query);
+			$rels = $this->_db->loadColumn();
+			$rels = implode(';', $rels);
+			
+			$query = $this->_db->getQuery(true);
+			$query->select('f.filename')->from('#__ksenmart_files as f')
+			->where('f.owner_id='.$product->id)->where('f.owner_type='.$this->_db->quote('product'));
+			$this->_db->setQuery($query);
+			$photos = $this->_db->loadColumn();
+			$photos = implode(';', $photos);			
+			
+			$arr = array(
+				$product->title,
+				$product->parent_title,
+				$cats,
+				$product->group_title,
+				$product->price,
+				$product->promotion_price,
+				$product->currency_title,
+				$product->product_code,
+				$product->unit_title,
+				$product->product_packaging,
+				$product->in_stock,
+				$product->promotion,
+				$product->manufacturer_title,
+				$product->country_title,
+				$rels,
+				$photos
+			);
+			foreach($properties as $property){
+				$props = array();
+				$query = $this->_db->getQuery(true);
+				$query->select('pv.title,ppv.price')->from('#__ksenmart_product_properties_values as ppv')
+				->leftjoin('#__ksenmart_property_values as pv on pv.id=ppv.value_id')
+				->where('ppv.product_id='.$product->id)->where('ppv.property_id='.$property->id);
+				$this->_db->setQuery($query);
+				$prd_props = $this->_db->loadObjectList();
+				foreach($prd_props as $prd_prop){
+					$prop = $prd_prop->title;
+					if (!empty($prd_prop->price)){
+						$prop .= '='.$prd_prop->price;
+					}
+					$props[] = $prop;
+				}
+				$arr[] = implode(';', $props);
+			}			
+			fputcsv($f, $arr, ';');
+		}
+		fclose($f);		
+		$contents = file_get_contents(JPATH_COMPONENT.'/tmp/export.csv'); 
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename="export.csv"');
+		echo $contents;		
+	}
 }

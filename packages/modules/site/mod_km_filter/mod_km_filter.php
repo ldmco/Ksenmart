@@ -21,7 +21,7 @@ $form_action    = JRoute::_('index.php?option=com_ksenmart&view=catalog&Itemid='
 
 $price_less = JRequest::getVar('price_less', $price_min);
 $price_more = JRequest::getVar('price_more', $price_max);
-$categories = JRequest::getVar('categories', array());
+$categories = $modKsenmartSearchHelper->categories;
 JArrayHelper::toInteger($categories);
 $order_type = JRequest::getVar('order_type', 'ordering');
 $order_dir  = JRequest::getVar('order_dir', 'asc');

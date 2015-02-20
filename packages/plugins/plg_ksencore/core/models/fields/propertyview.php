@@ -5,7 +5,10 @@ class JFormFieldPropertyView extends JFormField {
 	private $views = array(
 		'select',
 		'checkbox',
-		'radio'
+		'radio',
+		'text_inline',
+		'text_row',
+		'none'
 	);
 	
 	public function getInput() {

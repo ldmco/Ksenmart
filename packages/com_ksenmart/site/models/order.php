@@ -3,6 +3,8 @@
 KSSystem::import('models.modelkslist');
 class KsenMartModelOrder extends JModelKSList {
     var $_order_id = null;
+    private $_session       = null;
+    private $_user          = null;	
 
     private $_roistatFields = array(
         'id',
@@ -18,6 +20,8 @@ class KsenMartModelOrder extends JModelKSList {
 
     public function __construct() {
         parent::__construct();
+        $this->_session = JFactory::getSession();
+        $this->_user        = KSUsers::getUser();		
         $this->context = 'com_ksenmart';
     }
 
@@ -124,10 +128,6 @@ class KsenMartModelOrder extends JModelKSList {
         $address_fields  = $jinput->get('address_fields', 0, 'int');
         $customer_fields = $jinput->get('customer_fields', 0, 'int');
         
-        $session->set($this->context . '.customer_fields[name]', $name);
-        $session->set($this->context . '.customer_fields[phone]', $phone);
-        $session->set($this->context . '.customer_fields[email]', $email);
-        
         $status = 2;
         if($flag == 1){
             $status = 1;
@@ -211,15 +211,25 @@ class KsenMartModelOrder extends JModelKSList {
         }
         if($flag == 1) {
             if(!empty($email)){
-                KSMOrders::sendOrderMail($this->order_id);
+                KSMOrders::sendOrderMail($order_id);
             }
-            KSMOrders::sendOrderMail($this->order_id, true);
+            KSMOrders::sendOrderMail($order_id, true);
             $session->set('shopcart_discount', '');
             $session->set('shop_order_id', null);
         } else {
             $session->set('shop_order_id', $order_id);
         }
 
+		$cost = $prd->price * $count;
+		
+		$order_object = new stdClass();
+		$order_object->id   = $order_id;
+		$order_object->cost = $cost;
+
+		try{
+			$result = $this->_db->updateObject('#__ksenmart_orders', $order_object, 'id');
+		}catch(Exception $e){}
+			
         $this->onExecuteAfter('createOrder', array(&$order_id));
         return $order_id;
     }
@@ -331,4 +341,50 @@ class KsenMartModelOrder extends JModelKSList {
         $this->onExecuteAfter('getOrderStatus', array(&$statuses));
         return $statuses;
     }
+	
+	function getCustomerFields(){
+		$app = JFactory::getApplication();
+		$query = $this->_db->getQuery(true);
+		$query
+			->select('
+				sf.id,
+				sf.shipping_id,
+				sf.position,
+				sf.type,
+				sf.title,
+				sf.required,
+				sf.system,
+				sf.ordering
+			')
+			->from('#__ksenmart_shipping_fields AS sf')
+			->where('sf.shipping_id=0')
+			->where('sf.position=' . $this->_db->quote('customer'))
+			->where('sf.published=1')
+			->order('sf.ordering')
+		;
+		$this->_db->setQuery($query);
+		$fields = $this->_db->loadObjectList();	
+		
+		$fields_new = array();
+		$field_o    = new stdClass;		
+		foreach($fields as &$field) {
+			$user_value    = null;
+			$field->class  = $field->required == 1 ? 'required' : '';
+			
+			if(isset($this->_user->{$field->title})){
+				$user_value =  $this->_user->{$field->title};
+			}
+			
+			$field_name = $field->title;
+			if(!$field->system){
+				$field_name = $field->id;
+			}
+
+			$field->value             = $app->getUserState($this->context . '.customer_fields[' . $field_name . ']', $user_value);
+			$fields_new[$field->id]   = $field;
+			$field_o->{$field_name}   = $field->value;
+		}
+
+		return $fields_new;
+	}
 }

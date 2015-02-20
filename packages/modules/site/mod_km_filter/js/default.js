@@ -3,65 +3,73 @@ var priceTime = 1000;
 
 jQuery(document).ready(function() {
 
-    jQuery('.mod_ksm_filter .tracker').slider({
-        range: true,
-        min: price_min,
-        max: price_max,
-        step: 100,
-        values: [price_less, price_more],
-        slide: function(event, ui) {
-            jQuery('.mod_ksm_filter input[name="price_less"]').val(ui.values[0]);
-            jQuery('.mod_ksm_filter input[name="price_more"]').val(ui.values[1]);
-        },
-        stop: function(event, ui) {
-            priceTimer = false;
-            priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
-        }
-    });
+if (typeof(view) !== "undefined"){
 
-    jQuery('.mod_ksm_filter .prices input[type="text"]').keydown(function(e) {
-        keynum = e.which;
-        keynum = parseInt(keynum);
-        if (keynum == 13)
-            return false;
-        if (keynum >= 33 && keynum <= 40)
-            return true;
-        if (keynum == 8)
-            return true;
-        if (keynum == 17)
-            return true;
-        if (keynum == 45)
-            return true;
-        if (keynum == 46)
-            return true;
-        if (keynum >= 96 && keynum <= 105) {
-            keynum -= 48;
-        }
-        keychar = String.fromCharCode(keynum);
-        numcheck = /\d/;
-        var res = numcheck.test(keychar);
-        if (res) {
-            priceTimer = false;
-            priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
-        }
-        return res;
-    });
+		jQuery('.mod_ksm_filter .tracker').slider({
+			range: true,
+			min: price_min,
+			max: price_max,
+			step: 100,
+			values: [price_less, price_more],
+			slide: function(event, ui) {
+				jQuery('.mod_ksm_filter input[name="price_less"]').val(ui.values[0]);
+				jQuery('.mod_ksm_filter input[name="price_more"]').val(ui.values[1]);
+			},
+			stop: function(event, ui) {
+				priceTimer = false;
+				priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
+			}
+		});
+
+		jQuery('.mod_ksm_filter .prices input[type="text"]').keydown(function(e) {
+			keynum = e.which;
+			keynum = parseInt(keynum);
+			if (keynum == 13)
+				return false;
+			if (keynum >= 33 && keynum <= 40)
+				return true;
+			if (keynum == 8)
+				return true;
+			if (keynum == 17)
+				return true;
+			if (keynum == 45)
+				return true;
+			if (keynum == 46)
+				return true;
+			if (keynum >= 96 && keynum <= 105) {
+				keynum -= 48;
+			}
+			keychar = String.fromCharCode(keynum);
+			numcheck = /\d/;
+			var res = numcheck.test(keychar);
+			if (res) {
+				priceTimer = false;
+				priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
+			}
+			return res;
+		});
+		
+	}
 
 });
 
 jQuery(window).load(function() {
-    var form = jQuery('.mod_ksm_filter form');
-    var filter_url = URI_ROOT + 'index.php?option=com_ksenmart&view=catalog';
-    var formdata = form.serialize();
-    filter_url += '&' + formdata;
-    if (view != 'catalog') {
-        return false;
-    }
 
-    KMSetFilter(filter_url, false);
+	if (typeof(view) !== "undefined"){
+		var form = jQuery('.mod_ksm_filter form');
+		var filter_url = URI_ROOT + 'index.php?option=com_ksenmart&view=catalog';
+		var formdata = form.serialize();
+		filter_url += '&' + formdata;
+		if (view != 'catalog' && view != 'product') {
+			return false;
+		}
 
-    return true;
+		KMSetFilter(filter_url, false);
+
+		return true;
+	}
 });
+
 
 function KMChangeFilter(obj, click) {
     var form = jQuery('.mod_ksm_filter form');
@@ -69,6 +77,26 @@ function KMChangeFilter(obj, click) {
     var filter_url = URI_ROOT + 'index.php?option=com_ksenmart&view=catalog';
     var page_url = 'index.php?option=com_ksenmart&view=catalog';
     clicked = click;
+	
+	if (item.find('input').is('[type="radio"]')) {
+		if (item.is('.active')) {
+			item.removeClass('active');
+			item.parents('li').removeClass('active');
+			item.find('input').removeAttr('checked');
+		} else {
+			item.parents('.filter_box').find('.active').removeClass('active');
+			item.addClass('active');
+			item.parents('li').addClass('active');
+		}	
+	} else {
+		if (item.is('.active')) {
+			item.removeClass('active');
+			item.parents('li').removeClass('active');
+		} else {
+			item.addClass('active');
+			item.parents('li').addClass('active');
+		}
+	}	
 
     var price_less = parseInt(jQuery('.mod_ksm_filter input[name="price_less"]').val());
     var price_more = parseInt(jQuery('.mod_ksm_filter input[name="price_more"]').val());
@@ -130,13 +158,7 @@ function KMChangeFilter(obj, click) {
         window.location.href = page_url;
         return false;
     }
-    if (item.is('.active')) {
-        item.removeClass('active');
-        item.parents('li').removeClass('active');
-    } else {
-        item.addClass('active');
-        item.parents('li').addClass('active');
-    }
+
     history.pushState(null, null, page_url);
     KMSetFilter(filter_url, true);
 

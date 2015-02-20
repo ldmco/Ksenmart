@@ -202,6 +202,7 @@ INSERT INTO `#__ksenmart_order_statuses` (`id`, `title`, `system`) VALUES
 CREATE TABLE IF NOT EXISTS `#__ksenmart_payments` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
+  `introcontent` text NOT NULL,
   `description` text NOT NULL,
   `type` varchar(256) NOT NULL,
   `regions` text NOT NULL,
@@ -460,6 +461,7 @@ CREATE TABLE IF NOT EXISTS `#__ksenmart_searches_query` (
 CREATE TABLE IF NOT EXISTS `#__ksenmart_shippings` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
+  `introcontent` text NOT NULL,
   `type` varchar(256) NOT NULL,
   `regions` text NOT NULL,
   `days` int(10) NOT NULL,

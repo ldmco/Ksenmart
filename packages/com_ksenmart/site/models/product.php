@@ -339,7 +339,6 @@ class KsenMartModelProduct extends JModelKSList {
         }
         $query = $this->_db->getQuery(true);
         $query->select('id')->from('#__ksenmart_products')->where('id>' . $this->_id)->order('id ASC');
-        
         $this->_db->setQuery($query, 0, 1);
         $next_id = $this->_db->loadResult();
         if (empty($next_id)) {

@@ -145,7 +145,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
         if (!$this->checkRegion($shipping->regions, $cart->region_id)) return;
         $shipping->params = json_decode($shipping->params, true);
         if (!isset($shipping->params[$cart->region_id])) return;
-        $cart->shipping_sum = $shipping->params[$cart->region_id];
+        $cart->shipping_sum = (float)$shipping->params[$cart->region_id];
         $cart->shipping_sum_val = KSMPrice::showPriceWithTransform($cart->shipping_sum);
         $cart->total_sum+= $cart->shipping_sum;
         $cart->total_sum_val = KSMPrice::showPriceWithTransform($cart->total_sum);

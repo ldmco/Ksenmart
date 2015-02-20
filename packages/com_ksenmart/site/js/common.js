@@ -166,6 +166,10 @@ jQuery(document).ready(function() {
                 if (!jQuery(this).is('.row_active'))
                     jQuery(this).addClass('row_active');
                 flag = false;
+            } else if (jQuery(this).find('input[type="checkbox"]').length > 0 && jQuery(this).find('input[type="checkbox"]:checked').length == 0) {
+                if (!jQuery(this).is('.row_active'))
+                    jQuery(this).addClass('row_active');
+                flag = false;				
             }
         });
         if (!flag) {
@@ -194,7 +198,7 @@ jQuery(document).ready(function() {
                     var order_id = data;
                     if (order_id == 0) {
                         if (user_id == 0) {
-                            KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 610, 300);
+                            KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 610, 250);
                         } else {
                             jQuery.ajax({
                                 url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
@@ -326,9 +330,6 @@ jQuery(document).ready(function() {
         } else {
             new_address.slideDown(500);
         }
-        jQuery('body, html').animate({
-            scrollTop: 0
-        }, 500);
         return false;
     });
 

@@ -74,8 +74,10 @@ class KsenMartViewOrder extends JViewKS {
                     
                     $product = $this->get('Product');
                     $user    = KSUsers::getUser();
+					$customer_fields    = $this->get('CustomerFields');
 
                     $this->assignRef('product', $product);
+					$this->assignRef('customer_fields', $customer_fields);
                     $this->assignRef('user', $user);
                     $this->setLayout('openorder');
                     

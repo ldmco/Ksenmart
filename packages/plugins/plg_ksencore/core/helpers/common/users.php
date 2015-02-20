@@ -100,11 +100,16 @@ class KSUsers {
                 $user_region = $session->get('user_region', 0);
                 $user->region_id = $user_region;
             }
+            if ($user->phone == '') {
+                $session = JFactory::getSession();
+                $phone_code = $session->get('phone_code', '');
+                $user->phone = $phone_code;
+            }			
 
             if(!is_object($user->settings)){
-               $user->settings = '{"catalog_layout":"' . $params->get('catalog_default_view', 'grid') . '"}';
+                $user->settings = '{"catalog_layout":"' . $params->get('catalog_default_view', 'grid') . '"}';
+				$user->settings = json_decode($user->settings);
             }
-            $user->settings = json_decode($user->settings);
             $user->address  = KSUsers::getDefaultAddress($id);
             
             KSUsers::setAvatarLogoInObject($user);
@@ -126,7 +131,7 @@ class KSUsers {
         
         $user->id = 0;
         $user->region_id = $session->get('user_region', 0);
-        $user->phone = null;
+        $user->phone = $session->get('phone_code', 0);
         $user->watched = array();
         $user->favorites = array();
         $user->name = JText::_('ksm_users_anonym');

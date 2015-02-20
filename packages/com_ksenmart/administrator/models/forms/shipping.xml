@@ -17,6 +17,18 @@
 		/>
 		
 		<field
+			type="editor"
+			name="introcontent" 
+			label="KSM_SHIPPINGS_SHIPPING_INTROCONTENT_LBL"
+			description="KSM_SHIPPINGS_SHIPPING_INTROCONTENT_DESC"
+			filter="JComponentHelper::filterText"
+			default=""
+			height="150px"
+			buttons="false"
+			labelclass="inputname"
+		/>		
+		
+		<field
 			name="type"
 			type="shippingtype"
 			default=""

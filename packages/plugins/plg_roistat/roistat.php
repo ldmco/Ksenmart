@@ -45,7 +45,7 @@ class plgSystemRoistat extends JPlugin {
         return true;
     }
 
-    public function onBeforeExecuteKSMCartAddToCart($model){
+    public function onAfterExecuteKSMCartAddToCart($model){
         $app   = JFactory::getApplication();
         $table = JTable::getInstance('Orders', 'KsenmartTable');
         $input = $app->input;

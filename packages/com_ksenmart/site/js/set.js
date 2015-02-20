@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
         effect: 'slide, fade',
         crossfade: true,
         slideSpeed: 200,
-        fadeSpeed: 500,
+        fadeSpeed: 0,
         generateNextPrev: true,
         generatePagination: false,
         dynamicallyUpdateAnchors: false

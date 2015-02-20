@@ -76,6 +76,7 @@ class JFormFieldProductCategories extends JFormFieldCheckboxes {
 			data["task"]="catalog.get_properties";
 			data["id"]=jQuery("#jform_id").val();
 			data["categories"]=[];
+			data["active_properties"]=[];
 			if (item.is(".active"))
 			{
 				item.removeClass("active");
@@ -98,6 +99,9 @@ class JFormFieldProductCategories extends JFormFieldCheckboxes {
 			jQuery(".ksm-slidemodule-productcategories input[type=\'checkbox\']:checked").each(function(){
 				data["categories"].push(jQuery(this).val());
 			});
+			jQuery(".property-ul:visible").each(function(){
+				data["active_properties"].push(jQuery(this).attr("property_id"));
+			});			
 			jQuery.ajax({
 				url:"index.php?option=com_ksenmart",
 				data:data,
