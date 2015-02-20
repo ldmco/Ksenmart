@@ -34,14 +34,14 @@ class KSMOrders extends KSCoreHelper {
             $order->items = $db->loadObjectList();
             
             $order->costs = array(
-                'cost'              => KSMPrice::getPriceInDefaultCurrency($order->cost) ,
-                'cost_val'          => KSMPrice::showPriceWithTransform($order->cost) ,
+                'cost'              => KSMPrice::getPriceInDefaultCurrency($order->cost),
+                'cost_val'          => KSMPrice::showPriceWithTransform($order->cost),
                 'discount_cost'     => 0,
-                'discount_cost_val' => KSMPrice::showPriceWithTransform(0) ,
+                'discount_cost_val' => KSMPrice::showPriceWithTransform(0),
                 'shipping_cost'     => 0,
-                'shipping_cost_val' => KSMPrice::showPriceWithTransform(0) ,
-                'total_cost'        => KSMPrice::getPriceInDefaultCurrency($order->cost) ,
-                'total_cost_val'    => KSMPrice::showPriceWithTransform($order->cost)
+                'shipping_cost_val' => KSMPrice::showPriceWithTransform(0),
+                'total_cost'        => KSMPrice::getPriceInDefaultCurrency($order->cost),
+                'total_cost_val'    => KSMPrice::showPriceWithTransform($order->cost),
             );
             
             $dispatcher = JDispatcher::getInstance();
