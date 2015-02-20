@@ -409,7 +409,7 @@ class KsenMartModelCart extends JModelKSList {
         $jinput     = JFactory::getApplication()->input;
         
         $count      = $jinput->get('count', 1);
-        $price      = $jinput->get('price', 0, 'int');
+        $price      = $jinput->get('price', 0, 'float');
         $id         = $jinput->get('id', 0, 'int');
         $prd        = KSMProducts::getProduct($id);
         

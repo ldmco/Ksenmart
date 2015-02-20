@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" version="2.5" method="upgrade">
     <name>Компонент KsenMart</name>
     <packagename>ksenmart</packagename>
@@ -20,7 +20,7 @@
 	    	<a href="index.php?option=com_ksenmart&view=exportimport" title="Настройки ROIStat">Настройки ROIStat</a>
     	</div>
     	]]></description>
-    <creationDate>17 February 2015</creationDate>
+    <creationDate>17 February 2014</creationDate>
 
     <updateservers>
         <server type="collection" priority="1" name="pkg_ksenmart">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/pkg_ksenmart-update-list.xml</server>

@@ -46,18 +46,18 @@ class plgSystemRoistat extends JPlugin {
     }
 
     public function onAfterExecuteKSMCartAddToCart($model){
-        $app     = JFactory::getApplication();
-        $input   = $app->input;
-
+        $app   = JFactory::getApplication();
         $table = JTable::getInstance('Orders', 'KsenmartTable');
-        $table->load(array('id' => $model->order_id));
-
-        if($table->roistat <= 0){
-            $table->roistat = $input->cookie->get('roistat_visit', 0, 'int');
-            $table->save(array(
-                'roistat' => $table->roistat
-            ));
-            return true;
+        $input = $app->input;
+        
+        if($table->load(array('id' => $model->order_id))){
+            if($table->roistat <= 0){
+                $table->roistat = $input->cookie->get('roistat_visit', 0, 'int');
+                $table->save(array(
+                    'roistat' => $table->roistat
+                ));
+                return true;
+            }
         }
         return false;
     }
