@@ -30,5 +30,13 @@
 	
     <updateservers>
         <server type="extension" priority="1" name="modules">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_kmplugins_modules-update.xml</server>
-    </updateservers>		
+    </updateservers>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+                <field name="modules" type="ksmodules" />
+            </fieldset>
+        </fields>
+    </config>
 </extension>
