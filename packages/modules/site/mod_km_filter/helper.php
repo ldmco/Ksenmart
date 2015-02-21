@@ -18,7 +18,7 @@ class modKsenmartSearchHelper {
 		$view = $jinput->get('view', null);
         $categories = $jinput->get('categories', array(), 'array');
 		if (!count($categories) && $option == 'com_ksenmart' && $view == 'product'){
-			$product_id = $jinput->get('id', 0);
+			$product_id = $jinput->get('id', 0, 'int');
 			$default_category = $this->getProductCategory($product_id);	
 			if (!empty($default_category))
 				$categories[] = $default_category;

@@ -16,7 +16,7 @@ class modKsenmartCategoriesHelper {
                 return $active_id;
             } else return false;
         } elseif($view == 'product') {
-			$product_id = JRequest::getVar('id', 0);
+			$product_id = JRequest::getInt('id', 0);
 			$active_id = self::getProductCategory($product_id);	
 			if (!empty($active_id))
 				return $active_id;
