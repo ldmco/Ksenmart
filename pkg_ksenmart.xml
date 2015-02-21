@@ -87,5 +87,6 @@
 		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 
 		<file type="template" id="kmtemplate" client="site">templates/tpl_kmtemplate.zip</file>
+		<file type="template" id="ksenmartcolorful" client="site">templates/tpl_ksenmartcolorful.zip</file>
 	</files>
  </extension>

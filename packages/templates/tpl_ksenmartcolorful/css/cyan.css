@@ -1,0 +1,252 @@
+@charset "utf-8";
+
+body {
+	background: url(../images/bg-cyan.png) top left repeat-x;
+}
+
+a {
+	color: #D2A72B;
+}
+a:hover, a:focus {
+	color: #AA830A;
+}
+
+header.masthead .head_block_2 span {
+	color: #AA830A;
+}
+
+header.masthead #minicart {
+	background: #fff url(../images/minicart-bg-cyan.png) 16px 23px no-repeat;
+}
+
+header.masthead #minicart.active {
+	box-shadow: inset 0 1px 5px #16A3AE;
+}
+
+header.masthead #minicart.tops {
+	background: #fff url(../images/minicart-bg-cyan.png) 16px 15px no-repeat;
+}
+
+header .navbar .nav > .active > a, 
+header .navbar .nav > .active > a:hover, 
+v.navbar .nav > .active > a:focus {
+	background: url(../images/top-menu-bg-a-cyan.png) left bottom repeat-x;
+}
+header .navbar .nav > .active > a, 
+header .navbar .nav > .active > a:hover, 
+v.navbar .nav > .active > a:focus {
+	color: #B08C28 !important;
+}
+header .navbar .nav>li>a:focus, 
+header .navbar .nav>li>a:hover {
+	color: #B08C28 !important;
+}
+header .gk-main-menu ul ul li a:active, 
+header .gk-main-menu ul ul li a:focus, 
+header .gk-main-menu ul ul li a:hover {
+	color: #B08C28 !important;
+}
+.gk-main-menu ul > li.active li.current > a, 
+.gk-main-menu ul > li.active li.active > a, 
+.gk-main-menu ul > li:hover li.current > a, 
+.gk-main-menu ul > li:hover li.active > a {
+	color: #B08C28 !important;
+}
+.gk-main-menu ul > li.active li.current > a,
+.gk-main-menu ul > li.active li.active > a, 
+.gk-main-menu ul > li:hover li.current > a, 
+.gk-main-menu ul > li:hover li.active > a {
+	color: #B08C28 !important;
+}
+
+.carousel-indicators li.active {
+	background-color:#CFA00F
+}
+
+.floating-header .menus ul li a:hover {
+	color: #CFA00F!important;
+}
+.floating-header .menus ul li.active a {
+	color: #CFA00F!important;
+}
+
+#leftSidebar .shop_reviews_module h3 {
+	background: url(../images/bg-cyan.png) top left repeat-x;
+}
+
+.catalog ul.thumbnails > li .caption .bottom_wrapp .price {
+	color: #16A3AE;
+}
+
+.catalog .item .bottom .buy a.btn b {
+	background: url(../images/item-view-cyan.png) center no-repeat;
+}
+.catalog .item .bottom .buy button.btn b {
+	background: url(../images/item-buy-cyan.png) center no-repeat;
+}
+
+.table_sub .pricee,
+.table_sub .totall {
+	color:#16A3AE;
+}
+
+.accordion .nav .active a:hover {
+	background-color: #16A3AE;
+}
+
+#dropdownCat .accordion-group  .accordion-inner a {
+	color: #16A3AE;
+}
+
+#dropdownCat .nav-list>.active>a, 
+#dropdownCat .nav-list>.active>a:hover, 
+#dropdownCat .nav-list>.active>a:focus {
+	color:#16A3AE;
+}
+
+.unit .price {
+    color: #16A3AE;
+}
+
+.unit .buyb b  {
+	background: url(../images/buy-button-cyan.png) center no-repeat;
+}
+
+.link_b_border.to-fav {
+	background: url(../images/fav-cyan.png) left bottom no-repeat;
+}
+
+.link_b_border.to-fav span,
+.link_b_border {
+	color: #16A3AE;
+    border-bottom: 1px dashed #16A3AE;
+}
+
+.search .button b {
+	background: url(../images/search-cyan.png) center no-repeat;
+}
+
+.shop_reviews .item:hover .avatar:before{
+    border-left-color: #CFA00F;
+}
+
+.shop_reviews .item:hover .comment_wrapp:before{
+    border-right-color: #CFA00F;
+}
+
+.shop_reviews .item:hover .avatar .border_ksen,
+.shop_reviews .item:hover .comment_wrapp{
+    border-color: #CFA00F;
+}
+
+.popover a {
+	color: #16A3AE;
+}
+
+.default-bg:hover{
+    border-color: #0BA1AB;
+}
+
+.footer a {
+	color: #FBD34E;
+}
+
+.footer .nav > li.current > a,
+.footer .nav > li > a:hover {
+	background-color: #16A3AE;
+}
+
+.footer .nav > li.current > a:hover {
+	background-color: #16A3AE;
+}
+
+button,
+.button,
+.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	border:1px solid #D3A517;
+	text-shadow: -1px -1px 1px #AE860B;
+	background: #eeb913; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlYjkxMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkMGExMGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #eeb913 0%, #d0a10f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeb913), color-stop(100%,#d0a10f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeb913 0%,#d0a10f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeb913 0%,#d0a10f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeb913 0%,#d0a10f 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeb913 0%,#d0a10f 100%); /* W3C */
+}
+button:hover,
+.button:hover,
+.btn:hover,
+button:active,
+.button:active,
+.btn:active,
+button:focus,
+.button:focus,
+.btn:focus {
+	background: #eabc3f; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VhYmMzZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2E3NDMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #eabc3f 0%, #cca743 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eabc3f), color-stop(100%,#cca743)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eabc3f 0%,#cca743 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eabc3f 0%,#cca743 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eabc3f 0%,#cca743 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eabc3f 0%,#cca743 100%); /* W3C */
+}
+
+
+ 
+button.green,
+.button.green,
+.btn.green,
+.btn-success,
+button.green:hover,
+.button.green:hover,
+.btn.green:hover,
+.btn-success:hover,
+button.green:active,
+.button.green:active,
+.btn.green:active,
+.btn-success:active,
+button.green:focus,
+.button.green:focus,
+.btn.green:focus,
+.btn-success:focus {
+	border:1px solid #0BA1AB;
+	text-shadow: -1px -1px 1px #068F98;
+	background: #1fbcc7; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmYmNjNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxOGFiYjUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #1fbcc7 0%, #18abb5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1fbcc7), color-stop(100%,#18abb5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #1fbcc7 0%,#18abb5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #1fbcc7 0%,#18abb5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #1fbcc7 0%,#18abb5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #1fbcc7 0%,#18abb5 100%); /* W3C */
+}
+
+@media screen and (max-width: 979px) {
+	header.masthead #minicart {
+			background:#fff url(../images/minicart-bg-cyan.png) 16px 17px no-repeat;
+		}
+}
+@media screen and (max-width: 767px) {
+	header.masthead #minicart.tops {
+		background:#fff url(../images/minicart-bg-cyan.png) 16px 17px no-repeat;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
