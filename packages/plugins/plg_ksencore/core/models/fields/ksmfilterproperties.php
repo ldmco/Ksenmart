@@ -12,8 +12,8 @@ class JFormFieldKSMFilterProperties extends JFormField {
 		$db->setQuery($query);
 		$properties = $db->loadObjectList();
 		foreach($properties as $property){
-			$view = isset($this->value[$property->id]['view']) ? $this->value[$property->id]['view'] : 'none';
-			$display = isset($this->value[$property->id]['display']) ? $this->value[$property->id]['display'] : null;
+			$view = isset($this->value[$property->id]['view']) ? $this->value[$property->id]['view'] : 'text';
+			$display = isset($this->value[$property->id]['display']) ? $this->value[$property->id]['display'] : 'row';
 			$html .= '<div class="property">';
 			$html .= '	<h3>'.$property->title.'</h3>';
 			$html .= '	<div class="control-group">';

@@ -108,15 +108,26 @@ class modKsenmartSearchHelper {
         $properties = $this->mod_params['properties'];
         $this->properties = self::getProperties();
         foreach ($this->properties as $key => & $property) {
-            if (!empty($properties)) {
-                if (!isset($properties[$property->property_id]) || $properties[$property->property_id]['view'] == 'none') {
-                    unset($this->properties[$key]);
-                    continue;
-                } else {
-                    $this->properties[$key]->view = $properties[$property->property_id]['view'];
+            
+            if (isset($properties[$property->property_id]) && $properties[$property->property_id]['view'] == 'none') {
+                unset($this->properties[$key]);
+                continue;
+            } else {
+                if(isset($properties[$property->property_id]['view'])){
+                    $this->properties[$key]->view    = $properties[$property->property_id]['view'];
                     $this->properties[$key]->display = $properties[$property->property_id]['display'];
+                }else{
+                    $this->properties[$key]->view    = 'text';
+                    $this->properties[$key]->display = 'row';
+                }
+
+                if(isset($properties[$property->property_id]['display'])){
+                    $this->properties[$key]->display = $properties[$property->property_id]['display'];
+                }else{
+                    $this->properties[$key]->display = 'row';
                 }
             }
+            
             if (!empty($property->values)) {
                 foreach ($property->values as & $value) {
                     $value->selected = false;
@@ -286,13 +297,13 @@ class modKsenmartSearchHelper {
         $mod_params = $mod_params->toArray();
         if (!isset($mod_params['price'])) {
             $mod_params['price'] = array(
-                'view' => 'none',
+                'view' => 'text',
                 'display' => 'row'
             );
         }
         if (!isset($mod_params['manufacturer'])) {
             $mod_params['manufacturer'] = array(
-                'view' => 'none',
+                'view' => 'text',
                 'display' => 'row'
             );
         }
