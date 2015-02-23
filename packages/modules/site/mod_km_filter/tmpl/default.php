@@ -4,17 +4,10 @@
 	<h3><?php echo $module->title; ?></h3>
 	<?php } ?>
 	<form action="<?php echo $form_action; ?>" method="get">
-<<<<<<< HEAD
 		<?php if ($mod_params['price']['view'] != 'none'){ ?>
 		<div class="prices tracks act">
 			<fieldset>
 				<?php if ($mod_params['price']['view'] == 'slider'): ?>
-=======
-		<?php if ($params->get('price', 'none')->view != 'none'){ ?>
-		<div class="prices tracks act">
-			<fieldset>
-				<?php if ($params->get('price')->view == 'slider'): ?>
->>>>>>> origin/dev
 				<div class="inputs">
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE')?></span>
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_LESS')?></span><input type="text" id="search-price-less" class="search-price" name="price_less" value="<?php echo (int)$price_less?>" />
@@ -26,8 +19,6 @@
 				<?php endif; ?>
 			</fieldset>
 		</div>	
-		<?php } ?>
-<<<<<<< HEAD
 		<?php if (count($manufacturers) > 0 && $mod_params['manufacturer']['view'] != 'none'){ ?>
 		<div class="manufacturers brands filter_box display-<?php echo $mod_params['manufacturer']['display']; ?>">
 			<ul class="nav nav-list">
@@ -37,36 +28,17 @@
 					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo !empty($manufacturer->image)?' item_img':''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $manufacturer->title; ?>">
 						<?php if ($mod_params['manufacturer']['view'] == 'images' && $manufacturer->image!=''){ ?>					
-=======
-		<?php if (count($manufacturers) > 0 && $params->get('manufacturer', 'none')->view != 'none'){ ?>
-		<div class="manufacturers brands filter_box display-<?php echo $params->get('manufacturer', 'row')->display?>">
-			<ul class="nav nav-list">
-				<li class="nav-header"><?php echo JText::_('MOD_KM_FILTER_MANUFACTURERS'); ?></li>
-				<?php if ($params->get('manufacturer')->view != 'list'): ?>
-					<?php foreach($manufacturers as $manufacturer){ ?>
-					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo !empty($manufacturer->image)?' item_img':''; ?>">
-						<a href="javascript:void(0);" title="<?php echo $manufacturer->title; ?>">
-						<?php if ($params->get('manufacturer')->view == 'images' && $manufacturer->image!=''){ ?>					
->>>>>>> origin/dev
 						<label class="item image_item <?php if ($manufacturer->selected) echo 'active';?>">
 							<input style="display:none;" onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<div class="color"><img src="<?php echo $manufacturer->image; ?>" alt="<?php echo $manufacturer->title; ?>" /></div>
 							<span class="delta">&#x25C6;</span>
 						</label>
-<<<<<<< HEAD
 						<?php }elseif ($mod_params['manufacturer']['view'] == 'checkbox'){ ?>
-=======
-						<?php }elseif ($params->get('manufacturer')->view == 'checkbox'){ ?>
->>>>>>> origin/dev
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
 						</label>	
-<<<<<<< HEAD
 						<?php }elseif ($mod_params['manufacturer']['view'] == 'radio'){ ?>
-=======
-						<?php }elseif ($params->get('manufacturer')->view == 'radio'){ ?>
->>>>>>> origin/dev
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="radio" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
