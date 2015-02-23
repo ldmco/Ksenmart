@@ -4,10 +4,10 @@
 	<h3><?php echo $module->title; ?></h3>
 	<?php } ?>
 	<form action="<?php echo $form_action; ?>" method="get" class="row-fluid">
-		<?php if ($params->get('price', 'none')->view != 'none'){ ?>
+		<?php if ($mod_params['price']['view'] != 'none'){ ?>
 		<div class="prices tracks act span12">
 			<fieldset>
-				<?php if ($params->get('price')->view == 'slider'): ?>
+				<?php if ($mod_params['price']['view'] == 'slider'): ?>
 				<div class="inputs">
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE')?></span>
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_LESS')?></span><input type="text" id="search-price-less" class="search-price" name="price_less" value="<?php echo (int)$price_less?>" />
@@ -20,13 +20,13 @@
 			</fieldset>
 		</div>	
 		<?php } ?>
-		<?php if (count($manufacturers) > 0 && $params->get('manufacturer', 'none')->view != 'none'){ ?>
-		<div class="manufacturers brands filter_box display-<?php echo $params->get('manufacturer', 'row')->display?> span4">
+		<?php if (count($manufacturers) > 0 && $mod_params['manufacturer']['view'] != 'none'){ ?>
+		<div class="manufacturers brands filter_box display-<?php echo $mod_params['manufacturer']['display']; ?> span4">
 			<ul class="nav nav-list">
 				<li class="nav-header"><?php echo JText::_('MOD_KM_FILTER_MANUFACTURERS'); ?></li>
-				<?php if ($params->get('manufacturer')->view != 'list'): ?>
+				<?php if ($mod_params['manufacturer']['view'] != 'list'): ?>
 					<?php foreach($manufacturers as $manufacturer){ ?>
-					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo !empty($manufacturer->image)?' item_img':''; ?>">
+					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo (!empty($manufacturer->image) && $mod_params['manufacturer']['view'] == 'images') ? ' item_img' : ''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $manufacturer->title; ?>">
 						<?php if ($params->get('manufacturer')->view == 'images' && $manufacturer->image!=''){ ?>					
 						<label class="item image_item <?php if ($manufacturer->selected) echo 'active';?>">
@@ -34,12 +34,12 @@
 							<div class="color"><img src="<?php echo $manufacturer->image; ?>" alt="<?php echo $manufacturer->title; ?>" /></div>
 							<span class="delta">&#x25C6;</span>
 						</label>
-						<?php }elseif ($params->get('manufacturer')->view == 'checkbox'){ ?>
+						<?php }elseif ($mod_params['manufacturer']['view'] == 'checkbox'){ ?>
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
 						</label>	
-						<?php }elseif ($params->get('manufacturer')->view == 'radio'){ ?>
+						<?php }elseif ($mod_params['manufacturer']['view'] == 'radio'){ ?>
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="radio" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
@@ -74,7 +74,7 @@
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php if ($property->view != 'list'): ?>
 					<?php foreach($property->values as $value){ ?>
-					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image)?' item_img':''; ?>">
+					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo (!empty($value->image) && $property->view == 'images') ? ' item_img' : ''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $value->title; ?>">
 						<?php if ($property->view == 'images' && $value->image!=''){ ?>					
 						<label class="item image_item <?php if ($value->selected) echo 'active';?>">

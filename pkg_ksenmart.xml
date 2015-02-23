@@ -43,7 +43,6 @@
 		<file type="plugin" id="fixed" group="kmdiscount">plugins/plg_fixed.zip</file>
 		<file type="plugin" id="fixedregions" group="kmshipping">plugins/plg_fixedregions.zip</file>
 		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_redexpress.zip</file>
-		<file type="plugin" id="modules" group="kmdiscount">plugins/plg_modules.zip</file>
 		<file type="plugin" id="onorder" group="kmdiscount">plugins/plg_onorder.zip</file>
 		<file type="plugin" id="receipt" group="kmpayment">plugins/plg_receipt.zip</file>
 		<file type="plugin" id="robokassa" group="kmpayment">plugins/plg_robokassa.zip</file>
@@ -88,5 +87,6 @@
 		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 
 		<file type="template" id="kmtemplate" client="site">templates/tpl_kmtemplate.zip</file>
+		<file type="template" id="ksenmartcolorful" client="site">templates/tpl_ksenmartcolorful.zip</file>
 	</files>
  </extension>

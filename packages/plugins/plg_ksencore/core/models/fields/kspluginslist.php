@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die;
 
-KSSystem::import('helpers.common.system');
+JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart.KSM', array('common'), array(), array('angularJS' => 0)));
 class JFormFieldKSPluginsList extends JFormField {
     
     public $type = 'KSPluginsList';

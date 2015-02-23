@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" version="2.5" method="upgrade" client="site">
+    <name>KsenMart Colorful</name>
+    <version>1.0.0</version>
+    <creationDate>17 Oct 2013</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>ldmco.ru</authorUrl>
+    <copyright>Copyright © 2013 - All rights reserved.</copyright>
+    <license>GNU General Public License v2.0</license>
+    <description><![CDATA[]]></description>
+
+    <updateservers>
+        <server type="extension" priority="1" name="ksenmartcolorful">http://update.ksenmart.ru/update-info/j3/templates/ksenmartcolorful-update.xml</server>
+    </updateservers>
+
+    <files>
+            <filename>index.html</filename>
+            <filename>index.php</filename>
+            <filename>component.php</filename>
+            <filename>favicon.ico</filename>
+            <filename>params.ini</filename>
+            <filename>template_preview.png</filename>
+            <filename>template_thumbnail.png</filename>
+            <folder>css</folder>
+            <folder>js</folder>
+            <folder>images</folder>
+            <folder>html</folder>
+	</files>
+
+    <positions>
+        <position>slider</position>
+        <position>main-menu</position>
+        <position>left</position>
+        <position>right</position>
+        <position>content_bottom_1</position>
+        <position>content_bottom_2</position>
+        <position>content_bottom_3</position>
+		<position>head_menu_1</position>
+		<position>head_menu_2</position>
+        <position>head_block_1</position>
+        <position>head_block_2</position>
+        <position>head_block_3</position>
+        <position>fixed_bloc_left</position>
+        <position>fixed_bloc_right</position>
+        <position>content_top</position>
+        <position>head_custom_block</position>
+        <position>footer_1</position>
+        <position>footer_2</position>
+        <position>footer_3</position>
+        <position>footer_4</position>
+        <position>copyright</position>
+        <position>bottom_header</position>
+        <position>related_products</position>
+        <position>fixed_block_login_panel</position>
+        <position>fixed_block_minicart</position>
+    </positions>
+
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+                <field name="site_logo" type="media" default="templates/ksenmartcolorful/images/logo.png" label="Выберите лого">
+                    <option value="white">Белый</option>
+                    <option value="gray">Серый</option>
+                    <option value="blue">Голубой</option>
+                </field>
+				<field name="template_color" type="list" default="templates/ksenmartcolorful/css/green.css" label="Выберите цвет сайта">
+                    <option value="templates/ksenmartcolorful/css/green.css">Зеленый</option>
+                    <option value="templates/ksenmartcolorful/css/cyan.css">Голубой</option>
+                    <option value="templates/ksenmartcolorful/css/orange.css">Оранжевый</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>

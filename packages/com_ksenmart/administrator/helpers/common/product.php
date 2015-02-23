@@ -434,7 +434,7 @@ class KSMProducts extends KSCoreHelper {
         return $rows;
     }
 	
-    function getDefaultCategory($product_id) {
+    public static function getDefaultCategory($product_id) {
 		$db = JFactory::getDBO();
         $sql = $db->getQuery(true);
         $sql->select('category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id))->where('pc.is_default=1');
@@ -444,7 +444,7 @@ class KSMProducts extends KSCoreHelper {
         return $category;
     }
     
-    function getProductCategories($product_id) {
+    public static function getProductCategories($product_id) {
 		$db = JFactory::getDBO();
         $sql = $db->getQuery(true);
         $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id));
@@ -454,7 +454,7 @@ class KSMProducts extends KSCoreHelper {
         return $categories;
     }	
 	
-    function getProductCategory($product_id) {
+    public static function getProductCategory($product_id) {
         $final_categories = array();
         $parent_ids = array();
         $default_category = self::getDefaultCategory($product_id);

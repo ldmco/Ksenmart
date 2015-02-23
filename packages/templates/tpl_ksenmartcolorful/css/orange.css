@@ -1,0 +1,249 @@
+@charset "utf-8";
+
+body {
+	background: url(../images/bg-orange.png) top left repeat-x;
+}
+
+a {
+	color: #3f8fd2;
+}
+a:hover, a:focus {
+	color: #005580;
+}
+
+header.masthead .head_block_2 span {
+	color: #3f8fd2;
+}
+
+header.masthead #minicart {
+	background: #fff url(../images/minicart-bg-orange.png) 16px 23px no-repeat;
+}
+
+header.masthead #minicart.active {
+	box-shadow: inset 0 1px 5px #DC9120;
+}
+
+header.masthead #minicart.tops {
+	background: #fff url(../images/minicart-bg-orange.png) 16px 15px no-repeat;
+}
+
+header .navbar .nav > .active > a, 
+header .navbar .nav > .active > a:hover, 
+v.navbar .nav > .active > a:focus {
+	background: url(../images/top-menu-bg-a.png) left bottom repeat-x;
+}
+header .navbar .nav > .active > a, 
+header .navbar .nav > .active > a:hover, 
+v.navbar .nav > .active > a:focus {
+	color: #4E7FAB !important;
+}
+header .navbar .nav>li>a:focus, 
+header .navbar .nav>li>a:hover {
+	color: #4E7FAB !important;
+}
+header .gk-main-menu ul ul li a:active, 
+header .gk-main-menu ul ul li a:focus, 
+header .gk-main-menu ul ul li a:hover {
+	color: #4E7FAB !important;
+}
+.gk-main-menu ul > li.active li.current > a, 
+.gk-main-menu ul > li.active li.active > a, 
+.gk-main-menu ul > li:hover li.current > a, 
+.gk-main-menu ul > li:hover li.active > a {
+	color: #5990DE !important;
+}
+.gk-main-menu ul > li.active li.current > a,
+.gk-main-menu ul > li.active li.active > a, 
+.gk-main-menu ul > li:hover li.current > a, 
+.gk-main-menu ul > li:hover li.active > a {
+	color: #5990DE !important;
+}
+
+.carousel-indicators li.active {
+	background-color:#66A0D1
+}
+
+.floating-header .menus ul li a:hover {
+	color: #66A0D1!important;
+}
+.floating-header .menus ul li.active a {
+	color: #66A0D1!important;
+}
+
+#leftSidebar .shop_reviews_module h3 {
+	background: url(../images/bg-orange.png) top left repeat-x;
+}
+
+.catalog ul.thumbnails > li .caption .bottom_wrapp .price {
+	color: #DC9120;
+}
+
+.catalog .item .bottom .buy a.btn b {
+	background: url(../images/item-view.png) center no-repeat;
+}
+.catalog .item .bottom .buy button.btn b {
+	background: url(../images/item-buy-orange.png) center no-repeat;
+}
+
+.table_sub .pricee,
+.table_sub .totall {
+	color:#DC9120;
+}
+
+.accordion .nav .active a:hover {
+	background-color: #197EB1;
+}
+
+#dropdownCat .accordion-group  .accordion-inner a {
+	color: #DC9120;
+}
+
+#dropdownCat .nav-list>.active>a, 
+#dropdownCat .nav-list>.active>a:hover, 
+#dropdownCat .nav-list>.active>a:focus {
+	color:#3f8fd2;
+}
+
+.unit .price {
+    color: #DC9120;
+}
+
+.unit .buyb b  {
+	background: url(../images/buy-button-orange.png) center no-repeat;
+}
+
+.link_b_border.to-fav {
+	background: url(../images/fav.png) left bottom no-repeat;
+}
+
+.link_b_border.to-fav span,
+.link_b_border {
+    border-bottom: 1px dashed #08C;
+}
+
+.search .button b {
+	background: url(../images/search.png) center no-repeat;
+}
+
+.shop_reviews .item:hover .avatar:before{
+    border-left-color:#DC9120;
+}
+
+.shop_reviews .item:hover .comment_wrapp:before{
+    border-right-color:#DC9120;
+}
+
+.shop_reviews .item:hover .avatar .border_ksen,
+.shop_reviews .item:hover .comment_wrapp{
+    border-color:#DC9120;
+}
+
+.popover a {
+	color: #DC9120;
+}
+
+.default-bg:hover{
+    border-color: #DC9120;
+}
+
+.footer a {
+	color: #93ceff;
+}
+
+.footer .nav > li.current > a,
+.footer .nav > li > a:hover {
+	background-color: #08C;
+}
+
+.footer .nav > li.current > a:hover {
+	background-color: #197EB1;
+}
+
+button,
+.button,
+.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	border:1px solid #5989B2;
+	text-shadow: -1px -1px 1px #1F67A4;
+	background: #66a1d2;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY2YTFkMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MzhkY2EiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #66a1d2 0%, #438dca 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#66a1d2), color-stop(100%,#438dca)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #66a1d2 0%,#438dca 100%); /* W3C */
+}
+button:hover,
+.button:hover,
+.btn:hover,
+button:active,
+.button:active,
+.btn:active,
+button:focus,
+.button:focus,
+.btn:focus {
+	background: #66a1d2;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY2YTFkMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MzhkY2EiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #66a1d2 0%, #438dca 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#66a1d2), color-stop(100%,#438dca)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #66a1d2 0%,#438dca 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #66a1d2 0%,#438dca 100%); /* W3C */
+}
+
+
+ 
+button.green,
+.button.green,
+.btn.green,
+.btn-success,
+button.green:hover,
+.button.green:hover,
+.btn.green:hover,
+.btn-success:hover,
+button.green:active,
+.button.green:active,
+.btn.green:active,
+.btn-success:active,
+button.green:focus,
+.button.green:focus,
+.btn.green:focus,
+.btn-success:focus {
+	border:1px solid #CE7614;
+	text-shadow: -1px -1px 1px #D17E18;
+	background: #f29b2a; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyOWIyYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNzdmMWIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #f29b2a 0%, #d77f1b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f29b2a), color-stop(100%,#d77f1b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f29b2a 0%,#d77f1b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f29b2a 0%,#d77f1b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f29b2a 0%,#d77f1b 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f29b2a 0%,#d77f1b 100%); /* W3C */
+}
+
+@media screen and (max-width: 979px) {
+	header.masthead #minicart {
+			background:#fff url(../images/minicart-bg-orange.png) 16px 17px no-repeat;
+		}
+}
+@media screen and (max-width: 767px) {
+	header.masthead #minicart.tops {
+		background:#fff url(../images/minicart-bg-orange.png) 16px 17px no-repeat;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

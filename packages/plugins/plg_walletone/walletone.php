@@ -182,7 +182,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         if (empty($view->order->payment_id)) return;
         
         $payment = KSMWalletone::getPayment($view->order->payment_id, $this->_name);
-        if (empty($payment)) return;
+        if ($payment->id <= 0) return;
         if (empty($view->order->region_id)) return;
         if (!$this->checkRegion($payment->regions, $view->order->region_id)) return;
         
