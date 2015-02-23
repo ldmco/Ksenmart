@@ -7,13 +7,36 @@ class modKsenmartSearchHelper {
     public $manufacturers = array();
     public $countries = array();
     public $properties = array();
+<<<<<<< HEAD
+	public $categories = array();
+	public $mod_params = array();
+    
+    function init($mod_params) {
+		$this->initParams($mod_params);
+=======
     public $categories = array();
     
     public function init($mod_params) {
+>>>>>>> origin/dev
         $params = JComponentHelper::getParams('com_ksenmart');
         $app = JFactory::getApplication();
         $db = JFactory::getDBO();
         $jinput = $app->input;
+<<<<<<< HEAD
+		$option = $jinput->get('option', null);
+		$view = $jinput->get('view', null);
+        $categories = $jinput->get('categories', array(), 'array');
+		if (!count($categories) && $option == 'com_ksenmart' && $view == 'product'){
+			$product_id = $jinput->get('id', 0);
+			$default_category = $this->getProductCategory($product_id);	
+			if (!empty($default_category))
+				$categories[] = $default_category;
+		}
+		$this->categories = $categories;
+        $session_manufacturers = $jinput->get('manufacturers', array(), 'array');
+        $session_countries = $jinput->get('countries', array(), 'array');
+        $session_properties = $jinput->get('properties', array(), 'array');
+=======
         $option = $jinput->get('option', null);
         $view = $jinput->get('view', null);
         $categories = $jinput->get('categories', array() , 'array');
@@ -26,6 +49,7 @@ class modKsenmartSearchHelper {
         $session_manufacturers = $jinput->get('manufacturers', array() , 'array');
         $session_countries = $jinput->get('countries', array() , 'array');
         $session_properties = $jinput->get('properties', array() , 'array');
+>>>>>>> origin/dev
         
         $cats = array();
         $manufacturers = array();
@@ -103,18 +127,32 @@ class modKsenmartSearchHelper {
             if (in_array($country->id, $session_countries)) $country->selected = true;
         }
         
+<<<<<<< HEAD
+		$properties = $this->mod_params['properties'];
+        $this->properties = self::getProperties();
+
+        foreach ($this->properties as $key => & $property) {
+            if(!empty($properties)){
+=======
         $properties = $mod_params->toArray();
         $properties = $properties['properties'];
         $this->properties = self::getProperties();
         foreach ($this->properties as $key => & $property) {
             if (!empty($properties)) {
+>>>>>>> origin/dev
                 if (!isset($properties[$property->property_id]) || $properties[$property->property_id]['view'] == 'none') {
                     unset($this->properties[$key]);
                     continue;
                 } else {
+<<<<<<< HEAD
+					$this->properties[$key]->view =  $properties[$property->property_id]['view'];
+					$this->properties[$key]->display =  $properties[$property->property_id]['display'];
+				}
+=======
                     $this->properties[$key]->view = $properties[$property->property_id]['view'];
                     $this->properties[$key]->display = $properties[$property->property_id]['display'];
                 }
+>>>>>>> origin/dev
             }
             if (!empty($property->values)) {
                 foreach ($property->values as & $value) {
@@ -146,22 +184,96 @@ class modKsenmartSearchHelper {
         }
         return $return;
     }
+<<<<<<< HEAD
+	
+    public static function getProperties($pid = 0, $prid = 0, $val_id = 0, $by = 'ppv.product_id', $by_sort = 0) {
+=======
     
     public static function getProperties($pid = 0, $prid = 0, $val_id = 0, $by = 'ppv.product_id', $by_sort = 0) {
         
+>>>>>>> origin/dev
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('
                 ppv.id,
                 ppv.property_id,
                 ppv.value_id,
+<<<<<<< HEAD
+				ppv.price,
+=======
                 ppv.text,
+>>>>>>> origin/dev
                 p.edit_price,
                 p.title,
                 p.type,
                 p.view,
                 p.default,
                 p.prefix,
+<<<<<<< HEAD
+                p.suffix,
+				pv.title as value_title,
+				pv.image
+            ')
+            ->from('#__ksenmart_product_properties_values AS ppv')
+            ->leftjoin('#__ksenmart_properties AS p ON p.id=ppv.property_id')
+            ->leftjoin('#__ksenmart_property_values AS pv ON pv.id=ppv.value_id')
+        ;
+        if($pid) {
+            $query->where('ppv.product_id=' . $pid);
+        }
+
+        if($by_sort) {
+            switch($by) {
+                case 'ppv.id':
+                    $query->where('ppv.id=' . $by_sort);
+                    break;
+                default:
+                    $query->where('ppv.product_id=' . $pid);
+                    break;
+            }
+        }
+        $query->where('p.published=1');
+
+        if($prid) {
+            $query->where('ppv.property_id=' . $prid);
+        }
+		
+		$query->group('ppv.value_id');
+        $query->order('p.ordering,pv.ordering');
+        $db->setQuery($query);
+        $properties = $db->loadObjectList();
+		$props = array();
+		foreach($properties as $property)
+		{
+			if (!isset($props[$property->property_id]))
+			{
+				$props[$property->property_id] = new stdClass();
+				$props[$property->property_id]->id = $property->id;
+				$props[$property->property_id]->property_id = $property->property_id;
+				$props[$property->property_id]->value_id = $property->value_id;
+				$props[$property->property_id]->edit_price = $property->edit_price;
+				$props[$property->property_id]->title = $property->title;
+				$props[$property->property_id]->type = $property->type;
+				$props[$property->property_id]->view = $property->view;
+				$props[$property->property_id]->default = $property->default;
+				$props[$property->property_id]->prefix = $property->prefix;
+				$props[$property->property_id]->suffix = $property->suffix;
+				$props[$property->property_id]->values = array();
+			}
+			$props[$property->property_id]->values[$property->value_id] = new stdClass();
+			$props[$property->property_id]->values[$property->value_id]->id = $property->value_id;
+			$props[$property->property_id]->values[$property->value_id]->title = $property->value_title;
+			$props[$property->property_id]->values[$property->value_id]->image = $property->image;
+			$props[$property->property_id]->values[$property->value_id]->property_id = $property->property_id;
+			$props[$property->property_id]->values[$property->value_id]->price = $property->price;
+		}
+
+        return $props;
+    }
+
+    function getProductCategories($product_id) {
+		$db = JFactory::getDBO();
+=======
                 p.suffix
             ')->from('#__ksenmart_properties AS p')->leftjoin('#__ksenmart_product_properties_values AS ppv ON p.id=ppv.property_id');
         if ($pid) {
@@ -251,15 +363,22 @@ class modKsenmartSearchHelper {
     
     public function getProductCategories($product_id) {
         $db = JFactory::getDBO();
+>>>>>>> origin/dev
         $sql = $db->getQuery(true);
         $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id));
         $db->setQuery($sql);
         $categories = $db->loadObjectList();
         
         return $categories;
+<<<<<<< HEAD
+    }	
+	
+    function getProductCategory($product_id) {
+=======
     }
     
     public function getProductCategory($product_id) {
+>>>>>>> origin/dev
         $final_categories = array();
         $parent_ids = array();
         $default_category = $this->getDefaultCategory($product_id);
@@ -278,12 +397,16 @@ class modKsenmartSearchHelper {
                 if ($parent == $default_category) {
                     $id_default_way = true;
                 }
+<<<<<<< HEAD
+                $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
+=======
                 $category = KSSystem::getTableByIds(array(
                     $parent
                 ) , 'categories', array(
                     't.id',
                     't.parent_id'
                 ) , true, false, true);
+>>>>>>> origin/dev
                 $categories[] = $category->id;
                 $parent = $category->parent_id;
             }
@@ -296,4 +419,28 @@ class modKsenmartSearchHelper {
         
         return $category_id;
     }
+<<<<<<< HEAD
+    	
+	function initParams($mod_params){
+		$mod_params = $mod_params->toArray();
+		if (!isset($mod_params['price'])){
+			$mod_params['price'] = array(
+				'view' => 'none',
+				'display' => 'row'
+			);
+		}
+		if (!isset($mod_params['manufacturer'])){
+			$mod_params['manufacturer'] = array(
+				'view' => 'none',
+				'display' => 'row'
+			);
+		}	
+		if (!isset($mod_params['properties'])){
+			$mod_params['properties'] = array();
+		}	
+		$this->mod_params = $mod_params;
+	}
 }
+=======
+}
+>>>>>>> origin/dev

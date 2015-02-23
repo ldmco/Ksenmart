@@ -11,6 +11,7 @@ require_once dirname(__file__) . '/helper.php';
 $modKsenmartSearchHelper = new modKsenmartSearchHelper();
 
 $modKsenmartSearchHelper->init($params);
+$mod_params     = $modKsenmartSearchHelper->mod_params;
 $price_min      = $modKsenmartSearchHelper->price_min;
 $price_max      = $modKsenmartSearchHelper->price_max;
 $manufacturers  = $modKsenmartSearchHelper->manufacturers;
