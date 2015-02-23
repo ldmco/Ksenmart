@@ -26,7 +26,7 @@
 				<li class="nav-header"><?php echo JText::_('MOD_KM_FILTER_MANUFACTURERS'); ?></li>
 				<?php if ($mod_params['manufacturer']['view'] != 'list'): ?>
 					<?php foreach($manufacturers as $manufacturer){ ?>
-					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo !empty($manufacturer->image)?' item_img':''; ?>">
+					<li class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer <?php echo $manufacturer->selected?' active':''; ?><?php echo (!empty($manufacturer->image) && $mod_params['manufacturer']['view'] == 'images') ? ' item_img' : ''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $manufacturer->title; ?>">
 						<?php if ($params->get('manufacturer')->view == 'images' && $manufacturer->image!=''){ ?>					
 						<label class="item image_item <?php if ($manufacturer->selected) echo 'active';?>">
@@ -39,7 +39,7 @@
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
 						</label>	
-						<?php }elseif ($mod_params['manufacturer']['view']w == 'radio'){ ?>
+						<?php }elseif ($mod_params['manufacturer']['view'] == 'radio'){ ?>
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
 							<input onclick="KMChangeFilter(this,'manufacturer');" type="radio" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
@@ -74,7 +74,7 @@
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php if ($property->view != 'list'): ?>
 					<?php foreach($property->values as $value){ ?>
-					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image)?' item_img':''; ?>">
+					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo (!empty($value->image) && $property->view == 'images') ? ' item_img' : ''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $value->title; ?>">
 						<?php if ($property->view == 'images' && $value->image!=''){ ?>					
 						<label class="item image_item <?php if ($value->selected) echo 'active';?>">
