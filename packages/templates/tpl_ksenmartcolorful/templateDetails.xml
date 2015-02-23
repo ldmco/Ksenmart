@@ -10,10 +10,6 @@
     <license>GNU General Public License v2.0</license>
     <description><![CDATA[]]></description>
 
-    <updateservers>
-        <server type="extension" priority="1" name="ksenmartcolorful">http://update.ksenmart.ru/update-info/j3/templates/ksenmartcolorful-update.xml</server>
-    </updateservers>
-
     <files>
             <filename>index.html</filename>
             <filename>index.php</filename>
@@ -54,6 +50,7 @@
         <position>related_products</position>
         <position>fixed_block_login_panel</position>
         <position>fixed_block_minicart</position>
+        <position>minicart</position>
     </positions>
 
     <config>
