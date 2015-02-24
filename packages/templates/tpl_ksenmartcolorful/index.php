@@ -149,9 +149,9 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					<jdoc:include type="modules" name="footer_2" style="none" />
     			</div>
                 <?php } ?>
-				<?php if($this->countModules('footer3')){ ?>
-    			<div class="row-fluid" id="footer3">
-					<jdoc:include type="modules" name="footer_2" style="none" />
+				<?php if($this->countModules('footer_3')){ ?>
+    			<div class="row-fluid" id="footer_3">
+					<jdoc:include type="modules" name="footer_3" style="none" />
     			</div>
 				<?php } ?>
             </div>
