@@ -1,34 +1,31 @@
-<?php defined('_JEXEC') or die;
-
-    require_once JPATH_ROOT . '/components/com_banners/helpers/banner.php';
-    $baseurl = JURI::base();
-    $i = 0;
-?>
+<?php defined('_JEXEC') or die; ?>
+<?php $i = 0; ?>
+<?php $listCount = count($list); ?>
 <script>
     jQuery(document).ready(function(){
         jQuery('#carousel').carousel();
     });
 </script>
 <div id="carousel" class="carousel slide<?php echo $moduleclass_sfx ?>">
-	<div class="carousel-inner">
-
-    <?php foreach($list as $item){ ?>
-    	<div class="item<?php echo $i == 0?' active':''; ?>">
-            <?php if(!empty($item->clickurl)){ ?>
+    <div class="carousel-inner">
+    <?php foreach($list as $item): ?>
+        <div class="item<?php echo $i == 0?' active':''; ?>">
+            <?php if(!empty($item->clickurl)): ?>
             <a href="<?php echo $item->clickurl; ?>" title="<?php echo $item->name; ?>">
-            <?php } ?>
+            <?php endif; ?>
             <img src="<?php echo $item->params->get('imageurl');?>" alt="<?php echo $item->name; ?>" />
-            <?php if(!empty($item->clickurl)){ ?>
+            <?php if(!empty($item->clickurl)): ?>
             </a>
-            <?php } ?>
+            <?php endif; ?>
         </div>
         <?php $i++; ?>
-    <?php } ?>
-	</div>
-    <!--<a class="carousel-control left" href="#carousel" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="#carousel" data-slide="next">›</a>-->
-	<ol class="carousel-indicators">
-		<li data-target="#carousel" data-slide-to="0" class="active"></li>
-		<li data-target="#carousel" data-slide-to="1"></li>
-	  </ol>
+    <?php endforeach; ?>
+    </div>
+    <a class="carousel-control left" href="#carousel" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="#carousel" data-slide="next">›</a>
+    <ol class="carousel-indicators">
+        <?php for($i = 0; $i < $listCount; $i++): ?>
+            <li data-target="#carousel" data-slide-to="<?php echo $i; ?>"<?php echo $i == 0 ? ' class="active"' : ''; ?>></li>
+        <?php endfor; ?>
+      </ol>
 </div>
