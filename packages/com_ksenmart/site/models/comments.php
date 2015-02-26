@@ -45,9 +45,9 @@ class KsenMartModelComments extends JModelKSList {
         
         for ($k = 0; $k < count($comments); $k++) {
             $comments[$k]->user = KSUsers::getUser($comments[$k]->user);
-			if(isset($comments[$k]->product) && $comments[$k]->product > 0){
-				$comments[$k]->product = KSMProducts::getProduct($comments[$k]->product);
-			}
+            if(isset($comments[$k]->product) && $comments[$k]->product > 0){
+                $comments[$k]->product = KSMProducts::getProduct($comments[$k]->product);
+            }
         }
         $this->_pagination = new JPagination($this->_total, $limitstart, $this->_limit);
         
@@ -58,7 +58,7 @@ class KsenMartModelComments extends JModelKSList {
     public function getComment() {
         $this->onExecuteBefore('getComment');
 
-        $id = JRequest::getVar('id', 0);
+        $id = JRequest::getInt('id', 0);
         $comment = KSSystem::getTableByIds(array($id), 'comments', array(
                 't.id',
                 't.parent_id',
@@ -72,16 +72,18 @@ class KsenMartModelComments extends JModelKSList {
                 't.date_add',
                 't.type'
         ), true, false, true);
-        if(!empty($comment)){
+
+        if(property_exists($comment, 'id') && $comment->id > 0){
             $comment->user = KSUsers::getUser($comment->user);
-			if(isset($comment->product) && $comment->product > 0){
-				$comment->product = KSMProducts::getProduct($comment->product);
-			}
-            
-            $this->onExecuteAfter('getComment', array(&$comment));
-            return $comment;
+            if(isset($comment->product) && $comment->product > 0){
+                $comment->product = KSMProducts::getProduct($comment->product);
+            }
+        } else {
+            $comment = null;
         }
-        return new stdClass;
+
+        $this->onExecuteAfter('getComment', array($comment));
+        return $comment;
     }
 
     public function getPagination() {
@@ -144,19 +146,19 @@ class KsenMartModelComments extends JModelKSList {
         try{
             $result = $this->_db->insertObject('#__ksenmart_comments', $comment_object);
             
-			if($params->get('review_notice', false)){
-				$mail = JFactory::getMailer();
-				$sender = array($params->get('shop_email'), $params->get('shop_name'));
-				$content = KSSystem::loadTemplate(array('comment' => $comment_object), 'comments', 'default', 'mail');
-				
-				$mail->isHTML(true);
-				$mail->setSender($sender);
-				$mail->Subject = 'Новый отзыв';
-				$mail->Body = $content;
-				$mail->AddAddress($params->get('shop_email'), $params->get('shop_name'));
-				$mail->Send();
-			}
-			
+            if($params->get('review_notice', false)){
+                $mail = JFactory::getMailer();
+                $sender = array($params->get('shop_email'), $params->get('shop_name'));
+                $content = KSSystem::loadTemplate(array('comment' => $comment_object), 'comments', 'default', 'mail');
+                
+                $mail->isHTML(true);
+                $mail->setSender($sender);
+                $mail->Subject = 'Новый отзыв';
+                $mail->Body = $content;
+                $mail->AddAddress($params->get('shop_email'), $params->get('shop_name'));
+                $mail->Send();
+            }
+            
             $this->onExecuteAfter('addComment', array(&$result));
             return true;
         }catch(Exception $e){}
@@ -229,7 +231,6 @@ class KsenMartModelComments extends JModelKSList {
         $query->where("c.published=1");
         $query->where('c.user_id='.$uid);
         $query->order('c.date_add DESC');
-        echo $query;
         $this->_db->setQuery($query);
         
         $reviews = KSUsers::setAvatarLogoInObject($this->_db->loadObject());
@@ -258,12 +259,15 @@ class KsenMartModelComments extends JModelKSList {
         $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
         $query->where("c.type='shop_review'");
         $query->where("c.published=1");
-        $query->where('c.id='.$id);
+        $query->where('c.id=' . $this->_db->q($id));
         $query->order('c.date_add DESC');
         $this->_db->setQuery($query);
-        $review = $this->_db->loadObject();
         
-        KSUsers::setAvatarLogoInObject($review);
+        $review = $this->_db->loadObject();
+        if($review){        
+            $review->user = KSUsers::getUser($review->user);
+            KSUsers::setAvatarLogoInObject($review);
+        }
         
         $this->onExecuteAfter('getShopReviewById', array(&$review));
         return $review;
