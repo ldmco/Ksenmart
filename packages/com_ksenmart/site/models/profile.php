@@ -777,10 +777,11 @@ class KsenMartModelProfile extends JModelKSList {
         $query->where('c.user_id='.$uid);
 
         $this->_db->setQuery($query);
-        $reviews = KSUsers::setAvatarLogoInObject($this->_db->loadObject());
+        $review = $this->_db->loadObject();
+        $review = KSUsers::setAvatarLogoInObject($review);
         
-        $this->onExecuteAfter('getShopReview', array(&$reviews));
-        return $reviews;
+        $this->onExecuteAfter('getShopReview', array(&$review));
+        return $review;
     }
     
     public function updateProductReview($review_id, $comment, $good, $bad){
