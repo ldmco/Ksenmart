@@ -8,16 +8,17 @@ class KsenMartViewComments extends JViewKS {
         $document       = JFactory::getDocument();
         $this->params   = JComponentHelper::getParams('com_ksenmart');
         
-        $names_component = $this->params->get('shop_name');
-        $pref            = $this->params->get('path_separator');
-        $doc_title       = $names_component . $pref . 'Отзывы';
-        $id              = JRequest::getVar('id', 0);
-        $layout          = $this->getLayout();
+        $shop_name = $this->params->get('shop_name', 'магазине');
+        $pref      = $this->params->get('path_separator', '-');
+        $doc_title = $shop_name . $pref . 'Отзывы';
+        $id        = $app->input->get('id', 0, 'int');
+        $layout    = $this->getLayout();
         
         $document->setTitle($doc_title);
         $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/shop_reviews.css');
         
         switch ($layout) {
+
             case 'comments':
                 if(!JFactory::getConfig()->get('config.caching', 0)){
                     $path->addItem(JText::_('KSM_REVIEWS_LIST_PATH_TITLE'));
@@ -43,6 +44,9 @@ class KsenMartViewComments extends JViewKS {
                     }
                     
                     $this->assignRef('comment', $comment);
+                }else{
+                    JError::raiseError(404, 'Page not found');
+                    return false;
                 }
             break;
 
@@ -61,26 +65,30 @@ class KsenMartViewComments extends JViewKS {
             break;
 
             case 'shopreview':
-                $user         = KSUsers::getUser();
-                $this->params = JComponentHelper::getParams('com_ksenmart');
-                $model        = $this->getModel();
-                $shop_name    = $this->params->get('shop_name', 'KsenMart');
-                
-                $review = $model->getShopReviewById($id);
-                if(!$review){
+                if($id > 0){
+                    $user         = KSUsers::getUser();
+                    $this->params = JComponentHelper::getParams('com_ksenmart');
+                    $model        = $this->getModel();
+                    
+                    $review = $model->getShopReviewById($id);
+                    if(!$review){
+                        JError::raiseError(404, 'Page not found');
+                        return false;
+                    }
+                    $isset_review = KSSystem::issetReview($user->id);
+
+                    $this->assignRef('review', $review);
+                    $this->assignRef('user', $user);
+                    $this->assignref('show_shop_review', $isset_review);
+
+                    $document->setTitle(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
+                    if(!JFactory::getConfig()->get('config.caching', 0)) {
+                        $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=shopreviews&Itemid=' . KSSystem::getShopItemid());
+                        $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
+                    }
+                }else{
                     JError::raiseError(404, 'Page not found');
                     return false;
-                }
-                $isset_review = KSSystem::issetReview($user->id);
-
-                $this->assignRef('review', $review);
-                $this->assignRef('user', $user);
-                $this->assignref('show_shop_review', $isset_review);
-
-                $document->setTitle(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
-                if(!JFactory::getConfig()->get('config.caching', 0)) {
-                    $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=shopreviews&Itemid=' . KSSystem::getShopItemid());
-                    $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
                 }
             break;
         }
