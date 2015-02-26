@@ -28,6 +28,10 @@ function KsenMartBuildRoute(&$query) {
         break;
         case 'comments':
             $segments[] = 'reviews';
+            if (isset($query['layout']) && !empty($query['layout'])) {
+                $segments[] = $query['layout'];
+                unset($query['layout']);
+            }
             if (isset($query['id']) && !empty($query['id']) && $query['id'] != 0) {
                 $segments[] = $query['id'];
                 unset($query['id']);
@@ -347,7 +351,6 @@ function KsenMartBuildRoute(&$query) {
         $countries = array();
         
         $vars['view'] = 'catalog';
-        
         foreach ($segments as $segment) {
             
             switch ($segment) {
@@ -361,8 +364,8 @@ function KsenMartBuildRoute(&$query) {
                     break;
                 case 'reviews':
                     $vars['view'] = 'comments';
-                    if (isset($segments[1])) $vars['id'] = $segments[1];
-                    
+                    if (isset($segments[1])) $vars['layout'] = $segments[1];
+                    if (isset($segments[2])) $vars['id'] = $segments[2];
                     break;
                 case 'searching':
                     $vars['view'] = 'search';
