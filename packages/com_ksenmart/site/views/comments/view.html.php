@@ -50,7 +50,7 @@ class KsenMartViewComments extends JViewKS {
                 }
             break;
 
-            case 'shopreviews':
+            case 'reviews':
                 if(!JFactory::getConfig()->get('config.caching', 0)) {
                     $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'));
                 }
@@ -64,7 +64,7 @@ class KsenMartViewComments extends JViewKS {
                 $this->assignref('show_shop_review', $isset_review);
             break;
 
-            case 'shopreview':
+            case 'review':
                 if($id > 0){
                     $user         = KSUsers::getUser();
                     $this->params = JComponentHelper::getParams('com_ksenmart');
@@ -83,7 +83,7 @@ class KsenMartViewComments extends JViewKS {
 
                     $document->setTitle(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
                     if(!JFactory::getConfig()->get('config.caching', 0)) {
-                        $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=shopreviews&Itemid=' . KSSystem::getShopItemid());
+                        $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=reviews&Itemid=' . KSSystem::getShopItemid());
                         $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
                     }
                 }else{

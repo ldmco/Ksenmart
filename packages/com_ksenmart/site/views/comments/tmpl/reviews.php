@@ -43,12 +43,12 @@
     <?php foreach($this->reviews as $review){ ?>
         <article class="row-fluid item" id="review_<?php echo $review->id; ?>">
             <div class="span2 avatar">
-                <a href="javascript:void(0)" title="<?php echo $review->name; ?>">
-                    <img src="<?php echo JURI::root().$review->logo_thumb; ?>" alt="<?php echo $review->name; ?>" class="border_ksen" />
+                <a href="javascript:void(0)" title="<?php echo $review->user->name; ?>">
+                    <img src="<?php echo JURI::root().$review->logo_thumb; ?>" alt="<?php echo $review->user->name; ?>" class="border_ksen" />
                 </a>
             </div>
             <div class="span10 comment_wrapp">
-                <div class="name"><?php echo $review->name; ?></div>
+                <div class="name"><?php echo $review->user->name; ?></div>
 				<div class="rating">
 					<?php for($k=1;$k<6;$k++) {
 						if(floor($review->rate) >= $k){ ?>
@@ -62,7 +62,7 @@
                     <?php echo nl2br(mb_substr($review->comment, 0, $this->params->get('count_symbol', 400))); ?>
                 </div>
                 <div class="read_more">
-                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=shopreview&id='.$review->id); ?>" title="Подробнее">Подробнее</a>
+                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=review&id='.$review->id); ?>" title="Подробнее">Подробнее</a>
                 </div>
             </div>
         </article>
