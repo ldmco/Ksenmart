@@ -4,16 +4,30 @@ class JFormFieldCurrency extends JFormField {
 	protected $type = 'Currency';
 	
 	public function getInput() {
-		$db = JFactory::getDbo();
+		$db    = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('id as value, title as text')->from('#__ksenmart_currencies');
+		$query
+			->select($db->qn(array(
+				'c.id',
+				'c.title',
+			),
+			array(
+				'value',
+				'text',
+			)))
+			->from($db->qn('#__ksenmart_currencies', 'c'))
+		;
 		$db->setQuery($query);
 		$currencies = $db->loadObjectList();
+
+		if(!$this->value) {
+			$this->value = KSMPrice::_getDefaultCurrency();
+		}
 		
 		return JHTML::_('select.genericlist', $currencies, $this->name, array(
 			'class' => 'sel',
-			'id' => $this->name,
+			'id'    => $this->name,
 			'style' => 'width:40px;'
-		) , 'value', 'text', $this->value);
+		), 'value', 'text', $this->value);
 	}
 }
