@@ -295,7 +295,13 @@ class KsenMartModelComments extends JModelKSList {
         $query->where("published=1");
         $query->order('date_add DESC');
         $this->_db->setQuery($query);
+        
         $reviews = $this->_db->loadObjectList();
+        if($reviews){
+            foreach ($reviews as $review) {
+                $review->user = KSUsers::getUser($review->user);
+            }
+        }
         KSUsers::setAvatarLogoInObject($reviews);
         
         $this->onExecuteAfter('getShopReviewsList', array(&$reviews));
