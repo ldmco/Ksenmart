@@ -39,8 +39,9 @@ class JFormFieldKSModules extends JFormField {
         foreach ($modules as $module) {
             if (is_null($module->menuid) && (!$module->except || $module->menuid < 0)) continue;
             
-            $selected_pages = isset($this->value[$module->position][$module->id]['pages']) ? $this->value[$module->position][$module->id]['pages'] : array(0);
-            $selected_cats = isset($this->value[$module->position][$module->id]['categories']) ? $this->value[$module->position][$module->id]['categories'] : array(0);
+            $selected_pages = (isset($this->value[$module->position]) && isset($this->value[$module->position][$module->id]['pages'])) ? $this->value[$module->position][$module->id]['pages'] : array(0);
+            $selected_cats = (isset($this->value[$module->position]) && isset($this->value[$module->position][$module->id]['categories'])) ? $this->value[$module->position][$module->id]['categories'] : array(0);
+            
             $html.= '<tr>';
             $html.= '	<td class="title">' . $module->title . '</th>';
             $html.= '	<td width="10%" class="nowrap hidden-phone">' . $module->position . '</th>';
