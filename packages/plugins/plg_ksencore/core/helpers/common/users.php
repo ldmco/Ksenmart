@@ -131,7 +131,7 @@ class KSUsers {
         
         $user->id = 0;
         $user->region_id = $session->get('user_region', 0);
-        $user->phone = $session->get('phone_code', 0);
+        $user->phone = $session->get('phone_code', '');
         $user->watched = array();
         $user->favorites = array();
         $user->name = JText::_('ksm_users_anonym');
