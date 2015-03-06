@@ -57,10 +57,6 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/default.js"></script>
 	</head>
 	<body>
-        <div class="fixed_block_login_panel"><jdoc:include type="modules" name="fixed_block_login_panel" style="none" /></div>
-        <div class="fixed_block_minicart"><jdoc:include type="modules" name="fixed_block_minicart" style="none" /></div>
-		<div class="fixed_bloc_left"><jdoc:include type="modules" name="fixed_bloc_left" style="none" /></div>
-		<div class="fixed_bloc_right"><jdoc:include type="modules" name="fixed_bloc_right" style="none" /></div>
 		<div class="floating-header">
 			<div class="inner">
 				<div class="logo">
@@ -69,14 +65,14 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					</a>
 				</div>
 				<div class="menus">
-					<jdoc:include type="modules" name="main-menu" style="none" />
+					<jdoc:include type="modules" name="ks-menu" style="none" />
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="top-head">
-				<div class="left-m"><jdoc:include type="modules" name="head_menu_1" style="none" /></div>
-				<div class="right-m"><jdoc:include type="modules" name="auth" style="none" /></div>
+				<div class="left-m"><jdoc:include type="modules" name="ks-info-menu" style="none" /></div>
+				<div class="right-m"><jdoc:include type="modules" name="ks-auth" style="none" /></div>
 			</div>
 			<header class="masthead">
 				<div class="row-fluid header">
@@ -89,37 +85,37 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					</div>
 					<div class="span7 pull-right">
 						<div class="span6 head_block_2">
-							<jdoc:include type="modules" name="head_block_2" style="none" />
+							<jdoc:include type="modules" name="ks-clrful-header-info" style="none" />
 						</div>
 						<div class="span6 head_block_3">
-							<jdoc:include type="modules" name="minicart" style="none" />
+							<jdoc:include type="modules" name="ks-minicart" style="none" />
 						</div>
 					</div>
 				</div>
 				<nav class="navbar gk-main-menu">
 					<div class="navbar-inner">
 						<div class="container">
-							<jdoc:include type="modules" name="main-menu" style="none" />
+							<jdoc:include type="modules" name="ks-menu" style="none" />
 						</div>
 					</div>
 				</nav><!-- /.navbar -->
 			</header>
-			<jdoc:include type="modules" name="bottom_header" style="none" />
 			<section class="row-fluid">
 				<?php //if($left_column){ ?>
 				<aside class="span3" id="leftSidebar">
-					<jdoc:include type="modules" name="categories" style="none" />
-					<jdoc:include type="modules" name="right" style="none" />
-					<jdoc:include type="modules" name="left" style="none" />
+					<jdoc:include type="modules" name="ks-profile" style="none" />
+					<jdoc:include type="modules" name="ks-categories" style="none" />
+					<jdoc:include type="modules" name="ks-filters" style="none" />
+					<jdoc:include type="modules" name="ks-shipping-info" style="none" />
+					<jdoc:include type="modules" name="ks-reviews" style="none" />
 				</aside>
 				<?php //} ?>
 				<div class="span9 content">
-                    <div class="row-fluid">
-    				    <jdoc:include type="modules" name="jumbotron" style="xhtml" />
-                    </div>
 					<div class="row-fluid">
-						<jdoc:include type="modules" name="search" />
-						<jdoc:include type="modules" name="content_top" style="none" />
+						<jdoc:include type="modules" name="ks-search" />
+						<jdoc:include type="modules" name="ks-breadcrumbs" />
+    				    <jdoc:include type="modules" name="ks-main-banners" style="xhtml" />
+						<jdoc:include type="modules" name="ks-main-products-list" style="none" />
 					</div>
                     <div class="content_in_wrapp">
 						<jdoc:include type="message" />
@@ -128,32 +124,31 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 				</div>
 			</section>
 			<hr />
-			<?php if($this->countModules('content_bottom_1') || $this->countModules('content_bottom_2') || $this->countModules('content_bottom_3')){ ?>
-			<div class="row-fluid">
-				<jdoc:include type="modules" name="content_bottom_1" style="span4" />
-				<jdoc:include type="modules" name="content_bottom_2" style="span4" />
-				<jdoc:include type="modules" name="content_bottom_3" style="span4" />
-			</div>
-			<hr />
-			<?php } ?>
 		</div>
 		<footer class="footer">
 			<div class="container">
-                <?php if($this->countModules('footer_1')){ ?>
 				<div class="row-fluid" id="footer1">
-					<jdoc:include type="modules" name="footer_1" style="none" />
+					<div class="span3">
+						<jdoc:include type="modules" name="ks-clrful-footer-info1" style="none" />
+					</div>
+					<div class="span4">
+						<jdoc:include type="modules" name="ks-clrful-footer-info2" style="none" />
+					</div>
+					<div class="span2 pull-right">
+						<jdoc:include type="modules" name="ks-clrful-footer-info3" style="none" />
+					</div>
+					<div class="span2 pull-right">
+						<jdoc:include type="modules" name="ks-clrful-footer-info4" style="none" />
+					</div>
 				</div>
-                <?php } ?>
-                <?php if($this->countModules('footer_2')){ ?>
     			<div class="row-fluid" id="footer2">
-					<jdoc:include type="modules" name="footer_2" style="none" />
+					<div class="span6">
+						<jdoc:include type="modules" name="ks-footer-copyright" style="none" />
+					</div>
+					<div class="span2 pull-right">
+						<jdoc:include type="modules" name="ks-footer-ldm" style="none" />
+					</div>					
     			</div>
-                <?php } ?>
-				<?php if($this->countModules('footer_3')){ ?>
-    			<div class="row-fluid" id="footer_3">
-					<jdoc:include type="modules" name="footer_3" style="none" />
-    			</div>
-				<?php } ?>
             </div>
 		</footer>
 	</body>

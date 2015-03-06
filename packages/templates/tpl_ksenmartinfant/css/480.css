@@ -1,0 +1,86 @@
+/* #Mobile (Landscape) width of 480px
+================================================== */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+				
+			/* ************************************************************************************************
+			MOBILE MENU TOP  CURRENCIES   LANGUAGES    USER INFO
+			************************************************************************************************ */	
+			body#index .instant + #right_column {display:none;}
+			#mobilelink ul {width: 178px;}
+			#countries_2 .countries_ul, #setCurrency .currencies_ul {width: 179px;}
+			.alert_cart{ width:420px; left:50%; margin-left:-210px;}
+			/* ************************************************************************************************
+			HOMEFEATURED
+			************************************************************************************************ */	
+			#featured_products ul li .product_image {float:none;height: 215px;width:200px;margin:0 auto}
+			#featured_products ul li h5{ width:180px; float:none; padding-top:10px; min-height:25px;}
+			#featured_products ul li .product_descr{ width:180px; float:none; font-size:12px; display:none;}
+			#columns #featured_products ul li h5 a{ font-size:16px;}
+			
+			/* ************************************************************************************************
+			BOX COL
+			************************************************************************************************ */	
+			.products_block ul li > div {width:348px;}
+			#newsletter_block_left input[type="email"] {width: 100%;}
+			.column #cart_block .products .price {width: 301px;}
+			#buy_block .row_1 p#quantity_wanted_p {clear: none;margin-top:1px;padding-right: 10px;}
+			#layered_form .b-core-ui-select {width: 438px;}
+			#layered_form .select {width:460px;}
+			#layered_form div div ul{ position:relative;}
+			
+			/* ************************************************************************************************
+			STORE PAGE
+			************************************************************************************************ */	
+			div#stores_block p.text input {width:407px;height:35px; line-height:35px;}
+			div#stores_block p.select select{height:35px; line-height:35px;}
+			
+			/* ************************************************************************************************
+			PRODUCT LIST
+			************************************************************************************************ */
+			#product_list li {width:100%; float: left;}
+			#product_list li .mob{ display:block}
+			#product_list li a.product_img_link { width:29%;}
+			#product_list li .center_block h3,.grid li h3  {margin:-3px 0 8px 0;}
+			#product_list li .center_block{width:68%;}
+			#product_list li .product_desc.mob{ display:block; padding:0; margin:0;}
+			#product_list li .right_block{width:68%;}
+			#product_list li .button {margin-top:20px;}
+			#product_list li .exclusive{margin-right:16px;margin-left:0px; margin-top:20px; margin-bottom:0;}
+			#subcategories ul li { width:141px;}
+			#subcategories ul li.product_list_3 {}
+			#subcategories ul li.product_list_4 {}
+			#subcategories ul li .lnk_more{ min-height:28px}
+			.product_sort #productsSortForm select { width:420px;}
+			.row_compare_mobile{ width:100%; overflow:auto;}
+			
+			/* ************************************************************************************************
+			PAGE PRODUCT
+			************************************************************************************************ */	
+			#primary_block #pb-right-column {width:100%;}
+			#primary_block #pb-left-column {width:100%;}
+			#pb-right-column  .row_1 p.our_price_display { padding-top:0; padding-bottom:0px;}
+			#pb-right-column .row_1 #quantity_wanted_p{ float:right;}
+			.row_1 p#quantity_wanted_p {padding-top: 7px;}
+			#pb-right-column .row_1 #quantity_wanted_p label{ display:block;}
+			/**********************************************************************************************
+			LOGIN PAGE									
+			***********************************************************************************************/
+			p.cart_navigation .exclusive, p.cart_navigation .exclusive_large {float:right; margin-bottom:0px; margin-right:0px;}
+			
+			/**********************************************************************************************
+			ORDER PAGE									
+			***********************************************************************************************/
+			.list-order-step li {height: auto;width:380px;}
+			.list-order-step .img-order {height: 136px;}
+			.list-order-step .price-order {padding-left:0px;}
+			table#cart_summary td.cart_product {width: 146px;}
+			table#cart_summary .min-with-td {display: inline-block;font-weight: normal;min-width:100px;}
+			form#voucher fieldset p input.discount_name {width: 335px;}
+			table#cart_summary td.tdfirst {width: 77%;}
+			#sendOrderMessage select{ width:398px;}
+			/*clue tip*/
+			#cluetip {
+				left:50% !important;
+				margin-left:-225px;	
+			}
+}

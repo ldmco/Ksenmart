@@ -1,0 +1,277 @@
+/* #Tablet (Portrait) Note: Design for a width of 768px
+================================================== */
+@media only screen and (min-width: 1199px) and (max-width: 1250px) {	
+			.extra_wrapp{ max-width:1200px; padding-top:15px;}
+			#header-inner{ margin:0 -16px;}
+			#header_logo{ left:10px;}
+			#search_block_top,
+			#header_user,
+			.blockuserinfo,
+			#languages_block_top{ right:10px;}
+			#currencies_block_top{ right:20px;}
+			.footer-bg-mob {
+				max-width: 1280px;
+				margin:0 auto;
+			}
+			footer .block h4 {
+				display:none;
+			}
+}
+@media only screen and (min-width: 950px) and (max-width: 980px) {	
+			.blockuserinfo{ top: 12px;	right: -4px;}
+			#header-inner{ margin:0;}
+			.blockpermanentlinks-header{ top:50px; right:235px;}
+			footer .block h4 {
+				display:none;
+			}
+}
+@media only screen and (min-width: 1250px){	
+			footer .block h4 {
+				display:none;
+			}
+}
+@media only screen and (min-width: 980px) and (max-width: 1199px) {	
+			#header-inner{ margin:0;}
+			.extra_wrapp{ border:none;}
+			.blockpermanentlinks-header{ top:50px; left: auto;right: 0px !important;width: auto!important; }
+			.blockuserinfo{ top: 12px;	right: -4px;}
+			.list li .center_block {width: 335px;}
+			.mnf_sup_list li .left_side {width:327px;}
+			.products_block ul li > div {float: left;margin-top: -4px;padding: 0;width: 125px;}
+			#idTab4 li .accessories_desc{ width:460px;}
+			.breadcrumb {width:940px;}
+			#search_block_top {right: 187px;top: 87px;}
+			#thumbs_list {width: 300px;}
+			#thumbs_list li a {width: 92px;}
+			#thumbs_list li:first-child a {width: 91px;}
+			#thumbs_list li + li {margin-right: 9px;}
+			#views_block {height: 95px;}
+			#buy_block .row_1 p#quantity_wanted_p { clear:right; padding-top:20px;}
+			#subcategories ul li{ width:160px;}
+			#subcategories ul li.product_list_4  { margin-right:0;}
+			#subcategories ul li.product_list_5{ margin-right:10px;}
+			#layered_form .b-core-ui-select {width: 198px;}
+			#view_scroll_right,#view_scroll_left{ top:37px;}
+			footer .block .list-footer li a{padding-right:10px;}
+			#product_comparison .product_desc { display:none;}
+			#product_comparison .on_sale, #product_comparison .discount {left: -16px;top: -8px;}
+			table#cart_summary .cart_discount_price .div_cart_quantity_delete a { margin-top:3px;}
+			.products_block ul li .reduction {margin-left: 20px;margin-right: 0;}
+			.layout_grid li{ padding-top:20px; margin-top:10px;}
+			.bottom_pagination{ margin-top:10px;}
+			#layered_form div div ul {position: relative;}
+			#layered_form .select {width:220px;height:32px;left:0!important; top:15px!important;}
+			
+			ul#address_delivery {width: 41%;}
+			ul#address_invoice {width: 42%;}
+			.addresses #id_address_delivery {width: 329px;}
+			#header_logo { width: 210px;top: 40px;}
+			footer .block h4 {
+				display:none;
+			}
+			.user-panel .nav-tabs>li {
+				margin: 0 1% 5px;
+				width: 30%;
+			}
+			.user-panel .nav-tabs>.active>a, 
+			.user-panel .nav-tabs>.active>a:hover, 
+			.user-panel .nav-tabs>.active>a:focus {
+				border-top: 0px solid #ddd;
+				border-left: 0px solid #ddd;
+				border-right: 0px solid #ddd;
+				border-bottom: 0px solid #fff;
+				margin: 0;
+			}
+			.user-panel .nav-tabs > .active > a, 
+			.user-panel .nav-tabs > .active > a:hover, 
+			.user-panel .nav-tabs > .active > a:focus {
+				color: #b83850;
+			}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {	
+			#ul_layered_price span{
+				float:left;
+				width:20px;
+			}	
+			#ul_layered_price input{
+				float:left;
+				margin-top:0px!important;
+			}		
+			#search-price-less{		
+				margin-right:70px!important;
+			}
+			#ul_layered_price span:nth-child(3), #ul_layered_price input:nth-child(4), #ul_layered_price span:nth-child(5){
+				margin-top:10px!important;
+			}
+			footer .block h4 {
+				display:none;
+			}
+			#product #right_column {padding:44px 0 0;}
+			.extra_wrapp{ border:none;}
+			#header-inner{ margin:0;}
+			#languages_block_top {
+				display: none;
+			}
+			/* ************************************************************************************************
+			  FEATURED PRODUCT
+			************************************************************************************************ */
+			#featured_products ul li .product_image {float:none;height: 215px;width:200px;margin:0 auto; text-align:center;}
+			#featured_products ul li h5{ width:210px; float:none; padding-top:10px; min-height:25px;}
+			#featured_products ul li .product_descr{ width:210px; float:none; font-size:12px;}
+			#columns #featured_products ul li h5 a{ font-size:16px;}
+			.main-mobile-menu{ display:block; margin-left:20px; margin-top:-44px;}
+			#header_logo img{ width:180px;}
+			#header_logo {top:50px;}
+			#search_block_top input.search_query{ width:180px;}
+			#search_block_top {right:153px;top:88px;}
+			#header_user {
+			top: 88px;
+			}
+			.blockpermanentlinks-header {
+			left: auto;
+			right: 0px !important;
+			width:auto!important;
+			}
+			.header-box{ right:100px; top:50px;}
+			.blockuserinfo{ top: 12px;	right: -4px;}
+			#header {padding: 0 0 20px;}
+			.breadcrumb {width:725px; margin:0;}
+			#right_column {padding: 0px 0 0;}
+			#thumbs_list {width:229px;}
+			#thumbs_list li a {width:107px;}
+			#thumbs_list li:first-child a {width:108px;}
+			#views_block {height:110px;}
+			#thumbs_list li {margin-right: 8px;}
+			#header_user #shopping_cart b span, #header_user #shopping_cart .ajax_cart_quantity{ font-size:17px;}
+			#header_user #shopping_cart .ajax_cart_product_txt,#header_user #shopping_cart .ajax_cart_product_txt_s{ display:none!important;}
+			/* ************************************************************************************************
+			  CATEGORY PAGE
+			************************************************************************************************ */
+			.product_sort {margin-right:20px;}
+			.product_sort form {margin: 0;}
+			.bottom_pagination {margin-top:10px;}
+			.layout_list li.last_item { margin-bottom:10px;}
+			.layout_list li .center_block {padding:0px 0px 18px 0px;width:71%;float:right;}
+			.layout_list li a.product_img_link { width:25%;}
+			.layout_list li .right_block { border:none;float:right;width:71%; height:auto; padding:0;}
+			.layout_list li .right_block .price,
+			.layout_list li .right_block .buy,
+			.layout_list li .right_block .button { margin: 0 10px 0 0!important;float:left;}
+			.layout_list li .right_block .compare {padding:16px 0 16px;width:100%;overflow:hidden;}
+			.layout_list li .right_block span.price { float:left;}
+			.layout_list li .center_block .product_desc.mob2 {display:block;}
+			.layout_list li .center_block .product_desc {display:none;}
+			.layout_grid li { padding:20px 0 0 0; margin-top:10px; }
+			.layout_grid li .button { margin-bottom:10px; float:right;}
+			.layout_grid li .button:nth-child(3) {float:none;}
+			.layout_grid li .exclusive{ margin-bottom:10px; float: left;}
+			.layout_grid li.product_list-3 {width:178px;}
+			.layout_grid li .product_img_link img,.list li .product_img_link  img {width:177px;}
+			.layout_grid li a.product_img_link { margin-left:0px;}
+			#product_list .right_block span.discount { float:right; margin:0;}
+			#product_list .right_block span.on_sale{ float:right;margin:-16px 0 0 0}
+			#subcategories { margin-bottom:0px;}
+			#subcategories ul li { width:119px;}
+			#subcategories ul li.product_list_6{ margin-right:10px;}
+			#subcategories ul li.product_list_4{ margin-right:0;}
+			#product_comparison . footable-row-detail-inner div strong{ font-size:30px;}
+			.instant .layout_grid li h3 {min-height: 54px;}
+			.layout_grid li h3 {min-height: 54px;}
+			#subcategories ul li.product_list_5{ margin-right:10px;}
+			#layered_form .b-core-ui-select {width: 144px}
+			#product_comparison .product_image_div a img{ width:70px;}
+			#product_comparison th{white-space: normal; padding:5px; text-align:center;}
+			#product_comparison .comparison_product_infos a.button {margin-bottom:10px;}
+			#ul_layered_price_0 span, .layered_weight > ul.store_list_filter > li span {margin: 5px 19px 19px 0;min-width: 30px;}
+			#product_comparison .product_desc { display:none;}
+			.products_block ul li .reduction {margin-left: 0;margin-right: 0;}
+			#layered_form div div ul {position: relative;}
+			#layered_form .select {
+				width:166px;
+				height:32px;
+				left:0!important; top:15px!important;
+			}
+			#cluetip {
+				left:50% !important;
+				margin-left:-225px;	
+			}
+			/* ************************************************************************************************
+			  BOX COLUMN
+			************************************************************************************************ */
+			.products_block ul li > div {width:94px;}
+			.products_block ul li a.products_block_img {width: 60px;}
+			
+			/* ************************************************************************************************
+			 CONTACT FORM
+			************************************************************************************************ */
+			#contact_form textarea#message {height: 200px;width:534px;}
+			#contact_form p.submit{ padding-top:20px;}
+			#contact_form p{ padding-top:7px; padding-left:0;}
+			#contact_form p.upload-file{ display:none;}
+			#contact_form .text input, #contact_form .password input{ width:100%;}
+			#contact_form select{ width:100%;}
+			#contact_form .select select { width:100%;}
+			/* ************************************************************************************************
+			 PRODUCT PAGE
+			************************************************************************************************ */
+			#idTab1 div, #idTab1 p {margin: 17px 0 20px;padding: 0;}
+			#idTab22 {padding:10px 20px 0px 0px;}
+			#idTab4 li .accessories_price {width:187px;}
+			#idTab4 li .accessories_desc {width:310px;}
+			#product_comments_block_tab div.comment div.comment_details {width: 350px;}
+			
+			#buy_block .row_1 p#quantity_wanted_p{ float:right; padding-top:20px; clear:right;}
+			.crossselling.page_product_box h3, .tab-video.page_product_box h3 {margin-top: 20px;}
+			#HOOK_SHOPPING_CART .crossselling.page_product_box h3{ margin-top:7px;}
+			#product_comments_block_extra .comments_advices a.read_rew { border:none; margin-bottom:10px;}
+			.page_product_box .carusel-inner a.prev{opacity:1;filter:alpha(opacity=100); left:40px;}
+			.page_product_box .carusel-inner a.next{opacity:1;filter:alpha(opacity=100); right:22px;}
+			#view_scroll_right,#view_scroll_left{ top:48px;}
+			/* ************************************************************************************************
+			 MANUFACTURE
+			************************************************************************************************ */
+			.mnf_sup_list li .left_side { float:none; padding: 0 0 0 0px;width:100%; border:none;}
+			.mnf_sup_list li .right_side{ float:none; border:none;  height: auto;min-height: auto; padding-left:0;}
+			.mnf_sup_list li .des-small { display:none;}
+			.mnf_sup_list li .logo{ margin-right:20px;}
+			.mnf_sup_list li .logo img{ margin-top:0;}
+			.mnf_sup_list li .left_side h3 a{margin-top:-3px;}
+			.mnf_sup_list li .left_side h3{ margin-top:13px;}
+			/* ************************************************************************************************
+			 ORDER
+			************************************************************************************************ */
+			footer .block .list-footer li {width:100%;}
+			footer .block h4{ margin-top:14px;}
+			table#cart_summary td.tdfirst { width: 83%;}
+			#order-list .history_detail .color-myaccount{ display:block;}
+			.list-order-step li {height: 250px;}
+			.list-order-step .img-order {margin-bottom:55px;}
+			.multishipping-cart .cart_ref{ padding:5px!important;}
+			table.multishipping-cart td {padding: 5px !important;}
+			
+			ul#address_delivery {width:39%;}
+			ul#address_invoice {width:39%;}
+			.addresses #id_address_delivery {width:100%;}
+			.user-panel .nav-tabs>li {
+				margin: 0 1% 5px;
+				width: 45%;
+			}
+			.user-panel .nav-tabs>.active>a, 
+			.user-panel .nav-tabs>.active>a:hover, 
+			.user-panel .nav-tabs>.active>a:focus {
+				border-top: 0px solid #ddd;
+				border-left: 0px solid #ddd;
+				border-right: 0px solid #ddd;
+				border-bottom: 0px solid #fff;
+				margin: 0;
+			}
+			.user-panel .nav-tabs > .active > a, 
+			.user-panel .nav-tabs > .active > a:hover, 
+			.user-panel .nav-tabs > .active > a:focus {
+				color: #b83850;
+			}
+}
+@media only screen and (min-width: 768px) {
+	.top_up { margin-top:-57px;}	
+}

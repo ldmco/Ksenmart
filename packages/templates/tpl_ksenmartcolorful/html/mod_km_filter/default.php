@@ -46,7 +46,7 @@
 						</label>		
 						<?php }else{ ?>
 						<label class="item <?php if ($manufacturer->selected) echo 'active'; ?>">
-							<input onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
+							<input style="display:none;" onclick="KMChangeFilter(this,'manufacturer');" type="checkbox" name="manufacturers[]" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'checked'; ?> />
 							<span><?php echo $manufacturer->title; ?></span>
 						</label>						
 						<?php } ?>
@@ -94,7 +94,7 @@
 						</label>		
 						<?php }else{ ?>
 						<label class="item <?php if ($value->selected) echo 'active'; ?>">
-							<input onclick="KMChangeFilter(this,'property_<?php echo $property->id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
+							<input style="display:none;" onclick="KMChangeFilter(this,'property_<?php echo $property->id; ?>');" type="checkbox" name="properties[]" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'checked'; ?> />
 							<span><?php echo $value->title; ?></span>
 						</label>						
 						<?php } ?>

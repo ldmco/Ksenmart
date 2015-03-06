@@ -9,10 +9,13 @@
     <copyright>Copyright © 2013 - All rights reserved.</copyright>
     <license>GNU General Public License v2.0</license>
     <description><![CDATA[]]></description>
+	
+	<scriptfile>install.php</scriptfile>
 
     <files>
             <filename>index.html</filename>
             <filename>index.php</filename>
+			<filename>install.php</filename>
             <filename>component.php</filename>
             <filename>favicon.ico</filename>
             <filename>params.ini</filename>
@@ -22,45 +25,37 @@
             <folder>js</folder>
             <folder>images</folder>
             <folder>html</folder>
+			<folder>install</folder>
 	</files>
 
     <positions>
-        <position>slider</position>
-        <position>main-menu</position>
-        <position>left</position>
-        <position>right</position>
-        <position>content_bottom_1</position>
-        <position>content_bottom_2</position>
-        <position>content_bottom_3</position>
-		<position>head_menu_1</position>
-		<position>head_menu_2</position>
-        <position>head_block_1</position>
-        <position>head_block_2</position>
-        <position>head_block_3</position>
-        <position>fixed_bloc_left</position>
-        <position>fixed_bloc_right</position>
-        <position>content_top</position>
-        <position>head_custom_block</position>
-        <position>footer_1</position>
-        <position>footer_2</position>
-        <position>footer_3</position>
-        <position>footer_4</position>
-        <position>copyright</position>
-        <position>bottom_header</position>
-        <position>related_products</position>
-        <position>fixed_block_login_panel</position>
-        <position>fixed_block_minicart</position>
-        <position>minicart</position>
+        <position>ks-menu</position>
+        <position>ks-info-menu</position>
+        <position>ks-auth</position>
+        <position>ks-clrful-header-info</position>
+        <position>ks-minicart</position>
+        <position>ks-profile</position>
+        <position>ks-categories</position>
+		<position>ks-filters</position>
+		<position>ks-shipping-info</position>
+		<position>ks-reviews</position>
+        <position>ks-search</position>
+        <position>ks-breadcrumbs</position>
+        <position>ks-main-banners</position>
+        <position>ks-main-products-list</position>
+        <position>ks-clrful-footer-info1</position>
+        <position>ks-clrful-footer-info2</position>
+        <position>ks-clrful-footer-info3</position>
+        <position>ks-clrful-footer-info4</position>
+        <position>ks-footer-copyright</position>
+        <position>ks-footer-ldm</position>
     </positions>
 
     <config>
         <fields name="params">
             <fieldset name="advanced">
-                <field name="site_logo" type="media" default="templates/ksenmartcolorful/images/logo.png" label="Выберите лого">
-                    <option value="white">Белый</option>
-                    <option value="gray">Серый</option>
-                    <option value="blue">Голубой</option>
-                </field>
+                <field name="site_logo" type="media" default="templates/ksenmartcolorful/images/logo.png" label="Выберите лого" />
+				
 				<field name="template_color" type="list" default="templates/ksenmartcolorful/css/green.css" label="Выберите цвет сайта">
                     <option value="templates/ksenmartcolorful/css/green.css">Зеленый</option>
                     <option value="templates/ksenmartcolorful/css/cyan.css">Голубой</option>
