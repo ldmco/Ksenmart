@@ -5,7 +5,7 @@
 	<?php } ?>
 	<form action="<?php echo $form_action; ?>" method="get">
 		<?php if ($mod_params['price']['view'] != 'none'){ ?>
-		<div class="prices tracks act">
+		<div class="prices tracks act"<?php echo $params->get('catalog_mode', 0) ? '' : 'style="display:none;"'; ?>>
 			<fieldset>
 				<?php if ($mod_params['price']['view'] == 'slider'): ?>
 				<div class="inputs">
