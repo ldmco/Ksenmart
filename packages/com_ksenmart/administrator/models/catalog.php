@@ -962,13 +962,18 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         return $category;
     }
 
-    function saveCategory($data) {
+    public function saveCategory($data) {
         $this->onExecuteBefore('saveCategory', array(&$data));
 
-        $data['alias'] = KSFunctions::CheckAlias($data['alias'], $data['id']);
-        if($data['alias'] == '') $data['alias'] = KSFunctions::GenAlias($data['title']);
-        $data['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : 0;
+        $data['parent_id']  = isset($data['parent_id']) ? $data['parent_id'] : 0;
+        $data['published']  = isset($data['published']) ? 1 : 0;
         $data['properties'] = isset($data['properties']) ? $data['properties'] : array();
+        
+        $data['alias'] = KSFunctions::CheckAlias($data['alias'], $data['id']);
+        if($data['alias'] == '') {
+            $data['alias'] = KSFunctions::GenAlias($data['title']);
+        }
+        
         $table = $this->getTable('categories');
         if(!$table->bindCheckStore($data)) {
             $this->setError($table->getError());
