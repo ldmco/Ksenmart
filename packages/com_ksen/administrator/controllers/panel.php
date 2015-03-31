@@ -27,5 +27,5 @@ class KsenControllerPanel extends KsenController {
         echo $response;
         JFactory::getApplication()->close();		
 	}
-
+	
 }
