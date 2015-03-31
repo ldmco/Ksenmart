@@ -15,7 +15,7 @@ class ksenmartcolorfulInstallerScript extends KSInstaller {
 		$this->installModule('Меню пользователя (Ksenmart)', 'mod_km_profile_info', 'ks-profile', '{}');		
 		$this->installModule('Категории (Ksenmart)', 'mod_km_categories', 'ks-categories', '{}');		
 		$this->installModule('Доставка (Ksenmart)', 'mod_km_shipping', 'ks-shipping-info', '{}');	
-		$this->installModule('Фильтры (Ksenmart)', 'mod_km_filters', 'ks-filters', '{}');			
+		$this->installModule('Фильтры (Ksenmart)', 'mod_km_filter', 'ks-filters', '{}', 'catalog');			
 		$this->installModule('Отзывы (Ksenmart)', 'mod_km_shop_reviews', 'ks-reviews', '{}');		
 		$this->installModule('Поиск по каталогу (Ksenmart)', 'mod_km_simple_search', 'ks-search', '{}');		
 		$this->installModule('Список товаров (Ksenmart)', 'mod_km_products_list', 'ks-main-products-list', '{}', 'main');		
