@@ -1,7 +1,7 @@
 <?php defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.application.component.modellist');
-abstract class JModelKSList extends JModelList {
+jimport('joomla.application.component.modelform');
+abstract class JModelKSForm extends JModelForm {
 
     protected $params = null;
 
