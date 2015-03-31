@@ -33,7 +33,7 @@ if ($km_params->get('modules_styles', true)) {
 require_once (dirname(__file__) . DS . 'helper.php');
 $products = ModKsenmartProductsListHelper::getList($params);
 $pagination = ModKsenmartProductsListHelper::$pagination;
-//print_r($pagination);
+$com_params = JComponentHelper::getParams('com_ksenmart');
 
 if (count($products) > 0) {
     $products = ModKsenmartProductsListHelper::setOtherParams($products);

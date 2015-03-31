@@ -39,53 +39,36 @@ class ModKsenmartProductsListHelper {
      */
     public static function getList($params) {
         
+        $type = $params->get('type');
         $Itemid = JRequest::getVar('categories', null);
-        $db     = JFactory::getDbo();
-        $query  = $db->getQuery(true);
-        $type   = $params->get('type');
         
-        $query->select('SQL_CALC_FOUND_ROWS ' . $db->qn('p.id'));
-        $query->from($db->qn('#__ksenmart_products', 'p'));
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('SQL_CALC_FOUND_ROWS  p.id');
+        $query->from('#__ksenmart_products AS p');
         
         if ($Itemid[0]) {
-            $query->leftjoin($db->qn('#__ksenmart_products_categories', 'c') . 'ON ' . $db->qn('c.product_id') . '=' . $db->qn('p.id'));
-            $query->where($db->qn('c.category_id') . '=' . $db->q($Itemid[0]));
+            $query->leftjoin('#__ksenmart_products_categories AS c ON c.product_id=p.id');
+            $query->where('c.category_id=' . $Itemid[0]);
         }
-
-        $query->where($db->qn('p.published') . '=1');
-        $query->where('(' . $db->qn('p.parent_id') . ' = 0)');
-        $query->group($db->qn('p.id'));
-
-        switch ($type) {
-            case 'recommendation':
-                $query->where('(' . $db->qn('p.recommendation') . ' = 1)');
-            break;
-            case 'promotion':
-                $query->where('(' . $db->qn('p.promotion') . ' = 1)');
-            break;
-            case 'hot':
-                $query->where('(' . $db->qn('p.hot') . ' = 1)');
-            break;
-            case 'new':
-                $query->where('(' . $db->qn('p.new') . ' = 1)');
-            break;
+        $query->where('p.published = 1');
+        
+        if ($type == 'hot') {
+            $query->where('(p.hot = 1)');
         }
-
-        switch ($type) {
-            case 'recommendation':
-            case 'promotion':
-            case 'hot':
-            case 'new':
-                $query->order('RAND()');
-            break;
-            case 'hits':
-                $query->order($db->qn('p.hits') . ' DESC');
-            break;
-            
-            default:
-                $query->order($db->qn('p.ordering') . ' ASC');
-            break;
+        if ($type == 'new') {
+            $query->where('(p.new = 1)');
         }
+        if ($type == 'recommendation') {
+            $query->where('(p.recommendation = 1)');
+        }
+        if ($type == 'promotion') {
+            $query->where('(p.promotion = 1)');
+        }
+        
+        $query->where('(p.parent_id = 0)');
+        $query->order('p.ordering ASC');
+        $query->group('p.id');
         
         $db->setQuery($query, 0, $params->get('col', 10));
         $list = $db->loadObjectList();

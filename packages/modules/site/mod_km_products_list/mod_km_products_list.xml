@@ -65,6 +65,8 @@
 					<option
 						value="hot">MOD_KM_PRODUCTS_LIST_HITS</option>
 					<option
+						value="promotion">MOD_KM_PRODUCTS_LIST_PROMOTIONS</option>						
+					<option
 						value="ordering">MOD_KM_PRODUCTS_LIST_TOP_ORDERED</option>	
 					<option
 						value="hits">MOD_KM_PRODUCTS_LIST_TOP_HITS</option>		

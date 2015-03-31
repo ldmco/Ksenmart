@@ -3,7 +3,7 @@ var priceTime = 1000;
 
 jQuery(document).ready(function() {
 
-if (typeof(view) !== "undefined"){
+	if (typeof(view) !== "undefined"){
 
 		jQuery('.mod_ksm_filter .tracker').slider({
 			range: true,
@@ -17,7 +17,7 @@ if (typeof(view) !== "undefined"){
 			},
 			stop: function(event, ui) {
 				priceTimer = false;
-				priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
+				priceTimer = setTimeout("KMChangeFilter('prices')", priceTime);
 			}
 		});
 
@@ -44,7 +44,7 @@ if (typeof(view) !== "undefined"){
 			var res = numcheck.test(keychar);
 			if (res) {
 				priceTimer = false;
-				priceTimer = setTimeout("KMChangeFilter('prices','')", priceTime);
+				priceTimer = setTimeout("KMChangeFilter('prices')", priceTime);
 			}
 			return res;
 		});
@@ -70,13 +70,12 @@ jQuery(window).load(function() {
 	}
 });
 
-
-function KMChangeFilter(obj, click) {
+function KMChangeFilter(obj) {
     var form = jQuery('.mod_ksm_filter form');
     var item = jQuery(obj).parents('.item');
+	var filter_button = jQuery(obj).is('.filter-button');
     var filter_url = URI_ROOT + 'index.php?option=com_ksenmart&view=catalog';
     var page_url = 'index.php?option=com_ksenmart&view=catalog';
-    clicked = click;
 	
 	if (item.find('input').is('[type="radio"]')) {
 		if (item.is('.active')) {
@@ -141,7 +140,6 @@ function KMChangeFilter(obj, click) {
     filter_url += '&' + formdata;
 	filter_url += '&Itemid=' + shopItemid;
     page_url += '&' + formdata;
-    page_url += '&clicked=' + clicked;
     page_url += '&Itemid=' + shopItemid;
 
     jQuery.ajax({
@@ -159,8 +157,12 @@ function KMChangeFilter(obj, click) {
         return false;
     }
 
-    history.pushState(null, null, page_url);
-    KMSetFilter(filter_url, true);
+	if (show_filter_button == 0 || filter_button){
+		history.pushState(null, null, page_url);
+		KMSetFilter(filter_url, true);
+	} else {
+		KMSetFilter(filter_url, false);
+	}
 
     return true;
 }
@@ -208,4 +210,16 @@ function KMSetFilter(filter_url, replace_content) {
 			form.show();
         }
     });
+}
+
+function KMClearFilter(){
+	var form = jQuery('.mod_ksm_filter form');
+	
+	jQuery('.mod_ksm_filter input[name="price_less"]').val(price_min);
+	jQuery('.mod_ksm_filter input[name="price_more"]').val(price_max);	
+	form.find('.manufacturers, .properties, .countries').find('.active').removeClass('active');
+	form.find('.manufacturers, .properties, .countries').find('input[type="checkbox"], input[type="radio"]').removeAttr('checked');
+	form.find('.manufacturers, .properties, .countries').find('select').val('');
+	
+	KMChangeFilter('clear');
 }
