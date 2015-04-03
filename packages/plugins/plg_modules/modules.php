@@ -1,5 +1,7 @@
 <?php defined('_JEXEC') or die('Restricted access');
 
+use Joomla\Registry\Registry;
+
 if (!class_exists('KMPlugin')) {
 	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmplugin.php');
 }
@@ -10,6 +12,58 @@ class plgKMPluginsModules extends KMPlugin {
 	
 	function __construct(&$subject, $config) {
 		parent::__construct($subject, $config);
+	}
+	
+	public static function __callStatic($name,array $func_params)
+    {
+		$params = self::getParams();
+		$layouts  = $params->get('layouts', array());		
+		
+		foreach($layouts as $layout){
+			$func = 'on'.$layout->event.'DisplayKSM'.$layout->layout;
+			if ($name == $func){
+				$view = $func_params[0];
+				$tpl = &$func_params[1];
+				$html = &$func_params[2];
+				
+				$html .= KSSystem::loadModules($layout->position);
+			}
+		}
+       
+		return;
+    }
+
+	function getParams(){
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select('params')
+			->from('#__extensions')
+			->where('enabled = 1')
+			->where('type =' . $db->quote('plugin'))
+			->where('folder =' . $db->quote('kmplugins'))
+			->where('element =' . $db->quote('modules'));
+		$db_params = $db->setQuery($query)->loadResult();
+		
+		$params = new Registry;
+		if (!empty($db_params))
+		{
+			$params->loadString($db_params);
+		}	
+
+		return $params;
+	}
+	
+	function onBeforeStartComponent(){
+		$params = self::getParams();
+		$layouts  = $params->get('layouts', array());	
+		
+		$dispatcher = JDispatcher::getInstance();
+		foreach($layouts as $layout){
+			$func = 'on'.$layout->event.'DisplayKSM'.$layout->layout;
+			$dispatcher->register($func, 'plgKMPluginsModules::'.$func);
+		}
+		
+		return;
 	}
 
 	public function onAfterDispatch(){
@@ -72,4 +126,5 @@ class plgKMPluginsModules extends KMPlugin {
 		}
 		return true;
 	}
+	
 }

@@ -26,7 +26,7 @@ class JFormFieldKSModules extends JFormField {
         $query = $db->getQuery(true);
         $query->select('a.id, a.title, a.position, a.published, map.menuid')->from('#__modules AS a')->join('LEFT', sprintf('#__modules_menu AS map ON map.moduleid = a.id AND map.menuid IN (0, %1$d, -%1$d)', KSSystem::getShopItemid()))->select('(SELECT COUNT(*) FROM #__modules_menu WHERE moduleid = a.id AND menuid < 0) AS ' . $db->quoteName('except'));
         
-        $query->select('ag.title AS access_title')->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access')->where('a.published >= 0')->where('a.client_id = 0')->order('a.position, a.ordering');
+        $query->select('ag.title AS access_title')->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access')->where('a.published >= 0')->where('a.client_id = 0')->where('a.title != '.$db->quote(''))->order('a.position, a.ordering');
         
         $db->setQuery($query);
         $modules = $db->loadObjectList();
@@ -39,9 +39,8 @@ class JFormFieldKSModules extends JFormField {
         foreach ($modules as $module) {
             if (is_null($module->menuid) && (!$module->except || $module->menuid < 0)) continue;
             
-            $selected_pages = (isset($this->value[$module->position]) && isset($this->value[$module->position][$module->id]['pages'])) ? $this->value[$module->position][$module->id]['pages'] : array(0);
-            $selected_cats = (isset($this->value[$module->position]) && isset($this->value[$module->position][$module->id]['categories'])) ? $this->value[$module->position][$module->id]['categories'] : array(0);
-            
+            $selected_pages = isset($this->value[$module->position][$module->id]['pages']) ? $this->value[$module->position][$module->id]['pages'] : array(0);
+            $selected_cats = isset($this->value[$module->position][$module->id]['categories']) ? $this->value[$module->position][$module->id]['categories'] : array(0);
             $html.= '<tr>';
             $html.= '	<td class="title">' . $module->title . '</th>';
             $html.= '	<td width="10%" class="nowrap hidden-phone">' . $module->position . '</th>';
