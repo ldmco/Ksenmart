@@ -20,11 +20,18 @@
 			<file driver="mysql" charset="utf8">sql/install.sql</file>
 		</sql>
 	</install>
+
 	<uninstall>
 		<sql>
 			<file driver="mysql" charset="utf8">sql/uninstall.sql</file>
 		</sql>
 	</uninstall>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
 
     <media folder="media" destination="com_ksen">
 		<folder>images</folder>

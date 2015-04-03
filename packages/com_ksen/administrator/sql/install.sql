@@ -136,3 +136,10 @@ CREATE TABLE IF NOT EXISTS `#__ksen_widgets_users_config` (
   `config` text NOT NULL,
   PRIMARY KEY (`user_id`,`extension`,`widget_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `#__ksen_ping` (
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `#__ksen_ping` (`date`) VALUES
+('0000-00-00');
