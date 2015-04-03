@@ -34,4 +34,26 @@ abstract class JModelKSList extends JModelList {
         
         return $this;
     }
+	
+    public function getForm($data = array() , $loadData = true, $control = 'jform') {
+        
+        JKSForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+        JKSForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+        
+        if (!$this->form) {
+            $this->form = $this->getName();
+        }
+        
+        $form = JKSForm::getInstance($this->ext_name_com . '.' . $this->form, $this->form, array(
+            'control' => $control,
+            'load_data' => $loadData
+        ));
+        
+        if (empty($form)) 
+        return false;
+        
+        
+        return $form;
+    }
+	
 }

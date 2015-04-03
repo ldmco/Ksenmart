@@ -6,7 +6,7 @@ class JFormFieldKSMFilterPrice extends JFormField {
 	
 	public function getInput() {
 		$db = JFactory::getDBO();
-		$view = isset($this->value['view']) ? $this->value['view'] : 'slider';
+		$view = isset($this->value['view']) ? $this->value['view'] : 'none';
 		$html = '<div style="margin-left:-180px;">';
 		$html .= '<div class="'.$this->element['name'].'">';
 		$html .= '	<h3>'.JText::_($this->element['title']).'</h3>';

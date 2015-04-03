@@ -71,14 +71,12 @@ class KsenMartViewCatalog extends JViewKS {
                     $this->assignRef('manufacturer', $manufacturer);
                     $this->setLayout('manufacturer');
                 } elseif(count($this->state->get('com_ksenmart.countries', array())) == 1) {
-                    $rows       = $this->get('Manufacturers');
                     $country    = $this->get('Country');
                     $title      = $this->get('CountryTitle');
                     
                     $document->setTitle($title);
                     $model->setCountryMetaData();
                     
-                    $this->assignRef('rows', $rows);
                     $this->assignRef('country', $country);
                     $this->setLayout('country');
                 } elseif(count($this->state->get('com_ksenmart.users', array())) == 1) {
@@ -111,16 +109,16 @@ class KsenMartViewCatalog extends JViewKS {
                         }
                     }
                 }
-                if($this->getLayout() != 'country') {
-                    $pagination = $this->get('Pagination');
-                    $rows       = $this->get('Items');
-                    $sort_links = $this->get('SortLinks');
 
-                    $this->assignRef('sort_links', $sort_links);
-                    $this->assignRef('rows', $rows);
-                    $this->assignRef('pagination', $pagination);
-                    $this->assignRef('sort_links', $sort_links);
-                }
+				$pagination = $this->get('Pagination');
+				$rows       = $this->get('Items');
+				$sort_links = $this->get('SortLinks');
+
+				$this->assignRef('sort_links', $sort_links);
+				$this->assignRef('rows', $rows);
+				$this->assignRef('pagination', $pagination);
+				$this->assignRef('sort_links', $sort_links);
+
                 $seo_text = $this->get('SeoText');
                 $this->assignRef('seo_text', $seo_text);
                 break;

@@ -10,8 +10,9 @@
 				<div class="span10">
 					<div class="info clearfix">
 						<div class="name pull-left">
-							<?php echo $comment->name; ?>
+							<?php echo $comment->comment_name; ?>
 						</div>
+						<br clear="both">
 						<div class="rating pull-left">
 							<?php for($k=1;$k<6;$k++) { if (floor($comment->rate)>=$k) { ?>
 								<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star-small.png" alt="" />

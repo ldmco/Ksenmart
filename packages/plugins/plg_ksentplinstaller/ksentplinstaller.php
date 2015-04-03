@@ -9,7 +9,7 @@ if (!class_exists('KSInstaller')) {
 	require (JPATH_ROOT . '/plugins/system/ksencore/core/helpers/common/installer.php');
 }
 
-class plgExtensionKsentplinstaller extends KMPlugin {
+class plgSystemKsentplinstaller extends KMPlugin {
 	
 	private $eid = 0;
 	private $installer = null;
@@ -62,7 +62,7 @@ class plgExtensionKsentplinstaller extends KMPlugin {
 	private function processInstallTemplate()
 	{
 		$manifest		= $this->installer->getManifest();
-		$manifestScript = (string)$manifest->scriptfile;
+		$manifestScript = (string)$manifest->installfile;
 		$element        = $name = strtolower(JFilterInput::getInstance()->clean((string) $manifest->name, 'cmd'));
 
 		if ($manifestScript)
@@ -97,7 +97,7 @@ class plgExtensionKsentplinstaller extends KMPlugin {
 	private function processUninstallTemplate()
 	{
 		$manifest		= $this->installer->getManifest();
-		$manifestScript = (string)$manifest->scriptfile;
+		$manifestScript = (string)$manifest->installfile;
 		$element        = $name = strtolower(JFilterInput::getInstance()->clean((string) $manifest->name, 'cmd'));
 
 		if ($manifestScript)

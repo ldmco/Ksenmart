@@ -76,6 +76,8 @@ class KsenMartViewProduct extends JViewKS {
                 if (!JFactory::getConfig()->get('config.caching', 0)) {
                     $path->addItem($this->product->title);
                 }
+                $model->form = 'review';
+                $this->reviewform = $model->getForm();				
             } else {
                 $this->setLayout('no_product');
             }

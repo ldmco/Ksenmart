@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+
+		<field
+			name="categories"
+			type="ksmcategories"
+			label="KSM_EXPORTIMPORT_EXPORT_CSV_CATEGORIES_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>
+		
+		<field
+			name="unic"
+			type="list"
+			label="KSM_EXPORTIMPORT_EXPORT_CSV_PRODUCT_UNIQ_FIELD"
+			default="product_code"
+			labelclass="inputname"
+			class="sel"
+		>	
+			<option value="product_code">KSM_EXPORTIMPORT_EXPORT_CSV_PRODUCT_CODE</option>
+			<option value="title">KSM_EXPORTIMPORT_EXPORT_CSV_PRODUCT_NAME</option>
+			<option value="id">KSM_EXPORTIMPORT_EXPORT_CSV_PRODUCT_ID</option>
+		</field>
+		
+	</fieldset>
+</form>

@@ -80,7 +80,7 @@
                     </div>
                     <div class="bottom span12">
                         <span class="delta">&diams;</span>
-                        <?php if((!$this->params->get('only_auth_buy', 0) && (!empty($this->product->price) && $this->product->is_parent == 0 && $flag)) && $this->params->get('catalog_mode', 0) == 0){ ?>
+                        <?php if (($this->params->get('only_auth_buy',0) == 0 || ($this->params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)) && (!empty($this->product->price) && $this->product->is_parent == 0 && $flag) && !$this->params->get('catalog_mode', 0)){ ?> 
                             <div class="buy">
                                 <button type="submit" class="btn btn-success row-fluid">Купить</button>
                             </div>

@@ -141,18 +141,6 @@ jQuery(document).ready(function() {
         return false;
     });
 
-    jQuery('body').on('click', '#comment_form img[rate]', function() {
-        var rateWrapp = jQuery(this).parent();
-        var rate = jQuery(this).attr('rate');
-
-        jQuery('#comment_form #comment_rate').val(rate);
-        rateWrapp.find('img').attr('src', URI_ROOT + 'components/com_ksenmart/images/star2-small.png');
-
-        for (var k = 1; k <= rate; k++) {
-            rateWrapp.find('img[rate="' + k + '"]').attr('src', URI_ROOT + 'components/com_ksenmart/images/star-small.png');
-        }
-    });
-
     jQuery('.spy_price').click(function() {
         if (user_id == 0) {
             jQuery('.popup').hide();

@@ -26,7 +26,7 @@
 			</td>
 			<td valign="top">
 				<div id="exportinport_content">
-					<?php echo $this->loadTemplate($this->type);?>
+					<?php echo $this->loadTemplate('text');?>
 				</div>	
 			</td>	
 		</tr>	

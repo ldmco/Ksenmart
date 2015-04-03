@@ -1,12 +1,10 @@
-<?php
-defined( '_JEXEC' ) or die;
-?>
-<div class="catalog">
+<?php defined( '_JEXEC' ) or die; ?>
+<div class="">
 	<h2>Отзывы</h2>
-	<div id="reviews" class="items comment-items">
+	<div id="reviews" class="items shop_reviews comment-items">
 	<?php if (!empty($this->rows)):?>
 	<?php foreach($this->rows as $comment):?>
-	<?php require('comments_item.php');?>
+	<?php echo $this->loadTemplate('item', null, array('review' => $comment)); ?>
 	<?php endforeach;?>
 	<?php else:?>
 	<?php require_once('no_comments.php');?>

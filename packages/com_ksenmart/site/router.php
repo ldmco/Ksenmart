@@ -28,10 +28,6 @@ function KsenMartBuildRoute(&$query) {
         break;
         case 'comments':
             $segments[] = 'reviews';
-            if (isset($query['layout']) && !empty($query['layout'])) {
-                $segments[] = $query['layout'];
-                unset($query['layout']);
-            }
             if (isset($query['id']) && !empty($query['id']) && $query['id'] != 0) {
                 $segments[] = $query['id'];
                 unset($query['id']);
@@ -324,10 +320,6 @@ function KsenMartBuildRoute(&$query) {
                 $segments[] = 'order_dir=' . $query['order_dir'];
                 unset($query['order_dir']);
             }
-            if (isset($query['clicked'])) {
-                $segments[] = 'clicked=' . $query['clicked'];
-                unset($query['clicked']);
-            }
             if (isset($query['layout']) && $query['layout'] == 'manufacturers') {
                 $segments[] = $query['layout'];
                 unset($query['layout']);
@@ -351,6 +343,7 @@ function KsenMartBuildRoute(&$query) {
         $countries = array();
         
         $vars['view'] = 'catalog';
+        
         foreach ($segments as $segment) {
             
             switch ($segment) {
@@ -364,8 +357,8 @@ function KsenMartBuildRoute(&$query) {
                     break;
                 case 'reviews':
                     $vars['view'] = 'comments';
-                    if (isset($segments[1])) $vars['layout'] = $segments[1];
-                    if (isset($segments[2])) $vars['id'] = $segments[2];
+                    if (isset($segments[1])) $vars['id'] = $segments[1];
+                    
                     break;
                 case 'searching':
                     $vars['view'] = 'search';
@@ -440,9 +433,6 @@ function KsenMartBuildRoute(&$query) {
                             break;
                             case 'order_dir':
                                 $vars['order_dir'] = $segment[1];
-                            break;
-                            case 'clicked':
-                                $vars['clicked'] = $segment[1];
                             break;
                             default:
                                 $segment = explode(';', $segment[1]);

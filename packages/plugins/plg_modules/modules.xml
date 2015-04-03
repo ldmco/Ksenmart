@@ -36,9 +36,13 @@
 
     <config>
         <fields name="params">
-            <fieldset name="basic" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+            <fieldset name="visibility" label="KSM_PLUGIN_MODULES_VISIBILITY_SLIDER" addfieldpath="/plugins/kmplugins/modules/assets/fields">
                 <field name="modules" type="ksmodules" />
             </fieldset>
+			
+            <fieldset name="layouts" label="KSM_PLUGIN_MODULES_LAYOUTS_SLIDER" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+                <field name="layouts" type="kslayoutmodules" />
+            </fieldset>			
         </fields>
     </config>
 </extension>

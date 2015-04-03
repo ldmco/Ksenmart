@@ -4,7 +4,7 @@
 	<div class="row-fluid">
 		<ul class="thumbnails items catalog-items">
 			<?php foreach($products as $product) { ?>
-				<?php echo KSSystem::loadTemplate(array('product' => $product, 'params' => $params)); ?>
+				<?php echo KSSystem::loadTemplate(array('product' => $product, 'params' => $com_params)); ?>
 			<?php } ?>
 		</ul>
     </div>

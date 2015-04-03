@@ -3,5 +3,5 @@ UPDATE
 SET 
 	`enabled` = '1'
 WHERE 
-	`element` = 'ksentplinstaller' AND `type` = 'plugin' AND `folder` = 'extension'
+	`element` = 'ksentplinstaller' AND `type` = 'plugin' AND `folder` = 'system'
 ;

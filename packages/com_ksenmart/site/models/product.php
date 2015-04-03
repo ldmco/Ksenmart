@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die;
 
-KSSystem::import('models.modelkslist');
-class KsenMartModelProduct extends JModelKSList {
+KSSystem::import('models.modelksform');
+class KsenMartModelProduct extends JModelKSForm {
     var $_id = null;
     var $_product = null;
     

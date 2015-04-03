@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="plugin" group="extension" version="2.5.0" method="upgrade">
-    <name>KSM_EXTENSION_KSENTPLINSTALLER</name>
+<extension type="plugin" group="system" version="2.5.0" method="upgrade">
+    <name>KSM_SYSTEM_KSENTPLINSTALLER</name>
     <creationDate>March 2015</creationDate>
     <author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
@@ -8,12 +8,15 @@
 	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <version>1.0</version>
-    <description>KSM_EXTENSION_KSENTPLINSTALLER_DESCRIPTION</description>
+    <description>KSM_SYSTEM_KSENTPLINSTALLER_DESCRIPTION</description>
+	
+	<scriptfile>install.php</scriptfile>
 
     <files>
 		<filename plugin="ksentplinstaller">ksentplinstaller.php</filename>
         <filename>index.html</filename>
-        <folder>sql</folder>
+        <folder>install</folder>
+		<folder>sql</folder>
     </files>
 
     <install>
@@ -23,7 +26,7 @@
     </install>
     
     <languages folder="languages">
-		<language tag="ru-RU">ru-RU/ru-RU.plg_extension_ksentplinstaller.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_system_ksentplinstaller.sys.ini</language>
     </languages>
 	
 </extension>
