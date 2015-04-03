@@ -3,10 +3,6 @@
 KSSystem::import('models.modelksadmin');
 class KsenMartModelCatalog extends JModelKSAdmin {
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     protected function populateState() {
         $this->onExecuteBefore('populateState');
 

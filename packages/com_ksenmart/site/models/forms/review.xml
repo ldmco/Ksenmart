@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="default">
+		<field
+			name="comment_name"
+			type="text"
+			description="KSM_PRODUCT_POST_A_REVIEW_NAME_LBL"
+			label="KSM_PRODUCT_POST_A_REVIEW_NAME_LBL"
+			labelclass="control-label"
+			required="true"
+			size="30"
+		/>
+		
+		<field
+			name="comment_rate"
+			type="ksmrate"
+			description="KSM_PRODUCT_POST_A_REVIEW_RATE_LBL"
+			label="KSM_PRODUCT_POST_A_REVIEW_RATE_LBL"
+			labelclass="control-label"
+		/>		
+		
+		<field
+			name="comment_comment"
+			type="textarea"
+			description="KSM_PRODUCT_POST_A_REVIEW_COMMENT_LBL"
+			label="KSM_PRODUCT_POST_A_REVIEW_COMMENT_LBL"
+			labelclass="control-label"
+		/>			
+		
+		<field
+			name="comment_good"
+			type="textarea"
+			description="KSM_PRODUCT_POST_A_REVIEW_HIGHS_LBL"
+			label="KSM_PRODUCT_POST_A_REVIEW_HIGHS_LBL"
+			labelclass="control-label"
+		/>	
+		
+		<field
+			name="comment_bad"
+			type="textarea"
+			description="KSM_PRODUCT_POST_A_REVIEW_LOWS_LBL"
+			label="KSM_PRODUCT_POST_A_REVIEW_LOWS_LBL"
+			labelclass="control-label"
+		/>	
+		
+		<field
+			name="captcha"
+			type="captcha"
+			label="KSM_PRODUCT_POST_A_REVIEW_CAPTCHA_LBL"
+			description="KSM_PRODUCT_POST_A_REVIEW_CAPTCHA_LBL"
+			labelclass="control-label"
+			validate="captcha"
+		/>
+	</fieldset>
+</form>

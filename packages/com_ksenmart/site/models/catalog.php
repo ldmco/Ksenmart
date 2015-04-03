@@ -139,8 +139,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $this->_ids = $this->getIdsByProperties($this->_properties);
         }
         if (count($this->_countries) > 0) {
-            $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
-            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
+            $this->_ids = $this->getIdsByCountries($this->_countries);
         }
         if (count($this->_manufacturers) > 0) {
             $this->_ids = $this->getIdsByManufacturers($this->_manufacturers);
@@ -389,29 +388,30 @@ class KsenMartModelcatalog extends JModelKSList {
      * @param mixed $manufacturers
      * @return
      */
-    private function getIdsByCountries($countries, $manufacturers){
-        $this->onExecuteBefore('getIdsByCountries', array(&$countries, &$manufacturers));
+    private function getIdsByCountries($countries){
+        $this->onExecuteBefore('getIdsByCountries', array(&$countries));
         
         if(!empty($countries)){
             $where = array();
-            $where[] = "(country IN (" . implode(',', $countries) . "))";
-            if (count($manufacturers) > 0){
-                $where[] = "(id IN (" . implode(',', $manufacturers) . "))";
-                            
+            if(count($this->_ids) > 0){
+                $where[] = "(p.id IN (" . implode(',', $this->_ids) . "))";
             }
+
+			$query = $this->_db->getQuery(true);
+			$query->select('m.id')->from('#__ksenmart_manufacturers as m')->where('m.country in (' . implode(',', $countries) . ')');
+			$this->_db->setQuery($query);
+			$manufacturers = $this->_db->loadColumn();	
+			if(count($manufacturers) > 0)
+				$where[] = "(p.manufacturer IN (" . implode(',', $manufacturers) . "))";
+        
             $query = $this->_db->getQuery(true);
-            $query
-                ->select('DISTINCT id')
-                ->from('#__ksenmart_manufacturers')
-                ->where($where)
-            ;
+            $query->select('p.id')->from('#__ksenmart_products as p')->where($where);
             $this->_db->setQuery($query);
-            $manufacturers = $this->_db->loadColumn();
-            $manufacturers = count($manufacturers) > 0 ? $manufacturers : array(0);
-            $this->setState('com_ksenmart.manufacturers', $manufacturers);
+            $this->_ids = $this->_db->loadColumn();
+            $this->_ids = count($this->_ids) > 0 ? $this->_ids : array(0);  
             
-            $this->onExecuteAfter('getIdsByCountries', array(&$manufacturers));
-            return $manufacturers;
+            $this->onExecuteAfter('getIdsByCountries', array(&$this->_ids));        
+            return $this->_ids;
         }
         return array(0);
     }
@@ -488,8 +488,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $ids = $this->getIdsByCategories($this->_categories);
         }
         if (count($this->_countries) > 0) {
-            $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
-            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
+            $ids = $this->getIdsByCountries($this->_countries);
         }
         if (count($this->_manufacturers) > 0) {
             $ids = $this->getIdsByManufacturers($this->_manufacturers);
@@ -549,7 +548,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $this->_ids = $this->getIdsByProperties($this->_properties);
         }
         if (count($this->_countries) > 0) {
-            $this->_manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
+            $this->_ids = $this->getIdsByCountries($this->_countries);
         }
         
         $where = $this->getFilterDefaultParams();

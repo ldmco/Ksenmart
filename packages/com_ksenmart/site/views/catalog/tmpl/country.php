@@ -5,13 +5,17 @@
 	<?php if (!empty($this->seo_text)):?>
 	<div class="catalog-description"><?php echo $this->seo_text;?></div>
 	<?php endif;?>
-	<?php if (!empty($this->rows)){ ?>
-        <ul class="nav nav-list">
-        <?php foreach($this->rows as $manufacturer){ ?>
-    		<li><a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=catalog&manufacturers[]='.$manufacturer->id.'&clicked=manufacturers');; ?>" title="<?php echo $manufacturer->title; ?>"><?php echo $manufacturer->title; ?></a></li>
+    <?php echo $this->loadTemplate('sortlinks', 'default'); ?>
+    <div class="row-fluid layout_<?php echo $this->layout_view; ?> layout_block" data-layout="<?php echo $this->layout_view; ?>">
+        <?php if(!empty($this->rows)){ ?>
+        <ul class="thumbnails items catalog-items">
+    	<?php foreach($this->rows as $product){ ?>
+            <?php echo $this->loadTemplate('item', 'default', array('product' => $product, 'params' => $this->params)); ?>
     	<?php } ?>
         </ul>
-	<?php }else{ ?>
-		<?php echo $this->loadTemplate('nomanufacturers', 'default'); ?>
-    <?php } ?>
+        <?php }else{ ?>
+        <?php echo $this->loadTemplate('noproducts', 'default'); ?>
+        <?php } ?>
+    </div>
+    <?php echo $this->loadTemplate('pagination', 'default'); ?>
 </div>

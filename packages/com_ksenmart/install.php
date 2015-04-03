@@ -2,10 +2,6 @@
 
 class com_ksenmartInstallerScript {
 	
-	public function install($parent) {
-		file_get_contents('http://update.ksenmart.ru/statistic/?domain=' . $_SERVER['HTTP_HOST']);
-	}
-	
 	public function preflight($type, $parent) {}
 	
 	public function postflight($type, $parent) {

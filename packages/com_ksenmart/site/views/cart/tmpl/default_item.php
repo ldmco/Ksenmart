@@ -32,7 +32,7 @@
 	<td style="width: 12%;">
         <div class="input-prepend input-append quant quantt">
             <button type="button" class="btn minus">-</button>
-            <input type="text" price="<?php echo $this->item->price; ?>" product_id="<?php echo $this->item->product->id; ?>" product_packaging="<?php echo $this->item->product->product_packaging; ?>" count="<?php echo $this->item->count; ?>" data-item_id="<?php echo $this->item->id; ?>" class="inputbox span5 text-center" value="<?php echo $this->item->count; ?>" />
+            <input type="text" price="<?php echo $this->item->price; ?>" product_id="<?php echo $this->item->product->id; ?>" product_packaging="<?php echo $this->item->product->product_packaging; ?>" count="<?php echo $this->item->count; ?>" data-item_id="<?php echo $this->item->id; ?>" class="inputbox span1 text-center" value="<?php echo $this->item->count; ?>" />
             <button type="button" class="btn plus">+</button>
         </div>
 	</td>

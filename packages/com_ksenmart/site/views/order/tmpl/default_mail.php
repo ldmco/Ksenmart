@@ -15,9 +15,9 @@
 		<td><?php echo $this->order->address_fields; ?></td>
 	</tr>
 	<tr>
-		<td>Номер телефона:</td>
-		<td><?php echo $this->order->customer_fields['phone']; ?></td>
-	</tr>
+		<td>Телефон:</td>
+		<td><?php echo $this->order->phone; ?></td>
+	</tr>	
 </table>	
 <h2>Заказ</h2>
 <table id="cart_content_tbl" cellspacing="0">
@@ -36,9 +36,9 @@
     <?php foreach($this->order->items as $item) { ?>
     		<tr class="row_odd">
     			<td class="vid_produkt">
-    				<a class="title_lookp" href="<?php echo JRoute::_(JURI::root() . 'index.php?option=com_ksenmart&view=product&id=' . $item->product_id . ":" . $item->alias . '&Itemid=' . KSSystem::getShopItemid()); ?>" ><?php echo $item->title; ?></a>
-                    <?php if($item->product_code != '') { ?>
-                        <i>Арт. <?php echo $item->product_code; ?></i>
+    				<a class="title_lookp" href="<?php echo JURI::root() . JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $item->product_id . ':' . $item->product->alias . '&Itemid=' . KSSystem::getShopItemid()); ?>" ><?php echo $item->product->title; ?></a>
+                    <?php if($item->product->product_code != '') { ?>
+                        <i>Арт. <?php echo $item->product->product_code; ?></i>
                     <?php } ?>
                 
                     <?php foreach($item->properties as $item_property) { ?>
