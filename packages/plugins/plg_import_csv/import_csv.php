@@ -97,7 +97,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
         return true;
     }	
 	
-    function getProperties() {
+    function getProperties($public = true) {
 		$db = JFactory::getDBO();
 		
         $query = $db->getQuery(true);

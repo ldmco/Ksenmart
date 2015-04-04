@@ -3,15 +3,10 @@
 KSSystem::import('models.modelksadmin');
 class KsenMartModelExportImport extends JModelKSAdmin {
 
-    function __construct() {
-        parent::__construct();
-    }
-
     protected function populateState($ordering = null, $direction = null){
         $this->onExecuteBefore('populateState');
 
-        $app = JFactory::getApplication();
-
+        $app    = JFactory::getApplication();
         $params = JComponentHelper::getParams('com_ksenmart');
 
         $type = $app->getUserStateFromRequest('com_ksenmart.exportimport.type', 'type', 'text');
@@ -24,7 +19,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         $this->onExecuteAfter('populateState');
     }
 
-    function getProperties() {
+    function getProperties($public = true) {
         $this->onExecuteBefore('getProperties');
 
         $query = $this->_db->getQuery(true);
