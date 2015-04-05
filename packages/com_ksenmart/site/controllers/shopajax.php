@@ -641,18 +641,21 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 	}
 	
 	public function get_product_price_with_properties() {
-		$db = JFactory::getDBO();
-		$pid = $this->input->get('id', 0, 'int');
-		$val_prop_id = $this->input->get('val_prop_id', 0, 'int');
-		$prop_id = $this->input->get('prop_id', 0, 'int');
-		$properties = KSMProducts::getProperties($pid, $prop_id, $val_prop_id);
-		$productProperties = KSMProducts::getProperties($pid);
-		$prices = KSMProducts::getProductPrices($pid);
 		
+		$pid                = $this->input->get('id', 0, 'int');
+		$val_prop_id        = $this->input->get('val_prop_id', 0, 'int');
+		$prop_id            = $this->input->get('prop_id', 0, 'int');
 		$selectedProperties = $this->input->get('properties', array(), 'array');
-		$price = $prices->price;
-		$price_type = $prices->price_type;
-		$checked = array();
+		
+		$db                = JFactory::getDBO();
+		$app               = JFactory::getApplication();
+		$properties        = KSMProducts::getProperties($pid, $prop_id, $val_prop_id);
+		$productProperties = KSMProducts::getProperties($pid);
+		$prices            = KSMProducts::getProductPrices($pid);
+		
+		$price              = $prices->price;
+		$price_type         = $prices->price_type;
+		$checked            = array();
 
 		foreach ($productProperties as $property) {
 			foreach ($selectedProperties as $selectedPropId => $selectedProperty) {
@@ -671,7 +674,7 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 		}
 
 		foreach ($properties as $property) {
-
+			$edit_price = null;
 			if ($property->edit_price) {
 				if ($property->view == 'checkbox') {
 					$value = array_pop($property->values);
@@ -685,11 +688,13 @@ class KsenMartControllerShopAjax extends JControllerLegacy {
 				}
 			}
 			
-			$edit_price_sym = substr($edit_price, 0, 1);
-			$this->getCalcPriceAsProperties($edit_price_sym, $edit_price, $price);
+			if($edit_price){
+				$edit_price_sym = substr($edit_price, 0, 1);
+				$this->getCalcPriceAsProperties($edit_price_sym, $edit_price, $price);
+			}
 		}
 		$price = KSMPrice::getPriceInCurrentCurrency($price, $price_type);
-		exit($price . '^^^' . $price);
+		$app->close($price . '^^^' . $price);
 	}
 
 	private function getCalcPriceAsProperties($edit_price_sym, $edit_price, &$price) {
