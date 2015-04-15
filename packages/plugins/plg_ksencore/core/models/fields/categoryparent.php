@@ -39,6 +39,30 @@ class JFormFieldCategoryParent extends JFormFieldRadio {
         }
         $html.= '</ul>';
         
+        $script = '
+		jQuery(document).ready(function(){
+				
+			jQuery("body").on("click", ".ksm-slidemodule-categoryparent ul li a.show", function(){
+				jQuery(this).removeClass("show");
+				jQuery(this).addClass("hides");
+				jQuery(this).parents("li:first").find("ul:first").addClass("opened");		
+				jQuery(this).parents("li:first").find("ul:first").slideDown(300);
+				return false;
+			});
+			
+			jQuery("body").on("click", ".ksm-slidemodule-categoryparent ul li a.hides", function(){
+				jQuery(this).removeClass("hides");
+				jQuery(this).addClass("show");
+				jQuery(this).parents("li:first").find("ul:first").removeClass("opened");		
+				jQuery(this).parents("li:first").find("ul:first").slideUp(300);
+				return false;
+			});	
+			
+		});
+		';
+        $document = JFactory::getDocument();
+        $document->addScriptDeclaration($script);	
+		
         return $html;
     }
     
