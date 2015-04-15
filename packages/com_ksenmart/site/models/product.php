@@ -114,7 +114,7 @@ class KsenMartModelProduct extends JModelKSForm {
                 $comments = KSUsers::setAvatarLogoInObject($comments);
             }
             
-            $this->onExecuteAfter('populateState', array(&$comments));
+            $this->onExecuteAfter('getProductComments', array(&$comments));
             
             return $comments;
         }
