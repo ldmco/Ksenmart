@@ -3573,6 +3573,7 @@ span.text-error {
 	background:repeat-x url(../images/b_bg_off.png) center left;
 	height:20px;
 	position: relative;
+	border:none;
 }
 .mod_ksm_filter .tracker div{
 	top: 0;
@@ -3582,15 +3583,17 @@ span.text-error {
 	height:20px;
 	display: block;
 	background:url(../images/b_bg_on.png) center left repeat-x;
+	border:none;
 }
 .mod_ksm_filter .tracker a{
-	width:20px;
-	height:20px;
+	width: 13px;
+	height: 13px;
 	position: absolute;
-	z-index: 2;	
-	cursor:pointer;
-	top:0px;
-	margin-left:-10px;
+	z-index: 2;
+	cursor: pointer;
+	top: 3px;
+	margin-left: -5px;
+	border: none;
 }
 .mod_ksm_filter .tracker a:nth-child(2){
 	background:url(../images/b_l.png) center left no-repeat;
