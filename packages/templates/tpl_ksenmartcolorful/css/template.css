@@ -2975,7 +2975,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 @media screen and (max-width: 979px) {
 	header.masthead {
-		height: 178px;
+		height: 174px;
 	}
 	header.masthead .header {
 		margin:0;
@@ -3725,18 +3725,18 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 #leftSidebar h3 .caret,
 .navbar-inner h3 .caret{
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   vertical-align: top;
   border-top: 0;
   border-right: 0;
   border-left: 0;
   content: inherit;
-  background: url(../images/collapse.png) center no-repeat;
+  background: url(../images/collapse_big.png) center no-repeat;
   position: absolute;
   top: 50%;
   right: 9px;
-  margin-top: -6px;
+  margin-top: -8px;
   cursor:pointer;
 }
 .navbar-inner .wrap-menu{
@@ -3745,7 +3745,7 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 }
 #leftSidebar h3 .caret.hiden,
 .navbar-inner h3 .caret.hiden{
-	background: url(../images/collapsed.png) center no-repeat;
+	background: url(../images/collapsed_big.png) center no-repeat;
 }
 
 
@@ -3778,7 +3778,7 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 	}
 	.container .layout_block.layout_list_ext ul.thumbnails > .span3, .container .layout_block.layout_list ul.thumbnails > .span3{width:100%;margin-left:0; }
 	.quant.quantt{text-align:center;}
-.container .unit .quant .inputbox, .container .item-cart .quant .inputbox{width:100%;display:inline-block;float:none;border:1px solid #DDDDDD;}
+.container .unit .quant .inputbox, .container .item-cart .quant .inputbox{width:100%;display:inline-block;float:none;border:1px solid #DDDDDD;box-sizing:border-box;}
 .container .unit .quant span, .container .item-cart .quant span{
 	float:none;
 	display:inline-block;
@@ -3796,6 +3796,13 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 	.container .row-fluid ul.catalog-items li.span3{
 	  width: 100%;
 	  margin-left:0;
+	}
+}
+
+@media screen and (max-width: 560px){
+	.social.pull-right{
+		float:none;
+		margin:0 0 10px;
 	}
 }
 
@@ -3828,7 +3835,22 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 		margin:10px 0 0;
 	}
 }
+@media (max-width: 480px){
+	.container .form-horizontal .control-label{float:left;}
 
+	.container .unit #comment_form label{
+		width: 100%;
+ 		float: none;
+ 		text-align: center;
+	}
+	.container .form-horizontal .controls{
+		margin-left:0;
+		text-align:center;
+	}
+	.unit .descs .nav-tabs>li>a, .user-panel .nav-tabs>li>a{
+		  padding: 12px 2px;
+	}
+}
 
 @media screen and (max-width: 370px){
 
@@ -3846,3 +3868,8 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 		text-align:center;
 	}
 }
+
+.unit .info .form-horizontal .controls .quant{
+	max-width:80px;
+}
+
