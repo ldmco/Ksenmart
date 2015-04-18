@@ -525,14 +525,6 @@ ul.inline > li.sub_toolbar {
     cursor: pointer;
 }
 
-.form-horizontal .control-label{
-    width: 162px;
-}
-
-.form-horizontal .controls {
-    margin-left: 182px;
-}
-
 .follow {
     display: none;
     position: absolute;
