@@ -74,14 +74,14 @@ class KsenMartModelSearch extends JModelKSList {
         return str_replace($replace, $search, $string);
     }
 
-    public function getItems($value, $correct = false){
+    public function getItemsSearch($value, $correct = false){
         $this->onExecuteBefore('getProductSearch', array(&$value, &$correct));
 
         $this->setState('value', $value);
         $this->setState('correct', $correct);
         
         $this->getListQuery();
-        $results = parent::getItems($value, $correct);
+        $results = $this->getItems();
         
         $this->onExecuteAfter('getProductSearch', array(&$results));
         return $results;

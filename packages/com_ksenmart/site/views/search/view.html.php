@@ -56,7 +56,7 @@ class KsenMartViewSearch extends JViewKS {
             }
             $affected_rows = false;
 
-            $p_ids = $this->model->getItems($this->value);
+            $p_ids = $this->model->getItemsSearch($this->value);
             
             if($p_ids){                
                 $affected_rows = true;
@@ -76,7 +76,7 @@ class KsenMartViewSearch extends JViewKS {
                     }
                 }
             }else{
-                $p_ids = $this->model->getItems($this->value, true);
+                $p_ids = $this->model->getItemsSearch($this->value, true);
                 if($p_ids){
                     $affected_rows = true;
                 }
