@@ -215,14 +215,21 @@ class KsenMartModelProduct extends JModelKSForm {
         if ($id == 0) {
             $id = $this->_id;
         }
-        
+
         $query = $this->_db->getQuery(true);
-        $query->select('id,alias,title')->from('#__ksenmart_products')->where('parent_id=' . $this->_db->getEscaped($id));
+        $query
+            ->select($this->_db->qn(array(
+                'p.id',
+                'p.alias',
+                'p.title',
+            )))
+            ->from($this->_db->qn('#__ksenmart_products', 'p'))
+            ->where($this->_db->qn('p.parent_id') . '=' . $this->_db->q($id))
+        ;
         $this->_db->setQuery($query);
         $childs_titles = $this->_db->loadObjectList();
         
         $this->onExecuteAfter('getChildsTitles', array(&$childs_titles));
-        
         return $childs_titles;
     }
     
