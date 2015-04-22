@@ -3166,6 +3166,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	.footer .ldm {
 		margin: 20px 0 20px 225px;
 	}
+	.unit .info .form-horizontal .controls .quant{
+		max-width:80px;
+	}
 }
 
 @media screen and (max-width: 650px) {
@@ -3869,7 +3872,4 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 	}
 }
 
-.unit .info .form-horizontal .controls .quant{
-	max-width:80px;
-}
 

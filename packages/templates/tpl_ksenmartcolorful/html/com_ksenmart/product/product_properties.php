@@ -31,7 +31,7 @@
                         <?php $i=0;foreach($property->values as $value){ ?>
                         <label class="<?php echo $property->view; ?>">
                             <input type="<?php echo $property->view; ?>" data-prop_id="<?php echo $property->property_id; ?>" name="property_<?php echo $this->product->id; ?>_<?php echo $property->property_id; ?>" value="<?php echo $value->id; ?>" />
-                            <?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?>
+                            <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=catalog&properties[]='.$value->id); ?>"><?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?></a>
                         </label>
                         <?php $i++;} ?>
     				</div>
@@ -42,7 +42,7 @@
     				<div class="controls">
 						<?php $texts = array(); ?>
                         <?php foreach($property->values as $value){ ?>
-							<?php $texts[] = $value->title; ?>
+							<?php $texts[] = '<a href="'.JRoute::_('index.php?option=com_ksenmart&view=catalog&properties[]='.$value->id).'">'.$value->title.'</a>'; ?>
 						<?php } ?>
                         <span>
                             <?php echo $property->prefix; ?><?php echo implode(',', $texts); ?><?php echo $property->suffix; ?>
@@ -56,7 +56,7 @@
 						<ul style="margin-top:5px;">
                         <?php foreach($property->values as $value){ ?>
                         <li>
-                            <?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?>
+                           <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=catalog&properties[]='.$value->id); ?>"><?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?></a>
                         </li>		
 						<?php } ?>
 						</ul>
