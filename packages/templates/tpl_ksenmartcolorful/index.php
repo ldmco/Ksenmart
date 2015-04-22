@@ -18,6 +18,14 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $Itemid = JRequest::getInt('Itemid', 1, 'get');
 $view   = JRequest::getVar('view', null);
 $template_color = $this->params->get('template_color'); 
+$vkontakte = $this->params->get('vkontakte', '');
+$facebook = $this->params->get('facebook', '');
+$twitter = $this->params->get('twitter', '');
+$email = $this->params->get('email', '');
+$phone = $this->params->get('phone', '');
+$address = $this->params->get('address', '');
+$copyright = $this->params->get('copyright', '');
+
 $right_column = false;
 $left_column = false;
 
@@ -132,21 +140,47 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<jdoc:include type="modules" name="ks-clrful-footer-info1" style="none" />
 					</div>
 					<div class="span4">
+						<h5>Есть вопросы?</h5>
+						<?php if (!empty($phone)): ?>
+						<div class="span4" style="margin: 0;">
+							Звоните:<br />
+							<?php if (!empty($phone)): ?>
+								<?php echo $phone; ?><br />
+							<?php endif; ?>
+							<?php if (!empty($address)): ?>
+								<?php echo $address; ?>
+							<?php endif; ?>
+						</div>
+						<?php endif; ?>
+						<?php if (!empty($email)): ?>
+						<div class="span5">
+							Пишите:<br />
+							<?php echo $email; ?>
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="span2 pull-right">
+						<span>Мы в соцсетях:</span><br />
+						<?php if (!empty($vkontakte)): ?>
+						<a href="<?php echo $vkontakte; ?>"><img src="/templates/ksenmartcolorful/images/vk.png" alt="" /></a>
+						<?php endif; ?>
+						<?php if (!empty($facebook)): ?>
+						<a href="<?php echo $facebook; ?>"><img src="/templates/ksenmartcolorful/images/fb.png" alt="" /></a>
+						<?php endif; ?>
+						<?php if (!empty($twitter)): ?>
+						<a href="<?php echo $twitter; ?>"><img src="/templates/ksenmartcolorful/images/tw.png" alt="" /></a>
+						<?php endif; ?>						
+					</div>
+					<div class="span2 pull-right">
 						<jdoc:include type="modules" name="ks-clrful-footer-info2" style="none" />
-					</div>
-					<div class="span2 pull-right">
-						<jdoc:include type="modules" name="ks-clrful-footer-info3" style="none" />
-					</div>
-					<div class="span2 pull-right">
-						<jdoc:include type="modules" name="ks-clrful-footer-info4" style="none" />
 					</div>
 				</div>
     			<div class="row-fluid" id="footer2">
 					<div class="span6">
-						<jdoc:include type="modules" name="ks-footer-copyright" style="none" />
+						<?php echo $copyright; ?>
 					</div>
 					<div class="span2 pull-right">
-						<jdoc:include type="modules" name="ks-footer-ldm" style="none" />
+						<a href="http://ldm-co.ru" class="ldm" title="L.D.M&amp;Co.">Разработка<br /> шаблона</a>
 					</div>					
     			</div>
             </div>

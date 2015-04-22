@@ -61,6 +61,21 @@
                     <option value="templates/ksenmartcolorful/css/cyan.css">Голубой</option>
                     <option value="templates/ksenmartcolorful/css/orange.css">Оранжевый</option>
                 </field>
+				
+				<field name="vkontakte" type="text" label="Ссылка на Vkontakte" />
+				
+				<field name="facebook" type="text" label="Ссылка на Facebook" />
+				
+				<field name="twitter" type="text" label="Ссылка на Twitter" />
+				
+				<field name="email" type="text" label="E-mail магазина" />
+				
+				<field name="phone" type="text" label="Телефон магазина" />
+				
+				<field name="address" type="text" label="Адрес магазина" />
+				
+				<field name="copyright" type="editor" label="Копирайт" filter="JComponentHelper::filterText" height="150px" />
+				
             </fieldset>
         </fields>
     </config>
