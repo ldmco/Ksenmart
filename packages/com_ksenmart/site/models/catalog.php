@@ -1006,14 +1006,21 @@ class KsenMartModelcatalog extends JModelKSList {
                     m.country,
                     m.metatitle,
                     m.metadescription,
-                    m.metakeywords
+                    m.metakeywords,
+                    f.filename,
+                    f.folder,
+                    f.params
                 ')
                 ->from('#__ksenmart_manufacturers AS m')
-                ->where('published=1')
-                ->where('id=' . $this->_manufacturers[0])
+                ->leftjoin('#__ksenmart_files AS f ON m.id=f.owner_id AND f.owner_type='.$this->_db->quote('manufacturer'))
+                ->where('m.published=1')
+                 ->where('m.id=' . $this->_manufacturers[0])
             ;
             $this->_db->setQuery($query);
             $manufacturer = $this->_db->loadObject();
+            if(!empty($manufacturer)){
+                $manufacturer->image = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $this->_params->get('thumb_width'), $this->_params->get('thumb_height'));
+            }
             
             $this->onExecuteAfter('getManufacturer', array(&$manufacturer));
             return $manufacturer;
