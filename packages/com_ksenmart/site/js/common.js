@@ -144,9 +144,9 @@ jQuery(document).ready(function() {
         return res;
     });
 
-    jQuery('.buy [type="submit"]').parents('form').on('submit', function() {
+    jQuery('.catalog').on('submit', jQuery('.buy [type="submit"]').parents('form'), function(e) {
 
-        var form = jQuery(this);
+        var form = jQuery(e.target);
         var prd_id = form.find('input[name="id"]');
         var prd_price = form.find('input[name="price"]');
         var count = parseFloat(form.find('input[name="count"]').val());
@@ -169,7 +169,7 @@ jQuery(document).ready(function() {
             } else if (jQuery(this).find('input[type="checkbox"]').length > 0 && jQuery(this).find('input[type="checkbox"]:checked').length == 0) {
                 if (!jQuery(this).is('.row_active'))
                     jQuery(this).addClass('row_active');
-                flag = false;				
+                flag = false;
             }
         });
         if (!flag) {
