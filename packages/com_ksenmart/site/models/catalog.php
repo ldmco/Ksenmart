@@ -1311,7 +1311,7 @@ class KsenMartModelcatalog extends JModelKSList {
                         ->select('p.title')
                         ->from('#__ksenmart_product_categories_properties as pcp')
                         ->leftjoin('#__ksenmart_properties as p on p.id=pcp.property_id')
-                        ->where('pcp.category_id=' . $category->id)
+                        ->where('pcp.category_id=' . $this->_db->q($category->id))
                     ;
                     $this->_db->setQuery($query);
                     $properties = $this->_db->loadObjectList();

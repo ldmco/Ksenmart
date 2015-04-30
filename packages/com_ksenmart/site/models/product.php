@@ -421,10 +421,10 @@ class KsenMartModelProduct extends JModelKSForm {
     public function getCategoriesPath() {
         $this->onExecuteBefore('getCategoriesPath');
         
-        $path = array();
-        $final_categories = array();
-        $parent_ids = array();
-        $default_category = $this->getDefaultCategory();
+        $path               = array();
+        $final_categories   = array();
+        $parent_ids         = array();
+        $default_category   = $this->getDefaultCategory();
         $product_categories = $this->getProductCategories();
         
         foreach ($product_categories as $product_category) {
@@ -434,15 +434,17 @@ class KsenMartModelProduct extends JModelKSForm {
                 $id_default_way = true;
             }
             $categories = array();
-            $parent = $product_category->category_id;
+            $parent     = $product_category->category_id;
             
             while ($parent != 0) {
                 if ($parent == $default_category) {
                     $id_default_way = true;
                 }
                 $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
-                $categories[] = $category->id;
-                $parent = $category->parent_id;
+                if($category->id > 0) {
+                    $categories[] = $category->id;
+                    $parent       = $category->parent_id;
+                }
             }
             if ($id_default_way && count($categories) > count($final_categories)) {
                 $final_categories = $categories;
@@ -450,16 +452,14 @@ class KsenMartModelProduct extends JModelKSForm {
         }
         
         $final_categories = array_reverse($final_categories);
-        
-        $categories = KSSystem::getTableByIds($final_categories, 'categories', array('t.title', 't.id'), false);
+        $categories       = KSSystem::getTableByIds($final_categories, 'categories', array('t.title', 't.id'), false);
         
         foreach ($categories as $category) {
             $category->link = JRoute::_('index.php?option=com_ksenmart&view=catalog&categories[]=' . $category->id . '&Itemid=' . KSSystem::getShopItemid());
-            $path[] = $category;
+            $path[]         = $category;
         }
         
         $this->onExecuteAfter('getCategoriesPath', array(&$path));
-        
         return $path;
     }
     
