@@ -304,22 +304,52 @@ class KSMProducts extends KSCoreHelper {
     
     public static function getProductManufacturer($id) {
         $params = JComponentHelper::getParams('com_ksenmart');
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select('m.*,f.filename,f.folder')->from('#__ksenmart_manufacturers as m');
-        $query->join("LEFT", "#__ksenmart_files as f on m.id=f.owner_id and f.owner_type='manufacturer'");
-        $query->where('m.id=' . $id);
+        $db     = JFactory::getDbo();
+        $query  = $db->getQuery(true);
+
+        $query
+            ->select($db->qn(array(
+                'm.id',
+                'm.title',
+                'm.alias',
+                'm.content',
+                'm.introcontent',
+                'm.country',
+                'm.ordering',
+                'm.metatitle',
+                'm.metadescription',
+                'm.metakeywords',
+                'f.filename',
+                'f.folder',
+                'f.params',
+            )))
+            ->from($db->qn('#__ksenmart_manufacturers', 'm'))
+            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON ' . $db->qn('m.id') . '=' . $db->qn('f.owner_id') . 'AND' . $db->qn('f.owner_type') . '=' .  $db->q('manufacturer'))
+            ->where($db->qn('m.id') . '=' . $db->q($id))
+            ->where($db->qn('m.published') . '=' . $db->q('1'))
+        ;
+
         $db->setQuery($query);
-        $row = $db->loadObject();
-        if (count($row) > 0) {
-            if ($row->filename != '') $row->img = JURI::root() . 'media/com_ksenmart/images/' . $row->folder . '/original/' . $row->filename;
+        $manufacturer = $db->loadObject();
+        
+        if (count($manufacturer) > 0) {
+            
+            $manufacturer->img = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($manufacturer->params, true));
+
+            unset($manufacturer->filename);
+            unset($manufacturer->folder);
+            unset($manufacturer->params);
+            
             $query = $db->getQuery(true);
-            $query->select('*')->from('#__ksenmart_countries');
-            $query->where('id=' . $row->country);
+            $query
+                ->select('*')
+                ->from($db->qn('#__ksenmart_countries', 'c'))
+                ->where($db->qn('id') . '=' . $db->q($manufacturer->country));
+            ;
             $db->setQuery($query);
-            $row->country = $db->loadObject();
+            $manufacturer->country = $db->loadObject();
         }
-        return $row;
+        return $manufacturer;
     }
     
     public static function incProductHit($id) {
