@@ -18,6 +18,7 @@
     
     <languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.plg_kmshipping_fixedregions.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_kmshipping_fixedregions.sys.ini</language>
     </languages>
 
     <install>

@@ -27,10 +27,10 @@
 		<folder>fonts</folder>
 	</files>
 	<languages folder="language">
-        <language tag="en-GB">en-GB.tpl_kmtemplate.ini</language>
-        <language tag="en-GB">en-GB.tpl_kmtemplate.sys.ini</language>
-        <language tag="ru-RU">ru-RU.tpl_kmtemplate.ini</language>
-        <language tag="ru-RU">ru-RU.tpl_kmtemplate.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.tpl_kmtemplate.ini</language>
+        <language tag="en-GB">en-GB/en-GB.tpl_kmtemplate.sys.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.tpl_kmtemplate.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.tpl_kmtemplate.sys.ini</language>
     </languages>
     <positions>
         <position>slider</position>
