@@ -42,7 +42,6 @@
 		</ul>
         <a href="index.php?option=com_ksen&view=settings&extension=<?php echo $extension; ?>" class="prefs"><span></span></a>
         <a href="javascript:void(0);" class="info js-info" rel="<?php echo $extension; ?>"><span></span></a>
-        <a href="javascript:void(0);" class="quest"><span></span></a>
 	</div>	
 	<?php endif;?>
 </div>
