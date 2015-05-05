@@ -1336,8 +1336,7 @@ class KsenMartModelcatalog extends JModelKSList {
         if (!empty($metakeywords)){
             $document->setMetaData('keywords', $metakeywords);
         }
-        
-        $this->setCatalogMetaData();
+
         $this->onExecuteAfter('setCategoryMetaData', array(&$this));
         return true;
     }
@@ -1397,8 +1396,7 @@ class KsenMartModelcatalog extends JModelKSList {
         if (!empty($metakeywords)){
             $document->setMetaData('keywords', $metakeywords);
         }
-        
-        $this->setCatalogMetaData();
+
         $this->onExecuteAfter('setManufacturerMetaData', array(&$this));
         return true;
     }
@@ -1454,66 +1452,8 @@ class KsenMartModelcatalog extends JModelKSList {
             $document->setMetaData('keywords', $metakeywords);
         }
         
-        
-        $this->setCatalogMetaData();
         $this->onExecuteAfter('setCountryMetaData', array(&$this));
         return true;
-    }
-
-    /**
-     * KsenMartModelcatalog::setCatalogMetaData()
-     * 
-     * @return
-     */
-    public function setCatalogMetaData() {
-        $this->onExecuteBefore('setCatalogMetaData', array(&$this));
-
-        sort($this->_categories);
-        sort($this->_manufacturers);
-        sort($this->_properties);
-        sort($this->_countries);
-        
-        $params = array();
-        if (!empty($this->_categories))
-            $params['categories'] = $this->_categories;
-        if (!empty($this->_manufacturers))
-            $params['manufacturers'] = $this->_manufacturers;
-        if (!empty($this->_countries))
-            $params['countries'] = $this->_countries;
-        if (!empty($this->_properties))
-            $params['property_values'] = $this->_properties;
-
-                
-        $params = json_encode($params);
-        $query = $this->_db->getQuery(true);
-        $query
-            ->select('
-                metatitle,
-                metadescription,
-                metakeywords
-            ')
-            ->from('#__ksen_seo_texts')
-            ->where('params='.$this->_db->quote($params))
-            ->where('extension='.$this->_db->quote('com_ksenmart'))
-        ;
-        $this->_db->setQuery($query);
-        $metadata = $this->_db->loadObject();
-        if (!empty($metadata)) {
-            $document = JFactory::getDocument();
-            if (!empty($metadata->metatitle)){
-                $document->setMetaData('title', $metadata->metatitle);
-            }
-            if (!empty($metadata->metadescription)){
-                $document->setMetaData('description', $metadata->metadescription);
-            }
-            if (!empty($metadata->metakeywords)){
-                $document->setMetaData('keywords', $metadata->metakeywords);
-            }
-            
-            $this->onExecuteAfter('setCatalogMetaData', array(&$this));
-            return true;
-        }
-        return false;
     }
 
     /**

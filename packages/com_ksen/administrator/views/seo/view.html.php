@@ -19,26 +19,10 @@ class KsenViewSeo extends JViewKSAdmin {
 				$this->seotitlevalue = $this->get('SeoTitleValue');
 				$this->title = JText::_('ks_seo_seotitlevalue_editor');
 			break;
-			case 'seotext':
-				$this->document->addScript(JURI::base() . 'components/com_ksen/assets/js/seotext.js');
-				$model = $this->getModel();
-				$model->form = 'seotext';
-				$seotext = $model->getSeoText();
-				$model->form = 'seotext'.$this->state->get('extension');
-				$form = $model->getForm();
-				if ($form) $form->bind($seotext);
-				$this->title = JText::_('ks_seo_seotext_editor');
-				$this->form = $form;
-				$this->setLayout('seotext'.$this->state->get('extension'));
-				break;
 			default:
 				$this->document->addScript(JURI::base() . 'components/com_ksen/assets/js/seo.js');
 				
 				switch ($this->seo_type) {
-					case 'seo-texts-config':
-						$this->items = $this->get('ListItems');
-						$this->total = $this->get('Total');
-					break;
 					case 'seo-titles-config':
 						$this->configs = $this->get('TitlesConfigs');
 					break;

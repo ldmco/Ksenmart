@@ -33,17 +33,6 @@ CREATE TABLE IF NOT EXISTS `#__ksen_seo_config` (
   PRIMARY KEY (`id`)  
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `#__ksen_seo_texts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `extension` varchar(256) NOT NULL,
-  `params` text NOT NULL,
-  `text` text NOT NULL,
-  `metatitle` varchar(256) NOT NULL,
-  `metadescription` text NOT NULL,
-  `metakeywords` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
 CREATE TABLE IF NOT EXISTS `#__ksen_seo_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
@@ -53,8 +42,7 @@ CREATE TABLE IF NOT EXISTS `#__ksen_seo_types` (
 INSERT INTO `#__ksen_seo_types` (`id`, `title`) VALUES
 (1, 'seo-urls-config'),
 (2, 'seo-meta-config'),
-(3, 'seo-titles-config'),
-(4, 'seo-texts-config');
+(3, 'seo-titles-config');
 
 CREATE TABLE IF NOT EXISTS `#__ksen_users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,

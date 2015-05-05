@@ -92,7 +92,6 @@ class KsenMartViewCatalog extends JViewKS {
                     $title  = $this->get('CatalogTitle');
                     
                     $document->setTitle($title);
-                    $model->setCatalogMetaData();
                     if($layout == 'default'){
                         $this->setLayout('catalog');
                     }
@@ -119,8 +118,6 @@ class KsenMartViewCatalog extends JViewKS {
 				$this->assignRef('pagination', $pagination);
 				$this->assignRef('sort_links', $sort_links);
 
-                $seo_text = $this->get('SeoText');
-                $this->assignRef('seo_text', $seo_text);
                 break;
         }
         $this->assignRef('layout_view', $layout_view);

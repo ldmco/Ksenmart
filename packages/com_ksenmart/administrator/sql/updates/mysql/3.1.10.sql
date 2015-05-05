@@ -4,3 +4,7 @@ CREATE TABLE IF NOT EXISTS `#__ksen_ping` (
 
 INSERT INTO `#__ksen_ping` (`date`) VALUES
 ('0000-00-00');
+
+DROP TABLE `#__ksen_seo_texts`;
+
+DELETE FROM `#__ksen_seo_types` WHERE `id` = 4

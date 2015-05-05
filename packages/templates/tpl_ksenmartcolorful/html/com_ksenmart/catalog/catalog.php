@@ -3,9 +3,6 @@
 	<div class="page-header">
 		<h2><?php echo JText::_('KSM_CATALOG_TITLE');?></h2>
 	</div>
-	<?php if (!empty($this->seo_text)):?>
-	<div class="catalog-description"><?php echo $this->seo_text;?></div>
-	<?php endif;?>	
 	<?php echo $this->loadTemplate('sortlinks', 'default'); ?>
     <div class="row-fluid layout_<?php echo $this->layout_view; ?> layout_block" data-layout="<?php echo $this->layout_view; ?>">
         <?php if(!empty($this->rows)){ ?>
