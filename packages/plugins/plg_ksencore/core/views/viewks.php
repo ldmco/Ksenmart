@@ -36,7 +36,7 @@ abstract class JViewKS extends JViewLegacy {
             $view->setLayout($layout);
             
             foreach($vars as $name => $var){
-                $view->assignRef($name, $var);
+                $view->{$name} = $var;
             }
             
             $html = $view->loadTemplate($tpl);
