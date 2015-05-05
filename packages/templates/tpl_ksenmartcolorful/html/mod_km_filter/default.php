@@ -74,7 +74,7 @@
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php if ($property->view != 'list'): ?>
 					<?php foreach($property->values as $value){ ?>
-					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image)?' item_img':''; ?>">
+					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image) && $property->view == 'images' ?' item_img':''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $value->title; ?>">
 						<?php if ($property->view == 'images' && $value->image!=''){ ?>					
 						<label class="item image_item <?php if ($value->selected) echo 'active';?>">
