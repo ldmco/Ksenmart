@@ -3370,8 +3370,13 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-bottom: 0px dashed;
 }
 
+.search #search_result .item .img{
+    margin-right: 15px;
+	float:left;
+}
+
 .search #search_result .item .title a{
-    display: block;
+    display: inline-block;
     text-decoration: none;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -3458,7 +3463,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     float: left;
     height: 50px;
     position: relative;
-    margin: 0 0 5px;
+    margin: 0px 15px 5px 0px;
     z-index: 99;
 }
 
@@ -3513,7 +3518,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	padding:0 7px 0 9px;
 }
 li.layout_icon {
-	margin:-4px 0px 0px 5px;
+	margin:-5px 0px 0px 5px;
 }
 #leftSidebar .products_block {
 	border: 1px solid #DCDCDC;
@@ -3697,9 +3702,6 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 .layout_block.layout_list_ext ul.thumbnails > li .img img, .layout_block.layout_list ul.thumbnails > li .img img{
 	width:100%;
 	height:auto;
-}
-.layout_block.layout_list_ext ul.thumbnails > li .article, .layout_block.layout_list ul.thumbnails > li .article{
-	left:12px;
 }
 /*.container .catalog .item .img img{
 	height:auto;

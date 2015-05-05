@@ -1,6 +1,7 @@
 <?php defined( '_JEXEC' ) or die; ?>
 <div class="sort">
-	<ul class="breadcrumb noTransition clearfix">
+	<ul class="breadcrumb noTransition">
+		<li>&nbsp;</li>
         <li class="pull-right layout_icon<?php echo $this->layout_view == 'grid'?' active':''; ?>">
             <a href="javascript:void(0);" class="layout_show" data-layout="grid">
                 <i class="icon-th-large"></i>
