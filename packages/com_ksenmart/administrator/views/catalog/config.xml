@@ -114,62 +114,6 @@
 			<option
 				value="select">KSM_PARENTPRODUCTTEMPLATE_SELECT</option>
 		</field>
-
-		<field
-			name="include_jquery"
-			type="radio"
-			default="1"
-			label="KSM_PRODUCT_INCLUDEJQUERY_LABEL"
-			description="KSM_PRODUCT_INCLUDEJQUERY_DESC"
-			labelclass="inputname"
-			>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-        
-		<field
-			name="include_css"
-			type="radio"
-			default="1"
-			label="KSM_PRODUCT_INCLUDECSS_LABEL"
-			description="KSM_PRODUCT_INCLUDECSS_DESC"
-			labelclass="inputname"
-			>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-
-		<field
-			name="include_bscss"
-			type="radio"
-			default="1"
-			label="KSM_PRODUCT_INCLUDE_BSCSS_LABEL"
-			description="KSM_PRODUCT_INCLUDE_BSCSS_DESC"
-			labelclass="inputname"
-			>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-
-		<field
-			name="include_bsjs"
-			type="radio"
-			default="1"
-			label="KSM_PRODUCT_INCLUDE_BSJS_LABEL"
-			description="KSM_PRODUCT_INCLUDE_BSJS_DESC"
-			labelclass="inputname"
-			>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
 		
 		<field
 			name="only_auth_buy"
@@ -212,16 +156,6 @@
 			<option
 				value="1">JYES</option>
 		</field>	
-
-		<field
-			name="path_separator"
-			type="text"
-			default=" - "
-			label="KSM_SETTINGS_PATHSEPARATOR_LABEL"
-			description="KSM_SETTINGS_PATHSEPARATOR_DESC"
-			labelclass="inputname"
-			class="inputbox_205"
-			/>			
 			
 	</fieldset>	
 	

@@ -19,6 +19,9 @@ body ul {
     -webkit-text-shadow: none !important;
     text-shadow: none !important;
 }
+.settings-tab-content .btn {
+	padding: 6px 10px 4px 10px!important;
+}
 
 .admin .btn:hover,
 .btn.btn-other:hover{

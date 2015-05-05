@@ -35,6 +35,20 @@
 			class="inputbox_205"
 		/>
 		
+ 		<field
+			name="include_css"
+			type="radio"
+			default="0"
+			label="KSM_PRODUCT_INCLUDECSS_LABEL"
+			description="KSM_PRODUCT_INCLUDECSS_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+		
 		<field
 			name="modules_styles"
 			type="radio"
@@ -75,46 +89,6 @@
 			<option
 				value="1">KSM_SETTINGS_CALCSETPRICE_AUTOMATIC</option>			
 		</field>
-		
-		<field
-			name="admin_product_thumb_image_width"
-			type="text"
-			default="36"
-			label="KS_SETTINGS_THUMB_IMAGE_WIDTH_LABEL"
-			description="KS_SETTINGS_THUMB_IMAGE_WIDTH_DESC"
-			labelclass="inputname"
-			class="inputbox_205"
-			/>	
-			
-		<field
-			name="admin_product_thumb_image_heigth"
-			type="text"
-			default="36"
-			label="KS_SETTINGS_THUMB_IMAGE_HEIGTH_LABEL"
-			description="KS_SETTINGS_THUMB_IMAGE_HEIGTH_DESC"
-			labelclass="inputname"
-			class="inputbox_205"
-			/>
-			
-		<field
-			name="admin_product_medium_image_width"
-			type="text"
-			default="120"
-			label="KS_SETTINGS_MEDIUM_IMAGE_WIDTH_LABEL"
-			description="KS_SETTINGS_MEDIUM_IMAGE_WIDTH_DESC"
-			labelclass="inputname"
-			class="inputbox_205"
-			/>	
-			
-		<field
-			name="admin_product_medium_image_heigth"
-			type="text"
-			default="120"
-			label="KS_SETTINGS_MEDIUM_IMAGE_HEIGTH_LABEL"
-			description="KS_SETTINGS_MEDIUM_IMAGE_HEIGTH_DESC"
-			labelclass="inputname"
-			class="inputbox_205"
-			/>
 			
 	</fieldset>		
 	
