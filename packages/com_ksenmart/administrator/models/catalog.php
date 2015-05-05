@@ -1005,8 +1005,15 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         $this->onExecuteBefore('deleteCategory', array(&$id));
 
         $table = $this->getTable('categories');
+        $table->load($id);
+		$parent_id = $table->parent_id;
         $table->delete($id);
         KSMedia::deleteItemMedia($id, 'category');
+		
+        $query = $this->_db->getQuery(true);
+        $query->update('#__ksenmart_categories')->set('parent_id = '.$parent_id)->where('parent_id = '.$id);
+        $this->_db->setQuery($query);
+        $this->_db->query();		
 
         $this->onExecuteAfter('deleteCategory', array(&$id));
         return true;
