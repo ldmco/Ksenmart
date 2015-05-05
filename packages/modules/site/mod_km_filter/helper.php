@@ -113,15 +113,14 @@ class modKsenmartSearchHelper {
         $this->properties = self::getProperties();
         
         foreach ($this->properties as $key => & $property) {
-            if (!empty($properties)) {
-                if (!isset($properties[$property->property_id]) || $properties[$property->property_id]['view'] == 'none') {
-                    unset($this->properties[$key]);
-                    continue;
-                } else {
-                    $this->properties[$key]->view = $properties[$property->property_id]['view'];
-                    $this->properties[$key]->display = $properties[$property->property_id]['display'];
-                }
-            }
+			if (isset($properties[$property->property_id]) && $properties[$property->property_id]['view'] == 'none') {
+				unset($this->properties[$key]);
+				continue;
+			} else {
+				$this->properties[$key]->view = isset($properties[$property->property_id]) ? $properties[$property->property_id]['view'] : 'checkbox';
+				$this->properties[$key]->display = isset($properties[$property->property_id]) ? $properties[$property->property_id]['display'] : 'row';
+			}
+
             if (!empty($property->values)) {
                 foreach ($property->values as & $value) {
                     $value->selected = false;
@@ -285,19 +284,19 @@ class modKsenmartSearchHelper {
         $mod_params = $mod_params->toArray();
         if (!isset($mod_params['price'])) {
             $mod_params['price'] = array(
-                'view' => 'none',
+                'view' => 'slider',
                 'display' => 'row'
             );
         }
         if (!isset($mod_params['manufacturer'])) {
             $mod_params['manufacturer'] = array(
-                'view' => 'none',
+                'view' => 'checkbox',
                 'display' => 'row'
             );
         }
         if (!isset($mod_params['country'])) {
             $mod_params['country'] = array(
-                'view' => 'none',
+                'view' => 'checkbox',
                 'display' => 'row'
             );
         }
