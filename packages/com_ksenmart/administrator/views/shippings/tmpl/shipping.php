@@ -29,12 +29,6 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getLabel('published'); ?>
 							<?php echo $this->form->getInput('published'); ?>
 						</div>
-						<div class="row">
-							<h3><?php echo $this->form->getLabel('introcontent'); ?></h3>
-						</div>
-						<div class="row">
-							<?php echo $this->form->getInput('introcontent'); ?>
-						</div>						
 					</div>
 					<div class="params-set">
 						<?php echo $this->paramsform;?>
@@ -46,7 +40,13 @@ JHtml::_('behavior.tooltip');
 					<div class="set">
 						<h3 class="headname"><?php echo JText::_('ksm_shippings_shipping_addressfields_lbl')?></h3>
 						<?php echo $this->form->getInput('address_fields'); ?>
-					</div>					
+					</div>	
+					<div class="row">
+						<h3><?php echo $this->form->getLabel('introcontent'); ?></h3>
+					</div>
+					<div class="row">
+						<?php echo $this->form->getInput('introcontent'); ?>
+					</div>						
 				</td>
 				<td class="rightcol">	
 					<?php echo $this->form->getInput('images'); ?>
