@@ -7,4 +7,6 @@ INSERT INTO `#__ksen_ping` (`date`) VALUES
 
 DROP TABLE `#__ksen_seo_texts`;
 
-DELETE FROM `#__ksen_seo_types` WHERE `id` = 4
+DELETE FROM `#__ksen_seo_types` WHERE `id` = 4;
+
+ALTER TABLE `#__ksenmart_payments` DROP `introcontent`;
