@@ -34,7 +34,7 @@ class plgKMShippingCourierMoscow extends KSMShippingPlugin {
 		});	
 		</script>
 		<style>
-		.ksm-slidemodule-countries a,.ksm-slidemodule-regions a {display:none;}
+		.ksm-slidemodule-countries a,.ksm-slidemodule-regions a, .ksm-slidemodule-countries i,.ksm-slidemodule-regions i {display:none;}
 		</style>
 		';
         
