@@ -28,6 +28,12 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getInput('published'); ?>
 						</div>
 					</div>	
+					<div class="row alert">
+						<p><b><?php echo JText::_('KSM_PAYMENTS_LINKS'); ?></b></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_RESULT'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&task=cart.pay_order'; ?></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_SUCCESS'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&view=cart&layout=pay_success'; ?></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_ERROR'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&view=cart&layout=pay_error'; ?></p>
+					</div>
 					<div class="params-set">
 						<?php echo $this->paramsform;?>
 					</div>	
