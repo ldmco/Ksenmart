@@ -195,7 +195,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         $view->user = KSUsers::getUser();
         KSMWalletone::_setFields(array_merge($paymentTypes, array(
             'WMI_MERCHANT_ID'        => $payment->params['merchant_id'], 
-            'WMI_PAYMENT_AMOUNT'     => $view->order->cost, 
+            'WMI_PAYMENT_AMOUNT'     => $view->order->costs['total_cost'], 
             'WMI_PAYMENT_NO'         => $view->order->id, 
             'WMI_CURRENCY_ID'        => 643, 
             'WMI_DESCRIPTION'        => $view->payment_form_params->title, 
