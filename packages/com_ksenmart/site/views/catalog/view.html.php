@@ -55,6 +55,10 @@ class KsenMartViewCatalog extends JViewKS {
                     $category   = $this->get('Category');
                     $title      = $this->get('CategoryTitle');
 
+                    if(!$category) {
+                        JError::raiseError(404, 'Категории не существует');
+                    }
+
                     $document->setTitle($title);
                     $model->setCategoryMetaData();
                     
@@ -63,7 +67,11 @@ class KsenMartViewCatalog extends JViewKS {
                 } elseif(count($this->state->get('com_ksenmart.manufacturers', array())) == 1) {
                     $manufacturer   = $this->get('Manufacturer');
                     $title          = $this->get('ManufacturerTitle');
-                    
+
+                    if(!$manufacturer) {
+                        JError::raiseError(404, 'Производитель не существует');
+                    }
+
                     $document->setTitle($title);
                     $path->addItem(JText::_('KSM_MANUFACTURERS_PATHWAY_ITEM'), JRoute::_('index.php?option=com_ksenmart&view=catalog&layout=manufacturers'));
                     $model->setManufacturerMetaData();
@@ -73,6 +81,10 @@ class KsenMartViewCatalog extends JViewKS {
                 } elseif(count($this->state->get('com_ksenmart.countries', array())) == 1) {
                     $country    = $this->get('Country');
                     $title      = $this->get('CountryTitle');
+
+                    if(!$country) {
+                        JError::raiseError(404, 'Страна не существует');
+                    }
                     
                     $document->setTitle($title);
                     $model->setCountryMetaData();
