@@ -116,35 +116,59 @@ class KSMedia {
         return JURI::root() . str_replace(JPATH_ROOT . DS, '', $dst_filename);
     }
     
-    public static function setItemMedia($item = null, $owner_type = null) {
-        if (!$item) return false;
+    public static function saveItemMedia($id = null, $data = array(), $owner_type = null, $folder = null) {
+        
+        $owner_id = (int)$id;
+        if (!$owner_id) return false;
         
         global $ext_name, $ext_name_com;
-        $item->images = array();
-        $item->files = array();
-        $item->videos = array();
-        $owner_id = (int)$item->id;
-        
-        if (!$owner_type) return $item;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('*')->from('#__' . $ext_name . '_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id)->order('ordering');
-        $db->setQuery($query);
-        $medias = $db->loadObjectList('id');
-        
-        foreach ($medias as $media) {
-            if ($media->media_type == 'image') {
-                $item->images[$media->id] = $media;
-            }
-            if ($media->media_type == 'file') {
-                $item->files[$media->id] = $media;
-            }
-            if ($media->media_type == 'video') {
-                $item->videos[$media->id] = $media;
+        JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . $ext_name_com . DS . 'tables');
+
+        $db     = JFactory::getDBO();
+        $prefix = ucfirst($ext_name);
+        $in     = array();
+
+        if (isset($data['images']) && $data['images']) {
+            foreach ($data['images'] as $k => $v) {
+                $k = (int)$k;
+                if ($v['task'] == 'save') {
+                    $table = JTable::getInstance('files', $prefix . 'Table', array());
+                    
+                    $v['owner_type'] = $owner_type;
+                    $v['media_type'] = 'image';
+                    $v['mime_type']  = 'image/jpeg';
+                    $v['folder']     = $folder;
+                    if ($k > 0) {
+                        $v['id'] = $k;
+                    }
+                    $v['owner_id'] = $owner_id;
+                    $v['params']   = json_encode($v['params']);
+                    
+                    if (!$table->bindCheckStore($v)) {
+                        $this->setError($table->getError());
+                        return false;
+                    }
+                    $in[] = $table->id;
+                }
             }
         }
         
-        return $item;
+        $query = $db->getQuery(true);
+        $query
+            ->delete($db->qn('#__' . $ext_name . '_files'))
+            ->where($db->qn('owner_id') . '=' . $db->q($owner_id))
+            ->where($db->qn('owner_type') . '=' . $db->q($owner_type))
+            ->where($db->qn('media_type') . '=' . $db->q('image'))
+        ;
+        if (count($in)) {
+            $query
+                ->where('id not in (' . implode(', ', $in) . ')')
+                ->where($db->qn('id') . ' NOT IN (' . implode(', ', $db->q($in)) . ')')
+            ;
+        }
+        $db->setQuery($query);
+        $db->query();
+        return true;
     }
     
     public static function saveItemMedia($id = null, $data = array(), $owner_type = null, $folder = null) {
