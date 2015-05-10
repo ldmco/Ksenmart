@@ -2,24 +2,24 @@
 
 class JKSForm extends JForm {
 
-	private $ext_prefix     = null;
+    private $ext_prefix = null;
 
-	public function __construct($name, array $options = array()){
-		parent::__construct($name, $options);
+    public function __construct($name, array $options = array()){
+        parent::__construct($name, $options);
 
         global $ext_prefix;
         $this->ext_prefix   = $ext_prefix;
-	}
+    }
 
     public static function getInstance($name, $data = null, $options = array(), $replace = true, $xpath = false) {
 
-		global $ext_prefix;
+        global $ext_prefix;
 
         $formname = explode('.', $name);
         $formname = $formname[count($formname) - 1];
 
         $dispatcher = JDispatcher::getInstance();
-        $dispatcher->trigger('onBeforeGet' . strtoupper($ext_prefix) . 'Form' . $formname, array(&$this, &$name, &$data, &$options, &$replace, &$xpath));
+        $dispatcher->trigger('onBeforeGet' . strtoupper($ext_prefix) . 'Form' . ucfirst($formname), array(&$this, &$name, &$data, &$options, &$replace, &$xpath));
         // Reference to array with form instances
         $forms = &self::$forms;
 
@@ -50,42 +50,49 @@ class JKSForm extends JForm {
                 }
             }
         }
-        $dispatcher->trigger('onAfterGet' . strtoupper($ext_prefix) . 'Form' . $formname, array(&$this, &$forms[$name]));
+        $dispatcher->trigger('onAfterGet' . strtoupper($ext_prefix) . 'Form' . ucfirst($formname), array(&$this, &$forms[$name]));
 
         return $forms[$name];
     }
 
     public function getLabel($name, $group = null) {
-        $formname = $this->getName();
-        $html = '';
-
+        
         $dispatcher = JDispatcher::getInstance();
-        $dispatcher->trigger('onBeforeGet' . strtoupper($this->ext_prefix) . 'FormLabel' . $formname . $name, array(&$this, &$name, &$html));
+        $formname   = $this->getName();
+        $formname   = explode('.', $formname);
+        $formname   = $formname[count($formname) - 1];
+        $html       = '';
+
+        $dispatcher->trigger('onBeforeGet' . strtoupper($this->ext_prefix) . 'FormLabel' . ucfirst($formname) . ucfirst($name), array(&$this, &$name, &$html));
         if($name != 'empty' && $field = $this->getField($name, $group)) {
             $html .= $field->label;
         }
-        $dispatcher->trigger('onAfterGet' . strtoupper($this->ext_prefix) . 'FormLabel' . $formname . $name, array(&$this, &$name, &$html));
 
+        $dispatcher->trigger('onAfterGet' . strtoupper($this->ext_prefix) . 'FormLabel' . ucfirst($formname) . ucfirst($name), array(&$this, &$name, &$html));
         return $html;
     }
 
     public function getInput($name, $group = null, $value = null) {
 
-        $formname = $this->getName();
-        $formname = explode('.', $formname);
-        $formname = $formname[count($formname) - 1];
-        $html = '';
-
         $dispatcher = JDispatcher::getInstance();
-        $dispatcher->trigger('onBeforeGet' . strtoupper($this->ext_prefix) . 'FormInput' . $formname . $name, array(&$this, &$name, &$html));
+        $formname   = $this->getName();
+        $formname   = explode('.', $formname);
+        $formname   = $formname[count($formname) - 1];
+        $html       = '';
+
+        $dispatcher->trigger('onBeforeGet' . strtoupper($this->ext_prefix) . 'FormInput' . ucfirst($formname) . ucfirst($name), array(&$this, &$name, &$html));
         if($name != 'empty' && $field = $this->getField($name, $group, $value)) {
-            $element = $this->findField($name, $group);
+            
+            $element    = $this->findField($name, $group);
             $field_html = $field->input;
-            if(isset($element['wrap']) && !empty($element['wrap'])) $field_html = KSSystem::wrapFormField($element['wrap'], $element, $field_html);
+
+            if(isset($element['wrap']) && !empty($element['wrap'])) {
+                $field_html = KSSystem::wrapFormField($element['wrap'], $element, $field_html);
+            }
             $html .= $field_html;
         }
-        $dispatcher->trigger('onAfterGet' . strtoupper($this->ext_prefix) . 'FormInput' . $formname . $name, array(&$this, &$name, &$html));
 
+        $dispatcher->trigger('onAfterGet' . strtoupper($this->ext_prefix) . 'FormInput' . ucfirst($formname) . ucfirst($name), array(&$this, &$name, &$html));
         return $html;
     }
 }
