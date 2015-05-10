@@ -1,10 +1,9 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Список продуктов', 
-	`position` = 'content_top', 
-	`published` = '1',
-	`params`='{"layout":"_:dropdown"}'
+	`title` = 'Список товаров (Ksenmart)', 
+	`position` = 'ks-main-products-list', 
+	`published` = '1'
 WHERE 
 	`module` = 'mod_km_products_list'
 ;

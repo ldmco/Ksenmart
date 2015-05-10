@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Отзывы', 
-	`position` = 'left', 
+	`title` = 'Отзывы (Ksenmart)', 
+	`position` = 'ks-reviews', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_shop_reviews'

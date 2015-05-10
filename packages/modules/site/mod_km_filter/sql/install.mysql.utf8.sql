@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Фильтры', 
-	`position` = 'left', 
+	`title` = 'Фильтры (Ksenmart)', 
+	`position` = 'ks-filters', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_filter'

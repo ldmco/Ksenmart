@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Доставка', 
-	`position` = 'left', 
+	`title` = 'Доставка (Ksenmart)', 
+	`position` = 'ks-shipping-info', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_shipping'
