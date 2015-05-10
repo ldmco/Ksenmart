@@ -366,29 +366,34 @@ class KsenMartModelProduct extends JModelKSForm {
         $this->onExecuteBefore('getImages');
         
         $query = $this->_db->getQuery(true);
-        $query->select('
-                f.id,
-                f.owner_id,
-                f.media_type,
-                f.owner_type,
-                f.folder,
-                f.filename,
-                f.mime_type,
-                f.title,
-                f.ordering,
-                f.params
-            ')->from('#__ksenmart_files AS f')->where('f.owner_id=' . $this->_db->escape($this->_id))->where('f.owner_type=' . $this->_db->Quote('product'))->order('ordering');
+        $query->select($this->_db->qn(array(
+                'f.id',
+                'f.owner_id',
+                'f.media_type',
+                'f.owner_type',
+                'f.folder',
+                'f.filename',
+                'f.mime_type',
+                'f.title',
+                'f.ordering',
+                'f.params',
+            )))
+            ->from($this->_db->qn('#__ksenmart_files', 'f'))
+            ->where($this->_db->qn('f.owner_id') . '=' . $this->_db->q($this->_id))
+            ->where($this->_db->qn('f.owner_type') . '=' . $this->_db->q('product'))
+            ->where($this->_db->qn('f.media_type') . '=' . $this->_db->q('image'))
+            ->order('ordering')
+        ;
         $this->_db->setQuery($query);
         $rows = $this->_db->loadObjectList();
         
         for ($k = 0;$k < count($rows);$k++) {
             $rows[$k]->img_small = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('mini_thumb_width', 130), $this->params->get('mini_thumb_height', 80), json_decode($rows[$k]->params, true));
-            $rows[$k]->img = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
-            $rows[$k]->img_link = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('full_width', 900), $this->params->get('full_height', 900));
+            $rows[$k]->img       = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
+            $rows[$k]->img_link  = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('full_width', 900), $this->params->get('full_height', 900));
         }
         
         $this->onExecuteAfter('getImages', array(&$rows));
-        
         return $rows;
     }
     
