@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <form method="POST" action="index.php?option=com_ksenmart&task=shopajax.site_reg">
     <legend>Регистрация</legend>
 	<div class="control-group">

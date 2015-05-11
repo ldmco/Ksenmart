@@ -1,14 +1,20 @@
-<?php defined('_JEXEC') or die(); ?>
-<?php
-    $flag = true;
-	foreach($this->product->properties as $prop){
-       if($prop->type == 'select' && ($prop->view == 'select' || $prop->view == 'checkbox' || $prop->view == 'radio')){
-           if(count($prop->values) > 1){
-    	       $flag = false;
-               break;
-    	   }
-       }
-	}
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
+$flag = true;
+foreach($this->product->properties as $prop){
+   if($prop->type == 'select' && ($prop->view == 'select' || $prop->view == 'checkbox' || $prop->view == 'radio')){
+	   if(count($prop->values) > 1){
+		   $flag = false;
+		   break;
+	   }
+   }
+}
 ?>
 <li class="span3 item noTransition" data-id="<?php echo $this->product->id; ?>">
     <div class="thumbnail">

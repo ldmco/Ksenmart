@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div id="window-inner">
 	<?php require('map.php');?>
 	<form method="post" class="order_form">

@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die(); ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <p class="lead add_address"><span>+</span> <a href="javascript:void(0);" class="link_b_border">Добавить новый адрес</a></p>
 <div class="items">
 	<div class="new_address noTransition" style="display: none;">

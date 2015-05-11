@@ -1,3 +1,11 @@
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <section class="shop_reviews item row-fluid">
     <article class="row-fluid item">
         <div class="span2 avatar">

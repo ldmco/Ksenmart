@@ -1,5 +1,10 @@
-<?php
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 ?>
 <?php foreach($this->order->items as $item):?>
 <tr class="list_item list_item_parents order_items_<?php echo $this->order->id;?>">

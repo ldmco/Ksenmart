@@ -1,5 +1,10 @@
-<?
-defined( '_JEXEC' ) or die( '=;)' );
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 ?>
 <form action="" class="noprint">
 	<input id="print_button" type="button" value="<?php echo JText::_('ksm_print'); ?>" alt="<?php echo JText::_('ksm_print'); ?>" title="<?php echo JText::_('ksm_print'); ?>" onclick="window.print();return false;">

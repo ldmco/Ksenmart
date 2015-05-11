@@ -1,7 +1,14 @@
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <script>
     var avatar_full = '<?php echo $this->user->logo_original; ?>';
 </script>
-<?php defined('_JEXEC') or die; ?>
 <form method="post" class="form-horizontal profile_info" action="#tab2">
 	<?php if (!in_array(KSUsers::getSubscribersGroupID(), $this->user->groups)) { ?>
 	<p class="info_box muted text-center">

@@ -1,5 +1,12 @@
-<?php defined( '_JEXEC' ) or die;?>
-<?php foreach($this->customer_fields as $customer_field){ ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
+foreach($this->customer_fields as $customer_field){ ?>
 <div class="control-group <?php echo $customer_field->class; ?>">
 	<label class="control-label"><?php echo JText::_(($customer_field->system==1?'ksm_cart_shipping_field_':'').$customer_field->title); ?><?php echo $customer_field->required?' *':''; ?></label>
 	<div class="controls">

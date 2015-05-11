@@ -1,6 +1,12 @@
-<?php defined( '_JEXEC' ) or die;
-	JHtml::_('behavior.keepalive');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
+JHtml::_('behavior.keepalive');
 ?>
 <form class="form clearfix" method="POST">
 	<div class="heading">
