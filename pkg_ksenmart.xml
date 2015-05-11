@@ -87,7 +87,6 @@
 		<file type="module" id="mod_km_shipping" client="site">modules/site/mod_km_shipping.zip</file>
 		<file type="module" id="mod_km_shop_reviews" client="site">modules/site/mod_km_shop_reviews.zip</file>
 		<file type="module" id="mod_km_simple_search" client="site">modules/site/mod_km_simple_search.zip</file>
-		<file type="module" id="mod_km_subscribe" client="site">modules/site/mod_km_subscribe.zip</file>
 		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 
 		<file type="template" id="kmtemplate" client="site">templates/tpl_kmtemplate.zip</file>

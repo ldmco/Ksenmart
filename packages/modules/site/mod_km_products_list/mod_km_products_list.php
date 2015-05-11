@@ -1,21 +1,10 @@
-<?php
+<?php 
 /**
- *
- * $Id: mod_ksenmartbrands.php 1.0.0 2013-04-17 09:04:59 Bereza Kirill $
- * @package	    Joomla!
- * @subpackage	Nienie i?iecaiaeoaeae
- * @version     1.0.0
- * @description Ioia?a?aao nienie i?iecaiaeoaeae ec eiiiiiaioa KsenMart
- * @copyright	  Copyright © 2013 - All rights reserved.
- * @license		  GNU General Public License v2.0
- * @author		  Bereza Kirill
- * @author mail	kirill.bereza@zebu.com
- * @website		  http://brainstorage.me/TakT
- *
- *
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-// no direct access
-defined('_JEXEC') or die('Restricted access');
+ 
+defined('_JEXEC') or die;
 
 JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart', array('common'), array(), array('angularJS' => 0)));
 

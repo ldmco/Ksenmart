@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <?php JHtml::stylesheet('mod_ksm_news/default.css', false, true, false); ?>
 <li class="module_events <?php echo $moduleclass_sfx; ?>">
 	<?php foreach($events as $event): ?>

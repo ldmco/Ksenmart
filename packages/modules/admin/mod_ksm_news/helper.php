@@ -1,9 +1,11 @@
-<?php defined('_JEXEC') or die;
-
+<?php 
 /**
- * Class Module Helper
- * @author TakT
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+ 
+defined('_JEXEC') or die;
+
 class MODKSMNewsHelper {
 
     public static function getEvents($params) {
