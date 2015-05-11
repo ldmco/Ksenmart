@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="alert alert-error hide js-RoiError">
 	<p class="js-RoiError-Common">Упс, что-то пошло не так... Мы знаем о проблеме и уже работаем. Попробуйте обновить страницу или зайти попозже.</p>
 	<p class="js-RoiError-Roi"></p>
