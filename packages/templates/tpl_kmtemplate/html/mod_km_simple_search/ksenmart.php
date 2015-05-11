@@ -1,5 +1,11 @@
-<?
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
 defined('_JEXEC') or die;
+
 if (!class_exists('KsenMartHelper'))
 	include(JPATH_ROOT.'/administrator/components/com_ksenmart/helpers/ksenmart.php');
 $Itemid=KsenMartHelper::getShopItemid();

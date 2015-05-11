@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die(); ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <td class="image">
 	<a href="<?php echo $this->order_item->product->link; ?>"><img src="<?php echo $this->order_item->product->mini_small_img; ?>" alt="<?php echo $this->order_item->product->title; ?>" class="km_img sm" /></a>
 </td>

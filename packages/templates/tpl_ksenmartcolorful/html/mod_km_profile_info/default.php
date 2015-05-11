@@ -1,7 +1,13 @@
-<?php defined('_JEXEC') or die; ?>
-<?php
-	$user          = KSUsers::getUser();
-    $profile_link  = JRoute::_('index.php?option=com_ksenmart&view=profile&Itemid='.KSSystem::getShopItemid());
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
+$user          = KSUsers::getUser();
+$profile_link  = JRoute::_('index.php?option=com_ksenmart&view=profile&Itemid='.KSSystem::getShopItemid());
 ?>
 <div class="accordion catalog-menu" id="dropdownCat">
 	<h3><?php echo $module->title; ?></h3>

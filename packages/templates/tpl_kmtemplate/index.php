@@ -1,18 +1,10 @@
-<?php
+<?php 
 /**
- *
- * $Id: index.php 1.0.0 2013-04-11 19:02:19 Bereza Kirill $
- * @version     1.0.0
- * @description 
- * @copyright	  Copyright © 2013 - All rights reserved.
- * @license		  GNU General Public License v2.0
- * @author		  Bereza Kirill
- * @author        Email	kirill.bereza@zebu.com
- * @website		  http://brainstorage.me/TakT
- *
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-// no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+ 
+defined('_JEXEC') or die;
 
 $app 	= JFactory::getApplication();
 $Itemid = $app->input->get('Itemid', 1, 'int');

@@ -1,6 +1,13 @@
-<?php defined('_JEXEC') or die;
-    $Itemid = KSSystem::getShopItemid();
-    $value  = JRequest::getVar('value','');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
+$Itemid = KSSystem::getShopItemid();
+$value  = JRequest::getVar('value','');
 ?>
 <div class="search">
     <form action="<?php echo JRoute::_('index.php?option=com_ksenmart&view=search&Itemid='.$Itemid); ?>" method="get" id="simple-search-form">

@@ -1,8 +1,14 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
-    require_once JPATH_ROOT . '/components/com_banners/helpers/banner.php';
-    $baseurl = JURI::base();
-    $i = 0;
+require_once JPATH_ROOT . '/components/com_banners/helpers/banner.php';
+$baseurl = JURI::base();
+$i = 0;
 ?>
 <script>
     jQuery(document).ready(function(){

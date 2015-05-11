@@ -1,6 +1,12 @@
 <?php 
-defined( '_JEXEC' ) or die; 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 ?>
+
 <?php if(!empty($this->manufacture_search)){ ?>
 <div class="manufacture clearfix">
     <?php foreach($this->manufacture_search as $item){ ?>
