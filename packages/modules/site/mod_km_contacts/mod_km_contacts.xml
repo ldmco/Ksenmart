@@ -4,8 +4,8 @@
     <author>TakT</author>
     <authorEmail>kirill.bereza@yandex.ru</authorEmail>
     <authorUrl>http://brainstorage.me/TakT</authorUrl>
-    <copyright></copyright>
-    <license></license>
+	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <version>2.0.0</version>
     <creationDate>March 2014</creationDate>
     <description>MOD_KM_CONTACTS_DESC</description>
