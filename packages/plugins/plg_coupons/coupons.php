@@ -16,7 +16,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		'value' => 0,
 		'type' => 1,
 		'repeated' => 0,
-		'mode' => 0,
 		'coupons' => array()
 	);
 	
@@ -58,12 +57,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		$html.= '		<input type="radio" class="checkbox" name="jform[params][repeated]" value="0" ' . ($params['repeated'] == 0 ? 'checked' : '') . '>' . JText::_('jno');
 		$html.= '		&nbsp;&nbsp;';
 		$html.= '		<input type="radio" class="checkbox" name="jform[params][repeated]" value="1" ' . ($params['repeated'] == 1 ? 'checked' : '') . '>' . JText::_('jyes');
-		$html.= '	</div>';
-		$html.= '	<div class="row">';
-		$html.= '		<label class="inputname">' . JText::_('ksm_discount_coupons_automatic_mode') . '</label>';
-		$html.= '		<input type="radio" class="checkbox" name="jform[params][mode]" value="0" ' . ($params['mode'] == 0 ? 'checked' : '') . '>' . JText::_('jno');
-		$html.= '		&nbsp;&nbsp;';
-		$html.= '		<input type="radio" class="checkbox" name="jform[params][mode]" value="1" ' . ($params['mode'] == 1 ? 'checked' : '') . '>' . JText::_('jyes');
 		$html.= '	</div>';
 		$html.= '</div>';
 		$html.= '<div class="ksenmart-coupons slide_module">';
@@ -278,11 +271,11 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 				$return = $this->onCheckDiscountDate($coupon->discount_id);
 				if ($return) {
 					$return = $this->onCheckDiscountCountry($coupon->discount_id);
-					if ($return || $coupon->params['mode'] == 1) {
+					if ($return) {
 						$return = $this->onCheckDiscountUserGroups($coupon->discount_id);
-						if ($return || $coupon->params['mode'] == 1) {
+						if ($return) {
 							$return = $this->onCheckDiscountActions($coupon->discount_id);
-							if ($return != 1 || $coupon->params['mode'] == 1) {
+							if ($return != 1) {
 								$session->set('ksenmart.coupon_id', $coupon->id);
 								JRequest::setVar('discount_code', null);
 								JRequest::setVar('task', null);
@@ -313,30 +306,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			$return = $this->onCheckDiscountActions($discount->id);
 			if ($return == 1) 
 			continue;
-			if ($discount->params['mode'] == 1) {
-				$created = $session->get('com_ksenmart.created_discount_' . $discount->id, null);
-				if (empty($created)) {
-					$code = '';
-					
-					while ($code == '') {
-						$query = $db->getQuery(true);
-						$code = KsenmartHelper::generateCode(8);
-						$query->select('id')->from('#__ksenmart_discount_coupons')->where('code=' . $db->quote($code));
-						$db->setQuery($query);
-						$res = $db->loadResult();
-						if (!empty($res)) $code = '';
-					}
-					$query = $db->getQuery(true);
-					$query->insert('#__ksenmart_discount_coupons')->columns(array(
-						'discount_id',
-						'code',
-						'published'
-					))->values($discount->id . ',' . $db->quote($code) . ',1');
-					$db->setQuery($query);
-					$db->query();
-					$session->set('com_ksenmart.created_discount_' . $discount->id, $code);
-				}
-			}
 			$this->onSendDiscountEmail($discount->id);
 		}
 	}
@@ -360,7 +329,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			if (!$return) 
 			continue;
 			$return = $this->onCheckDiscountActions($discount->id);
-			if ($return == 1 && $discount->params['mode'] != 1) 
+			if ($return == 1) 
 			continue;
 			$this->onSetCartDiscount($cart, $discount->id);
 		}
