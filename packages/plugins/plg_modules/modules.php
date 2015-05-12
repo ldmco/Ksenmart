@@ -94,12 +94,14 @@ class plgKMPluginsModules extends KMPlugin {
 			return true;
 		}
 
-		$attribs  = array();
 		$doc      = JFactory::getDocument();
 		$renderer = $doc->loadRenderer('module');
 		$modules  = $this->params->get('modules', new stdClass);
 		
 		foreach($modules as $position => $mods){
+			$attribs  = array(
+				'name' => $position
+			);
 			$buf = $doc->getBuffer('modules', $position, $attribs);
 			foreach(JModuleHelper::getModules($position) as $mod)
 			{

@@ -19,6 +19,8 @@ class JFormFieldKSModules extends JFormField {
     
     public function getInput() {
         $db = JFactory::getDBO();
+		$this->value = is_array($this->value) ? $this->value : array();
+		
         $html = '<style>.form-horizontal .controls {margin:0px;}</style>';
         $html.= '<table class="table table-striped" id="articleList">';
         $html.= '	<thead>';
