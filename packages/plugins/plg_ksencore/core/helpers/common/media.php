@@ -154,15 +154,15 @@ class KSMedia {
     }	
     
     public static function saveItemMedia($id = null, $data = array(), $owner_type = null, $folder = null) {
+        
         $owner_id = (int)$id;
         if (!$owner_id) return false;
-        $db = JFactory::getDBO();
         
         global $ext_name, $ext_name_com;
-        $prefix = ucfirst($ext_name);
-        
-        $in = array();
         JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . $ext_name_com . DS . 'tables');
+        $db     = JFactory::getDBO();
+        $prefix = ucfirst($ext_name);
+        $in     = array();
         if (isset($data['images']) && $data['images']) {
             foreach ($data['images'] as $k => $v) {
                 $k = (int)$k;
@@ -171,27 +171,35 @@ class KSMedia {
                     
                     $v['owner_type'] = $owner_type;
                     $v['media_type'] = 'image';
-                    $v['mime_type'] = 'image/jpeg';
-                    $v['folder'] = $folder;
+                    $v['mime_type']  = 'image/jpeg';
+                    $v['folder']     = $folder;
                     if ($k > 0) {
                         $v['id'] = $k;
                     }
                     $v['owner_id'] = $owner_id;
-                    $v['params'] = json_encode($v['params']);
+                    $v['params']   = json_encode($v['params']);
                     
                     if (!$table->bindCheckStore($v)) {
                         $this->setError($table->getError());
                         return false;
                     }
-                    
                     $in[] = $table->id;
                 }
             }
         }
+        
         $query = $db->getQuery(true);
-        $query->delete('#__' . $ext_name . '_files')->where('owner_id=' . $owner_id)->where('owner_type=' . $db->quote($owner_type));
+        $query
+            ->delete($db->qn('#__' . $ext_name . '_files'))
+            ->where($db->qn('owner_id') . '=' . $db->q($owner_id))
+            ->where($db->qn('owner_type') . '=' . $db->q($owner_type))
+            ->where($db->qn('media_type') . '=' . $db->q('image'))
+        ;
         if (count($in)) {
-            $query->where('id not in (' . implode(', ', $in) . ')');
+            $query
+                ->where('id not in (' . implode(', ', $in) . ')')
+                ->where($db->qn('id') . ' NOT IN (' . implode(', ', $db->q($in)) . ')')
+            ;
         }
         $db->setQuery($query);
         $db->query();
