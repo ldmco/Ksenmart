@@ -121,6 +121,37 @@ class KSMedia {
         
         return JURI::root() . str_replace(JPATH_ROOT . DS, '', $dst_filename);
     }
+	
+    public static function setItemMedia($item = null, $owner_type = null) {
+        if (!$item) return false;
+        
+        global $ext_name, $ext_name_com;
+        $item->images = array();
+        $item->files = array();
+        $item->videos = array();
+        $owner_id = (int)$item->id;
+        
+        if (!$owner_type) return $item;
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->select('*')->from('#__' . $ext_name . '_files')->where('owner_type=' . $db->quote($owner_type))->where('owner_id=' . $owner_id)->order('ordering');
+        $db->setQuery($query);
+        $medias = $db->loadObjectList('id');
+        
+        foreach ($medias as $media) {
+            if ($media->media_type == 'image') {
+                $item->images[$media->id] = $media;
+            }
+            if ($media->media_type == 'file') {
+                $item->files[$media->id] = $media;
+            }
+            if ($media->media_type == 'video') {
+                $item->videos[$media->id] = $media;
+            }
+        }
+        
+        return $item;
+    }	
     
     public static function saveItemMedia($id = null, $data = array(), $owner_type = null, $folder = null) {
         $owner_id = (int)$id;
