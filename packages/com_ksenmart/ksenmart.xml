@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5.0" method="upgrade">
 	<name>KSENMART</name>
-	<creationDate>March 2014</creationDate>
+	<creationDate>May 2015</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>3.1.9-beta</version>
+	<version>3.1.10-beta</version>
 
 	<scriptfile>install.php</scriptfile>
 	

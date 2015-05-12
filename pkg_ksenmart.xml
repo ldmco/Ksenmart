@@ -5,9 +5,9 @@
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.1.7-beta</version>
+    <version>1.1.8-beta</version>
     <description><![CDATA[
     	<div class="text-left" style="font-size: 15px;">
 	    	Официальный сайт <a href="https://github.com/ldmco/KsenMart" target="_blank" title="Официальный сайт KsenMart">KsenMart <span class="icon-out-2 small"></span></a>
@@ -20,7 +20,7 @@
 	    	<a href="index.php?option=com_ksenmart&view=exportimport" title="Настройки ROIStat">Настройки ROIStat</a>
     	</div>
     	]]></description>
-    <creationDate>17 February 2014</creationDate>
+    <creationDate>May 2015</creationDate>
 
     <updateservers>
         <server type="collection" priority="1" name="pkg_ksenmart">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/pkg_ksenmart-update-list.xml</server>
