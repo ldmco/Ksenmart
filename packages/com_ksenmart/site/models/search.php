@@ -68,12 +68,18 @@ class KsenMartModelSearch extends JModelKSList {
         $search = array(
             "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
             "ф","ы","в","а","п","р","о","л","д","ж","э",
-            "я","ч","с","м","и","т","ь","б","ю"
+            "я","ч","с","м","и","т","ь","б","ю",
+            "Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ",
+            "Ф","Ы","В","А","П","Р","О","Л","Д","Ж","Э",
+            "Я","Ч","С","М","И","Т","Ь","Б","Ю",
         );
         $replace = array(
             "q","w","e","r","t","y","u","i","o","p","[","]",
             "a","s","d","f","g","h","j","k","l",";","'",
-            "z","x","c","v","b","n","m",",","."
+            "z","x","c","v","b","n","m",",",".",
+            "Q","W","E","R","T","Y","U","I","O","P","[","]",
+            "A","S","D","F","G","H","J","K","L",";","'",
+            "Z","X","C","V","B","N","M",",",".",
         );
         
         $this->onExecuteAfter('correctString', array(&$replace, &$search, &$string));
@@ -85,10 +91,20 @@ class KsenMartModelSearch extends JModelKSList {
 
         $this->setState('value', $value);
         $this->setState('correct', $correct);
-        
-        $this->getListQuery();
+
+        if ($correct) {
+            
+            $store       = $this->getStoreId();
+            $this->query = array();
+
+            unset($this->cache[$store]);
+        }
+
         $results = $this->getItems();
-        
+        if (!$results) {
+            $results = array();
+        }
+
         $this->onExecuteAfter('getProductSearch', array(&$results));
         return $results;
     }
@@ -271,22 +287,21 @@ class KsenMartModelSearch extends JModelKSList {
         $this->onExecuteBefore('getCatSearch', array(&$value));
         
         $morph_search = str_replace(' ', '* ', $value);
-        
-        $query = "
-            SELECT 
-                c.id AS cat_id, 
-                c.title 
-            FROM 
-                #__ksenmart_categories AS c 
-            WHERE 
-                (c.title 
-            LIKE
-                '".$value."%')
-            OR
-                (c.title 
-            LIKE
-                '" . strtoupper($value) . "%')
-        ";
+
+        $value = $this->_db->q($this->_db->escape($value) . '%');
+        $query = $this->_db->getQuery(true);
+
+        $query
+            ->select($this->_db->qn(array(
+                'c.id',
+                'c.title',
+            ), array(
+                'cat_id',
+                'cat_title',
+            )))
+            ->from($this->_db->qn('#__ksenmart_categories', 'c'))
+            ->where($this->_db->qn('c.title') . ' LIKE ' . $this->_db->q($value))
+        ;
         
         $this->_db->setQuery($query, 0, $this->_limit_categories);
         $results = $this->_db->loadObjectList();
@@ -299,25 +314,22 @@ class KsenMartModelSearch extends JModelKSList {
         $this->onExecuteBefore('getManufactureSearch', array(&$value));
 
         $morph_search = str_replace(' ', '* ', $value);
+
+        $value = $this->_db->q($this->_db->escape($value) . '%');
+        $query = $this->_db->getQuery(true);
         
-        $query = "
-            SELECT 
-                m.id, 
-                m.title 
-            FROM 
-                #__ksenmart_manufacturers AS m 
-            WHERE 
-                (m.title 
-            LIKE
-                '".$value."%')
-            OR
-                (m.title 
-            LIKE
-                '" . strtoupper($value) . "%')                
-        ";
-        
+        $query
+            ->select($this->_db->qn(array(
+                'm.id',
+                'm.title',
+            )))
+            ->from($this->_db->qn('#__ksenmart_manufacturers', 'm'))
+            ->where($this->_db->qn('m.title') . ' LIKE ' . $this->_db->q($value))
+        ;
+
         $this->_db->setQuery($query, 0, $this->_limit_manufacture);
         $results = $this->_db->loadObjectList();
+
 
         $this->onExecuteAfter('getManufactureSearch', array(&$results));
         return $results;
@@ -328,20 +340,20 @@ class KsenMartModelSearch extends JModelKSList {
         $this->onExecuteBefore('getRelevantSearches', array(&$value));
 
         $morph_search = str_replace(' ', '* ', $value);
-        
-        $query = "
-            SELECT 
-                id, title, hit  
-            FROM 
-                #__ksenmart_searches_query 
-            WHERE 
-                title 
-            LIKE
-                '".$value."%'
-            GROUP BY 
-                hit
-            DESC
-        ";
+
+        $value = $this->_db->q($this->_db->escape($value) . '%');
+        $query = $this->_db->getQuery(true);
+
+        $query
+            ->select($this->_db->qn(array(
+                'r.id',
+                'r.title',
+                'r.hit',
+            )))
+            ->from($this->_db->qn('#__ksenmart_searches_query', 'r'))
+            ->where($this->_db->qn('r.title') . ' LIKE ' . $this->_db->q($value))
+            ->group($this->_db->qn('r.hit') . ' DESC')
+        ;
         
         $this->_db->setQuery($query, 0, $this->_limit_relevant);
         $results = $this->_db->loadObjectList();
@@ -395,11 +407,17 @@ class KsenMartModelSearch extends JModelKSList {
     private function getLikeSearchId($value){
         $this->onExecuteBefore('getLikeSearchId', array(&$value));
 
+        $value = $this->_db->q($this->_db->escape($value) . '%');
         $query = $this->_db->getQuery(true);
+
         $query
-            ->select('id')
-            ->from('#__ksenmart_searches_query')
-            ->where("title ='".$value."'");
+            ->select($this->_db->qn(array(
+                'r.id',
+                'r.title',
+                'r.hit',
+            )))
+            ->from($this->_db->qn('#__ksenmart_searches_query', 'r'))
+            ->where($this->_db->qn('r.title') . '=' . $this->_db->q($value))
         ;
         
         $this->_db->setQuery($query, 0, 1);
