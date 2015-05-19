@@ -10,6 +10,7 @@ KSSystem::import('views.viewks');
 class KsenMartViewProduct extends JViewKS {
     public function display($tpl = null) {
         $app          = JFactory::getApplication();
+        $document     = JFactory::getDocument();
         $this->params = JComponentHelper::getParams('com_ksenmart');
         $path         = $app->getPathway();
         $model        = $this->getModel();

@@ -60,38 +60,31 @@ class KSMProducts extends KSCoreHelper {
                     $row->filename = 'no.jpg';
                 }
             }
-            $query = $db->getQuery(true);
-            $query->select('count(id)')->from('#__ksenmart_products');
-            $query->where('parent_id=' . $row->id);
-            $db->setQuery($query);
-            $row->is_parent = $db->loadResult();
             
             if ($row->product_packaging == 0) {
                 $row->product_packaging = 1;
             }
             $row->product_packaging = rtrim(rtrim($row->product_packaging, '0'), '.');
-            
-            $row->link = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $row->id . ':' . $row->alias . '&Itemid=' . KSSystem::getShopItemid());
-            self::productPricesTransform($row);
-            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
-            $row->small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
-            $row->img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
-            $row->rate = KSMProducts::getProductRate($row->id);
-            
-            if (!empty($row->folder)) {
-				$row->img_link = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
-            } else {
-                $row->img_link = JURI::root() . 'media/com_ksenmart/images/products/no.jpg';
-            }
 
-            $row->add_link_cart = KSFunctions::getAddToCartLink($row->price, 2);
+            if($row->parent_id > 0) {
+                $row->parent = self::getProduct($row->parent_id);
+            }
+            
+            self::productPricesTransform($row);
+            $row->link           = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $row->id . ':' . $row->alias . '&Itemid=' . KSSystem::getShopItemid());
+            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
+            $row->small_img      = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
+            $row->img            = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
+			$row->img_link       = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
+            $row->rate           = KSMProducts::getProductRate($row->id);
+            $row->add_link_cart  = KSFunctions::getAddToCartLink($row->price, 2);
+
             $row->tags = new JHelperTags;
             $row->tags->getItemTags('com_ksenmart.product', $row->id);
         }
         $ext_name = $old_ext_name;
 		
 		self::onExecuteAfter(array(&$row));
-		
         return $row;
     }
 
