@@ -21,7 +21,7 @@ class KsenMartControllerProfile extends JControllerLegacy {
         $order = $model->getOrder();
         $session->set('shopcart_discount', $order->coupon);
         $session->set('shop_order_id', $order->id);
-        $this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=cart', false));
+        $this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid='.KSSystem::getShopItemid(), false));
     }
 
     public function add_address() {
