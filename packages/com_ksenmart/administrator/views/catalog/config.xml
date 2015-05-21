@@ -258,7 +258,7 @@
 			type="text"
 			default="120"
 			label="KSM_PRODUCT_MANUFACTURERHEIGHT_LABEL"
-			description="KSM_PRODUCT_MANUFACTURERWIDTH_DESC"
+			description="KSM_PRODUCT_MANUFACTURERHEIGHT_DESC"
 			labelclass="inputname"
 			class="inputbox_205"
 		/>
