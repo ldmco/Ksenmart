@@ -26,8 +26,8 @@ defined('_JEXEC') or die;
 <div class="control-group">
 	<label class="control-label"><?php echo $this->childs_title; ?></label>
 	<div class="controls">
-		<select class="sel" id="property_childs" name="property_childs" required="true">
-			<option value="0">Выбрать</option>
+		<select class="sel" id="property_childs" required="true">
+			<option value="">Выбрать</option>
 			<?php foreach($this->childs_titles as $childs_title):?>
 			<option value="<?php echo JRoute::_('index.php?option=com_ksenmart&view=product&id='.$childs_title->id.':'.$childs_title->alias.'&Itemid=' . KSSystem::getShopItemid()); ?>" <?php echo ($childs_title->id==$this->product->id?'selected':'')?>><?php echo $childs_title->title?></option>
 			<?php endforeach;?>
