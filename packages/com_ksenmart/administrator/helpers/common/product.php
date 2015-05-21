@@ -333,7 +333,7 @@ class KSMProducts extends KSCoreHelper {
         
         if (count($manufacturer) > 0) {
             
-            $manufacturer->img = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($manufacturer->params, true));
+            $manufacturer->img = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $params->get('manufacturer_width', 240), $params->get('manufacturer_height', 120), json_decode($manufacturer->params, true));
 
             unset($manufacturer->filename);
             unset($manufacturer->folder);

@@ -242,6 +242,27 @@
 			labelclass="inputname"
 			class="inputbox_205"
 			/>
+
+		<field
+			name="manufacturer_width"
+			type="text"
+			default="240"
+			label="KSM_PRODUCT_MANUFACTURERWIDTH_LABEL"
+			description="KSM_PRODUCT_MANUFACTURERWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+		/>
+			
+		<field
+			name="manufacturer_height"
+			type="text"
+			default="120"
+			label="KSM_PRODUCT_MANUFACTURERHEIGHT_LABEL"
+			description="KSM_PRODUCT_MANUFACTURERWIDTH_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+		/>
+		
 	</fieldset>
 	<fieldset name="KSM_SEARCH_CONFIG"
 		label="KSM_SEARCH_CONFIG_LABEL"
