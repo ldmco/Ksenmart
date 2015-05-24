@@ -178,16 +178,8 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			$query = $db->getQuery(true);
 			$query->select('code')->from('#__ksenmart_discount_coupons')->where('published=1')->where('id=' . $coupon_id);
 			$db->setQuery($query);
-			$code = $db->loadResult();
-			$html.= '<div class="km-coupons default_shipping-plugin-renew">';
-			$html.= '	<div class="step">';
-			$html.= '		<legend>' . JText::_('ksm_discount_coupons_text_1') . '</legend>';
-			$html.= '		<div class="control-group">';
-			$html.= '			<span>' . JText::_('ksm_discount_coupons_text_2') . '</span>&nbsp;' . $code . '&nbsp;&nbsp;';
-			$html.= '			<input type="button" class="st_button btn" value="' . JText::_('ksm_discount_coupons_unset_coupon') . '" />';
-			$html.= '		</div>';
-			$html.= '	</div>';
-			$html.= '</div>';
+			$view->code = $db->loadResult();
+			$html .= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'unset');
 			
 			$script = '
 			jQuery(document).ready(function(){
@@ -200,18 +192,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			';
 			$document->addScriptDeclaration($script);
 		} else {
-			$html.= '<div class="km-coupons default_shipping-plugin-renew">';
-			$html.= '	<div class="step">';
-			$html.= '		<legend>' . JText::_('ksm_discount_coupons_text') . '</legend>';
-			$html.= '		<div class="controls">';
-			$html.= '		    <div class="control-group input-append">';
-			$html.= '			   <span>' . JText::_('ksm_discount_coupons_print_code_site') . '</span>';
-			$html.= '			   <input type="text" class="inputbox span12" name="discount_code" value="" placeholder="' . JText::_('ksm_discount_coupons_placeholder') . '" />';
-			$html.= '			   <input type="button" class="st_button btn" value="' . JText::_('ksm_discount_coupons_recalculate') . '" />';
-			$html.= '		    </div>';
-			$html.= '        </div>';
-			$html.= '	</div>';
-			$html.= '</div>';
+			$html .= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'set');
 			
 			$script = '
 			jQuery(document).ready(function(){
