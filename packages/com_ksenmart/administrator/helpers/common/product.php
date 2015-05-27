@@ -102,14 +102,33 @@ class KSMProducts extends KSCoreHelper {
     public static function getLinks($pid) {
         if ($pid > 0) {
             $db = JFactory::getDBO();
+			
+            $query = $db->getQuery(true);
+            $query
+                ->select('parent_id')
+                ->from('#__ksenmart_products')
+                ->where('id=' . $db->q($pid))
+            ;
+            $db->setQuery($query);
+            $parent_id = $db->loadResult();		
 
-            $cid = self::getProductCategory($pid);	
+			$query = $db->getQuery(true);
+			$query
+				->select('id')
+				->from('#__ksenmart_products')
+				->where('parent_id=' . $db->q($parent_id))
+			;
+			$db->setQuery($query);
+			$ids = $db->loadColumn();						
+
+            $cid = self::getProductCategory($pid);
 
             $query = $db->getQuery(true);
             $query
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id<' . $db->q($pid))
+                ->where('product_id in ('.implode(',', $ids).')')
                 ->order('product_id DESC')
             ;
 			if (!empty($cid))
@@ -123,6 +142,7 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MAX(product_id)')
                     ->from('#__ksenmart_products_categories')
+					->where('product_id in ('.implode(',', $ids).')')
                 ;
 				if (!empty($cid))
 					$query->where('category_id=' . $db->q($cid));
@@ -137,6 +157,7 @@ class KSMProducts extends KSCoreHelper {
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id>' . $db->q($pid))
+				->where('product_id in ('.implode(',', $ids).')')
                 ->order('product_id ASC')
             ;
 			if (!empty($cid))
@@ -149,6 +170,7 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MIN(product_id)')
                     ->from('#__ksenmart_products_categories')
+					->where('product_id in ('.implode(',', $ids).')')
                 ;
 				if (!empty($cid))
 					$query->where('category_id=' . $db->q($cid));				
