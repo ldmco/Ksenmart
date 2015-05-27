@@ -7,11 +7,11 @@
 defined('_JEXEC') or die;
 ?>
 <div class="deliv-info">
-	<h3>Доставка и оплата</h3>
+	<h3><?php echo $module->title; ?></h3>
 	<div class="row-fluid">
-		<h5>Вы находитесь в регионе:</h5>
+		<h5><?php echo JText::_('MOD_KM_SHIPPING_REGION'); ?></h5>
 		<select class="input-medium" id="shipping_region" style="width:180px;">
-			<option value="0">Выбрать регион</option>
+			<option value="0"><?php echo JText::_('MOD_KM_SHIPPING_CHOOSE_REGION'); ?></option>
 			<?php foreach($regions as $region) { ?>
 			     <option value="<?php echo $region->id; ?>" <?php echo ($region->id == $user_region ? 'selected' : ''); ?>><?php echo $region->title; ?></option>
 			<?php } ?>
@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 	</div>
 	<div class="deliv-payment-info">
 		<div class="row-fluid">
-			<h5>Доступные способы доставки:</h5>
+			<h5><?php echo JText::_('MOD_KM_SHIPPING_SHIPPINGS'); ?></h5>
             <?php if(count($shippings) > 0) { ?>
                 <?php foreach($shippings as $ship) {?>
             	<p>
@@ -31,11 +31,11 @@ defined('_JEXEC') or die;
 				</p>
             	<? } ?>
             <?php } else { ?>
-            	<p>Нет способов для этого региона</p>
+            	<p><?php echo JText::_('MOD_KM_SHIPPING_NO_SHIPPINGS'); ?></p>
             <?php } ?>
 		</div>
 		<div class="row-fluid">
-			<h5>Доступные способы оплаты:</h5>
+			<h5><?php echo JText::_('MOD_KM_SHIPPING_PAYMENTS'); ?></h5>
 			<?php if(count($payments) > 0) { ?>
                 <?php foreach($payments as $pay) { ?>
 				<p>
@@ -46,7 +46,7 @@ defined('_JEXEC') or die;
 				</p>
 				<?php } ?>
             <?php } else { ?>
-			<p>Нет способов для этого региона</p>
+			<p><?php echo JText::_('MOD_KM_SHIPPING_NO_PAYMENTS'); ?></p>
 			<?php } ?>
 		</div>
 	</div>

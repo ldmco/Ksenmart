@@ -19,7 +19,6 @@ defined('_JEXEC') or die;
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE')?></span>
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_LESS')?></span><input type="text" id="search-price-less" class="search-price" name="price_less" value="<?php echo (int)$price_less?>" />
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_MORE')?></span><input type="text" id="search-price-more" class="search-price" name="price_more" value="<?php echo (int)$price_more?>" />
-					<span>руб</span>
 				</div>
 				<div class="tracker">
 				</div>		
@@ -63,7 +62,7 @@ defined('_JEXEC') or die;
 				<?php else: ?>
 				<li>
 					<select name="manufacturers[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($manufacturers as $manufacturer){ ?>
 						<option class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer item <?php if ($manufacturer->selected) echo 'active'; ?>" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'selected'; ?>><?php echo $manufacturer->title; ?></option>
 						<?php } ?>	
@@ -111,7 +110,7 @@ defined('_JEXEC') or die;
 				<?php else: ?>
 				<li>
 					<select name="properties[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($property->values as $value){ ?>
 						<option class="property_value_<?php echo $value->id; ?> property_value item <?php if ($value->selected) echo 'active'; ?>" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'selected'; ?>><?php echo $value->title; ?></option>
 						<?php } ?>	
@@ -159,7 +158,7 @@ defined('_JEXEC') or die;
 				<?php else: ?>
 				<li>
 					<select name="countries[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($countries as $country){ ?>
 						<option class="country_<?php echo $country->id; ?> country item <?php if ($country->selected) echo 'active'; ?>" value="<?php echo $country->id; ?>" <?php if ($country->selected) echo 'selected'; ?>><?php echo $country->title; ?></option>
 						<?php } ?>	
