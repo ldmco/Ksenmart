@@ -106,8 +106,15 @@ class plgKMExportimportExport_csv extends KMPlugin {
 				$query->select('title,parent_id')->from('#__ksenmart_categories')->where('id=' . $parent);
 				$db->setQuery($query);
 				$category = $db->loadObject();
-				$cat_tree[] = $category->title;
-				$parent = $category->parent_id;
+				if (!empty($category))
+				{
+					$cat_tree[] = $category->title;
+					$parent = $category->parent_id;
+				}
+				else 
+				{
+					$parent = 0;
+				}
 			}
 			$cat_tree = array_reverse($cat_tree);
 			$cats_tree[$cat->id] = implode(':', $cat_tree);
