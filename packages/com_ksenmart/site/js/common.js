@@ -144,61 +144,79 @@ jQuery(document).ready(function() {
         return res;
     });
 
-    jQuery('.catalog, .unit').on('submit', jQuery('.buy [type="submit"]').parents('form'), function(e) {
+    jQuery('body').on('click', '.buy [type="submit"]', function(e) {
+        e.stopPropagation();
 
-        var form = jQuery(e.target);
-        var prd_id = form.find('input[name="id"]');
-        var prd_price = form.find('input[name="price"]');
-        var count = parseFloat(form.find('input[name="count"]').val());
-        var flag = true;
-        var product_packaging = parseFloat(form.find('input[name="product_packaging"]').val());
+        var form = jQuery(this).parents('form');
+        var product_packaging = form.find('[name="product_packaging"]');
 
-        count = Math.ceil(count / product_packaging) * product_packaging;
-        count = count.toFixed(4);
-        count = fixCount(count);
+        if (product_packaging.length) {
 
-        form.find('.options .row').each(function() {
-            if (jQuery(this).find('input[type="hidden"]').length > 0 && jQuery(this).find('input[type="hidden"]').val() == 0) {
-                if (!jQuery(this).is('.row_active'))
-                    jQuery(this).addClass('row_active');
-                flag = false;
-            } else if (jQuery(this).find('input[type="radio"]').length > 0 && jQuery(this).find('input[type="radio"]:checked').length == 0) {
-                if (!jQuery(this).is('.row_active'))
-                    jQuery(this).addClass('row_active');
-                flag = false;
-            } else if (jQuery(this).find('input[type="checkbox"]').length > 0 && jQuery(this).find('input[type="checkbox"]:checked').length == 0) {
-                if (!jQuery(this).is('.row_active'))
-                    jQuery(this).addClass('row_active');
-                flag = false;
+            var prd_id = form.find('input[name="id"]');
+            var prd_price = form.find('input[name="price"]');
+            var count = parseFloat(form.find('input[name="count"]').val());
+            var flag = true;
+            var product_packaging = parseFloat(form.find('input[name="product_packaging"]').val());
+
+            count = Math.ceil(count / product_packaging) * product_packaging;
+            count = count.toFixed(4);
+            count = fixCount(count);
+
+            if (!count) {
+                count = 1;
             }
-        });
-        if (!flag) {
-            jQuery('body').animate({
-                'scrollTop': form.offset().top
-            }, 500);
-            return false;
-        }
-        jQuery.ajax({
-            url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.validate_in_stock&' + form.serialize() + '&tmpl=ksenmart',
-            async: false,
-            success: function(data) {
-                if (data != '') {
-                    KMShowMessage(data);
+
+            form.find('.options .row').each(function() {
+                if (jQuery(this).find('input[type="hidden"]').length > 0 && jQuery(this).find('input[type="hidden"]').val() == 0) {
+                    if (!jQuery(this).is('.row_active'))
+                        jQuery(this).addClass('row_active');
+                    flag = false;
+                } else if (jQuery(this).find('input[type="radio"]').length > 0 && jQuery(this).find('input[type="radio"]:checked').length == 0) {
+                    if (!jQuery(this).is('.row_active'))
+                        jQuery(this).addClass('row_active');
+                    flag = false;
+                } else if (jQuery(this).find('input[type="checkbox"]').length > 0 && jQuery(this).find('input[type="checkbox"]:checked').length == 0) {
+                    if (!jQuery(this).is('.row_active'))
+                        jQuery(this).addClass('row_active');
                     flag = false;
                 }
+            });
+            if (!flag) {
+                jQuery('body').animate({
+                    'scrollTop': form.offset().top
+                }, 500);
+                return false;
             }
-        });
-        if (!flag)
-            return false;
-
-        if (order_process == 1) {
             jQuery.ajax({
-                url: URI_ROOT + 'index.php?option=com_ksenmart&view=order&task=order.get_order_id&tmpl=ksenmart',
+                url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.validate_in_stock&' + form.serialize() + '&tmpl=ksenmart',
+                async: false,
                 success: function(data) {
-                    var order_id = data;
-                    if (order_id == 0) {
-                        if (user_id == 0) {
-                            KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 610, 250);
+                    if (data != '') {
+                        KMShowMessage(data);
+                        flag = false;
+                    }
+                }
+            });
+            if (!flag)
+                return false;
+
+            if (order_process == 1) {
+                jQuery.ajax({
+                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=order&task=order.get_order_id&tmpl=ksenmart',
+                    success: function(data) {
+                        var order_id = data;
+                        if (order_id == 0) {
+                            if (user_id == 0) {
+                                KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 610, 250);
+                            } else {
+                                jQuery.ajax({
+                                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
+                                    success: function(data) {
+                                        jQuery('#minicart').html(data);
+                                        KMShowCartMessage('Товар добавлен в корзину');
+                                    }
+                                });
+                            }
                         } else {
                             jQuery.ajax({
                                 url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
@@ -208,27 +226,21 @@ jQuery(document).ready(function() {
                                 }
                             });
                         }
-                    } else {
-                        jQuery.ajax({
-                            url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
-                            success: function(data) {
-                                jQuery('#minicart').html(data);
-                                KMShowCartMessage('Товар добавлен в корзину');
-                            }
-                        });
                     }
-                }
-            });
-        } else {
-            jQuery.ajax({
-                url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
-                success: function(data) {
-                    jQuery('#minicart').html(data);
-                    KMShowCartMessage('Товар добавлен в корзину');
-                }
-            });
+                });
+            } else {
+                jQuery.ajax({
+                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
+                    success: function(data) {
+                        jQuery('#minicart').html(data);
+                        KMShowCartMessage('Товар добавлен в корзину');
+                    }
+                });
+            }
+            return false;
         }
-        return false;
+
+        return true;
     });
 
     jQuery('.buy-price2 .buy .button').on('click', function() {
