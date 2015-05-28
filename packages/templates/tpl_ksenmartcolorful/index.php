@@ -131,10 +131,11 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<jdoc:include type="modules" name="ks-clrful-footer-info1" style="none" />
 					</div>
 					<div class="span4">
-						<h5>Есть вопросы?</h5>
+						<h5><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_QUESTIONS'); ?></h5>
 						<?php if (!empty($phone)): ?>
 						<div class="span4" style="margin: 0;">
-							Звоните:<br />
+							<?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_CALL_US'); ?>
+							<br />
 							<?php if (!empty($phone)): ?>
 								<?php echo $phone; ?><br />
 							<?php endif; ?>
@@ -145,21 +146,22 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<?php endif; ?>
 						<?php if (!empty($email)): ?>
 						<div class="span5">
-							Пишите:<br />
+							<?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_WRITE_US'); ?>
+							<br />
 							<?php echo $email; ?>
 						</div>
 						<?php endif; ?>
 					</div>
 					<div class="span2 pull-right">
-						<span>Мы в соцсетях:</span><br />
+						<span><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_SOCIAL_LINKS'); ?></span><br />
 						<?php if (!empty($vkontakte)): ?>
-						<a href="<?php echo $vkontakte; ?>"><img src="/templates/ksenmartcolorful/images/vk.png" alt="" /></a>
+						<a href="<?php echo $vkontakte; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/vk.png" alt="" /></a>
 						<?php endif; ?>
 						<?php if (!empty($facebook)): ?>
-						<a href="<?php echo $facebook; ?>"><img src="/templates/ksenmartcolorful/images/fb.png" alt="" /></a>
+						<a href="<?php echo $facebook; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/fb.png" alt="" /></a>
 						<?php endif; ?>
 						<?php if (!empty($twitter)): ?>
-						<a href="<?php echo $twitter; ?>"><img src="/templates/ksenmartcolorful/images/tw.png" alt="" /></a>
+						<a href="<?php echo $twitter; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/tw.png" alt="" /></a>
 						<?php endif; ?>						
 					</div>
 					<div class="span2 pull-right">
@@ -171,7 +173,7 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<?php echo $copyright; ?>
 					</div>
 					<div class="span2 pull-right">
-						<a href="http://ldm-co.ru" class="ldm" title="L.D.M&amp;Co.">Разработка<br /> шаблона</a>
+						<a href="http://ldm-co.ru" class="ldm" title="L.D.M&amp;Co."><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_MADE_BY'); ?></a>
 					</div>					
     			</div>
             </div>

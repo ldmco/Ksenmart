@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
     				<label class="control-label"><?php echo $property->title ?>:</label>
     				<div class="controls">
     					<select class="sel" data-prop_id="<?php echo $property->property_id; ?>" name="property_<?php echo $this->product->id."_".$property->property_id; ?>" required="true">
-    						<option value="">Выберите</option>
+    						<option value=""><?php echo JText::_('KSM_PRODUCT_PROPERTY_CHOOSE'); ?></option>
                             <?php foreach ($property->values as $value){ ?>
     						<option value="<?php echo $value->id; ?>"><?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?></option>
     						<?php } ?>

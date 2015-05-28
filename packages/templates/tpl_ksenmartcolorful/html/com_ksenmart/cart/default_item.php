@@ -15,14 +15,14 @@ defined('_JEXEC') or die;
 	</td>
 	<td style="width: 40%;">
 		<dl class="dl-horizontal">
-			<dt>Название</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_COLUMN_TITLE'); ?></dt>
 			<dd><a href="<?php echo $this->item->product->link; ?>" title="<?php echo $this->item->product->title; ?>"><?php echo $this->item->product->title; ?></a></dd>
 			<?php if(!empty($this->item->product->product_code)){ ?>
-			<dt>Артикул</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
 			<dd><?php echo $this->item->product->product_code; ?></dd>
 			<?php } ?>
 			<?php if(!empty($this->item->product->manufacturer_title)){ ?>
-			<dt>Производитель</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?></dt>
 			<dd><?php echo $this->item->product->manufacturer_title; ?></dd>
 			<?php } ?>
             <?php foreach($this->item->properties as $item_property){ ?>

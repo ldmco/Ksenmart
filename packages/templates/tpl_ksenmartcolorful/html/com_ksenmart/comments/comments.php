@@ -7,7 +7,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="">
-	<h2>Отзывы</h2>
+	<h2><?php echo JText::_('KSM_REVIEWS_LIST_PATH_TITLE'); ?></h2>
 	<div id="reviews" class="items shop_reviews comment-items">
 	<?php if (!empty($this->rows)):?>
 	<?php foreach($this->rows as $comment):?>

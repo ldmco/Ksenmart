@@ -34,7 +34,7 @@ foreach($this->product->properties as $prop){
     				<div class="for"><?php echo $this->product->manufacturer_title; ?></div>
     				<?php }?>
     				<?php if(!empty($this->product->product_code)){ ?>
-    				<div class="article muted">Артикул: <?php echo $this->product->product_code; ?></div>
+    				<div class="article muted"><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?> <?php echo $this->product->product_code; ?></div>
     				<?php }?>
     				<?php if(!empty($this->product->introcontent)){ ?>
     				<div class="introcontent muted">
@@ -50,11 +50,11 @@ foreach($this->product->properties as $prop){
     				<div class="muted row-fluid bottom_info">
                         <div class="span6 brand">
                             <?php if(!empty($this->product->manufacturer_title)){ ?>
-                            Бренд: <a href="index.php?option=com_ksenmart&view=catalog&manufacturers[0]=<?php echo $this->product->manufacturer; ?>&Itemid=<?php echo KSSystem::getShopItemid(); ?>" title="<?php echo $this->product->manufacturer_title; ?>"><?php echo $this->product->manufacturer_title; ?></a>
+                            <?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?> <a href="index.php?option=com_ksenmart&view=catalog&manufacturers[0]=<?php echo $this->product->manufacturer; ?>&Itemid=<?php echo KSSystem::getShopItemid(); ?>" title="<?php echo $this->product->manufacturer_title; ?>"><?php echo $this->product->manufacturer_title; ?></a>
                             <?php }?>
                         </div>
                         <div class="span6 rating">
-                            <span class="title">Рейтинг: </span>
+                            <span class="title"><?php echo JText::_('KSM_PRODUCT_RATE'); ?> </span>
             				<?php for($k=1; $k<6; $k++){ ?>
                 				<?php if(floor($this->product->rate->rate) >= $k){ ?>
                 				<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star2.png" alt="" />
@@ -70,7 +70,7 @@ foreach($this->product->properties as $prop){
                 <div class="bottom_wrapp span12">
 					<div class="price row-fluid"<?php echo $this->product->price == 0?' style="visibility: hidden;"':''; ?>>
                         <div class="span6">
-                            <span class="title">Цена: </span>
+                            <span class="title"><?php echo JText::_('KSM_PRODUCT_PRICE'); ?> </span>
     						<?php if($this->product->old_price != 0){ ?>
     						<span class="old"><?php echo $this->product->val_old_price; ?></span>
     						<?php } ?>
@@ -88,7 +88,7 @@ foreach($this->product->properties as $prop){
     					<span class="delta">&diams;</span>
                         <?php if (($this->params->get('only_auth_buy',0) == 0 || ($this->params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)) && ($this->product->price != 0 && $this->product->is_parent == 0 && $flag) && !$this->params->get('catalog_mode', 0)){ ?>	
         					<div class="buy">
-                                <button type="submit" class="btn btn-success row-fluid"><b></b> <span>Купить</span></button>
+                                <button type="submit" class="btn btn-success row-fluid"><b></b> <span><?php echo JText::_('KSM_PRODUCT_ADDTOCART_BUTTON_TEXT'); ?></span></button>
                             </div>
                             <?php }else{ ?>
                             <div class="buy">

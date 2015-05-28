@@ -35,7 +35,7 @@ defined('_JEXEC') or die;
 				<?php echo nl2br(mb_substr($this->review->comment, 0, $this->params->get('count_symbol', 400))); ?>
 			</div>
 			<div class="read_more">
-				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="Подробнее">Подробнее</a>
+				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="<?php echo JText::_('KSM_REVIEW_MORE'); ?>"><?php echo JText::_('KSM_REVIEW_MORE'); ?></a>
 			</div>
 		</div>
 	</div>
