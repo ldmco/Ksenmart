@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
 	<div class="name"></div>
 	<div class="info">
 		<dl class="dl-horizontal">
-		  <dt>Артикул:</dt>
+		  <dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
 		  <dd><?php echo $this->order_item->product->product_code; ?></dd>
 		<?php foreach($this->order_item->properties as $item_property): ?>
 			<?php if (!empty($item_property->value)): ?>
@@ -26,13 +26,6 @@ defined('_JEXEC') or die;
 			  <dd></dd>
 			<?php endif; ?>
 		<?php endforeach; ?>
-		<?php if ($this->order->status_id == 5): ?>
-			<?php foreach($this->order_item->product->files as $file): ?>
-			<div>
-				<label><a target="_blank" href="<?php echo JURI::root()?>administrator/components/com_ksenmart/files/<?php echo $file->file; ?>"><?php echo $file->title; ?></a></label>
-			</div>
-			<?php endforeach; ?>
-		<?php endif; ?>
 		</dl>
 	</div>
 </td>

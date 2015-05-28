@@ -18,9 +18,9 @@ defined('_JEXEC') or die;
             <div class="title pull-left">
                 <div>
                     <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="manufacture"><?php echo $item->title; ?></a>
-                    <span class="product_total"><?php echo $item->product_total; ?> товаров</span>
+                    <span class="product_total"><?php echo JText::sprintf('ksm_search_results_products', $item->product_total); ?></span>
                 </div>
-                <div class="type">производитель</div>
+                <div class="type"><?php echo JText::_('ksm_search_manufacturer'); ?></div>
             </div>
         </div>
 		<div class="clearfix"></div>

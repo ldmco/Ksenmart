@@ -40,7 +40,7 @@ foreach($this->product->properties as $prop){
     				<div class="for_brand"><?php echo $product->manufacturer_title; ?></div>
     				<?php }?>
     				<?php if(!empty($product->product_code)){ ?>
-    				<div class="article muted">Артикул: <?php echo $product->product_code; ?></div>
+    				<div class="article muted"><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?> <?php echo $product->product_code; ?></div>
     				<?php }?>
     				<?php if(!empty($product->introcontent)){ ?>
     				<div class="introcontent muted">
@@ -56,11 +56,11 @@ foreach($this->product->properties as $prop){
     				<div class="muted row-fluid bottom_info">
                         <div class="span6 brand">
                             <?php if(!empty($product->manufacturer_title)){ ?>
-                            Бренд: <a href="index.php?option=com_ksenmart&view=catalog&manufacturers[0]=<?php echo $product->manufacturer; ?>&Itemid=<?php echo KSSystem::getShopItemid(); ?>" title="<?php echo $product->manufacturer_title; ?>"><?php echo $product->manufacturer_title; ?></a>
+                            <?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?> <a href="index.php?option=com_ksenmart&view=catalog&manufacturers[0]=<?php echo $product->manufacturer; ?>&Itemid=<?php echo KSSystem::getShopItemid(); ?>" title="<?php echo $product->manufacturer_title; ?>"><?php echo $product->manufacturer_title; ?></a>
                             <?php }?>
                         </div>
                         <div class="span6 rating">
-                            <span class="title">Рейтинг: </span>
+                            <span class="title"><?php echo JText::_('KSM_PRODUCT_RATE'); ?> </span>
             				<?php for($k=1; $k<6; $k++){ ?>
                 				<?php if(floor($product->rate->rate) >= $k){ ?>
                 				<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star2.png" alt="" />
@@ -76,7 +76,7 @@ foreach($this->product->properties as $prop){
                 <div class="bottom_wrapp span12">
 					<div class="price row-fluid"<?php echo $product->val_price_wou == 0?' style="visibility: hidden;"':''; ?>>
                         <div class="span6">
-                            <span class="title">Цена: </span>
+                            <span class="title"><?php echo JText::_('KSM_PRODUCT_PRICE'); ?> </span>
     						<?php if($product->val_old_price_wou != 0){ ?>
     						<span class="old"><?php echo $product->val_old_price; ?></span>
     						<?php } ?>
@@ -94,7 +94,7 @@ foreach($this->product->properties as $prop){
     					<span class="delta">&diams;</span>
                         <?php if(!$params->get('only_auth_buy', 0) && ($product->val_price_wou != 0 && $product->is_parent == 0 && $flag)){ ?>	
         					<div class="buy">
-                                <button type="submit" class="btn btn-success row-fluid">Купить</button>
+                                <button type="submit" class="btn btn-success row-fluid"><?php echo JText::_('KSM_PRODUCT_ADDTOCART_BUTTON_TEXT'); ?></button>
                             </div>
                             <?php }else{ ?>
                             <div class="buy">

@@ -9,7 +9,7 @@ defined('_JEXEC') or die;
 <div class="catalog">
     <div class="pagination pagination-centered pagination-small letters js-letters">
         <ul>
-            <li class="active"><a href="javascript:void(0);" data-letter="all" title="Показать все">Показать все</a></li>
+            <li class="active"><a href="javascript:void(0);" data-letter="all" title="<?php echo JText::_('KSM_CATALOG_MANUFACTURERS_SHOW_ALL'); ?>"><?php echo JText::_('KSM_CATALOG_MANUFACTURERS_SHOW_ALL'); ?></a></li>
             <?php foreach($this->brands as $key => $letter){ ?>
             <li><a href="javascript:void(0);" data-letter="<?php echo $key; ?>" title="<?php echo $key; ?>"><?php echo $key; ?></a></li>
             <?php } ?>

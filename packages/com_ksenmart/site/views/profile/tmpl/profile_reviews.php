@@ -19,7 +19,7 @@ if(!empty($this->reviews)){ ?>
         <?php echo $this->loadTemplate('review', 'profile', array('review' => $review)); ?>
     <?php } ?>
 <?php }else{ ?>
-    <h2 class="text-center">Нет отзывов</h2>
+    <h2 class="text-center"><?php echo JText::_('KSM_PROFILE_REVIEWS_NO_REVIEWS'); ?></h2>
 <?php } ?>
 <div class="pagination">
     <?php echo $this->pagination->getPagesLinks(); ?>

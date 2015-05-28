@@ -66,7 +66,7 @@ defined('_JEXEC') or die;
 							</div>
 						</div>
 						<dl class="dl-horizontal">
-							<dt>Комментарий</dt>
+							<dt><?php echo JText::_('KSM_COMMENTS_LABEL_TEXT'); ?></dt>
 							<dd>
 								<?php echo $comment->children->comment; ?>
 							</dd>

@@ -19,9 +19,9 @@ if($this->manufacture_search){
                 <div>
                     <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="manufacture"><?php echo $item->title; ?></a>
                 </div>
-                <div class="type">производитель</div>
+                <div class="type"><?php echo JText::_('ksm_search_manufacturer'); ?></div>
             </div>
-            <div class="price span2 pull-right"><?php echo $item->product_total .' товаров'; ?></div>
+            <div class="price span2 pull-right"><?php echo JText::sprintf('ksm_search_results_products', $item->product_total); ?></div>
         </div>
     <?php } ?>
 <?php } ?>

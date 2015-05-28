@@ -24,7 +24,7 @@ foreach($this->customer_fields as $customer_field){ ?>
                     <input type="text" id="customer_phone" size="25" name="customer_fields[<?php echo $customer_field->system==1?$customer_field->title:$customer_field->id;?>]" value="<?php echo empty($customer_field->value)?'7':$customer_field->value; ?>" required="true" />
                     <span class="add-on">
                         <input type="hidden" checked="true" />
-                        <label id="descr">Введите номер</label>
+                        <label id="descr"><?php echo JText::_('KSM_CART_TYPE_PHONE_NUMBER'); ?></label>
                     </span>
                 </div>
             <?php } ?>

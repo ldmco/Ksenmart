@@ -8,14 +8,14 @@ defined('_JEXEC') or die;
 ?>
 <?php if(!$this->show_shop_review && KSUsers::getUser()->id > 0){ ?>
 <div class="row-fluid">
-    <p class="lead add_shop_review pull-right clearfix"><span>+</span> <a href="javascript:void(0);" class="link_b_border lrg">Добавить отзыв о магазине</a></p>
+    <p class="lead add_shop_review pull-right clearfix"><span>+</span> <a href="javascript:void(0);" class="link_b_border lrg"><?php echo JText::_('KSM_SHOP_REVIEW_ADD'); ?></a></p>
 </div>
 <div class="review add noTransition row-fluid" style="display: none;">
 	<form method="post">
 		<?php if(empty(KSUsers::getUser()->name)){ ?>
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="name" placeholder="Имя" required="true" />
+				<input type="text" name="name" placeholder="<?php echo JText::_('KSM_SHOP_REVIEW_ADD_NAME'); ?>" required="true" />
 			</div>
 		</div>
 		<?php } ?>
@@ -30,12 +30,12 @@ defined('_JEXEC') or die;
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<textarea name="review" placeholder="Отзыв о магазине" required="true"></textarea>
+				<textarea name="review" placeholder="<?php echo JText::_('KSM_SHOP_REVIEW_ADD_COMMENT'); ?>" required="true"></textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls top">
-				<input type="submit" class="btn btn-success" value="Добавить" />
+				<input type="submit" class="btn btn-success" value="<?php echo JText::_('KSM_SHOP_REVIEW_ADD_BUTTON'); ?>" />
 			</div>
 		</div>
 		<input type="hidden" name="task" value="profile.add_shop_review" />
@@ -69,7 +69,7 @@ defined('_JEXEC') or die;
                     <?php echo nl2br(mb_substr($review->comment, 0, $this->params->get('count_symbol', 400))); ?>
                 </div>
                 <div class="read_more">
-                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=review&id='.$review->id); ?>" title="Подробнее">Подробнее</a>
+                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=review&id='.$review->id); ?>" title="<?php echo JText::_('KSM_REVIEW_MORE'); ?>"><?php echo JText::_('KSM_REVIEW_MORE'); ?></a>
                 </div>
             </div>
         </article>
