@@ -1,3 +1,6 @@
+#ksenmart-map {
+	display:none;
+}
 #ksenmart-map-inner{
 	position: relative;
 	max-height:none;
