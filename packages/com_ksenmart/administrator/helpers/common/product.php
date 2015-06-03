@@ -1,4 +1,5 @@
 <?php 
+
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -9,37 +10,57 @@ defined('_JEXEC') or die;
 KSSystem::import('helpers.corehelper');
 class KSMProducts extends KSCoreHelper {
     
-	private $ext_name_com   = 'com_ksenmart';
-    private $ext_prefix     = 'KSM';
-	private $helper_name    = 'Products';
+    private $ext_name_com = 'com_ksenmart';
+    private $ext_prefix   = 'KSM';
+    private $helper_name  = 'Products';
     
     private static function setProductMainImageToQuery($query) {
-        $query->select('(select f.filename from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as filename');
-        $query->select('(select f.folder from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as folder');
-        $query->select('(select f.params from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as params');
+        $db = JFactory::getDBO();
+        $query
+            ->select($db->qn(array(
+                'f.filename',
+                'f.folder',
+                'f.params',
+            )))
+            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON ' . 
+                $db->qn('owner_id') . '=' . $db->qn('p.id') . ' AND ' . 
+                $db->qn('f.owner_type') . '=' . $db->q('product') . ' AND ' . 
+                $db->qn('f.media_type') . '=' . $db->q('image'))
+        ;
         return $query;
     }
     
-    private static $_property_values = array();
-    private static $_images = array();
+    private static $_property_values       = array();
+    private static $_images                = array();
     private static $_images_products_files = array();
     
     public static function getProduct($id) {
+
+        self::onExecuteBefore(array(&$id));
+
         global $ext_name;
         $old_ext_name = $ext_name;
-        $ext_name = 'ksenmart';
-        
+        $ext_name     = 'ksenmart';
 		
-        $db = JFactory::getDBO();
+        $db     = JFactory::getDBO();
         $params = JComponentHelper::getParams('com_ksenmart');
-        $query = $db->getQuery(true);
-        $query->select('p.*,m.title as manufacturer_title,u.form1 as unit')->from('#__ksenmart_products as p');
-        $query->join("LEFT", "#__ksenmart_manufacturers as m on p.manufacturer=m.id");
-        $query->join("LEFT", "#__ksenmart_product_units as u on p.product_unit=u.id");
-        $query->where('p.id=' . $id);
-        $query->group('p.id');
-        $query = KSMProducts::setProductMainImageToQuery($query);
-        
+        $query  = $db->getQuery(true);
+        $query  = KSMProducts::setProductMainImageToQuery($query);
+        $query
+            ->select('`p`.*')
+            ->select($db->qn(array(
+                'm.title',
+                'u.form1',
+            ), array(
+                'manufacturer_title',
+                'unit',
+            )))
+            ->from($db->qn('#__ksenmart_products', 'p'))
+            ->leftjoin($db->qn('#__ksenmart_manufacturers', 'm') . ' ON ' . $db->qn('p.manufacturer') . '=' . $db->qn('m.id'))
+            ->leftjoin($db->qn('#__ksenmart_product_units', 'u') . ' ON ' . $db->qn('p.product_unit') . '=' . $db->qn('u.id'))
+            ->where($db->qn('p.id') . '=' . $db->q($id))
+            ->group($db->qn('p.id'))
+        ;
         $db->setQuery($query);
         $row = $db->loadObject();
         
@@ -50,15 +71,7 @@ class KSMProducts extends KSCoreHelper {
                 $row->folder = 'products';
             }
             if (empty($row->filename)) {
-                if (!empty($row->parent_id)) {
-                    $query = $db->getQuery(true);
-                    $query->select('filename')->from('#__ksenmart_files')->where('owner_type=' . $db->quote('product'))->where('owner_id=' . $row->parent_id)->order('ordering');
-                    $db->setQuery($query, 0, 1);
-                    $row->filename = $db->loadResult();
-                    if (empty($row->filename)) $row->filename = 'no.jpg';
-                } else {
-                    $row->filename = 'no.jpg';
-                }
+                $row->filename = 'no.jpg';
             }
             
             if ($row->product_packaging == 0) {
@@ -75,7 +88,7 @@ class KSMProducts extends KSCoreHelper {
             $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
             $row->small_img      = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
             $row->img            = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
-			$row->img_link       = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
+            $row->img_link       = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
             $row->rate           = KSMProducts::getProductRate($row->id);
             $row->add_link_cart  = KSFunctions::getAddToCartLink($row->price, 2);
 
@@ -83,8 +96,8 @@ class KSMProducts extends KSCoreHelper {
             $row->tags->getItemTags('com_ksenmart.product', $row->id);
         }
         $ext_name = $old_ext_name;
-		
-		self::onExecuteAfter(array(&$row));
+        
+        self::onExecuteAfter(array(&$row));
         return $row;
     }
 
