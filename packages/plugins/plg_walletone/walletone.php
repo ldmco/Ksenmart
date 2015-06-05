@@ -169,6 +169,9 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         if (empty($params)) {
             $params = $this->_params;
         }
+        if (!isset($params['payment_types'])) {
+            $params['payment_types'] = array();
+        }
         $params['payment_types'] = array_flip($params['payment_types']);
         $params = array_merge($params, $this->_payment_fields);
         
