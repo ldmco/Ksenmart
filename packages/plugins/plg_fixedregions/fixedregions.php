@@ -113,7 +113,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 				html+="<li region_id="+region_id+" country_id="+country_id+">";
 				html+="		<div class=\'line\'>";
 				html+="			<label class=\'inputname\'>"+title+"</label>";
-				html+="			<input type=\'text\' class=\'inputbox\' name=\'jform[params]["+region_id+"]\' value=\'\'>";
+				html+="			<input type=\'text\' class=\'inputbox\' name=\'jform[params]["+region_id+"]\' value=\'0\'>";
 				html+="			<p>' . $currency_code . '</p>";
 				html+="		</div>";
 				html+="</li>";
