@@ -452,6 +452,7 @@ class KsenMartModelProduct extends JModelKSForm {
                     $id_default_way = true;
                 }
                 $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
+                $parent   = 0;
                 if($category->id > 0) {
                     $categories[] = $category->id;
                     $parent       = $category->parent_id;
