@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <article class="row-fluid item" id="review_<?php echo $this->review->id; ?>">
 	<div class="span2 avatar">
 		<a href="javascript:void(0)" title="<?php echo $this->review->user->name; ?>">
@@ -28,7 +35,7 @@
 				<?php echo nl2br(mb_substr($this->review->comment, 0, $this->params->get('count_symbol', 400))); ?>
 			</div>
 			<div class="read_more">
-				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="Подробнее">Подробнее</a>
+				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="<?php echo JText::_('KSM_REVIEW_MORE'); ?>"><?php echo JText::_('KSM_REVIEW_MORE'); ?></a>
 			</div>
 		</div>
 	</div>

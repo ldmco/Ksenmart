@@ -1,19 +1,27 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php 
 if($this->manufacture_search){
     foreach($this->manufacture_search as $item){ ?>
         <?php $link = JRoute::_('index.php?option=com_ksenmart&view=catalog&manufacturers[]='.$item->id.'&Itemid='.$this->shop_id); ?>
-        <div class="item row-fluid">
-            <div class="img span1">
-                <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>"><img src="./modules/mod_km_simple_search/images/icon_manufacture.png" alt="<?php echo $item->title; ?>" width="32px" height="32px" /></a>
+        <div class="item">
+            <div class="img">
+                <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="manufacture"><img src="<?php echo JURI::root(); ?>components/com_ksenmart/css/i/icon_manufacture.png" alt="<?php echo $item->title; ?>" width="32px" height="32px" /></a>
             </div>
-            <div class="title span9">
+            <div class="title">
                 <div>
                     <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="manufacture"><?php echo $item->title; ?></a>
+                    <span class="product_total"><?php echo JText::sprintf('ksm_search_results_products', $item->product_total); ?></span>
                 </div>
-                <div class="type">категория</div>
+                <div class="type muted"><?php echo JText::_('ksm_search_manufacturer'); ?></div>
             </div>
-            <div class="price span2 pull-right"><?php echo $item->product_total .' товаров'; ?></div>
         </div>
     <?php } ?>
 <?php } ?>

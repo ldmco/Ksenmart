@@ -13,19 +13,20 @@
 	<installfile>install.php</installfile>
 
     <files>
-            <filename>index.html</filename>
-            <filename>index.php</filename>
-			<filename>install.php</filename>
-            <filename>component.php</filename>
-            <filename>favicon.ico</filename>
-            <filename>params.ini</filename>
-            <filename>template_preview.png</filename>
-            <filename>template_thumbnail.png</filename>
-            <folder>css</folder>
-            <folder>js</folder>
-            <folder>images</folder>
-            <folder>html</folder>
-			<folder>install</folder>
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<filename>install.php</filename>
+		<filename>component.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>params.ini</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+		<folder>html</folder>
+		<folder>install</folder>
+		<folder>language</folder>
 	</files>
 
     <positions>
@@ -45,22 +46,41 @@
         <position>ks-main-products-list</position>
         <position>ks-clrful-footer-info1</position>
         <position>ks-clrful-footer-info2</position>
-        <position>ks-clrful-footer-info3</position>
-        <position>ks-clrful-footer-info4</position>
         <position>ks-footer-copyright</position>
-        <position>ks-footer-ldm</position>
     </positions>
+	
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_ksenmartcolorful.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_ksenmartcolorful.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_ksenmartcolorful.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_ksenmartcolorful.sys.ini</language>		
+	</languages>	
 
     <config>
         <fields name="params">
             <fieldset name="advanced">
-                <field name="site_logo" type="media" default="templates/ksenmartcolorful/images/logo.png" label="Выберите лого" />
+                <field name="site_logo" type="media" default="templates/ksenmartcolorful/images/logo.png" label="TPL_KSENMARTCOLORFUL_SITE_LOGO" />
 				
-				<field name="template_color" type="list" default="templates/ksenmartcolorful/css/green.css" label="Выберите цвет сайта">
-                    <option value="templates/ksenmartcolorful/css/green.css">Зеленый</option>
-                    <option value="templates/ksenmartcolorful/css/cyan.css">Голубой</option>
-                    <option value="templates/ksenmartcolorful/css/orange.css">Оранжевый</option>
+				<field name="template_color" type="list" default="templates/ksenmartcolorful/css/green.css" label="TPL_KSENMARTCOLORFUL_SITE_COLOR" >
+                    <option value="templates/ksenmartcolorful/css/green.css">TPL_KSENMARTCOLORFUL_SITE_COLOR_GREEN</option>
+                    <option value="templates/ksenmartcolorful/css/cyan.css">TPL_KSENMARTCOLORFUL_SITE_COLOR_BLUE</option>
+                    <option value="templates/ksenmartcolorful/css/orange.css">TPL_KSENMARTCOLORFUL_SITE_COLOR_ORANGE</option>
                 </field>
+				
+				<field name="vkontakte" type="text" label="TPL_KSENMARTCOLORFUL_VK_LINK" />
+				
+				<field name="facebook" type="text" label="TPL_KSENMARTCOLORFUL_FB_LINK" />
+				
+				<field name="twitter" type="text" label="TPL_KSENMARTCOLORFUL_TW_LINK" />
+				
+				<field name="email" type="text" label="TPL_KSENMARTCOLORFUL_SHOP_EMAIL" />
+				
+				<field name="phone" type="text" label="TPL_KSENMARTCOLORFUL_SHOP_PHONE" />
+				
+				<field name="address" type="text" label="TPL_KSENMARTCOLORFUL_SHOP_ADDRESS" />
+				
+				<field name="copyright" type="editor" label="TPL_KSENMARTCOLORFUL_COPYRIGHT" filter="JComponentHelper::filterText" height="150px" />
+				
             </fieldset>
         </fields>
     </config>

@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="row <?php echo $element['name'];?>">
 	<div class="ksm-slidemodule-<?php echo $element['type'];?> slide_module <?php echo $element['class'];?>">
 		<div class="module-head">

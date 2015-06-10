@@ -1,5 +1,11 @@
-<?php	 		 		 	
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
 jimport('joomla.application.component.controlleradmin');
 
 class KsenControllerSeo extends KsenController
@@ -32,27 +38,4 @@ class KsenControllerSeo extends KsenController
 		$this->setRedirect('index.php?option=com_ksen&view=seo&extension='.$extension);
 	}
 	
-	function save_seo_text()
-	{
-        $model = $this->getModel('seo');
-		$extension = $model->getState('extension');
-        $data = JRequest::getVar('jform', array(), 'post', 'array');
-        
-        $model->form = 'seotext'.$extension;
-        $form = $model->getForm();
-        if (!$form) {
-            JError::raiseError(500, $model->getError());
-            return false;
-        }
-        $id = (int)$data['id'];
-        
-        if (!$return = $model->saveSeoText($data)) {
-            $this->setRedirect('index.php?option=com_ksen&view=seo&layout=seotext&id=' . $id . '&tmpl=component&extension='.$extension, JText::_('KSM_SERVER_SIDE_SAVE_ERROR') . implode('<br>', $model->getErrors()));
-            return false;
-        }
-        $on_close = $return['on_close'];
-        
-        $this->closePopup($on_close);
-	}	
-
 }

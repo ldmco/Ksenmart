@@ -1,4 +1,12 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php if($this->cat_search){ ?>
 <div class="categories row-fluid">
     <?php  foreach($this->cat_search as $item){ ?>
@@ -10,9 +18,9 @@
             <div class="title span10">
                 <div>
                     <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="category"><?php echo $item->title; ?></a>
-                    <small class="product_total muted"><?php echo $item->product_total; ?> товаров</small>
+                    <small class="product_total muted"><?php echo JText::sprintf('ksm_search_results_products', $item->product_total); ?></small>
                 </div>
-                <div class="type muted">категория</div>
+                <div class="type muted"><?php echo JText::_('ksm_search_category'); ?></div>
             </div>
 			<div class="clearfix"></div>
         </div>

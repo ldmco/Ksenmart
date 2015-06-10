@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart.KSM', array('common'), array(), array('angularJS' => 0)));
 class JFormFieldKSModules extends JFormField {
@@ -13,6 +19,8 @@ class JFormFieldKSModules extends JFormField {
     
     public function getInput() {
         $db = JFactory::getDBO();
+		$this->value = is_array($this->value) ? $this->value : array();
+		
         $html = '<style>.form-horizontal .controls {margin:0px;}</style>';
         $html.= '<table class="table table-striped" id="articleList">';
         $html.= '	<thead>';

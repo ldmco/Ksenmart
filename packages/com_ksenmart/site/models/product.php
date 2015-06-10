@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelksform');
 class KsenMartModelProduct extends JModelKSForm {
@@ -114,7 +120,7 @@ class KsenMartModelProduct extends JModelKSForm {
                 $comments = KSUsers::setAvatarLogoInObject($comments);
             }
             
-            $this->onExecuteAfter('populateState', array(&$comments));
+            $this->onExecuteAfter('getProductComments', array(&$comments));
             
             return $comments;
         }
@@ -215,14 +221,21 @@ class KsenMartModelProduct extends JModelKSForm {
         if ($id == 0) {
             $id = $this->_id;
         }
-        
+
         $query = $this->_db->getQuery(true);
-        $query->select('id,alias,title')->from('#__ksenmart_products')->where('parent_id=' . $this->_db->getEscaped($id));
+        $query
+            ->select($this->_db->qn(array(
+                'p.id',
+                'p.alias',
+                'p.title',
+            )))
+            ->from($this->_db->qn('#__ksenmart_products', 'p'))
+            ->where($this->_db->qn('p.parent_id') . '=' . $this->_db->q($id))
+        ;
         $this->_db->setQuery($query);
         $childs_titles = $this->_db->loadObjectList();
         
         $this->onExecuteAfter('getChildsTitles', array(&$childs_titles));
-        
         return $childs_titles;
     }
     
@@ -359,29 +372,34 @@ class KsenMartModelProduct extends JModelKSForm {
         $this->onExecuteBefore('getImages');
         
         $query = $this->_db->getQuery(true);
-        $query->select('
-                f.id,
-                f.owner_id,
-                f.media_type,
-                f.owner_type,
-                f.folder,
-                f.filename,
-                f.mime_type,
-                f.title,
-                f.ordering,
-                f.params
-            ')->from('#__ksenmart_files AS f')->where('f.owner_id=' . $this->_db->escape($this->_id))->where('f.owner_type=' . $this->_db->Quote('product'))->order('ordering');
+        $query->select($this->_db->qn(array(
+                'f.id',
+                'f.owner_id',
+                'f.media_type',
+                'f.owner_type',
+                'f.folder',
+                'f.filename',
+                'f.mime_type',
+                'f.title',
+                'f.ordering',
+                'f.params',
+            )))
+            ->from($this->_db->qn('#__ksenmart_files', 'f'))
+            ->where($this->_db->qn('f.owner_id') . '=' . $this->_db->q($this->_id))
+            ->where($this->_db->qn('f.owner_type') . '=' . $this->_db->q('product'))
+            ->where($this->_db->qn('f.media_type') . '=' . $this->_db->q('image'))
+            ->order('ordering')
+        ;
         $this->_db->setQuery($query);
         $rows = $this->_db->loadObjectList();
         
         for ($k = 0;$k < count($rows);$k++) {
             $rows[$k]->img_small = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('mini_thumb_width', 130), $this->params->get('mini_thumb_height', 80), json_decode($rows[$k]->params, true));
-            $rows[$k]->img = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
-            $rows[$k]->img_link = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('full_width', 900), $this->params->get('full_height', 900));
+            $rows[$k]->img       = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('middle_width', 200), $this->params->get('middle_height', 200));
+            $rows[$k]->img_link  = KSMedia::resizeImage($rows[$k]->filename, $rows[$k]->folder, $this->params->get('full_width', 900), $this->params->get('full_height', 900));
         }
         
         $this->onExecuteAfter('getImages', array(&$rows));
-        
         return $rows;
     }
     
@@ -414,10 +432,10 @@ class KsenMartModelProduct extends JModelKSForm {
     public function getCategoriesPath() {
         $this->onExecuteBefore('getCategoriesPath');
         
-        $path = array();
-        $final_categories = array();
-        $parent_ids = array();
-        $default_category = $this->getDefaultCategory();
+        $path               = array();
+        $final_categories   = array();
+        $parent_ids         = array();
+        $default_category   = $this->getDefaultCategory();
         $product_categories = $this->getProductCategories();
         
         foreach ($product_categories as $product_category) {
@@ -427,15 +445,18 @@ class KsenMartModelProduct extends JModelKSForm {
                 $id_default_way = true;
             }
             $categories = array();
-            $parent = $product_category->category_id;
+            $parent     = $product_category->category_id;
             
             while ($parent != 0) {
                 if ($parent == $default_category) {
                     $id_default_way = true;
                 }
                 $category = KSSystem::getTableByIds(array($parent), 'categories', array('t.id', 't.parent_id'), true, false, true);
-                $categories[] = $category->id;
-                $parent = $category->parent_id;
+                $parent   = 0;
+                if($category->id > 0) {
+                    $categories[] = $category->id;
+                    $parent       = $category->parent_id;
+                }
             }
             if ($id_default_way && count($categories) > count($final_categories)) {
                 $final_categories = $categories;
@@ -443,16 +464,14 @@ class KsenMartModelProduct extends JModelKSForm {
         }
         
         $final_categories = array_reverse($final_categories);
-        
-        $categories = KSSystem::getTableByIds($final_categories, 'categories', array('t.title', 't.id'), false);
+        $categories       = KSSystem::getTableByIds($final_categories, 'categories', array('t.title', 't.id'), false);
         
         foreach ($categories as $category) {
             $category->link = JRoute::_('index.php?option=com_ksenmart&view=catalog&categories[]=' . $category->id . '&Itemid=' . KSSystem::getShopItemid());
-            $path[] = $category;
+            $path[]         = $category;
         }
         
         $this->onExecuteAfter('getCategoriesPath', array(&$path));
-        
         return $path;
     }
     

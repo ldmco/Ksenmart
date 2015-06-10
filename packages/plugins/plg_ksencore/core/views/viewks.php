@@ -1,4 +1,10 @@
-<?php defined('JPATH_PLATFORM') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 abstract class JViewKS extends JViewLegacy {
@@ -17,16 +23,11 @@ abstract class JViewKS extends JViewLegacy {
         $config['base_path'] = JPATH_ROOT . DS . 'components' . DS . $this->ext_name_com;
         parent::__construct($config);
 
-        $name = $this->getName();
-        $dispatcher = JDispatcher::getInstance();
-        $dispatcher->trigger('onBeforeView' . strtoupper($this->ext_prefix) . $name, array(&$this));
+        JDispatcher::getInstance()->trigger('onBeforeView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
     }
 
     public function display($tpl = null) {
-        $name = $this->getName();
-        $dispatcher = JDispatcher::getInstance();
-        $dispatcher->trigger('onAfterView' . strtoupper($this->ext_prefix) . $name, array(&$this));
-
+        JDispatcher::getInstance()->trigger('onAfterView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
         parent::display($tpl);
     }
     
@@ -41,11 +42,10 @@ abstract class JViewKS extends JViewLegacy {
             $view->setLayout($layout);
             
             foreach($vars as $name => $var){
-                $view->assign($name, $var);
+                $view->assign($vars);
             }
             
             $html = $view->loadTemplate($tpl);
-            
             $view->setLayout($current_layout);
         }else{
             $html = parent::loadTemplate($tpl);
@@ -67,15 +67,15 @@ abstract class JViewKS extends JViewLegacy {
             $this->setLayout($layout);
         }
         
-        foreach($vars as $name => $var){
-            $this->assign($name, $var);
+        foreach($vars as $name => &$var){
+            $this->assignRef($name, $var);
         }
-		
-        if($tpl != 'empty')
+        
+        if($tpl != 'empty'){
             $html .= parent::loadTemplate($tpl);
+        }
 
         $this->setLayout($current_layout);
-
         $dispatcher->trigger('onAfterDisplay' . strtoupper($this->ext_prefix) . $name . $function, array(&$this, &$tpl, &$html));
 
         return $html;

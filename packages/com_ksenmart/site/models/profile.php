@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelkslist');
 jimport('joomla.html.pagination');
@@ -72,18 +78,19 @@ class KsenMartModelProfile extends JModelKSList {
         
         $jinput = JFactory::getApplication()->input;
         $data   = $jinput->get('form', array(), 'array');
-		$data['name'] = '';
-		if (!empty($data['last_name'])) $data['name'] .= $data['last_name'].' ';
-		if (!empty($data['first_name'])) $data['name'] .= $data['first_name'].' ';
-		if (!empty($data['middle_name'])) $data['name'] .= $data['middle_name'];		
+		
+        if (!empty($data['name']))        $data['name']  = $data['name'].' ';
+		if (!empty($data['last_name']))   $data['name'] .= $data['last_name'].' ';
+		if (!empty($data['first_name']))  $data['name'] .= $data['first_name'].' ';
+		if (!empty($data['middle_name'])) $data['name'] .= $data['middle_name'];	
 
         if(!empty($data['id'])){
             $pk = $data['id'];
         }else{
             $pk = (int)$this->getState('user.id');
         }
-        $km_user   = KSUsers::getUser();
-        $user   = JUser::getInstance($pk);
+        $km_user = KSUsers::getUser();
+        $user    = JUser::getInstance($pk);
         if (!$user->bind($data)) {
             return $user->getError();
         }

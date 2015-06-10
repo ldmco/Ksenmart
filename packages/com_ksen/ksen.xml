@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5.0" method="upgrade">
 	<name>Ядро Ksen</name>
-	<creationDate>May 2014</creationDate>
+	<creationDate>May 2015</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>1.0.4-beta</version>
+	<version>1.0.5-beta</version>
 
 	<scriptfile>install.php</scriptfile>
 	
@@ -20,11 +20,18 @@
 			<file driver="mysql" charset="utf8">sql/install.sql</file>
 		</sql>
 	</install>
+
 	<uninstall>
 		<sql>
 			<file driver="mysql" charset="utf8">sql/uninstall.sql</file>
 		</sql>
 	</uninstall>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
 
     <media folder="media" destination="com_ksen">
 		<folder>images</folder>

@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 if (!class_exists('KMPaymentPlugin')) {
     require (JPATH_ROOT . DIRECTORY_SEPARATOR . 'administrator' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_ksenmart' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'kmpaymentplugin.php');
@@ -163,6 +169,9 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         if (empty($params)) {
             $params = $this->_params;
         }
+        if (!isset($params['payment_types'])) {
+            $params['payment_types'] = array();
+        }
         $params['payment_types'] = array_flip($params['payment_types']);
         $params = array_merge($params, $this->_payment_fields);
         
@@ -195,7 +204,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         $view->user = KSUsers::getUser();
         KSMWalletone::_setFields(array_merge($paymentTypes, array(
             'WMI_MERCHANT_ID'        => $payment->params['merchant_id'], 
-            'WMI_PAYMENT_AMOUNT'     => $view->order->cost, 
+            'WMI_PAYMENT_AMOUNT'     => $view->order->costs['total_cost'], 
             'WMI_PAYMENT_NO'         => $view->order->id, 
             'WMI_CURRENCY_ID'        => 643, 
             'WMI_DESCRIPTION'        => $view->payment_form_params->title, 

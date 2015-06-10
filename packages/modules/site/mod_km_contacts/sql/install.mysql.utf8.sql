@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Контакты', 
-	`position` = 'head_block_2', 
+	`title` = 'Контакты (Ksenmart)', 
+	`position` = 'ks-contacts', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_contacts'

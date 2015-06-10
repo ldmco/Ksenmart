@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Категории KsenMart', 
-	`position` = 'left', 
+	`title` = 'Категории (Ksenmart)', 
+	`position` = 'ks-categories', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_categories'

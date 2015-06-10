@@ -1,5 +1,11 @@
-<?php
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
 JHtml::_('behavior.tooltip');
 ?>
 <form class="form" method="post">
@@ -28,12 +34,12 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getInput('published'); ?>
 						</div>
 					</div>	
-					<div class="row">
-						<h3><?php echo $this->form->getLabel('introcontent'); ?></h3>
+					<div class="row alert">
+						<p><b><?php echo JText::_('KSM_PAYMENTS_LINKS'); ?></b></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_RESULT'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&task=cart.pay_order'; ?></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_SUCCESS'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&view=cart&layout=pay_success'; ?></p>
+						<p><u><?php echo JText::_('KSM_PAYMENTS_LINKS_ERROR'); ?>:</u>&nbsp;&nbsp;<?php echo JURI::root().'index.php?option=com_ksenmart&view=cart&layout=pay_error'; ?></p>
 					</div>
-					<div class="row">
-						<?php echo $this->form->getInput('introcontent'); ?>
-					</div>						
 					<div class="params-set">
 						<?php echo $this->paramsform;?>
 					</div>	

@@ -1,4 +1,11 @@
-<?php defined('_JEXEC' ) or die(); ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <table class="table table_sub">
 	<thead>
 		<th><?php echo JText::_('KSM_PHOTO_COLUMN_TITLE'); ?></th>
@@ -22,7 +29,7 @@
 					<?php } else { ?>
                     <input type="submit" class="st_button btn btn-success pull-left" value="<?php echo JText::_('KSM_PROFILE_REPEAT_ORDER_TEXT'); ?>" />
 					<dl class="dl-horizontal pull-right">
-						<dt>Адрес доставки:</dt>
+						<dt><?php echo JText::_('KSM_PROFILE_ORDERS_ORDER_ADDRESS'); ?></dt>
 						<dd><?php echo $this->order->address_fields; ?></dd>
 					</dl>
 					<?php } ?>

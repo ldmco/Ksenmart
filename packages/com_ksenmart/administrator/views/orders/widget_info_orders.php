@@ -1,4 +1,11 @@
-<?php
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
 $query = $this->_db->getQuery(true);
 $query->select('COUNT(*)')->from('#__ksenmart_orders')->where('status_id=1');
 $this->_db->setQuery($query);

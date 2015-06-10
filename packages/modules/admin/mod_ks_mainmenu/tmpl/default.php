@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="ksenmart-mainmenu">
 	<?php if (!$parent_widget): ?>
 	<div id="main-menu">
@@ -42,7 +49,6 @@
 		</ul>
         <a href="index.php?option=com_ksen&view=settings&extension=<?php echo $extension; ?>" class="prefs"><span></span></a>
         <a href="javascript:void(0);" class="info js-info" rel="<?php echo $extension; ?>"><span></span></a>
-        <a href="javascript:void(0);" class="quest"><span></span></a>
 	</div>	
 	<?php endif;?>
 </div>

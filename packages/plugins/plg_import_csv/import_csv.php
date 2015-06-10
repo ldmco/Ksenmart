@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 if (!class_exists('KMPlugin')) {
 	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmplugin.php');
@@ -97,7 +103,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
         return true;
     }	
 	
-    function getProperties() {
+    function getProperties($public = true) {
 		$db = JFactory::getDBO();
 		
         $query = $db->getQuery(true);
@@ -384,9 +390,9 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         'price' => $db->quote($product_data['price']),
                         'old_price' => $db->quote($product_data['old_price']),
                         'price_type' => $product_data['price_type'],
-                        'in_stock' => $product_data['in_stock'],
+                        'in_stock' => $db->quote($product_data['in_stock']),
                         'product_code' => $db->quote($product_data['product_code']),
-                        'product_packaging' => $product_data['product_packaging'],
+                        'product_packaging' => $db->quote($product_data['product_packaging']),
                         'product_unit' => $product_data['product_unit'],
                         'introcontent' => $db->quote($product_data['introcontent']),
                         'content' => $db->quote($product_data['content']),

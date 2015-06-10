@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="sort">
 	<ul class="breadcrumb noTransition clearfix">
         <li class="pull-right layout_icon<?php echo $this->layout_view == 'grid'?' active':''; ?>">

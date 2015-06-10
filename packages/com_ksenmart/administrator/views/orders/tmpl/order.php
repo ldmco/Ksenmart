@@ -1,5 +1,13 @@
-<?php defined('_JEXEC') or die; ?>
-<?php JHtml::_('behavior.tooltip'); ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
+JHtml::_('behavior.tooltip'); 
+?>
 <form class="form" method="post">
 	<div class="heading">
 		<h3><?php echo $this->title;?></h3>

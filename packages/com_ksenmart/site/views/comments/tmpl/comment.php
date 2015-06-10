@@ -1,6 +1,13 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div id="catalog">
-	<h2>Отзв о товаре</h2>
+	<h2><?php echo JText::_('KSM_REVIEW_TITLE'); ?></h2>
 	<div id="review">
 		<article class="row-fluid item" id="review_<?php echo $this->comment->id; ?>">
 			<div class="span2 avatar">
@@ -34,7 +41,7 @@
 					<?php if (strip_tags($this->comment->good)!=''):?>
 					<br clear="both">
 					<br>
-					<b>Достоинства</b>
+					<b><?php echo JText::_('KSM_REVIEW_GOOD'); ?></b>
 					<div class="txt">
 						<?php echo $this->comment->good?>
 					</div>
@@ -42,7 +49,7 @@
 					<?php if (strip_tags($this->comment->bad)!=''):?>
 					<br clear="both">
 					<br>
-					<b>Недостатки</b>
+					<b><?php echo JText::_('KSM_REVIEW_BAD'); ?></b>
 					<div class="txt">
 						<?php echo $this->comment->bad?>
 					</div>

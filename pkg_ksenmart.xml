@@ -5,9 +5,9 @@
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
+	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.1.7-beta</version>
+    <version>1.1.8-beta</version>
     <description><![CDATA[
     	<div class="text-left" style="font-size: 15px;">
 	    	Официальный сайт <a href="https://github.com/ldmco/KsenMart" target="_blank" title="Официальный сайт KsenMart">KsenMart <span class="icon-out-2 small"></span></a>
@@ -20,7 +20,7 @@
 	    	<a href="index.php?option=com_ksenmart&view=exportimport" title="Настройки ROIStat">Настройки ROIStat</a>
     	</div>
     	]]></description>
-    <creationDate>17 February 2014</creationDate>
+    <creationDate>May 2015</creationDate>
 
     <updateservers>
         <server type="collection" priority="1" name="pkg_ksenmart">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/pkg_ksenmart-update-list.xml</server>
@@ -32,26 +32,28 @@
 		<file type="component" id="com_ksenmart">com_ksenmart.zip</file>
 
 		<file type="plugin" id="ksencore" group="system">plugins/plg_ksencore.zip</file>
-		<file type="plugin" id="countdown" group="kmdiscount">plugins/plg_countdown.zip</file>
 		<file type="plugin" id="coupons" group="kmdiscount">plugins/plg_coupons.zip</file>
 		<file type="plugin" id="courier" group="kmpayment">plugins/plg_courier.zip</file>
 		<file type="plugin" id="couriermoscow" group="kmshipping">plugins/plg_couriermoscow.zip</file>
 		<file type="plugin" id="cumulative" group="kmdiscount">plugins/plg_cumulative.zip</file>
 		<file type="plugin" id="discountdisplay" group="kmplugins">plugins/plg_discountdisplay.zip</file>
 		<file type="plugin" id="dobeforecache" group="kmplugins">plugins/plg_dobeforecache.zip</file>
-		<file type="plugin" id="modules" group="kmplugins">plugins/plg_modules.zip</file>
+		<file type="plugin" id="export_csv" group="kmexportimport">plugins/plg_export_csv.zip</file>
+		<file type="plugin" id="export_ym" group="kmexportimport">plugins/plg_export_ym.zip</file>
 		<file type="plugin" id="fixed" group="kmdiscount">plugins/plg_fixed.zip</file>
 		<file type="plugin" id="fixedregions" group="kmshipping">plugins/plg_fixedregions.zip</file>
-		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_redexpress.zip</file>
+		<file type="plugin" id="import_csv" group="kmexportimport">plugins/plg_import_csv.zip</file>
+		<file type="plugin" id="ksentplinstaller" group="system">plugins/plg_ksentplinstaller.zip</file>
+		<file type="plugin" id="modules" group="kmplugins">plugins/plg_modules.zip</file>
 		<file type="plugin" id="onorder" group="kmdiscount">plugins/plg_onorder.zip</file>
 		<file type="plugin" id="receipt" group="kmpayment">plugins/plg_receipt.zip</file>
-		<file type="plugin" id="robokassa" group="kmpayment">plugins/plg_robokassa.zip</file>
-		<file type="plugin" id="walletone" group="kmpayment">plugins/plg_walletone.zip</file>
+		<file type="plugin" id="redexpress" group="kmshipping">plugins/plg_redexpress.zip</file>
+		<file type="plugin" id="roistat" group="system">plugins/plg_roistat.zip</file>
 		<file type="plugin" id="sitevisits" group="kmdiscountactions">plugins/plg_sitevisits.zip</file>
 		<file type="plugin" id="time" group="kmdiscountactions">plugins/plg_time.zip</file>
 		<file type="plugin" id="viewpages" group="kmdiscountactions">plugins/plg_viewpages.zip</file>
 		<file type="plugin" id="viewproducts" group="kmdiscountactions">plugins/plg_viewproducts.zip</file>
-		<file type="plugin" id="roistat" group="system">plugins/plg_roistat.zip</file>
+		<file type="plugin" id="walletone" group="kmpayment">plugins/plg_walletone.zip</file>
 
 		<file type="module" id="mod_km_categories" client="administrator">modules/admin/mod_km_categories.zip</file>
 		<file type="module" id="mod_km_commentrates" client="administrator">modules/admin/mod_km_commentrates.zip</file>
@@ -83,10 +85,8 @@
 		<file type="module" id="mod_km_shipping" client="site">modules/site/mod_km_shipping.zip</file>
 		<file type="module" id="mod_km_shop_reviews" client="site">modules/site/mod_km_shop_reviews.zip</file>
 		<file type="module" id="mod_km_simple_search" client="site">modules/site/mod_km_simple_search.zip</file>
-		<file type="module" id="mod_km_subscribe" client="site">modules/site/mod_km_subscribe.zip</file>
 		<file type="module" id="mod_ksm_discount" client="site">modules/site/mod_ksm_discount.zip</file>
 
-		<file type="template" id="kmtemplate" client="site">templates/tpl_kmtemplate.zip</file>
 		<file type="template" id="ksenmartcolorful" client="site">templates/tpl_ksenmartcolorful.zip</file>
 	</files>
  </extension>

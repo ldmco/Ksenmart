@@ -27,6 +27,25 @@ jQuery(document).ready(function() {
         }
         return false;
     });
+
+    jQuery('.slide_module').on('click', 'ul li a', function() {
+        var a = jQuery(this);
+        if (a.hasClass('sh')) {
+            if (a.hasClass('show')) {
+                a.removeClass('show');
+                a.addClass('hides');
+                a.parents("li:first").find("ul:first").addClass('opened');
+                a.parents("li:first").find("ul:first").slideDown(300);
+            } else if (a.hasClass('hides')) {
+                a.removeClass('hides');
+                a.addClass('show');
+                a.parents("li:first").find("ul:first").removeClass('opened');
+                a.parents("li:first").find("ul:first").slideUp(300);
+            }
+        }
+
+        return false;
+    });
 });
 
 function createPopup(title, p_class, save_button) {

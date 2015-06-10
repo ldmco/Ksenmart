@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 jimport('joomla.filesystem.folder');
 
@@ -22,13 +28,9 @@ class ksenmartcolorfulInstallerScript extends KSInstaller {
 		$this->installPseudoHTMLModule('Главное меню (Ksenmart)', 'mod_menu', 'ks-menu');
 		$this->installPseudoHTMLModule('Информационное меню (Ksenmart)', 'mod_menu', 'ks-info-menu');
 		$this->installPseudoHTMLModule('Баннеры (Ksenmart)', 'mod_banners', 'ks-main-banners', 'main');
-		$this->installHTMLModule('Копирайт (Ksenmart)', 'ks-footer-copyright');
-		$this->installHTMLModule('ЛДМ (Ksenmart)', 'ks-footer-ldm');
 		$this->installHTMLModule('Инфо в шапке (Ksenmart Colorful)', 'ks-clrful-header-info');
 		$this->installHTMLModule('Инфо в подвале 1 (Ksenmart Colorful)', 'ks-clrful-footer-info1');
 		$this->installHTMLModule('Инфо в подвале 2 (Ksenmart Colorful)', 'ks-clrful-footer-info2');
-		$this->installHTMLModule('Инфо в подвале 3 (Ksenmart Colorful)', 'ks-clrful-footer-info3');
-		$this->installHTMLModule('Инфо в подвале 4 (Ksenmart Colorful)', 'ks-clrful-footer-info4');
 
 		if (JFolder::exists($this->installer->getPath('extension_root') . '/install/'))
 		{

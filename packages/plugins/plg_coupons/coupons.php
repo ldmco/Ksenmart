@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 if (!class_exists('KMDiscountPlugin')) {
 	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmdiscountplugin.php');
@@ -10,7 +16,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		'value' => 0,
 		'type' => 1,
 		'repeated' => 0,
-		'mode' => 0,
 		'coupons' => array()
 	);
 	
@@ -52,12 +57,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 		$html.= '		<input type="radio" class="checkbox" name="jform[params][repeated]" value="0" ' . ($params['repeated'] == 0 ? 'checked' : '') . '>' . JText::_('jno');
 		$html.= '		&nbsp;&nbsp;';
 		$html.= '		<input type="radio" class="checkbox" name="jform[params][repeated]" value="1" ' . ($params['repeated'] == 1 ? 'checked' : '') . '>' . JText::_('jyes');
-		$html.= '	</div>';
-		$html.= '	<div class="row">';
-		$html.= '		<label class="inputname">' . JText::_('ksm_discount_coupons_automatic_mode') . '</label>';
-		$html.= '		<input type="radio" class="checkbox" name="jform[params][mode]" value="0" ' . ($params['mode'] == 0 ? 'checked' : '') . '>' . JText::_('jno');
-		$html.= '		&nbsp;&nbsp;';
-		$html.= '		<input type="radio" class="checkbox" name="jform[params][mode]" value="1" ' . ($params['mode'] == 1 ? 'checked' : '') . '>' . JText::_('jyes');
 		$html.= '	</div>';
 		$html.= '</div>';
 		$html.= '<div class="ksenmart-coupons slide_module">';
@@ -179,16 +178,8 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			$query = $db->getQuery(true);
 			$query->select('code')->from('#__ksenmart_discount_coupons')->where('published=1')->where('id=' . $coupon_id);
 			$db->setQuery($query);
-			$code = $db->loadResult();
-			$html.= '<div class="km-coupons default_shipping-plugin-renew">';
-			$html.= '	<div class="step">';
-			$html.= '		<legend>' . JText::_('ksm_discount_coupons_text_1') . '</legend>';
-			$html.= '		<div class="control-group">';
-			$html.= '			<span>' . JText::_('ksm_discount_coupons_text_2') . '</span>&nbsp;' . $code . '&nbsp;&nbsp;';
-			$html.= '			<input type="button" class="st_button btn" value="' . JText::_('ksm_discount_coupons_unset_coupon') . '" />';
-			$html.= '		</div>';
-			$html.= '	</div>';
-			$html.= '</div>';
+			$view->code = $db->loadResult();
+			$html .= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'unset');
 			
 			$script = '
 			jQuery(document).ready(function(){
@@ -201,18 +192,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			';
 			$document->addScriptDeclaration($script);
 		} else {
-			$html.= '<div class="km-coupons default_shipping-plugin-renew">';
-			$html.= '	<div class="step">';
-			$html.= '		<legend>' . JText::_('ksm_discount_coupons_text') . '</legend>';
-			$html.= '		<div class="controls">';
-			$html.= '		    <div class="control-group input-append">';
-			$html.= '			   <span>' . JText::_('ksm_discount_coupons_print_code_site') . '</span>';
-			$html.= '			   <input type="text" class="inputbox span12" name="discount_code" value="" placeholder="' . JText::_('ksm_discount_coupons_placeholder') . '" />';
-			$html.= '			   <input type="button" class="st_button btn" value="' . JText::_('ksm_discount_coupons_recalculate') . '" />';
-			$html.= '		    </div>';
-			$html.= '        </div>';
-			$html.= '	</div>';
-			$html.= '</div>';
+			$html .= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'set');
 			
 			$script = '
 			jQuery(document).ready(function(){
@@ -272,11 +252,11 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 				$return = $this->onCheckDiscountDate($coupon->discount_id);
 				if ($return) {
 					$return = $this->onCheckDiscountCountry($coupon->discount_id);
-					if ($return || $coupon->params['mode'] == 1) {
+					if ($return) {
 						$return = $this->onCheckDiscountUserGroups($coupon->discount_id);
-						if ($return || $coupon->params['mode'] == 1) {
+						if ($return) {
 							$return = $this->onCheckDiscountActions($coupon->discount_id);
-							if ($return != 1 || $coupon->params['mode'] == 1) {
+							if ($return != 1) {
 								$session->set('ksenmart.coupon_id', $coupon->id);
 								JRequest::setVar('discount_code', null);
 								JRequest::setVar('task', null);
@@ -307,30 +287,6 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			$return = $this->onCheckDiscountActions($discount->id);
 			if ($return == 1) 
 			continue;
-			if ($discount->params['mode'] == 1) {
-				$created = $session->get('com_ksenmart.created_discount_' . $discount->id, null);
-				if (empty($created)) {
-					$code = '';
-					
-					while ($code == '') {
-						$query = $db->getQuery(true);
-						$code = KsenmartHelper::generateCode(8);
-						$query->select('id')->from('#__ksenmart_discount_coupons')->where('code=' . $db->quote($code));
-						$db->setQuery($query);
-						$res = $db->loadResult();
-						if (!empty($res)) $code = '';
-					}
-					$query = $db->getQuery(true);
-					$query->insert('#__ksenmart_discount_coupons')->columns(array(
-						'discount_id',
-						'code',
-						'published'
-					))->values($discount->id . ',' . $db->quote($code) . ',1');
-					$db->setQuery($query);
-					$db->query();
-					$session->set('com_ksenmart.created_discount_' . $discount->id, $code);
-				}
-			}
 			$this->onSendDiscountEmail($discount->id);
 		}
 	}
@@ -354,7 +310,7 @@ class plgKMDiscountCoupons extends KMDiscountPlugin {
 			if (!$return) 
 			continue;
 			$return = $this->onCheckDiscountActions($discount->id);
-			if ($return == 1 && $discount->params['mode'] != 1) 
+			if ($return == 1) 
 			continue;
 			$this->onSetCartDiscount($cart, $discount->id);
 		}

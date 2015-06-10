@@ -1,6 +1,13 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="">
-	<h2>Отзывы</h2>
+	<h2><?php echo JText::_('KSM_REVIEWS_LIST_PATH_TITLE'); ?></h2>
 	<div id="reviews" class="items shop_reviews comment-items">
 	<?php if (!empty($this->rows)):?>
 	<?php foreach($this->rows as $comment):?>

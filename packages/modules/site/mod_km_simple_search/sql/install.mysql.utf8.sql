@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Простой поиск', 
-	`position` = 'content_top', 
+	`title` = 'Поиск по каталогу (Ksenmart)', 
+	`position` = 'ks-search', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_simple_search'

@@ -1,12 +1,10 @@
-<?php defined('_JEXEC') or die;
-
+<?php 
 /**
- *
- * @package     Joomla.Plugin
- * @subpackage  System.Roistat
- * @since       2.5+
- * @author		TakT
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+ 
+defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 class plgSystemRoistat extends JPlugin {

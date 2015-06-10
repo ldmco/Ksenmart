@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <div class="mod_ksm_filter ksenmart-search well noTransition <?php echo $class_sfx; ?>" id="ksenmart-search">
 	<?php if($module->showtitle){ ?>
 	<h3><?php echo $module->title; ?></h3>
@@ -12,7 +19,6 @@
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE')?></span>
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_LESS')?></span><input type="text" id="search-price-less" class="search-price" name="price_less" value="<?php echo (int)$price_less?>" />
 					<span><?php echo JText::_('MOD_KM_FILTER_PRICE_MORE')?></span><input type="text" id="search-price-more" class="search-price" name="price_more" value="<?php echo (int)$price_more?>" />
-					<span>руб</span>
 				</div>
 				<div class="tracker">
 				</div>		
@@ -56,7 +62,7 @@
 				<?php else: ?>
 				<li>
 					<select name="manufacturers[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($manufacturers as $manufacturer){ ?>
 						<option class="manufacturer_<?php echo $manufacturer->id; ?> manufacturer item <?php if ($manufacturer->selected) echo 'active'; ?>" value="<?php echo $manufacturer->id; ?>" <?php if ($manufacturer->selected) echo 'selected'; ?>><?php echo $manufacturer->title; ?></option>
 						<?php } ?>	
@@ -74,7 +80,7 @@
 				<li class="nav-header clearfix"><?php echo $property->title; ?></li>
 				<?php if ($property->view != 'list'): ?>
 					<?php foreach($property->values as $value){ ?>
-					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image)?' item_img':''; ?>">
+					<li class="property_value_<?php echo $value->id; ?> property_value<?php echo $value->selected?' active':''; ?><?php echo !empty($value->image) && $property->view == 'images' ?' item_img':''; ?>">
 						<a href="javascript:void(0);" title="<?php echo $value->title; ?>">
 						<?php if ($property->view == 'images' && $value->image!=''){ ?>					
 						<label class="item image_item <?php if ($value->selected) echo 'active';?>">
@@ -104,7 +110,7 @@
 				<?php else: ?>
 				<li>
 					<select name="properties[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($property->values as $value){ ?>
 						<option class="property_value_<?php echo $value->id; ?> property_value item <?php if ($value->selected) echo 'active'; ?>" value="<?php echo $value->id; ?>" <?php if ($value->selected) echo 'selected'; ?>><?php echo $value->title; ?></option>
 						<?php } ?>	
@@ -152,7 +158,7 @@
 				<?php else: ?>
 				<li>
 					<select name="countries[]" onchange="KMChangeFilter(this);">
-						<option value="">Выбрать</option>
+						<option value=""><?php echo JText::_('MOD_KM_FILTER_CHOOSE')?></option>
 						<?php foreach($countries as $country){ ?>
 						<option class="country_<?php echo $country->id; ?> country item <?php if ($country->selected) echo 'active'; ?>" value="<?php echo $country->id; ?>" <?php if ($country->selected) echo 'selected'; ?>><?php echo $country->title; ?></option>
 						<?php } ?>	

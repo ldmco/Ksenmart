@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <tr class="list_item <?php echo ($this->item->published==0?'disabled':'')?> <?php echo ($this->item->parent_id!=0?'child_item child_item_'.$this->item->parent_id:'');?> <?php echo (isset($this->item->set_id)?'child_item child_item_'.$this->item->set_id:'');?>" >
 	<td class="art sort-handler"><?php echo $this->item->product_code?></td>
 	<td class="name stretch"> 

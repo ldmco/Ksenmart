@@ -23,7 +23,7 @@ $upper_limit = $lang->getUpperLimitSearchWord();
 		<div class="btn-group pull-left span1">
 			<button name="Search" onclick="this.form.submit()" class="button btn btn-primary hasTooltip" title="<?php echo JHtml::tooltipText('COM_SEARCH_SEARCH');?>">
 				<b></b>
-				<span>Поиск</span>
+				<span><?php echo JText::_('TPL_KSENMARTCOLORFUL_SEARCH_SEARCH'); ?></span>
 			</button>
 		</div>
 		<input type="hidden" name="task" value="search" />

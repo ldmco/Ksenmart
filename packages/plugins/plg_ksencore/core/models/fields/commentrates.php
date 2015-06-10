@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class JFormFieldCommentRates extends JFormField {
 	
@@ -21,8 +27,8 @@ class JFormFieldCommentRates extends JFormField {
 			
 			for ($k = 1;$k < 6;$k++) {
 				$html.= '	<label>';
-				if (floor($value) >= $k) $html.= '	<img rel="' . $k . '" src="' . JURI::base() . 'components/com_ksenmart/css/i/c-star.png" alt="" />';
-				else $html.= '	<img rel="' . $k . '" src="' . JURI::base() . 'components/com_ksenmart/css/i/c-star2.png" alt="" />';
+				if (floor($value) >= $k) $html.= '	<img rel="' . $k . '" src="' . JURI::base() . 'components/com_ksenmart/assets/images/c-star.png" alt="" />';
+				else $html.= '	<img rel="' . $k . '" src="' . JURI::base() . 'components/com_ksenmart/assets/images/c-star2.png" alt="" />';
 				$html.= '		<input type="radio" name="' . $this->name . '[' . $rate->id . ']" onclick="setAddRate(this);" value="' . $k . '" ' . (floor($value) == $k ? 'checked' : '') . ' />';
 				$html.= '	</label>';
 			}
@@ -35,9 +41,9 @@ class JFormFieldCommentRates extends JFormField {
 		{
 			var rate=jQuery(obj).val();
 			var rate_block=jQuery(obj).parents(".rate");
-			rate_block.find("img").attr("src","components/com_ksenmart/css/i/c-star2.png");
+			rate_block.find("img").attr("src","components/com_ksenmart/assets/images/c-star2.png");
 			for(var k=1;k<=rate;k++)
-				rate_block.find("img[rel=\'"+k+"\']").attr("src","components/com_ksenmart/css/i/c-star.png");
+				rate_block.find("img[rel=\'"+k+"\']").attr("src","components/com_ksenmart/assets/images/c-star.png");
 		}
 		';
 		$document = JFactory::getDocument();

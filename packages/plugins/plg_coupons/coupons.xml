@@ -14,10 +14,12 @@
 		<filename plugin="coupons">coupons.php</filename>
 		<filename>index.html</filename>
 		<folder>sql</folder>
+		<folder>tmpl</folder>
     </files>
 
     <languages folder="language">
-		<language tag="ru-RU">ru-RU/ru-RU.plg_kmdiscount_coupons.sys.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmdiscount_coupons.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_kmdiscount_coupons.sys.ini</language>
     </languages>
 
     <install>

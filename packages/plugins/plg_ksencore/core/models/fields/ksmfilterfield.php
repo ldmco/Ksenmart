@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class JFormFieldKSMFilterField extends JFormField {
 	
@@ -6,8 +12,8 @@ class JFormFieldKSMFilterField extends JFormField {
 	
 	public function getInput() {
 		$db = JFactory::getDBO();
-		$view = isset($this->value['view']) ? $this->value['view'] : 'none';
-		$display = isset($this->value['display']) ? $this->value['display'] : null;
+		$view = isset($this->value['view']) ? $this->value['view'] : 'checkbox';
+		$display = isset($this->value['display']) ? $this->value['display'] : 'row';
 		$html = '<div style="margin-left:-180px;">';
 		$html .= '<div class="'.$this->element['name'].'">';
 		$html .= '	<h3>'.JText::_($this->element['title']).'</h3>';

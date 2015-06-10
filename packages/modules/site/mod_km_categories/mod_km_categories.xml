@@ -23,6 +23,8 @@
     <languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_categories.ini</language>
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_categories.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_categories.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_categories.sys.ini</language>
     </languages>
 
     <install>
@@ -43,11 +45,13 @@
 
     <config>
         <fields name="params">
-            <fieldset name="basic">
+            <fieldset 
+                name="basic" 
+                addfieldpath="/plugins/system/ksencore/core/models/fields"
+            >
 
-                <field name="categories" type="sql"
-                    query="SELECT id, title FROM #__ksenmart_categories WHERE published=1 ORDER BY ordering"
-                    key_field="id" value_field="title"
+                <field name="categories" type="kscategories"
+                    extension="ksenmart"
                     label="MOD_KM_CATEGORIES_CATS_LABEL"
                     multiple="true"
                 />

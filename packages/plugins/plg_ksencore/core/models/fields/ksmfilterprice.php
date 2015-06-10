@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class JFormFieldKSMFilterPrice extends JFormField {
 	
@@ -6,7 +12,7 @@ class JFormFieldKSMFilterPrice extends JFormField {
 	
 	public function getInput() {
 		$db = JFactory::getDBO();
-		$view = isset($this->value['view']) ? $this->value['view'] : 'none';
+		$view = isset($this->value['view']) ? $this->value['view'] : 'slider';
 		$html = '<div style="margin-left:-180px;">';
 		$html .= '<div class="'.$this->element['name'].'">';
 		$html .= '	<h3>'.JText::_($this->element['title']).'</h3>';

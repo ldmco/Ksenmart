@@ -1,4 +1,12 @@
-<?php defined( '_JEXEC' ) or die;?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php foreach($this->address_fields as $address_field){ ?>
 <div class="control-group <?php echo $address_field->class; ?>">
 	<label class="control-label"><?php echo JText::_(($address_field->system==1?'ksm_cart_shipping_field_':'').$address_field->title);?><?php echo $address_field->required?' *':''; ?></label>

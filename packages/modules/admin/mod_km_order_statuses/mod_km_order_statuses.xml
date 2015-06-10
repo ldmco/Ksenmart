@@ -22,6 +22,8 @@
 	<languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_order_statuses.ini</language>
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_order_statuses.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_order_statuses.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_order_statuses.sys.ini</language>
     </languages>
 
     <install>

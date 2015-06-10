@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
 
     jQuery('.unit .info #property_childs').change(function() {
         var url = jQuery(this).val();
-        if (url != 0)
+        if (url != '')
             window.location.href = url;
     });
 

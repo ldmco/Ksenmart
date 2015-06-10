@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class KsenmartHtmlHelper {
 
@@ -13,22 +19,13 @@ class KsenmartHtmlHelper {
         KSLoader::loadLocalHelpers(array('common'));
 
         $params = JComponentHelper::getParams('com_ksenmart');
-        if($params->get('include_jquery', 1)) {
-            $document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-        }
-        if($params->get('include_bsjs', 1)) {
-            $document->addScript(JURI::base() . 'components/com_ksenmart/js/bootstrap.min.js');
-        }
+
         $document->addScript(JURI::base() . 'administrator/components/com_ksenmart/js/jquery.custom.min.js');
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/common.js');
         
         $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
-        
-        if($params->get('include_bscss', 1)) {
-            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap.min.css');
-        }
+
         if($params->get('include_css', 1)) {
-            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/bootstrap-responsive.min.css');
             $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/template.css');
         }
         

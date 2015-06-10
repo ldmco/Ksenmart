@@ -1,4 +1,12 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <? if (!empty($this->product->product_code)){ ?>
 <div class="control-group">
 	<label class="control-label"><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></label>

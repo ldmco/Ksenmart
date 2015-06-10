@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
@@ -88,12 +94,14 @@ class plgKMPluginsModules extends KMPlugin {
 			return true;
 		}
 
-		$attribs  = array();
 		$doc      = JFactory::getDocument();
 		$renderer = $doc->loadRenderer('module');
 		$modules  = $this->params->get('modules', new stdClass);
 		
 		foreach($modules as $position => $mods){
+			$attribs  = array(
+				'name' => $position
+			);
 			$buf = $doc->getBuffer('modules', $position, $attribs);
 			foreach(JModuleHelper::getModules($position) as $mod)
 			{

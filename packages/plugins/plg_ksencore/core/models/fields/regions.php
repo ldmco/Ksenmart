@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class JFormFieldRegions extends JFormField {
 	
@@ -28,7 +34,7 @@ class JFormFieldRegions extends JFormField {
 		
 		foreach ($this->value as $country_id => $regions) {
 			if (isset($countries[$country_id])) {
-				$html.= '	<li country_id="' . $country_id . '"><span>' . $countries[$country_id]->title . '</span><a href="#"></a><input type="hidden" name="' . $this->name . '[' . $country_id . '][]"></li>';
+				$html.= '	<li country_id="' . $country_id . '"><span>' . $countries[$country_id]->title . '</span><i></i><input type="hidden" name="' . $this->name . '[' . $country_id . '][]"></li>';
 			}
 		}
 		
@@ -78,7 +84,7 @@ class JFormFieldRegions extends JFormField {
 			$count_regions+= count($regions);
 			
 			
-			foreach ($regions as $region_id) if (isset($countries[$country_id]) && isset($countries[$country_id]->regions[$region_id])) $html.= '	<li region_id="' . $region_id . '"><span>' . $countries[$country_id]->regions[$region_id]->title . '</span><a href="#"></a><input type="hidden" name="' . $this->name . '[' . $country_id . '][]" value="' . $region_id . '"></li>';
+			foreach ($regions as $region_id) if (isset($countries[$country_id]) && isset($countries[$country_id]->regions[$region_id])) $html.= '	<li region_id="' . $region_id . '"><span>' . $countries[$country_id]->regions[$region_id]->title . '</span><i></i><input type="hidden" name="' . $this->name . '[' . $country_id . '][]" value="' . $region_id . '"></li>';
 		}
 		$html.= '		<li class="no-regions" style="' . ($count_regions > 0 ? 'display:none;' : '') . '"><span>' . JText::_('ksm_shippings_shipping_no_regions') . '</span></li>';
 		$html.= '	</ul>';
@@ -154,10 +160,9 @@ class JFormFieldRegions extends JFormField {
 					addCountry(jQuery(this).attr("country_id"));
 			});
 			
-			jQuery("body").on("click", ".ksm-slidemodule-countries .countries li a", function(){
+			jQuery("body").on("click", ".ksm-slidemodule-countries .countries li i", function(){
 				var country_id=jQuery(this).parents("li").attr("country_id");
 				removeCountry(country_id);
-				return false;
 			});
 			
 			jQuery(".all-regions").click(function(){
@@ -186,10 +191,9 @@ class JFormFieldRegions extends JFormField {
 					addRegion(jQuery(this).attr("region_id"));
 			});
 			
-			jQuery("body").on("click", ".ksm-slidemodule-regions .regions li a", function(){
+			jQuery("body").on("click", ".ksm-slidemodule-regions .regions li i", function(){
 				var region_id=jQuery(this).parents("li").attr("region_id");
 				removeRegion(region_id);
-				return false;
 			});			
 		
 		});
@@ -200,7 +204,7 @@ class JFormFieldRegions extends JFormField {
 			var title=jQuery("#popup-window3 li[country_id="+country_id+"] span").text();
 			html+="<li country_id="+country_id+">";
 			html+="		<span>"+title+"</span>";
-			html+="		<a href=\'\'></a>";
+			html+="		<i></i>";
 			html+="		<input type=\'hidden\' name=\'' . $this->name . '["+country_id+"][]\'>";
 			html+="</li>";
 			jQuery("#popup-window3 li[country_id="+country_id+"]").addClass("active");
@@ -232,7 +236,7 @@ class JFormFieldRegions extends JFormField {
 			var country_id=jQuery("#popup-window4 li[region_id="+region_id+"]").attr("country_id");
 			html+="<li region_id="+region_id+">";
 			html+="		<span>"+title+"</span>";
-			html+="		<a href=\'\'></a>";
+			html+="		<i></i>";
 			html+="		<input type=\'hidden\' name=\'' . $this->name . '["+country_id+"][]\' value=\'"+region_id+"\'>";
 			html+="</li>";
 			jQuery("#popup-window4 li[region_id="+region_id+"]").addClass("active");
