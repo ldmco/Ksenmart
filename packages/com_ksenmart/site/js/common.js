@@ -150,6 +150,13 @@ jQuery(document).ready(function() {
         var form = jQuery(this).parents('form');
         var product_packaging = form.find('[name="product_packaging"]');
 
+        if (!form[0].checkValidity()) {
+            // If the form is invalid, submit it. The form won't actually submit;
+            // this will just cause the browser to display the native HTML5 error messages.
+            form.find(':submit').submit();
+            return;
+        }
+
         if (product_packaging.length) {
 
             var prd_id = form.find('input[name="id"]');
@@ -166,21 +173,6 @@ jQuery(document).ready(function() {
                 count = 1;
             }
 
-            form.find('.options .row').each(function() {
-                if (jQuery(this).find('input[type="hidden"]').length > 0 && jQuery(this).find('input[type="hidden"]').val() == 0) {
-                    if (!jQuery(this).is('.row_active'))
-                        jQuery(this).addClass('row_active');
-                    flag = false;
-                } else if (jQuery(this).find('input[type="radio"]').length > 0 && jQuery(this).find('input[type="radio"]:checked').length == 0) {
-                    if (!jQuery(this).is('.row_active'))
-                        jQuery(this).addClass('row_active');
-                    flag = false;
-                } else if (jQuery(this).find('input[type="checkbox"]').length > 0 && jQuery(this).find('input[type="checkbox"]:checked').length == 0) {
-                    if (!jQuery(this).is('.row_active'))
-                        jQuery(this).addClass('row_active');
-                    flag = false;
-                }
-            });
             if (!flag) {
                 jQuery('body').animate({
                     'scrollTop': form.offset().top
@@ -237,7 +229,7 @@ jQuery(document).ready(function() {
                     }
                 });
             }
-            return false;
+            e.preventDefault();
         }
 
         return true;
