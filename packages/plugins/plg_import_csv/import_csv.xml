@@ -7,7 +7,7 @@
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <description>KSM_EXPORTIMPORT_IMPORT_CSV_DESCRIPTION</description>
 
     <files>
