@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('views.viewks');
 class KsenMartViewCatalog extends JViewKS {
@@ -55,6 +61,10 @@ class KsenMartViewCatalog extends JViewKS {
                     $category   = $this->get('Category');
                     $title      = $this->get('CategoryTitle');
 
+                    if(!$category) {
+                        JError::raiseError(404, 'Категории не существует');
+                    }
+
                     $document->setTitle($title);
                     $model->setCategoryMetaData();
                     
@@ -63,7 +73,11 @@ class KsenMartViewCatalog extends JViewKS {
                 } elseif(count($this->state->get('com_ksenmart.manufacturers', array())) == 1) {
                     $manufacturer   = $this->get('Manufacturer');
                     $title          = $this->get('ManufacturerTitle');
-                    
+
+                    if(!$manufacturer) {
+                        JError::raiseError(404, 'Производитель не существует');
+                    }
+
                     $document->setTitle($title);
                     $path->addItem(JText::_('KSM_MANUFACTURERS_PATHWAY_ITEM'), JRoute::_('index.php?option=com_ksenmart&view=catalog&layout=manufacturers'));
                     $model->setManufacturerMetaData();
@@ -71,14 +85,16 @@ class KsenMartViewCatalog extends JViewKS {
                     $this->assignRef('manufacturer', $manufacturer);
                     $this->setLayout('manufacturer');
                 } elseif(count($this->state->get('com_ksenmart.countries', array())) == 1) {
-                    $rows       = $this->get('Manufacturers');
                     $country    = $this->get('Country');
                     $title      = $this->get('CountryTitle');
+
+                    if(!$country) {
+                        JError::raiseError(404, 'Страна не существует');
+                    }
                     
                     $document->setTitle($title);
                     $model->setCountryMetaData();
                     
-                    $this->assignRef('rows', $rows);
                     $this->assignRef('country', $country);
                     $this->setLayout('country');
                 } elseif(count($this->state->get('com_ksenmart.users', array())) == 1) {
@@ -94,7 +110,6 @@ class KsenMartViewCatalog extends JViewKS {
                     $title  = $this->get('CatalogTitle');
                     
                     $document->setTitle($title);
-                    $model->setCatalogMetaData();
                     if($layout == 'default'){
                         $this->setLayout('catalog');
                     }
@@ -111,18 +126,16 @@ class KsenMartViewCatalog extends JViewKS {
                         }
                     }
                 }
-                if($this->getLayout() != 'country') {
-                    $pagination = $this->get('Pagination');
-                    $rows       = $this->get('Items');
-                    $sort_links = $this->get('SortLinks');
 
-                    $this->assignRef('sort_links', $sort_links);
-                    $this->assignRef('rows', $rows);
-                    $this->assignRef('pagination', $pagination);
-                    $this->assignRef('sort_links', $sort_links);
-                }
-                $seo_text = $this->get('SeoText');
-                $this->assignRef('seo_text', $seo_text);
+				$pagination = $this->get('Pagination');
+				$rows       = $this->get('Items');
+				$sort_links = $this->get('SortLinks');
+
+				$this->assignRef('sort_links', $sort_links);
+				$this->assignRef('rows', $rows);
+				$this->assignRef('pagination', $pagination);
+				$this->assignRef('sort_links', $sort_links);
+
                 break;
         }
         $this->assignRef('layout_view', $layout_view);

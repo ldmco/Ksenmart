@@ -1,17 +1,18 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelksadmin');
 class KsenMartModelExportImport extends JModelKSAdmin {
 
-    function __construct() {
-        parent::__construct();
-    }
-
     protected function populateState($ordering = null, $direction = null){
         $this->onExecuteBefore('populateState');
 
-        $app = JFactory::getApplication();
-
+        $app    = JFactory::getApplication();
         $params = JComponentHelper::getParams('com_ksenmart');
 
         $type = $app->getUserStateFromRequest('com_ksenmart.exportimport.type', 'type', 'text');
@@ -24,7 +25,7 @@ class KsenMartModelExportImport extends JModelKSAdmin {
         $this->onExecuteAfter('populateState');
     }
 
-    function getProperties() {
+    function getProperties($public = true) {
         $this->onExecuteBefore('getProperties');
 
         $query = $this->_db->getQuery(true);

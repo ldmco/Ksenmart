@@ -1,28 +1,15 @@
-<?php	 		 		 	
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
 jimport('joomla.application.component.controlleradmin');
 
 class KsenMartControllerExportImport extends KsenMartController
 {
-
-	function import_from_csv_parse()
-	{
-		$model=$this->getModel('exportimport');
-        if (!$return=$model->uploadImportCSVFile()) {
-            $this->setRedirect('index.php?option=com_ksenmart&view=exportimport&type=import_from_csv',JText::_('KSM_SERVER_SIDE_SAVE_ERROR') . implode('<br>', $model->getErrors()));
-            return false;
-        }		
-		$this->setRedirect('index.php?option=com_ksenmart&view=exportimport&layout=import_from_csv_parse&type=import_from_csv');
-		return true;
-	}
-	
-	function export_csv()
-	{
-		$data = JRequest::getVar('jform', array(), 'post', 'array');
-		$model=$this->getModel('exportimport');
-		$model->getExportCSV($data);
-		JFactory::getApplication()->close();	
-	}
 
 	function save_yandexmarket()
 	{

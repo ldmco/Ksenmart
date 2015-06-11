@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
 class KsenMartControllerProfile extends JControllerLegacy {
@@ -15,7 +21,7 @@ class KsenMartControllerProfile extends JControllerLegacy {
         $order = $model->getOrder();
         $session->set('shopcart_discount', $order->coupon);
         $session->set('shop_order_id', $order->id);
-        $this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=cart', false));
+        $this->setRedirect(JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid='.KSSystem::getShopItemid(), false));
     }
 
     public function add_address() {

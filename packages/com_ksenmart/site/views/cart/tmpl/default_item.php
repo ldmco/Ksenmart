@@ -1,4 +1,11 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <tr class="item-cart">
 	<td style="width: 16%;">
 		<form>
@@ -8,14 +15,14 @@
 	</td>
 	<td style="width: 45%;">
 		<dl class="dl-horizontal">
-			<dt>Название</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_COLUMN_TITLE'); ?></dt>
 			<dd><a href="<?php echo $this->item->product->link; ?>" title="<?php echo $this->item->product->title; ?>"><?php echo $this->item->product->title; ?></a></dd>
 			<?php if(!empty($this->item->product->product_code)){ ?>
-			<dt>Артикул</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
 			<dd><?php echo $this->item->product->product_code; ?></dd>
 			<?php } ?>
 			<?php if(!empty($this->item->product->manufacturer_title)){ ?>
-			<dt>Производитель</dt>
+			<dt><?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?></dt>
 			<dd><?php echo $this->item->product->manufacturer_title; ?></dd>
 			<?php } ?>
             <?php foreach($this->item->properties as $item_property){ ?>
@@ -32,7 +39,7 @@
 	<td style="width: 12%;">
         <div class="input-prepend input-append quant quantt">
             <button type="button" class="btn minus">-</button>
-            <input type="text" price="<?php echo $this->item->price; ?>" product_id="<?php echo $this->item->product->id; ?>" product_packaging="<?php echo $this->item->product->product_packaging; ?>" count="<?php echo $this->item->count; ?>" data-item_id="<?php echo $this->item->id; ?>" class="inputbox span5 text-center" value="<?php echo $this->item->count; ?>" />
+            <input type="text" price="<?php echo $this->item->price; ?>" product_id="<?php echo $this->item->product->id; ?>" product_packaging="<?php echo $this->item->product->product_packaging; ?>" count="<?php echo $this->item->count; ?>" data-item_id="<?php echo $this->item->id; ?>" class="inputbox span1 text-center" value="<?php echo $this->item->count; ?>" />
             <button type="button" class="btn plus">+</button>
         </div>
 	</td>

@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelkslist');
 class KsenMartModelComments extends JModelKSList {
@@ -58,7 +64,7 @@ class KsenMartModelComments extends JModelKSList {
     public function getComment() {
         $this->onExecuteBefore('getComment');
 
-        $id = JRequest::getVar('id', 0);
+        $id = JRequest::getInt('id', 0);
         $comment = KSSystem::getTableByIds(array($id), 'comments', array(
                 't.id',
                 't.parent_id',
@@ -114,28 +120,21 @@ class KsenMartModelComments extends JModelKSList {
         return $rates;
     }
 
-    public function addComment() {
+    public function addComment($data) {
         $this->onExecuteBefore('addComment');
 
         $user       = KSUsers::getUser();
         $jinput     = JFactory::getApplication()->input;
         $params     = JComponentHelper::getParams('com_ksenmart');
         
-        $name       = $jinput->get('comment_name', $user->name, 'string');
-        $product    = $jinput->get('id', 0, 'int');
-        $rate       = $jinput->get('comment_rate', 0, 'int');
-        $comment    = $jinput->get('comment_comment', null, 'string');
-        $good       = $jinput->get('comment_good', null, 'string');
-        $bad        = $jinput->get('comment_bad', null, 'string');
-        
         $comment_object = new stdClass();
         $comment_object->user_id    = $user->id;
-        $comment_object->product_id = $product;
-        $comment_object->name       = $name;
-        $comment_object->comment    = $comment;
-        $comment_object->good       = $good;
-        $comment_object->bad        = $bad;
-        $comment_object->rate       = $rate;
+        $comment_object->product_id = $data['product_id'];
+        $comment_object->name       = $data['comment_name'];
+        $comment_object->comment    = $data['comment_comment'];
+        $comment_object->good       = $data['comment_good'];
+        $comment_object->bad        = $data['comment_bad'];
+        $comment_object->rate       = $data['comment_rate'];
 
         if($params->get('review_moderation', false)){
             $comment_object->published       = 0;
@@ -227,9 +226,9 @@ class KsenMartModelComments extends JModelKSList {
         $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
         $query->where("c.type='shop_review'");
         $query->where("c.published=1");
-        $query->where('c.user_id='.$uid);
+        $query->where('c.user_id=' . $this->_db->q($uid));
         $query->order('c.date_add DESC');
-        echo $query;
+
         $this->_db->setQuery($query);
         
         $reviews = KSUsers::setAvatarLogoInObject($this->_db->loadObject());
@@ -258,7 +257,7 @@ class KsenMartModelComments extends JModelKSList {
         $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
         $query->where("c.type='shop_review'");
         $query->where("c.published=1");
-        $query->where('c.id='.$id);
+        $query->where('c.id=' . $this->_db->q($id));
         $query->order('c.date_add DESC');
         $this->_db->setQuery($query);
         $review = $this->_db->loadObject();

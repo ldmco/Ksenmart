@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelkslist');
 class KsenMartModelcatalog extends JModelKSList {
@@ -139,8 +145,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $this->_ids = $this->getIdsByProperties($this->_properties);
         }
         if (count($this->_countries) > 0) {
-            $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
-            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
+            $this->_ids = $this->getIdsByCountries($this->_countries);
         }
         if (count($this->_manufacturers) > 0) {
             $this->_ids = $this->getIdsByManufacturers($this->_manufacturers);
@@ -389,29 +394,30 @@ class KsenMartModelcatalog extends JModelKSList {
      * @param mixed $manufacturers
      * @return
      */
-    private function getIdsByCountries($countries, $manufacturers){
-        $this->onExecuteBefore('getIdsByCountries', array(&$countries, &$manufacturers));
+    private function getIdsByCountries($countries){
+        $this->onExecuteBefore('getIdsByCountries', array(&$countries));
         
         if(!empty($countries)){
             $where = array();
-            $where[] = "(country IN (" . implode(',', $countries) . "))";
-            if (count($manufacturers) > 0){
-                $where[] = "(id IN (" . implode(',', $manufacturers) . "))";
-                            
+            if(count($this->_ids) > 0){
+                $where[] = "(p.id IN (" . implode(',', $this->_ids) . "))";
             }
+
+			$query = $this->_db->getQuery(true);
+			$query->select('m.id')->from('#__ksenmart_manufacturers as m')->where('m.country in (' . implode(',', $countries) . ')');
+			$this->_db->setQuery($query);
+			$manufacturers = $this->_db->loadColumn();	
+			if(count($manufacturers) > 0)
+				$where[] = "(p.manufacturer IN (" . implode(',', $manufacturers) . "))";
+        
             $query = $this->_db->getQuery(true);
-            $query
-                ->select('DISTINCT id')
-                ->from('#__ksenmart_manufacturers')
-                ->where($where)
-            ;
+            $query->select('p.id')->from('#__ksenmart_products as p')->where($where);
             $this->_db->setQuery($query);
-            $manufacturers = $this->_db->loadColumn();
-            $manufacturers = count($manufacturers) > 0 ? $manufacturers : array(0);
-            $this->setState('com_ksenmart.manufacturers', $manufacturers);
+            $this->_ids = $this->_db->loadColumn();
+            $this->_ids = count($this->_ids) > 0 ? $this->_ids : array(0);  
             
-            $this->onExecuteAfter('getIdsByCountries', array(&$manufacturers));
-            return $manufacturers;
+            $this->onExecuteAfter('getIdsByCountries', array(&$this->_ids));        
+            return $this->_ids;
         }
         return array(0);
     }
@@ -488,8 +494,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $ids = $this->getIdsByCategories($this->_categories);
         }
         if (count($this->_countries) > 0) {
-            $manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
-            $this->_manufacturers = array_merge($manufacturers, $this->_manufacturers);
+            $ids = $this->getIdsByCountries($this->_countries);
         }
         if (count($this->_manufacturers) > 0) {
             $ids = $this->getIdsByManufacturers($this->_manufacturers);
@@ -549,7 +554,7 @@ class KsenMartModelcatalog extends JModelKSList {
             $this->_ids = $this->getIdsByProperties($this->_properties);
         }
         if (count($this->_countries) > 0) {
-            $this->_manufacturers = $this->getIdsByCountries($this->_countries, $this->_manufacturers);
+            $this->_ids = $this->getIdsByCountries($this->_countries);
         }
         
         $where = $this->getFilterDefaultParams();
@@ -1007,14 +1012,21 @@ class KsenMartModelcatalog extends JModelKSList {
                     m.country,
                     m.metatitle,
                     m.metadescription,
-                    m.metakeywords
+                    m.metakeywords,
+                    f.filename,
+                    f.folder,
+                    f.params
                 ')
                 ->from('#__ksenmart_manufacturers AS m')
-                ->where('published=1')
-                ->where('id=' . $this->_manufacturers[0])
+                ->leftjoin('#__ksenmart_files AS f ON m.id=f.owner_id AND f.owner_type='.$this->_db->quote('manufacturer'))
+                ->where('m.published=1')
+                 ->where('m.id=' . $this->_manufacturers[0])
             ;
             $this->_db->setQuery($query);
             $manufacturer = $this->_db->loadObject();
+            if(!empty($manufacturer)){
+                $manufacturer->image = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $this->_params->get('thumb_width'), $this->_params->get('thumb_height'));
+            }
             
             $this->onExecuteAfter('getManufacturer', array(&$manufacturer));
             return $manufacturer;
@@ -1305,7 +1317,7 @@ class KsenMartModelcatalog extends JModelKSList {
                         ->select('p.title')
                         ->from('#__ksenmart_product_categories_properties as pcp')
                         ->leftjoin('#__ksenmart_properties as p on p.id=pcp.property_id')
-                        ->where('pcp.category_id=' . $category->id)
+                        ->where('pcp.category_id=' . $this->_db->q($category->id))
                     ;
                     $this->_db->setQuery($query);
                     $properties = $this->_db->loadObjectList();
@@ -1330,8 +1342,7 @@ class KsenMartModelcatalog extends JModelKSList {
         if (!empty($metakeywords)){
             $document->setMetaData('keywords', $metakeywords);
         }
-        
-        $this->setCatalogMetaData();
+
         $this->onExecuteAfter('setCategoryMetaData', array(&$this));
         return true;
     }
@@ -1391,8 +1402,7 @@ class KsenMartModelcatalog extends JModelKSList {
         if (!empty($metakeywords)){
             $document->setMetaData('keywords', $metakeywords);
         }
-        
-        $this->setCatalogMetaData();
+
         $this->onExecuteAfter('setManufacturerMetaData', array(&$this));
         return true;
     }
@@ -1448,66 +1458,8 @@ class KsenMartModelcatalog extends JModelKSList {
             $document->setMetaData('keywords', $metakeywords);
         }
         
-        
-        $this->setCatalogMetaData();
         $this->onExecuteAfter('setCountryMetaData', array(&$this));
         return true;
-    }
-
-    /**
-     * KsenMartModelcatalog::setCatalogMetaData()
-     * 
-     * @return
-     */
-    public function setCatalogMetaData() {
-        $this->onExecuteBefore('setCatalogMetaData', array(&$this));
-
-        sort($this->_categories);
-        sort($this->_manufacturers);
-        sort($this->_properties);
-        sort($this->_countries);
-        
-        $params = array();
-        if (!empty($this->_categories))
-            $params['categories'] = $this->_categories;
-        if (!empty($this->_manufacturers))
-            $params['manufacturers'] = $this->_manufacturers;
-        if (!empty($this->_countries))
-            $params['countries'] = $this->_countries;
-        if (!empty($this->_properties))
-            $params['property_values'] = $this->_properties;
-
-                
-        $params = json_encode($params);
-        $query = $this->_db->getQuery(true);
-        $query
-            ->select('
-                metatitle,
-                metadescription,
-                metakeywords
-            ')
-            ->from('#__ksen_seo_texts')
-            ->where('params='.$this->_db->quote($params))
-            ->where('extension='.$this->_db->quote('com_ksenmart'))
-        ;
-        $this->_db->setQuery($query);
-        $metadata = $this->_db->loadObject();
-        if (!empty($metadata)) {
-            $document = JFactory::getDocument();
-            if (!empty($metadata->metatitle)){
-                $document->setMetaData('title', $metadata->metatitle);
-            }
-            if (!empty($metadata->metadescription)){
-                $document->setMetaData('description', $metadata->metadescription);
-            }
-            if (!empty($metadata->metakeywords)){
-                $document->setMetaData('keywords', $metadata->metakeywords);
-            }
-            
-            $this->onExecuteAfter('setCatalogMetaData', array(&$this));
-            return true;
-        }
-        return false;
     }
 
     /**

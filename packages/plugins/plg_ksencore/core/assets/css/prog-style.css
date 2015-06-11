@@ -19,6 +19,9 @@ body ul {
     -webkit-text-shadow: none !important;
     text-shadow: none !important;
 }
+.settings-tab-content .btn {
+	padding: 6px 10px 4px 10px!important;
+}
 
 .admin .btn:hover,
 .btn.btn-other:hover{
@@ -2265,4 +2268,15 @@ table.cat td p{
 
 table.cat td.del a{
 	margin:0px;
+}
+
+.ksm-slidemodule-countries ul li i, .ksm-slidemodule-regions ul li i {
+	position: absolute;
+	top: 50%;
+	margin: -20px 0 0;
+	right: -4px;
+	width: 40px;
+	height: 40px;
+	background: url(i/close.png) center center no-repeat;
+	cursor: pointer;
 }

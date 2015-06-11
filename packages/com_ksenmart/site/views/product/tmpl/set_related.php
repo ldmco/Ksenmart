@@ -1,4 +1,12 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php if ($this->set_related): ?>
 <div class="set catalog related_products">
 	<h3><?php echo JText::_('KSM_PRODUCT_RELATED_TITLE'); ?></h3>

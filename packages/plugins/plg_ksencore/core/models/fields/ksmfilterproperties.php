@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class JFormFieldKSMFilterProperties extends JFormField {
 	
@@ -12,7 +18,7 @@ class JFormFieldKSMFilterProperties extends JFormField {
 		$db->setQuery($query);
 		$properties = $db->loadObjectList();
 		foreach($properties as $property){
-			$view = isset($this->value[$property->id]['view']) ? $this->value[$property->id]['view'] : 'text';
+			$view = isset($this->value[$property->id]['view']) ? $this->value[$property->id]['view'] : 'checkbox';
 			$display = isset($this->value[$property->id]['display']) ? $this->value[$property->id]['display'] : 'row';
 			$html .= '<div class="property">';
 			$html .= '	<h3>'.$property->title.'</h3>';

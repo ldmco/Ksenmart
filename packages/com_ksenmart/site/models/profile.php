@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelkslist');
 jimport('joomla.html.pagination');
@@ -72,18 +78,19 @@ class KsenMartModelProfile extends JModelKSList {
         
         $jinput = JFactory::getApplication()->input;
         $data   = $jinput->get('form', array(), 'array');
-		$data['name'] = '';
-		if (!empty($data['last_name'])) $data['name'] .= $data['last_name'].' ';
-		if (!empty($data['first_name'])) $data['name'] .= $data['first_name'].' ';
-		if (!empty($data['middle_name'])) $data['name'] .= $data['middle_name'];		
+		
+        if (!empty($data['name']))        $data['name']  = $data['name'].' ';
+		if (!empty($data['last_name']))   $data['name'] .= $data['last_name'].' ';
+		if (!empty($data['first_name']))  $data['name'] .= $data['first_name'].' ';
+		if (!empty($data['middle_name'])) $data['name'] .= $data['middle_name'];	
 
         if(!empty($data['id'])){
             $pk = $data['id'];
         }else{
             $pk = (int)$this->getState('user.id');
         }
-        $km_user   = KSUsers::getUser();
-        $user   = JUser::getInstance($pk);
+        $km_user = KSUsers::getUser();
+        $user    = JUser::getInstance($pk);
         if (!$user->bind($data)) {
             return $user->getError();
         }
@@ -498,49 +505,20 @@ class KsenMartModelProfile extends JModelKSList {
         $query->where("c.type = 'review'");
         $query->group('c.id');
 
+
         $this->_db->setQuery($query, $limitstart, $this->_limit);
         $comments = $this->_db->loadObjectList();
         $this->_pagination = new JPagination(count($comments), $limitstart, $this->_limit);
 
-        $this->setProductLinksOfReviews($comments);
-        $this->setProductImagesOfReviews($comments);
+        foreach ($comments as $comment) {
+            $comment->user    = KSUsers::getUser($comment->user);
+            $comment->link    = KSMProducts::generateProductLink($comment->p_id, $comment->alias);
+            $comment->product = KSMProducts::getProduct($comment->p_id);
+
+            $comment->small_img = $comment->product->small_img;
+        }
 
         $this->onExecuteAfter('getComments', array(&$comments));
-        return $comments;
-    }
-
-    /**
-     * KsenMartModelProfile::setProductLinksOfReviews()
-     * 
-     * @param mixed $comments
-     * @return
-     */
-    function setProductLinksOfReviews($comments) {
-        $this->onExecuteBefore('setProductLinksOfReviews', array(&$comments));
-
-        foreach ($comments as $comment) {
-            $comment->link = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $comment->p_id . ':' . $comment->alias);
-        }
-        
-        $this->onExecuteAfter('setProductLinksOfReviews', array(&$comments));
-        return $comments;
-    }
-
-    /**
-     * KsenMartModelProfile::setProductImagesOfReviews()
-     * 
-     * @param mixed $comments
-     * @return
-     */
-    function setProductImagesOfReviews($comments) {
-        $this->onExecuteBefore('setProductImagesOfReviews', array(&$comments));
-
-        $params = JComponentHelper::getParams('com_ksenmart');
-        foreach ($comments as $comment) {
-            $comment->small_img = KSMedia::resizeImage($comment->filename, $comment->folder, $params->get('thumb_width'), $params->get('thumb_height'));
-        }
-        
-        $this->onExecuteAfter('setProductImagesOfReviews', array(&$comments));
         return $comments;
     }
 
@@ -806,10 +784,11 @@ class KsenMartModelProfile extends JModelKSList {
         $query->where('c.user_id='.$uid);
 
         $this->_db->setQuery($query);
-        $reviews = KSUsers::setAvatarLogoInObject($this->_db->loadObject());
+        $review = $this->_db->loadObject();
+        $review = KSUsers::setAvatarLogoInObject($review);
         
-        $this->onExecuteAfter('getShopReview', array(&$reviews));
-        return $reviews;
+        $this->onExecuteAfter('getShopReview', array(&$review));
+        return $review;
     }
     
     public function updateProductReview($review_id, $comment, $good, $bad){

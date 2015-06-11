@@ -181,6 +181,7 @@
 			description="KSM_CATALOG_PRODUCT_DESCRIPTION_DESC"
 			filter="JComponentHelper::filterText"
 			default=""
+			buttons="true"
 			height="250px"
 		/>
 		

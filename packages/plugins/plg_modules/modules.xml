@@ -7,7 +7,7 @@
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>KSM_PLUGIN_MODULES_DESCRIPTION</description>
 
     <scriptfile>install.php</scriptfile>
@@ -26,8 +26,9 @@
         </sql>
     </install>
     
-    <languages folder="language">
-		<language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_modules.sys.ini</language>
+    <languages folder="languages">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_modules.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_kmplugins_modules.sys.ini</language>
     </languages>
 	
     <updateservers>
@@ -36,9 +37,13 @@
 
     <config>
         <fields name="params">
-            <fieldset name="basic" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+            <fieldset name="visibility" label="KSM_PLUGIN_MODULES_VISIBILITY_SLIDER" addfieldpath="/plugins/kmplugins/modules/assets/fields">
                 <field name="modules" type="ksmodules" />
             </fieldset>
+			
+            <fieldset name="layouts" label="KSM_PLUGIN_MODULES_LAYOUTS_SLIDER" addfieldpath="/plugins/kmplugins/modules/assets/fields">
+                <field name="layouts" type="kslayoutmodules" />
+            </fieldset>			
         </fields>
     </config>
 </extension>

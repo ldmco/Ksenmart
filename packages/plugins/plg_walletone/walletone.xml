@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="plugin" group="kmpayment" version="2.5.0" method="upgrade">
     <name>KSM_PAYMENT_WALLETONE</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <creationDate>December 2014</creationDate>
     <author>Kirill Bereza</author>
     <authorEmail>takt.bereza@gmail.com</authorEmail>
@@ -20,6 +20,7 @@
     
     <languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.plg_kmpayment_walletone.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_kmpayment_walletone.sys.ini</language>
     </languages>
 
     <install>

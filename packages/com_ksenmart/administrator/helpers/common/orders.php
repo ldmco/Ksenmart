@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('helpers.corehelper');
 class KSMOrders extends KSCoreHelper {
@@ -145,17 +151,21 @@ class KSMOrders extends KSCoreHelper {
         JRequest::setVar('id', $order_id);
         $model = KSSystem::getModel('orders');
         $order = $model->getOrder();
-        self::setOrderItemsProperties($order, $order_id);
+		$order->items = KSMOrders::getOrderItems($order_id);
+		
         if (!empty($order->address_fields)) {
             $order->address_fields = implode(', ', $order->address_fields);
         } else {
             $order->address_fields = '';
         }
+		
         $order->customer_name = '';
+        if (isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name.= $order->customer_fields['name'];
         if (isset($order->customer_fields['last_name']) && !empty($order->customer_fields['last_name'])) $order->customer_name.= $order->customer_fields['last_name'] . ' ';
-        if (isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name.= $order->customer_fields['name'] . ' ';
         if (isset($order->customer_fields['first_name']) && !empty($order->customer_fields['first_name'])) $order->customer_name.= $order->customer_fields['first_name'] . ' ';
         if (isset($order->customer_fields['middle_name']) && !empty($order->customer_fields['middle_name'])) $order->customer_name.= $order->customer_fields['middle_name'];
+		
+		$order->phone = isset($order->customer_fields['phone']) && !empty($order->customer_fields['phone']) ? $order->customer_fields['phone'] : '';
         
         $mail = JFactory::getMailer();
         $params = JComponentHelper::getParams('com_ksenmart');
@@ -166,7 +176,7 @@ class KSMOrders extends KSCoreHelper {
         
         $content = KSSystem::loadTemplate(array(
             'order' => $order
-        ) , 'order', 'default', 'mail');
+        ), 'order', 'default', 'mail');
         
         $mail->isHTML(true);
         $mail->setSender($sender);

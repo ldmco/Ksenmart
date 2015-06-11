@@ -1,5 +1,10 @@
-<?php
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 ?>
 <?php if ($this->order->id>0):?>
 <input type="button" value="<?php echo JText::_('ksm_orders_order_print')?>" class="print"> 

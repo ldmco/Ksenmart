@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Профиль', 
-	`position` = 'left', 
+	`title` = 'Меню пользователя (Ksenmart)', 
+	`position` = 'ks-profile', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_profile_info'

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+
+		<field
+			name="categories"
+			type="ksmcategories"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_CATEGORIES_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>
+		
+		<field
+			name="shopname"
+			type="text"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_SHOPNAME_LBL"
+			class="inputbox_205"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="company"
+			type="text"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_COMPANY_LBL"
+			class="inputbox_205"
+			labelclass="inputname"
+		/>		
+		
+	</fieldset>
+</form>

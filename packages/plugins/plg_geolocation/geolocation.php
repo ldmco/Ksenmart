@@ -1,4 +1,9 @@
-<?php
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
 defined('_JEXEC') or die;
 
 if (!class_exists('KMPlugin')) {
@@ -11,7 +16,7 @@ class plgKMPluginsGeolocation extends KMPlugin {
 		$db=JFactory::getDBO();
 		$session=JFactory::getSession();
 		$user_region=$session->get('user_region',0);
-		$phone_code=$session->get('phone_code',0);
+		$phone_code=$session->get('phone_code','');
 		if (empty($user_region))
 		{
 			$user_region=0;
@@ -35,7 +40,7 @@ class plgKMPluginsGeolocation extends KMPlugin {
 				$query = $db->getQuery(true);
 				$query->select('phone_code')->from('#__ksenmart_countries')->where('title='.$db->quote($country));
 				$db->setQuery($query, 0, 1);
-				$phone_code=(int)$db->loadResult();
+				$phone_code=$db->loadResult();
 			}
 			$session->set('phone_code',$phone_code);	
 			

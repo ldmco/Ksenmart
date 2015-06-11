@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Скидка', 
-	`position` = 'content_bottom', 
+	`title` = 'Информация о скидках (Ksenmart)', 
+	`position` = 'ks-discount', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_ksm_discount'

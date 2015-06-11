@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="kmexportimport" version="2.5.0" method="upgrade">
+    <name>KSM_EXPORTIMPORT_EXPORT_YM</name>
+    <creationDate>March 2015</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0.1</version>
+    <description>KSM_EXPORTIMPORT_EXPORT_YM_DESCRIPTION</description>
+
+    <scriptfile>install.php</scriptfile>
+    
+    <files>
+		<filename plugin="export_ym">export_ym.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+		<folder>assets</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    
+    <languages folder="languages">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmexportimport_export_ym.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_kmexportimport_export_ym.sys.ini</language>
+    </languages>
+	
+</extension>

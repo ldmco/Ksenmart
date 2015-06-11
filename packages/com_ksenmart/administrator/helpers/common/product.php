@@ -1,39 +1,66 @@
-<?php defined('_JEXEC') or die;
+<?php 
+
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('helpers.corehelper');
 class KSMProducts extends KSCoreHelper {
     
-	private $ext_name_com   = 'com_ksenmart';
-    private $ext_prefix     = 'KSM';
-	private $helper_name    = 'Products';
+    private $ext_name_com = 'com_ksenmart';
+    private $ext_prefix   = 'KSM';
+    private $helper_name  = 'Products';
     
     private static function setProductMainImageToQuery($query) {
-        $query->select('(select f.filename from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as filename');
-        $query->select('(select f.folder from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as folder');
-        $query->select('(select f.params from #__ksenmart_files as f where f.owner_id=p.id and owner_type="product" and media_type="image" order by ordering limit 1) as params');
+        $db = JFactory::getDBO();
+        $query
+            ->select($db->qn(array(
+                'f.filename',
+                'f.folder',
+                'f.params',
+            )))
+            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON ' . 
+                $db->qn('owner_id') . '=' . $db->qn('p.id') . ' AND ' . 
+                $db->qn('f.owner_type') . '=' . $db->q('product') . ' AND ' . 
+                $db->qn('f.media_type') . '=' . $db->q('image'))
+        ;
         return $query;
     }
     
-    private static $_property_values = array();
-    private static $_images = array();
+    private static $_property_values       = array();
+    private static $_images                = array();
     private static $_images_products_files = array();
     
     public static function getProduct($id) {
+
+        self::onExecuteBefore(array(&$id));
+
         global $ext_name;
         $old_ext_name = $ext_name;
-        $ext_name = 'ksenmart';
-        
+        $ext_name     = 'ksenmart';
 		
-        $db = JFactory::getDBO();
+        $db     = JFactory::getDBO();
         $params = JComponentHelper::getParams('com_ksenmart');
-        $query = $db->getQuery(true);
-        $query->select('p.*,m.title as manufacturer_title,u.form1 as unit')->from('#__ksenmart_products as p');
-        $query->join("LEFT", "#__ksenmart_manufacturers as m on p.manufacturer=m.id");
-        $query->join("LEFT", "#__ksenmart_product_units as u on p.product_unit=u.id");
-        $query->where('p.id=' . $id);
-        $query->group('p.id');
-        $query = KSMProducts::setProductMainImageToQuery($query);
-        
+        $query  = $db->getQuery(true);
+        $query  = KSMProducts::setProductMainImageToQuery($query);
+        $query
+            ->select('`p`.*')
+            ->select($db->qn(array(
+                'm.title',
+                'u.form1',
+            ), array(
+                'manufacturer_title',
+                'unit',
+            )))
+            ->from($db->qn('#__ksenmart_products', 'p'))
+            ->leftjoin($db->qn('#__ksenmart_manufacturers', 'm') . ' ON ' . $db->qn('p.manufacturer') . '=' . $db->qn('m.id'))
+            ->leftjoin($db->qn('#__ksenmart_product_units', 'u') . ' ON ' . $db->qn('p.product_unit') . '=' . $db->qn('u.id'))
+            ->where($db->qn('p.id') . '=' . $db->q($id))
+            ->group($db->qn('p.id'))
+        ;
         $db->setQuery($query);
         $row = $db->loadObject();
         
@@ -44,48 +71,33 @@ class KSMProducts extends KSCoreHelper {
                 $row->folder = 'products';
             }
             if (empty($row->filename)) {
-                if (!empty($row->parent_id)) {
-                    $query = $db->getQuery(true);
-                    $query->select('filename')->from('#__ksenmart_files')->where('owner_type=' . $db->quote('product'))->where('owner_id=' . $row->parent_id)->order('ordering');
-                    $db->setQuery($query, 0, 1);
-                    $row->filename = $db->loadResult();
-                    if (empty($row->filename)) $row->filename = 'no.jpg';
-                } else {
-                    $row->filename = 'no.jpg';
-                }
+                $row->filename = 'no.jpg';
             }
-            $query = $db->getQuery(true);
-            $query->select('count(id)')->from('#__ksenmart_products');
-            $query->where('parent_id=' . $row->id);
-            $db->setQuery($query);
-            $row->is_parent = $db->loadResult();
             
             if ($row->product_packaging == 0) {
                 $row->product_packaging = 1;
             }
             $row->product_packaging = rtrim(rtrim($row->product_packaging, '0'), '.');
-            
-            $row->link = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $row->id . ':' . $row->alias . '&Itemid=' . KSSystem::getShopItemid());
-            self::productPricesTransform($row);
-            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
-            $row->small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
-            $row->img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
-            $row->rate = KSMProducts::getProductRate($row->id);
-            
-            if (!empty($row->folder)) {
-				$row->img_link = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
-            } else {
-                $row->img_link = JURI::root() . 'media/com_ksenmart/images/products/no.jpg';
-            }
 
-            $row->add_link_cart = KSFunctions::getAddToCartLink($row->price, 2);
+            if($row->parent_id > 0) {
+                $row->parent = self::getProduct($row->parent_id);
+            }
+            
+            self::productPricesTransform($row);
+            $row->link           = JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $row->id . ':' . $row->alias . '&Itemid=' . KSSystem::getShopItemid());
+            $row->mini_small_img = KSMedia::resizeImage($row->filename, $row->folder, $params->get('mini_thumb_width'), $params->get('mini_thumb_height'), json_decode($row->params, true));
+            $row->small_img      = KSMedia::resizeImage($row->filename, $row->folder, $params->get('thumb_width'), $params->get('thumb_height'), json_decode($row->params, true));
+            $row->img            = KSMedia::resizeImage($row->filename, $row->folder, $params->get('middle_width'), $params->get('middle_height'), json_decode($row->params, true));
+            $row->img_link       = KSMedia::resizeImage($row->filename, $row->folder, $params->get('full_width', 900), $params->get('full_height', 900));
+            $row->rate           = KSMProducts::getProductRate($row->id);
+            $row->add_link_cart  = KSFunctions::getAddToCartLink($row->price, 2);
+
             $row->tags = new JHelperTags;
             $row->tags->getItemTags('com_ksenmart.product', $row->id);
         }
         $ext_name = $old_ext_name;
-		
-		self::onExecuteAfter(array(&$row));
-		
+        
+        self::onExecuteAfter(array(&$row));
         return $row;
     }
 
@@ -103,14 +115,33 @@ class KSMProducts extends KSCoreHelper {
     public static function getLinks($pid) {
         if ($pid > 0) {
             $db = JFactory::getDBO();
+			
+            $query = $db->getQuery(true);
+            $query
+                ->select('parent_id')
+                ->from('#__ksenmart_products')
+                ->where('id=' . $db->q($pid))
+            ;
+            $db->setQuery($query);
+            $parent_id = $db->loadResult();		
 
-            $cid = self::getProductCategory($pid);	
+			$query = $db->getQuery(true);
+			$query
+				->select('id')
+				->from('#__ksenmart_products')
+				->where('parent_id=' . $db->q($parent_id))
+			;
+			$db->setQuery($query);
+			$ids = $db->loadColumn();						
+
+            $cid = self::getProductCategory($pid);
 
             $query = $db->getQuery(true);
             $query
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id<' . $db->q($pid))
+                ->where('product_id in ('.implode(',', $ids).')')
                 ->order('product_id DESC')
             ;
 			if (!empty($cid))
@@ -124,6 +155,7 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MAX(product_id)')
                     ->from('#__ksenmart_products_categories')
+					->where('product_id in ('.implode(',', $ids).')')
                 ;
 				if (!empty($cid))
 					$query->where('category_id=' . $db->q($cid));
@@ -138,6 +170,7 @@ class KSMProducts extends KSCoreHelper {
                 ->select('product_id')
                 ->from('#__ksenmart_products_categories')
                 ->where('product_id>' . $db->q($pid))
+				->where('product_id in ('.implode(',', $ids).')')
                 ->order('product_id ASC')
             ;
 			if (!empty($cid))
@@ -150,6 +183,7 @@ class KSMProducts extends KSCoreHelper {
                 $query
                     ->select('MIN(product_id)')
                     ->from('#__ksenmart_products_categories')
+					->where('product_id in ('.implode(',', $ids).')')
                 ;
 				if (!empty($cid))
 					$query->where('category_id=' . $db->q($cid));				
@@ -304,22 +338,52 @@ class KSMProducts extends KSCoreHelper {
     
     public static function getProductManufacturer($id) {
         $params = JComponentHelper::getParams('com_ksenmart');
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select('m.*,f.filename,f.folder')->from('#__ksenmart_manufacturers as m');
-        $query->join("LEFT", "#__ksenmart_files as f on m.id=f.owner_id and f.owner_type='manufacturer'");
-        $query->where('m.id=' . $id);
+        $db     = JFactory::getDbo();
+        $query  = $db->getQuery(true);
+
+        $query
+            ->select($db->qn(array(
+                'm.id',
+                'm.title',
+                'm.alias',
+                'm.content',
+                'm.introcontent',
+                'm.country',
+                'm.ordering',
+                'm.metatitle',
+                'm.metadescription',
+                'm.metakeywords',
+                'f.filename',
+                'f.folder',
+                'f.params',
+            )))
+            ->from($db->qn('#__ksenmart_manufacturers', 'm'))
+            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON ' . $db->qn('m.id') . '=' . $db->qn('f.owner_id') . 'AND' . $db->qn('f.owner_type') . '=' .  $db->q('manufacturer'))
+            ->where($db->qn('m.id') . '=' . $db->q($id))
+            ->where($db->qn('m.published') . '=' . $db->q('1'))
+        ;
+
         $db->setQuery($query);
-        $row = $db->loadObject();
-        if (count($row) > 0) {
-            if ($row->filename != '') $row->img = JURI::root() . 'media/com_ksenmart/images/' . $row->folder . '/original/' . $row->filename;
+        $manufacturer = $db->loadObject();
+        
+        if (count($manufacturer) > 0) {
+            
+            $manufacturer->img = KSMedia::resizeImage($manufacturer->filename, $manufacturer->folder, $params->get('manufacturer_width', 240), $params->get('manufacturer_height', 120), json_decode($manufacturer->params, true));
+
+            unset($manufacturer->filename);
+            unset($manufacturer->folder);
+            unset($manufacturer->params);
+            
             $query = $db->getQuery(true);
-            $query->select('*')->from('#__ksenmart_countries');
-            $query->where('id=' . $row->country);
+            $query
+                ->select('*')
+                ->from($db->qn('#__ksenmart_countries', 'c'))
+                ->where($db->qn('id') . '=' . $db->q($manufacturer->country));
+            ;
             $db->setQuery($query);
-            $row->country = $db->loadObject();
+            $manufacturer->country = $db->loadObject();
         }
-        return $row;
+        return $manufacturer;
     }
     
     public static function incProductHit($id) {

@@ -1,14 +1,20 @@
-<?php
-defined( '_JEXEC' ) or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 ?>
 <article class="row-fluid item" id="review_<?php echo $this->review->id; ?>">
 	<div class="span2 avatar">
-		<a href="javascript:void(0)" title="<?php echo $this->review->name; ?>">
-			<img src="<?php echo $this->review->user->medium_img; ?>" alt="<?php echo $this->review->name; ?>" class="border_ksen" />
+		<a href="javascript:void(0)" title="<?php echo $this->review->user->name; ?>">
+			<img src="<?php echo $this->review->user->medium_img; ?>" alt="<?php echo $this->review->user->name; ?>" class="border_ksen" />
 		</a>
+		<div class="name"><?php echo $this->review->user->name; ?></div>
 	</div>
 	<div class="span10 comment_wrapp row-fluid">
-		<?php if($this->review->product != 0):?>
+		<?php if($this->review->product): ?>
 		<div class="span2">
 			<div class="photo">
 				<a href="<?php echo $this->review->product->link; ?>"><img class="border_ksen" src="<?php echo $this->review->product->mini_small_img; ?>" alt="" /></a>
@@ -16,7 +22,6 @@ defined( '_JEXEC' ) or die;
 		</div>
 		<?php endif;?>
 		<div class="span10">
-			<div class="name"><?php echo $this->review->name; ?></div>
 			<div class="rating">
 				<?php for($k=1;$k<6;$k++) {
 					if(floor($this->review->rate) >= $k){ ?>
@@ -30,7 +35,7 @@ defined( '_JEXEC' ) or die;
 				<?php echo nl2br(mb_substr($this->review->comment, 0, $this->params->get('count_symbol', 400))); ?>
 			</div>
 			<div class="read_more">
-				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="Подробнее">Подробнее</a>
+				<a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=comment&id='.$this->review->id); ?>" title="<?php echo JText::_('KSM_REVIEW_MORE'); ?>"><?php echo JText::_('KSM_REVIEW_MORE'); ?></a>
 			</div>
 		</div>
 	</div>

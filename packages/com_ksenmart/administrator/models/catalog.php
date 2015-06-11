@@ -1,11 +1,13 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 KSSystem::import('models.modelksadmin');
 class KsenMartModelCatalog extends JModelKSAdmin {
-
-    public function __construct() {
-        parent::__construct();
-    }
 
     protected function populateState() {
         $this->onExecuteBefore('populateState');
@@ -962,13 +964,18 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         return $category;
     }
 
-    function saveCategory($data) {
+    public function saveCategory($data) {
         $this->onExecuteBefore('saveCategory', array(&$data));
 
-        $data['alias'] = KSFunctions::CheckAlias($data['alias'], $data['id']);
-        if($data['alias'] == '') $data['alias'] = KSFunctions::GenAlias($data['title']);
-        $data['parent_id'] = isset($data['parent_id']) ? $data['parent_id'] : 0;
+        $data['parent_id']  = isset($data['parent_id']) ? $data['parent_id'] : 0;
+        $data['published']  = isset($data['published']) ? 1 : 0;
         $data['properties'] = isset($data['properties']) ? $data['properties'] : array();
+        
+        $data['alias'] = KSFunctions::CheckAlias($data['alias'], $data['id']);
+        if($data['alias'] == '') {
+            $data['alias'] = KSFunctions::GenAlias($data['title']);
+        }
+        
         $table = $this->getTable('categories');
         if(!$table->bindCheckStore($data)) {
             $this->setError($table->getError());
@@ -1004,8 +1011,15 @@ class KsenMartModelCatalog extends JModelKSAdmin {
         $this->onExecuteBefore('deleteCategory', array(&$id));
 
         $table = $this->getTable('categories');
+        $table->load($id);
+		$parent_id = $table->parent_id;
         $table->delete($id);
         KSMedia::deleteItemMedia($id, 'category');
+		
+        $query = $this->_db->getQuery(true);
+        $query->update('#__ksenmart_categories')->set('parent_id = '.$parent_id)->where('parent_id = '.$id);
+        $this->_db->setQuery($query);
+        $this->_db->query();		
 
         $this->onExecuteAfter('deleteCategory', array(&$id));
         return true;

@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class modKsenmartCategoriesHelper {
     
@@ -68,14 +74,23 @@ class modKsenmartCategoriesHelper {
                 $menu[$v->parent_id] = new stdClass();
                 $menu[$v->parent_id]->children = array();
             }
-            $menu[$v->parent_id]->children[] = $v;
+            $menu[$v->parent_id]->children[$v->id] = $v;
         }
         $this->menu = $menu;
     }
     
-    private function make_tree($category, $level = 1) {
+    private function make_tree($category, $level = 1, $params) {
         if (isset($category->children) && !empty($category->children)) {
-            foreach ($category->children as $child) {
+			$categories = $params->get('categories', array());
+			$children = array_keys($category->children);
+			$intersect = array_intersect($children, $categories);
+			$filter = count($intersect) ? true : false;
+            foreach ($category->children as $key => $child) {
+				if ($filter && !in_array($key, $categories))
+				{
+					unset($category->children[$key]);
+					continue;
+				}
                 $child->level = $level;
                 $child->deeper = false;
                 $child->shallower = false;
@@ -92,7 +107,7 @@ class modKsenmartCategoriesHelper {
                     $this->tree[count($this->tree) - 1]->shallower = (1 < $this->tree[count($this->tree) - 1]->level);
                     $this->tree[count($this->tree) - 1]->level_diff = ($this->tree[count($this->tree) - 1]->level - 1);
                 }
-                $this->make_tree($this->menu[$child->id], $level + 1);
+                $this->make_tree($this->menu[$child->id], $level + 1, $params);
             }
         }
     }
@@ -107,7 +122,7 @@ class modKsenmartCategoriesHelper {
             $this->build_tree($params);
             
             if ($this->menu) {
-                $this->make_tree($this->menu[0]);
+                $this->make_tree($this->menu[0], 1, $params);
                 $cache->store($this->tree, $key);
             } else {
                 return false;

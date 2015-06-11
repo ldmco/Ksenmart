@@ -1,4 +1,12 @@
-<?php defined('_JEXEC') or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php
 	$user          = KSUsers::getUser();
     $profile_link  = JRoute::_('index.php?option=com_ksenmart&view=profile');
@@ -14,12 +22,12 @@
 	</div>
 	<div class="left-menu">
 		<ul class="nav nav-list">
-			<li><a href="<?php echo $profile_link; ?>#tab1">Мои заказы</a></li>
-			<li><a href="<?php echo $profile_link; ?>#tab5">Избранные товары</a></li>
-			<li><a href="<?php echo $profile_link; ?>#tab6">Отслеживаемые товары</a></li>
-			<li><a href="<?php echo $profile_link; ?>#tab2">Информация обо мне</a></li>
-			<li><a href="<?php echo $profile_link; ?>#tab3">Мои адреса</a></li>
-			<li><a href="<?php echo $profile_link; ?>#tab4">Мои отзывы</a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab1"><?php echo JText::_('MOD_KM_PROFILE_INFO_MY_ORDERS'); ?></a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab5"><?php echo JText::_('MOD_KM_PROFILE_INFO_FAVOURITES'); ?></a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab6"><?php echo JText::_('MOD_KM_PROFILE_INFO_WATCHED'); ?></a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab2"><?php echo JText::_('MOD_KM_PROFILE_INFO_MY_INFO'); ?></a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab3"><?php echo JText::_('MOD_KM_PROFILE_INFO_MY_ADDRESSES'); ?></a></li>
+			<li><a href="<?php echo $profile_link; ?>#tab4"><?php echo JText::_('MOD_KM_PROFILE_INFO_MY_REVIEWS'); ?></a></li>
 		</ul>
 	</div>
 </div>

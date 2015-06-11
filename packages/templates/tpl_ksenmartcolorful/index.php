@@ -1,23 +1,22 @@
-<?php
+<?php 
 /**
- *
- * $Id: index.php 1.0.0 2013-04-11 19:02:19 Bereza Kirill $
- * @template  	Shoes
- * @version     1.0.0
- * @description 
- * @copyright	  Copyright © 2013 - All rights reserved.
- * @license		  GNU General Public License v2.0
- * @author		  Bereza Kirill
- * @author        Email	kirill.bereza@zebu.com
- * @website		  http://brainstorage.me/TakT
- *
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-// no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+ 
+defined('_JEXEC') or die;
 
 $Itemid = JRequest::getInt('Itemid', 1, 'get');
 $view   = JRequest::getVar('view', null);
 $template_color = $this->params->get('template_color'); 
+$vkontakte = $this->params->get('vkontakte', '');
+$facebook = $this->params->get('facebook', '');
+$twitter = $this->params->get('twitter', '');
+$email = $this->params->get('email', '');
+$phone = $this->params->get('phone', '');
+$address = $this->params->get('address', '');
+$copyright = $this->params->get('copyright', '');
+
 $right_column = false;
 $left_column = false;
 
@@ -57,10 +56,6 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/default.js"></script>
 	</head>
 	<body>
-        <div class="fixed_block_login_panel"><jdoc:include type="modules" name="fixed_block_login_panel" style="none" /></div>
-        <div class="fixed_block_minicart"><jdoc:include type="modules" name="fixed_block_minicart" style="none" /></div>
-		<div class="fixed_bloc_left"><jdoc:include type="modules" name="fixed_bloc_left" style="none" /></div>
-		<div class="fixed_bloc_right"><jdoc:include type="modules" name="fixed_bloc_right" style="none" /></div>
 		<div class="floating-header">
 			<div class="inner">
 				<div class="logo">
@@ -69,14 +64,14 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					</a>
 				</div>
 				<div class="menus">
-					<jdoc:include type="modules" name="main-menu" style="none" />
+					<jdoc:include type="modules" name="ks-menu" style="none" />
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="top-head">
-				<div class="left-m"><jdoc:include type="modules" name="head_menu_1" style="none" /></div>
-				<div class="right-m"><jdoc:include type="modules" name="auth" style="none" /></div>
+				<div class="left-m"><jdoc:include type="modules" name="ks-info-menu" style="none" /></div>
+				<div class="right-m"><jdoc:include type="modules" name="ks-auth" style="none" /></div>
 			</div>
 			<header class="masthead">
 				<div class="row-fluid header">
@@ -89,37 +84,37 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					</div>
 					<div class="span7 pull-right">
 						<div class="span6 head_block_2">
-							<jdoc:include type="modules" name="head_block_2" style="none" />
+							<jdoc:include type="modules" name="ks-clrful-header-info" style="none" />
 						</div>
 						<div class="span6 head_block_3">
-							<jdoc:include type="modules" name="minicart" style="none" />
+							<jdoc:include type="modules" name="ks-minicart" style="none" />
 						</div>
 					</div>
 				</div>
 				<nav class="navbar gk-main-menu">
 					<div class="navbar-inner">
 						<div class="container">
-							<jdoc:include type="modules" name="main-menu" style="none" />
+							<jdoc:include type="modules" name="ks-menu" style="none" />
 						</div>
 					</div>
 				</nav><!-- /.navbar -->
 			</header>
-			<jdoc:include type="modules" name="bottom_header" style="none" />
 			<section class="row-fluid">
 				<?php //if($left_column){ ?>
 				<aside class="span3" id="leftSidebar">
-					<jdoc:include type="modules" name="categories" style="none" />
-					<jdoc:include type="modules" name="right" style="none" />
-					<jdoc:include type="modules" name="left" style="none" />
+					<jdoc:include type="modules" name="ks-profile" style="none" />
+					<jdoc:include type="modules" name="ks-categories" style="none" />
+					<jdoc:include type="modules" name="ks-filters" style="none" />
+					<jdoc:include type="modules" name="ks-shipping-info" style="none" />
+					<jdoc:include type="modules" name="ks-reviews" style="none" />
 				</aside>
 				<?php //} ?>
 				<div class="span9 content">
-                    <div class="row-fluid">
-    				    <jdoc:include type="modules" name="jumbotron" style="xhtml" />
-                    </div>
 					<div class="row-fluid">
-						<jdoc:include type="modules" name="search" />
-						<jdoc:include type="modules" name="content_top" style="none" />
+						<jdoc:include type="modules" name="ks-search" />
+						<jdoc:include type="modules" name="ks-breadcrumbs" />
+    				    <jdoc:include type="modules" name="ks-main-banners" style="xhtml" />
+						<jdoc:include type="modules" name="ks-main-products-list" style="none" />
 					</div>
                     <div class="content_in_wrapp">
 						<jdoc:include type="message" />
@@ -128,32 +123,59 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 				</div>
 			</section>
 			<hr />
-			<?php if($this->countModules('content_bottom_1') || $this->countModules('content_bottom_2') || $this->countModules('content_bottom_3')){ ?>
-			<div class="row-fluid">
-				<jdoc:include type="modules" name="content_bottom_1" style="span4" />
-				<jdoc:include type="modules" name="content_bottom_2" style="span4" />
-				<jdoc:include type="modules" name="content_bottom_3" style="span4" />
-			</div>
-			<hr />
-			<?php } ?>
 		</div>
 		<footer class="footer">
 			<div class="container">
-                <?php if($this->countModules('footer_1')){ ?>
 				<div class="row-fluid" id="footer1">
-					<jdoc:include type="modules" name="footer_1" style="none" />
+					<div class="span3">
+						<jdoc:include type="modules" name="ks-clrful-footer-info1" style="none" />
+					</div>
+					<div class="span4">
+						<h5><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_QUESTIONS'); ?></h5>
+						<?php if (!empty($phone)): ?>
+						<div class="span4" style="margin: 0;">
+							<?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_CALL_US'); ?>
+							<br />
+							<?php if (!empty($phone)): ?>
+								<?php echo $phone; ?><br />
+							<?php endif; ?>
+							<?php if (!empty($address)): ?>
+								<?php echo $address; ?>
+							<?php endif; ?>
+						</div>
+						<?php endif; ?>
+						<?php if (!empty($email)): ?>
+						<div class="span5">
+							<?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_WRITE_US'); ?>
+							<br />
+							<?php echo $email; ?>
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="span2 pull-right">
+						<span><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_SOCIAL_LINKS'); ?></span><br />
+						<?php if (!empty($vkontakte)): ?>
+						<a href="<?php echo $vkontakte; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/vk.png" alt="" /></a>
+						<?php endif; ?>
+						<?php if (!empty($facebook)): ?>
+						<a href="<?php echo $facebook; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/fb.png" alt="" /></a>
+						<?php endif; ?>
+						<?php if (!empty($twitter)): ?>
+						<a href="<?php echo $twitter; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/tw.png" alt="" /></a>
+						<?php endif; ?>						
+					</div>
+					<div class="span2 pull-right">
+						<jdoc:include type="modules" name="ks-clrful-footer-info2" style="none" />
+					</div>
 				</div>
-                <?php } ?>
-                <?php if($this->countModules('footer_2')){ ?>
     			<div class="row-fluid" id="footer2">
-					<jdoc:include type="modules" name="footer_2" style="none" />
+					<div class="span6">
+						<?php echo $copyright; ?>
+					</div>
+					<div class="span2 pull-right">
+						<a href="http://ldm-co.ru" class="ldm" title="L.D.M&amp;Co."><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_MADE_BY'); ?></a>
+					</div>					
     			</div>
-                <?php } ?>
-				<?php if($this->countModules('footer3')){ ?>
-    			<div class="row-fluid" id="footer3">
-					<jdoc:include type="modules" name="footer_2" style="none" />
-    			</div>
-				<?php } ?>
             </div>
 		</footer>
 	</body>

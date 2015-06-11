@@ -15,6 +15,15 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
+
+		<field
+			name="published"
+			default="1"
+			value="1"
+			label="KSM_PUBLISHED_LBL"
+			description="KSM_PUBLISHED_DESC"
+			type="checkbox" 
+		/>
 		
 		<field
 			name="alias"

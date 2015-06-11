@@ -1,8 +1,8 @@
 UPDATE 
 	`#__modules` 
 SET 
-	`title` = 'Миникорзина', 
-	`position` = 'head_block_3', 
+	`title` = 'Миникорзина (Ksenmart)', 
+	`position` = 'ks-minicart', 
 	`published` = '1'
 WHERE 
 	`module` = 'mod_km_minicart'

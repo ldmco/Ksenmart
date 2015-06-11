@@ -1,4 +1,10 @@
-<?php defined('JPATH_PLATFORM') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
 abstract class JModelKSList extends JModelList {
@@ -34,4 +40,26 @@ abstract class JModelKSList extends JModelList {
         
         return $this;
     }
+	
+    public function getForm($data = array() , $loadData = true, $control = 'jform') {
+        
+        JKSForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+        JKSForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+        
+        if (!$this->form) {
+            $this->form = $this->getName();
+        }
+        
+        $form = JKSForm::getInstance($this->ext_name_com . '.' . $this->form, $this->form, array(
+            'control' => $control,
+            'load_data' => $loadData
+        ));
+        
+        if (empty($form)) 
+        return false;
+        
+        
+        return $form;
+    }
+	
 }

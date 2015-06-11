@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="module" client="administrator" method="upgrade">
     <name>Категории KsenMart</name>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<creationDate>March 2014</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
@@ -23,6 +23,8 @@
 	<languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_categories.ini</language>
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_categories.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_categories.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_km_categories.sys.ini</language>
     </languages>
 
     <install>

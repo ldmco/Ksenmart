@@ -1,4 +1,12 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+
 <?php if(!empty($this->manufacture_search)){ ?>
 <div class="manufacture row-fluid">
     <?php foreach($this->manufacture_search as $item){ ?>
@@ -10,9 +18,9 @@
             <div class="title pull-left">
                 <div>
                     <a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>" data-type="manufacture"><?php echo $item->title; ?></a>
-                    <span class="product_total"><?php echo $item->product_total; ?> товаров</span>
+                    <span class="product_total"><?php echo JText::sprintf('ksm_search_results_products', $item->product_total); ?></span>
                 </div>
-                <div class="type">производитель</div>
+                <div class="type"><?php echo JText::_('ksm_search_manufacturer'); ?></div>
             </div>
         </div>
 		<div class="clearfix"></div>

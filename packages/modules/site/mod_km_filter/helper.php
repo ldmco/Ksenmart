@@ -1,37 +1,47 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 class modKsenmartSearchHelper {
     
     public $price_min = null;
     public $price_max = null;
+
     public $manufacturers = array();
-    public $countries = array();
-    public $properties = array();
-    public $categories = array();
-    public $mod_params = array();
+    public $countries     = array();
+    public $properties    = array();
+    public $categories    = array();
+    public $mod_params    = array();
     
     public function init($mod_params) {
         $this->initParams($mod_params);
+       
         $params = JComponentHelper::getParams('com_ksenmart');
-        $app = JFactory::getApplication();
-        $db = JFactory::getDBO();
+        $app    = JFactory::getApplication();
+        $db     = JFactory::getDBO();
         $jinput = $app->input;
-        $option = $jinput->get('option', null);
-        $view = $jinput->get('view', null);
+        $option = $jinput->get('option', null, 'string');
+        $view   = $jinput->get('view', null, 'string');
+
         $categories = $jinput->get('categories', array() , 'array');
         if (!count($categories) && $option == 'com_ksenmart' && $view == 'product') {
             $product_id = $jinput->get('id', 0, 'int');
             $default_category = $this->getProductCategory($product_id);
             if (!empty($default_category)) $categories[] = $default_category;
         }
-        $this->categories = $categories;
+
+        $this->categories      = $categories;
         $session_manufacturers = $jinput->get('manufacturers', array() , 'array');
-        $session_countries = $jinput->get('countries', array() , 'array');
-        $session_properties = $jinput->get('properties', array() , 'array');
+        $session_countries     = $jinput->get('countries', array() , 'array');
+        $session_properties    = $jinput->get('properties', array() , 'array');
         
-        $cats = array();
+        $cats          = array();
         $manufacturers = array();
-        $ids = array();
+        $ids           = array();
         foreach ($categories as $cat) {
             $tmp = $this->getChildCats($cat);
             $cats = array_merge($cats, $tmp);
@@ -107,27 +117,16 @@ class modKsenmartSearchHelper {
         
         $properties = $this->mod_params['properties'];
         $this->properties = self::getProperties();
+        
         foreach ($this->properties as $key => & $property) {
-            
-            if (isset($properties[$property->property_id]) && $properties[$property->property_id]['view'] == 'none') {
-                unset($this->properties[$key]);
-                continue;
-            } else {
-                if(isset($properties[$property->property_id]['view'])){
-                    $this->properties[$key]->view    = $properties[$property->property_id]['view'];
-                    $this->properties[$key]->display = $properties[$property->property_id]['display'];
-                }else{
-                    $this->properties[$key]->view    = 'text';
-                    $this->properties[$key]->display = 'row';
-                }
+			if (isset($properties[$property->property_id]) && $properties[$property->property_id]['view'] == 'none') {
+				unset($this->properties[$key]);
+				continue;
+			} else {
+				$this->properties[$key]->view = isset($properties[$property->property_id]) ? $properties[$property->property_id]['view'] : 'checkbox';
+				$this->properties[$key]->display = isset($properties[$property->property_id]) ? $properties[$property->property_id]['display'] : 'row';
+			}
 
-                if(isset($properties[$property->property_id]['display'])){
-                    $this->properties[$key]->display = $properties[$property->property_id]['display'];
-                }else{
-                    $this->properties[$key]->display = 'row';
-                }
-            }
-            
             if (!empty($property->values)) {
                 foreach ($property->values as & $value) {
                     $value->selected = false;
@@ -139,13 +138,13 @@ class modKsenmartSearchHelper {
         }
     }
     
-    private function getChildCats($catid) {
+    function getChildCats($catid) {
         $db = JFactory::getDBO();
         $return = array();
         $return1 = array();
         $return[] = $catid;
         $sql = $db->getQuery(true);
-        $sql->select('id')->from('#__ksenmart_categories')->where('parent_id=' . $catid);
+        $sql->select('id')->from('#__ksenmart_categories')->where('parent_id=' . $db->q($catid));
         $db->setQuery($sql);
         $cats = $db->loadObjectList();
         if (count($cats) > 0) {
@@ -162,46 +161,39 @@ class modKsenmartSearchHelper {
     public static function getProperties($pid = 0, $prid = 0, $val_id = 0, $by = 'ppv.product_id', $by_sort = 0) {
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query
-            ->select('
+        $query->select('
                 ppv.id,
                 ppv.property_id,
                 ppv.value_id,
                 ppv.price,
-                ppv.text,
                 p.edit_price,
                 p.title,
                 p.type,
                 p.view,
                 p.default,
-                p.prefix,       
+                p.prefix,
                 p.suffix,
                 pv.title as value_title,
                 pv.image
-            ')
-            ->from('#__ksenmart_product_properties_values AS ppv')
-            ->leftjoin('#__ksenmart_properties AS p ON p.id=ppv.property_id')
-            ->leftjoin('#__ksenmart_property_values AS pv ON pv.id=ppv.value_id')
-        ;
+            ')->from('#__ksenmart_product_properties_values AS ppv')->leftjoin('#__ksenmart_properties AS p ON p.id=ppv.property_id')->leftjoin('#__ksenmart_property_values AS pv ON pv.id=ppv.value_id');
         if ($pid) {
-            $query->where('ppv.product_id=' . $pid);
+            $query->where('ppv.product_id=' . $db->q($pid));
         }
         
         if ($by_sort) {
             switch ($by) {
                 case 'ppv.id':
-                    $query->where('ppv.id=' . $by_sort);
-                    break;
-
+                    $query->where('ppv.id=' . $db->q($by_sort));
+                break;
                 default:
-                    $query->where('ppv.product_id=' . $pid);
-                    break;
+                    $query->where('ppv.product_id=' . $db->q($pid));
+                break;
             }
         }
         $query->where('p.published=1');
         
         if ($prid) {
-            $query->where('ppv.property_id=' . $prid);
+            $query->where('ppv.property_id=' . $db->q($prid));
         }
         
         $query->group('ppv.value_id');
@@ -235,27 +227,27 @@ class modKsenmartSearchHelper {
         return $props;
     }
     
-    public function getDefaultCategory($product_id) {
+    function getProductCategories($product_id) {
         $db = JFactory::getDBO();
         $sql = $db->getQuery(true);
-        $sql->select('category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id))->where('pc.is_default=1');
-        $db->setQuery($sql);
-        $category = $db->loadResult();
-        
-        return $category;
-    }
-    
-    public function getProductCategories($product_id) {
-        $db = JFactory::getDBO();
-        $sql = $db->getQuery(true);
-        $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->escape($product_id));
+        $sql->select('pc.category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->q($product_id));
         $db->setQuery($sql);
         $categories = $db->loadObjectList();
         
         return $categories;
     }
     
-    public function getProductCategory($product_id) {
+    public function getDefaultCategory($product_id) {
+        $db = JFactory::getDBO();
+        $sql = $db->getQuery(true);
+        $sql->select('category_id')->from('#__ksenmart_products_categories AS pc')->where('pc.product_id=' . $db->q($product_id))->where('pc.is_default=1');
+        $db->setQuery($sql);
+        $category = $db->loadResult();
+        
+        return $category;
+    }
+    
+    function getProductCategory($product_id) {
         $final_categories = array();
         $parent_ids = array();
         $default_category = $this->getDefaultCategory($product_id);
@@ -293,17 +285,24 @@ class modKsenmartSearchHelper {
         return $category_id;
     }
     
-    private function initParams($mod_params) {
+    function initParams($mod_params) {
+        
         $mod_params = $mod_params->toArray();
         if (!isset($mod_params['price'])) {
             $mod_params['price'] = array(
-                'view' => 'text',
+                'view' => 'slider',
                 'display' => 'row'
             );
         }
         if (!isset($mod_params['manufacturer'])) {
             $mod_params['manufacturer'] = array(
-                'view' => 'text',
+                'view' => 'checkbox',
+                'display' => 'row'
+            );
+        }
+        if (!isset($mod_params['country'])) {
+            $mod_params['country'] = array(
+                'view' => 'checkbox',
                 'display' => 'row'
             );
         }

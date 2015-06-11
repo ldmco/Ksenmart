@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 if (!class_exists('KSMShippingPlugin')) {
     require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmshippingplugin.php');
@@ -15,7 +21,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
         $currency_code = $this->getDefaultCurrencyCode();
         $html = '';
         $html.= '<div class="set">';
-        $html.= '	<h3 class="headname">' . JText::_('ksm_discount_algorithm') . '</h3>';
+        $html.= '	<h3 class="headname">' . JText::_('ksm_shipping_algorithm') . '</h3>';
         $html.= '	<div class="lists">';
         $html.= '		<div class="row">';
         $html.= '			<ul class="regions-params-ul">';
@@ -58,10 +64,9 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 					removeFixedRegionsCountry(jQuery(this).attr("country_id"));
 			});
 			
-			jQuery(".countries li a").on("click",function(){
+			jQuery("body").on("click", ".ksm-slidemodule-countries .countries li i", function(){
 				var country_id=jQuery(this).parents("li").attr("country_id");
 				removeFixedRegionsCountry(country_id);
-				return false;
 			});
 			
 			jQuery(".all-regions").click(function(){
@@ -88,10 +93,9 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 					addFixedRegionsRegion(jQuery(this).attr("region_id"));
 			});
 			
-			jQuery(".regions li a").on("click",function(){
+			jQuery("body").on("click", ".ksm-slidemodule-regions .regions i", function(){
 				var region_id=jQuery(this).parents("li").attr("region_id");
 				removeFixedRegionsRegion(region_id);
-				return false;
 			});	
 			
 			function removeFixedRegionsCountry(country_id)
@@ -109,7 +113,7 @@ class plgKMShippingFixedRegions extends KSMShippingPlugin {
 				html+="<li region_id="+region_id+" country_id="+country_id+">";
 				html+="		<div class=\'line\'>";
 				html+="			<label class=\'inputname\'>"+title+"</label>";
-				html+="			<input type=\'text\' class=\'inputbox\' name=\'jform[params]["+region_id+"]\' value=\'\'>";
+				html+="			<input type=\'text\' class=\'inputbox\' name=\'jform[params]["+region_id+"]\' value=\'0\'>";
 				html+="			<p>' . $currency_code . '</p>";
 				html+="		</div>";
 				html+="</li>";

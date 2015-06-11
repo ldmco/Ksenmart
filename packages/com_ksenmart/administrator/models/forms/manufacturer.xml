@@ -89,6 +89,7 @@
 		<field
 			name="country"
 			type="country"
+			class="active"
 			label="KSM_CATALOG_MANUFACTURER_COUNTRY"
 			wrap="slidemodule"
 		/>

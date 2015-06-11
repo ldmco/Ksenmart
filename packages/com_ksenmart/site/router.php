@@ -1,4 +1,11 @@
-<?php
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+
 require_once JPATH_ROOT . '/plugins/system/ksencore/core/helpers/common/functions.php';
 
 function KsenMartBuildRoute(&$query) {
@@ -320,10 +327,6 @@ function KsenMartBuildRoute(&$query) {
                 $segments[] = 'order_dir=' . $query['order_dir'];
                 unset($query['order_dir']);
             }
-            if (isset($query['clicked'])) {
-                $segments[] = 'clicked=' . $query['clicked'];
-                unset($query['clicked']);
-            }
             if (isset($query['layout']) && $query['layout'] == 'manufacturers') {
                 $segments[] = $query['layout'];
                 unset($query['layout']);
@@ -437,9 +440,6 @@ function KsenMartBuildRoute(&$query) {
                             break;
                             case 'order_dir':
                                 $vars['order_dir'] = $segment[1];
-                            break;
-                            case 'clicked':
-                                $vars['clicked'] = $segment[1];
                             break;
                             default:
                                 $segment = explode(';', $segment[1]);

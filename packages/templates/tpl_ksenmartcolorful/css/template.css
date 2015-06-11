@@ -459,6 +459,10 @@ header .gk-main-menu ul ul li a:hover {
 #leftSidebar .ksenmart-search .prices{
 	padding:0px 15px;
 }
+#leftSidebar .ksenmart-search .buttons{
+	padding:0px 15px;
+	  margin: 20px 0 0;
+}
 #leftSidebar .ksenmart-search .properties ul li {
 	/*padding:3px 30px 0 0;*/
 }
@@ -1038,7 +1042,7 @@ header .gk-main-menu ul ul li a:hover {
 .layout_block.layout_list ul.thumbnails > li .img{
     float: none;
     display: table-cell;
-    vertical-align: top;
+    vertical-align: middle;
     width: 25%;
     border-bottom: 0px solid transparent;
     text-align: left;
@@ -1046,6 +1050,7 @@ header .gk-main-menu ul ul li a:hover {
 .layout_block.layout_list_ext ul.thumbnails > li .img img,
 .layout_block.layout_list ul.thumbnails > li .img img {
 	margin: 0 0 0 -1px;
+	padding:5px;
 }
 
 .layout_block.layout_list ul.thumbnails > li .img {
@@ -1140,7 +1145,7 @@ header .gk-main-menu ul ul li a:hover {
     font-size: 15px;
 }
 .layout_block.layout_list ul.thumbnails > li .img img {
-	height: 130px;
+	height: auto;
 }
 
 .layout_block.layout_list_ext ul.thumbnails > li .article,
@@ -3161,6 +3166,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	.footer .ldm {
 		margin: 20px 0 20px 225px;
 	}
+	.unit .info .form-horizontal .controls .quant{
+		max-width:80px;
+	}
 }
 
 @media screen and (max-width: 650px) {
@@ -3362,8 +3370,13 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-bottom: 0px dashed;
 }
 
+.search #search_result .item .img{
+    margin-right: 15px;
+	float:left;
+}
+
 .search #search_result .item .title a{
-    display: block;
+    display: inline-block;
     text-decoration: none;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -3450,7 +3463,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     float: left;
     height: 50px;
     position: relative;
-    margin: 0 0 5px;
+    margin: 0px 15px 5px 0px;
     z-index: 99;
 }
 
@@ -3505,7 +3518,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	padding:0 7px 0 9px;
 }
 li.layout_icon {
-	margin:-4px 0px 0px 5px;
+	margin:-5px 0px 0px 5px;
 }
 #leftSidebar .products_block {
 	border: 1px solid #DCDCDC;
@@ -3561,10 +3574,14 @@ span.text-error {
 	border-bottom: 1px solid #eee;
 	padding-bottom:10px;
 }
+.unit .reviews .rating{
+	margin-left:0px;
+}
 .mod_ksm_filter .tracker {
 	background:repeat-x url(../images/b_bg_off.png) center left;
 	height:20px;
 	position: relative;
+	border:none;
 }
 .mod_ksm_filter .tracker div{
 	top: 0;
@@ -3574,15 +3591,17 @@ span.text-error {
 	height:20px;
 	display: block;
 	background:url(../images/b_bg_on.png) center left repeat-x;
+	border:none;
 }
 .mod_ksm_filter .tracker a{
-	width:20px;
-	height:20px;
+	width: 13px;
+	height: 13px;
 	position: absolute;
-	z-index: 2;	
-	cursor:pointer;
-	top:0px;
-	margin-left:-10px;
+	z-index: 2;
+	cursor: pointer;
+	top: 3px;
+	margin-left: -5px;
+	border: none;
 }
 .mod_ksm_filter .tracker a:nth-child(2){
 	background:url(../images/b_l.png) center left no-repeat;
@@ -3643,3 +3662,216 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 	font-size:16px;
 	cursor:pointer;
 }
+
+
+.nav li{
+	border-bottom:1px solid transparent;
+}
+.top-head .left-m{
+	max-width:78.83720930232558%;
+}
+.top-head .right-m{
+	max-width:19.76744186046512%;
+}
+
+#dropdownCat .accordion-inner .nav-list > li > a:hover{
+	text-decoration:underline;
+}
+.container select{
+	max-width:400px;
+	width:auto;
+	width:100%;
+}
+#leftSidebar .ksenmart-search .properties ul li{
+	text-align:center;
+}
+
+
+.container .catalog .item .bottom .buy button.btn b,
+.container .catalog .item .bottom .buy button.btn span{
+	display:inline-block;
+	margin:0 2px 0 2px;
+	float:none;
+}
+.container .catalog .item .bottom .btn{
+	text-align:center;
+}
+.layout_block.layout_list ul.thumbnails > li .bottom_info .span6.rating{
+	width:100%;
+}
+.layout_block.layout_list_ext ul.thumbnails > li .img img, .layout_block.layout_list ul.thumbnails > li .img img{
+	width:100%;
+	height:auto;
+}
+/*.container .catalog .item .img img{
+	height:auto;
+	max-height:170px;
+}*/
+
+.pos_relative .for{margin:8px 0;}
+
+
+.container .profile_order .photo img, .container .item-cart .photo img{
+	height:auto;
+}
+#leftSidebar .ksenmart-search label{text-align:left;}
+.container #leftSidebar .ksenmart-search .properties ul li.item_img{
+	float:left;
+	margin:0 2px 5px;
+}
+#leftSidebar h3,
+.navbar-inner h3{position:relative;text-align:center;}
+
+#leftSidebar .catalog-menu.hiden,
+#leftSidebar .mod_ksm_filter.hiden{padding-bottom:0;}
+
+/*#leftSidebar .mod_ksm_filter.hiden form{display:none!important;}*/
+
+#leftSidebar h3 .caret,
+.navbar-inner h3 .caret{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: top;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  content: inherit;
+  background: url(../images/collapse_big.png) center no-repeat;
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  margin-top: -8px;
+  cursor:pointer;
+}
+.navbar-inner .wrap-menu{
+	display:inline-block;
+	width:100%;
+}
+#leftSidebar h3 .caret.hiden,
+.navbar-inner h3 .caret.hiden{
+	background: url(../images/collapsed_big.png) center no-repeat;
+}
+
+
+@media screen and (max-width: 1200px){
+	.container .unit .quant .inputbox, .container .item-cart .quant .inputbox{
+		width:42px;
+	}
+}
+
+@media screen and (max-width: 1060px){
+	.popover{
+		left:auto!important;
+		right:0!important;
+	}
+	.popover.bottom .arrow{
+		left:80%!important;
+	}
+}
+
+
+@media screen and (max-width: 980px){
+	.container .catalog ul > li.item:nth-child(4n+1){
+		margin-left:2.127659574468085%;
+	}
+	.container .catalog ul > li.item:nth-child(3n+1){
+		margin-left:0;
+	}
+	.container .row-fluid .catalog-items .span3{
+	  width: 31.491712707182323%;
+	}
+	.container .layout_block.layout_list_ext ul.thumbnails > .span3, .container .layout_block.layout_list ul.thumbnails > .span3{width:100%;margin-left:0; }
+	.quant.quantt{text-align:center;}
+.container .unit .quant .inputbox, .container .item-cart .quant .inputbox{width:100%;display:inline-block;float:none;border:1px solid #DDDDDD;box-sizing:border-box;}
+.container .unit .quant span, .container .item-cart .quant span{
+	float:none;
+	display:inline-block;
+	width:100%;
+	box-sizing:border-box;
+}
+}
+@media screen and (max-width: 979px){
+	header.masthead .header{
+		position:relative;
+		overflow:hidden;
+	}
+}
+@media (max-width: 767px){
+	.container .row-fluid ul.catalog-items li.span3{
+	  width: 100%;
+	  margin-left:0;
+	}
+}
+
+@media screen and (max-width: 560px){
+	.social.pull-right{
+		float:none;
+		margin:0 0 10px;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.breadcrumb{
+		display:inline-block;
+		width:100%;
+		box-sizing:border-box;
+	}
+	.breadcrumb>li{
+		float:left;
+		margin:0 0 7px;
+	}
+
+}
+
+@media screen and (max-width: 490px){
+	.container .top-head{
+		height:auto;
+		min-height:50px;
+		display:inline-block;
+	}
+	.container header.masthead .header .logo{
+		max-width:230px;
+		width:auto;
+		padding:0 10px;
+		margin:0 auto;
+	}
+	.container header.masthead .header .logo img{
+		margin:10px 0 0;
+	}
+}
+@media (max-width: 480px){
+	.container .form-horizontal .control-label{float:left;}
+
+	.container .unit #comment_form label{
+		width: 100%;
+ 		float: none;
+ 		text-align: center;
+	}
+	.container .form-horizontal .controls{
+		margin-left:0;
+		text-align:center;
+	}
+	.unit .descs .nav-tabs>li>a, .user-panel .nav-tabs>li>a{
+		  padding: 12px 2px;
+	}
+}
+
+@media screen and (max-width: 370px){
+
+	.top-head .left-m{
+		max-width:68.83720930232558%;
+	}
+	.top-head .right-m{
+		max-width:29.76744186046512%;
+	}
+	.container .search .span11,
+	.container .search .span1{
+		width:100%;
+	}
+	.container .search .span1{
+		text-align:center;
+	}
+}
+
+

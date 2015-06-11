@@ -4,9 +4,9 @@
     <author>Bereza Kirill</author>
     <authorEmail>takt.bereza@gmail.com</authorEmail>
     <authorUrl>http://brainstorage.me/TakT</authorUrl>
-    <copyright></copyright>
-    <license></license>
-    <version>2.0.4</version>
+	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <version>2.0.5</version>
     <creationDate>March 2014</creationDate>
     <description>MOD_KM_SHOP_REVIEWS_DESC</description>
     <files>
@@ -20,6 +20,8 @@
     <languages folder="language">
         <language tag="ru-RU">ru-RU.mod_km_shop_reviews.ini</language>
         <language tag="ru-RU">ru-RU.mod_km_shop_reviews.sys.ini</language>
+        <language tag="en-GB">en-GB.mod_km_shop_reviews.ini</language>
+        <language tag="en-GB">en-GB.mod_km_shop_reviews.sys.ini</language>
     </languages>
 	
     <install>

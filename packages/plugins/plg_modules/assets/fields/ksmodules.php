@@ -1,4 +1,10 @@
-<?php defined('_JEXEC') or die;
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
 
 JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart.KSM', array('common'), array(), array('angularJS' => 0)));
 class JFormFieldKSModules extends JFormField {
@@ -13,6 +19,8 @@ class JFormFieldKSModules extends JFormField {
     
     public function getInput() {
         $db = JFactory::getDBO();
+		$this->value = is_array($this->value) ? $this->value : array();
+		
         $html = '<style>.form-horizontal .controls {margin:0px;}</style>';
         $html.= '<table class="table table-striped" id="articleList">';
         $html.= '	<thead>';
@@ -26,7 +34,7 @@ class JFormFieldKSModules extends JFormField {
         $query = $db->getQuery(true);
         $query->select('a.id, a.title, a.position, a.published, map.menuid')->from('#__modules AS a')->join('LEFT', sprintf('#__modules_menu AS map ON map.moduleid = a.id AND map.menuid IN (0, %1$d, -%1$d)', KSSystem::getShopItemid()))->select('(SELECT COUNT(*) FROM #__modules_menu WHERE moduleid = a.id AND menuid < 0) AS ' . $db->quoteName('except'));
         
-        $query->select('ag.title AS access_title')->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access')->where('a.published >= 0')->where('a.client_id = 0')->order('a.position, a.ordering');
+        $query->select('ag.title AS access_title')->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access')->where('a.published >= 0')->where('a.client_id = 0')->where('a.title != '.$db->quote(''))->order('a.position, a.ordering');
         
         $db->setQuery($query);
         $modules = $db->loadObjectList();

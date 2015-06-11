@@ -1,4 +1,11 @@
-<?php defined( '_JEXEC' ) or die; ?>
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
 <article class="unit row-fluid">
 	<div class="top row-fluid">
 		<?php echo $this->loadTemplate('title','product');?>	
@@ -8,7 +15,7 @@
         <?php echo $this->loadTemplate('gallery', 'product'); ?>
 		<div class="info" id="info">
 			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal">
-                <?php echo $this->loadTemplate('info','product');?>			
+                <?php echo $this->loadTemplate('info');?>			
                 <?php echo $this->loadTemplate('prices','product');?>	
     			<input type="hidden" name="price" value="<?php echo $this->product->price; ?>" />
     			<input type="hidden" name="id" value="<?php echo $this->product->id?>" />
