@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5.0" method="upgrade">
 	<name>KSENMART</name>
-	<creationDate>May 2015</creationDate>
+	<creationDate>March 2014</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>

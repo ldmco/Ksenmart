@@ -1,6 +1,5 @@
 DROP TABLE
 `#__ksen_seo_config`, 
-`#__ksen_seo_texts`, 
 `#__ksen_seo_types`, 
 `#__ksen_users`, 
 `#__ksen_user_addresses`, 
