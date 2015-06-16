@@ -7,7 +7,6 @@
 defined('_JEXEC') or die;
 
 require_once JPATH_ROOT . '/plugins/system/ksencore/core/helpers/common/functions.php';
-
 function KsenMartBuildRoute(&$query) {
     $app = JFactory::getApplication();
     $menu = $app->getMenu();
@@ -65,7 +64,7 @@ function KsenMartBuildRoute(&$query) {
                                     if (!empty($country) && $country->alias != '') $segments[] = $country->alias;
                                 } elseif ($key == 'seo-manufacturer') {
                                     $sql = $db->getQuery(true);
-                                    $sql->select('m.alias,m.id')->from('#__ksenmart_products as p')->leftjoin('#__ksenmart_manufacturers as m on m.id=p.manufacturer')->where('p.id=' . (int)$query['id']);
+                                    $sql->select('m.alias,m.id')->from('#__ksenmart_products as p')->leftjoin('#__ksenmart_manufacturers as m on m.id=p.manufacturer')->where('p.id=' . $db->q((int)$query['id']));
                                     $db->setQuery($sql);
                                     $manufacturer = $db->loadObject();
                                     if (!empty($manufacturer) && $manufacturer->alias != '') $segments[] = $manufacturer->alias;
@@ -79,7 +78,7 @@ function KsenMartBuildRoute(&$query) {
                                     
                                     while ($parent != 0) {
                                         $sql = $db->getQuery(true);
-                                        $sql->select('alias,parent_id')->from('#__ksenmart_categories')->where('id=' . $parent);
+                                        $sql->select('alias,parent_id')->from('#__ksenmart_categories')->where('id=' . $db->q($parent));
                                         $db->setQuery($sql);
                                         $category = $db->loadObject();
                                         if ($category->alias != '' && $parent != $default_category) $categories[] = $category->alias;
@@ -90,18 +89,18 @@ function KsenMartBuildRoute(&$query) {
                                     foreach ($categories as $category) $segments[] = $category;
                                 } elseif ($key == 'seo-category') {
                                     $sql = $db->getQuery(true);
-                                    $sql->select('category_id')->from('#__ksenmart_products_categories')->where('product_id=' . (int)$query['id'])->where('is_default=1');
+                                    $sql->select('category_id')->from('#__ksenmart_products_categories')->where('product_id=' . $db->q((int)$query['id']))->where('is_default=1');
                                     $db->setQuery($sql);
                                     $default_category = $db->loadResult();
                                     
                                     $sql = $db->getQuery(true);
-                                    $sql->select('alias')->from('#__ksenmart_categories')->where('id=' . $default_category);
+                                    $sql->select('alias')->from('#__ksenmart_categories')->where('id=' . $db->q($default_category));
                                     $db->setQuery($sql);
                                     $alias = $db->loadResult();
                                     if (!empty($alias)) $segments[] = $alias;
                                 } elseif ($key == 'seo-parent-product') {
                                     $sql = $db->getQuery(true);
-                                    $sql->select('pp.alias')->from('#__ksenmart_products as p')->leftjoin('#__ksenmart_products as pp on p.parent_id=pp.id')->where('p.id=' . (int)$query['id']);
+                                    $sql->select('pp.alias')->from('#__ksenmart_products as p')->leftjoin('#__ksenmart_products as pp on p.parent_id=pp.id')->where('p.id=' . $db->q((int)$query['id']));
                                     $db->setQuery($sql);
                                     $alias = $db->loadResult();
                                     if (!empty($alias)) {
@@ -109,7 +108,7 @@ function KsenMartBuildRoute(&$query) {
                                     }
                                 } elseif ($key == 'seo-product') {
                                     $sql = $db->getQuery(true);
-                                    $sql->select('alias')->from('#__ksenmart_products')->where('id=' . (int)$query['id']);
+                                    $sql->select('alias')->from('#__ksenmart_products')->where('id=' . $db->q((int)$query['id']));
                                     $db->setQuery($sql);
                                     $alias = $db->loadResult();
                                     if (!empty($alias)) {
