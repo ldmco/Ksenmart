@@ -221,9 +221,13 @@ class KsenMartModelOrders extends JModelKSAdmin {
         $data['address_fields'] = json_encode($data['address_fields']);
         $data['cost'] = 0;
 
+		$old_status = 0;
+		$old_items = array();
+		$new_items = array();
         $in = array();
         if(isset($data['items']) && $data['items']) {
             foreach($data['items'] as $k => $v) {
+				$new_items[$v['product_id']] = isset($new_items[$v['product_id']]) ? $new_items[$v['product_id']] + $v['count'] : $v['count'];
                 $data['cost'] += $v['price'] * $v['count'];
             }
         }
@@ -234,6 +238,10 @@ class KsenMartModelOrders extends JModelKSAdmin {
         } else {
 			$order = KSSystem::loadDbItem($data['id'], 'orders');
 			$old_status = $order->status_id;
+			$query = $this->_db->getQuery(true);
+			$query->select('product_id, sum(count) as count')->from('#__ksenmart_order_items')->where('order_id='.$data['id'])->group('product_id');
+			$this->_db->setQuery($query);
+			$old_items = $this->_db->loadObjectList('product_id');
 		}
 
         if(!$table->bindCheckStore($data)) {
@@ -255,16 +263,6 @@ class KsenMartModelOrders extends JModelKSAdmin {
                     $this->setError($table->getError());
                     return false;
                 }
-				
-				if(($data['status_id'] == 4 && $old_status != 4) || ($old_status == 4 && $data['status_id'] != 4) && $this->params->get('use_stock', 1)){
-					$query = $this->_db->getQuery(true);
-					if($data['status_id'] == 4)
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$v['count'])->where('id='.$v['product_id']);
-					else
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock-'.$v['count'])->where('id='.$v['product_id']);
-					$this->_db->setQuery($query);
-					$this->_db->query();
-				}
 
                 $in[] = $table->id;
             }
@@ -277,6 +275,67 @@ class KsenMartModelOrders extends JModelKSAdmin {
         }
         $this->_db->setQuery($query);
         $this->_db->query();
+		
+		if ($this->params->get('use_stock', 1))
+		{
+			if ($data['status_id'] == 4 && $old_status != 4)
+			{
+				foreach($old_items as $old_item)
+				{
+					$query = $this->_db->getQuery(true);
+					$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$old_item->count)->where('id='.$old_item->product_id);
+					$this->_db->setQuery($query);
+					$this->_db->query();					
+				}				
+			}
+			elseif ($old_status == 4 && $data['status_id'] != 4)
+			{
+				foreach($new_items as $product_id => $count)
+				{
+					$query = $this->_db->getQuery(true);
+					$query->update('#__ksenmart_products')->set('in_stock=in_stock-'.$count)->where('id='.$product_id);
+					$this->_db->setQuery($query);
+					$this->_db->query();					
+				}					
+			}
+			else
+			{
+				foreach($old_items as $old_item)
+				{
+					if (!isset($new_items[$old_item->product_id]))
+					{
+						$query = $this->_db->getQuery(true);
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.$old_item->count)->where('id='.$old_item->product_id);
+						$this->_db->setQuery($query);
+						$this->_db->query();					
+					}
+					elseif ($old_item->count > $new_items[$old_item->product_id])
+					{
+						$query = $this->_db->getQuery(true);
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock+'.($old_item->count - $new_items[$old_item->product_id]))->where('id='.$old_item->product_id);
+						$this->_db->setQuery($query);
+						$this->_db->query();						
+					}
+					elseif ($old_item->count < $new_items[$old_item->product_id])
+					{
+						$query = $this->_db->getQuery(true);
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock-'.($new_items[$old_item->product_id] - $old_item->count))->where('id='.$old_item->product_id);
+						$this->_db->setQuery($query);
+						$this->_db->query();						
+					}				
+				}
+				foreach($new_items as $product_id => $count)
+				{
+					if (!isset($old_items[$product_id]))
+					{
+						$query = $this->_db->getQuery(true);
+						$query->update('#__ksenmart_products')->set('in_stock=in_stock-'.$count)->where('id='.$product_id);
+						$this->_db->setQuery($query);
+						$this->_db->query();					
+					}				
+				}				
+			}
+		}			
 
         $on_close = 'window.parent.OrdersList.refreshList();';
         $return = array('id' => $id, 'on_close' => $on_close);
