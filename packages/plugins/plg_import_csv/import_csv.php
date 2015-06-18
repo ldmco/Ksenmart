@@ -1,10 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
+<?php defined('_JEXEC') or die('Restricted access');
 
 if (!class_exists('KMPlugin')) {
 	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmplugin.php');
@@ -103,7 +97,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
         return true;
     }	
 	
-    function getProperties($public = true) {
+    function getProperties() {
 		$db = JFactory::getDBO();
 		
         $query = $db->getQuery(true);
@@ -181,13 +175,9 @@ class plgKMExportimportImport_csv extends KMPlugin {
                 if(isset($_POST['relative']) && $_POST['relative'] != '') $product_data['relative'] = $this->encode($data[$_POST['relative']]);
 				if(isset($_POST['tags']) && $_POST['tags'] != '') $product_data['tags'] = $this->encode($data[$_POST['tags']]);
                 if(isset($_POST['metatitle']) && $_POST['metatitle'] != '') $product_data['metatitle'] = $this->encode($data[$_POST['metatitle']]);
-                else  $product_data['metatitle'] = '';
                 if(isset($_POST['metadescription']) && $_POST['metadescription'] != '') $product_data['metadescription'] = $this->encode($data[$_POST['metadescription']]);
-                else  $product_data['metadescription'] = '';
                 if(isset($_POST['metakeywords']) && $_POST['metakeywords'] != '') $product_data['metakeywords'] = $this->encode($data[$_POST['metakeywords']]);
-                else  $product_data['metakeywords'] = '';
 
-                $product_data['type'] = 'product';
                 $query = $db->getQuery(true);
                 $query->select('*')->from('#__ksenmart_properties')->order('ordering');
                 $db->setQuery($query);
@@ -219,7 +209,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         $db->setQuery($query);
                         $db->query();
                     }
-                } else  $product_data['parent_id'] = 0;
+                }
 
                 if(isset($product_data['childs_group']) && $product_data['childs_group'] != '' && $product_data['parent_id'] != 0) {
                     $query = $db->getQuery(true);
@@ -235,7 +225,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         $childs_group_id = $db->insertid();
                         $product_data['childs_group'] = $childs_group_id;
                     } else  $product_data['childs_group'] = $childs_group->id;
-                } else  $product_data['childs_group'] = 0;
+                }
 
                 if(isset($product_data['price_type']) && $product_data['price_type'] != '') {
                     $query = $db->getQuery(true);
@@ -244,7 +234,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
                     $price_type = $db->loadObject();
                     if(count($price_type) == 0) $product_data['price_type'] = $def_price_type;
                     else  $product_data['price_type'] = $price_type->id;
-                } else  $product_data['price_type'] = $def_price_type;
+                }
 
                 if(isset($product_data['product_unit']) && $product_data['product_unit'] != '') {
                     $query = $db->getQuery(true);
@@ -263,15 +253,12 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         $unit_id = $db->insertid();
                         $product_data['product_unit'] = $unit_id;
                     } else  $product_data['product_unit'] = $unit->id;
-                } else  $product_data['product_unit'] = $def_unit;
+                }
 
                 if(isset($product_data['promotion_price']) && $product_data['promotion_price'] != '') {
                     $product_data['promotion'] = 1;
                     $product_data['old_price'] = $product_data['price'];
                     $product_data['price'] = $product_data['promotion_price'];
-                } else {
-                    $product_data['promotion'] = 0;
-                    $product_data['old_price'] = 0;
                 }
 
                 if(isset($product_data['country']) && $product_data['country'] != '') {
@@ -293,7 +280,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         $country_id = $db->insertid();
                         $product_data['country'] = $country_id;
                     } else  $product_data['country'] = $country->id;
-                } else  $product_data['country'] = 0;
+                }
 
                 if(isset($product_data['manufacturer']) && $product_data['manufacturer'] != '') {
                     $query = $db->getQuery(true);
@@ -315,98 +302,98 @@ class plgKMExportimportImport_csv extends KMPlugin {
                         $manufacturer_id = $db->insertid();
                         $product_data['manufacturer'] = $manufacturer_id;
                     } else  $product_data['manufacturer'] = $manufacturer->id;
-                } else  $product_data['manufacturer'] = 0;
-
-                $categories = explode(';', $product_data['categories']);
-                $prd_cats = array();
-                foreach($categories as $cats) {
-                    $parent = 0;
-                    $prd_cat = 0;
-                    $cats = explode(':', $cats);
-                    foreach($cats as $cat) {
-                        $cat = trim($cat);
-                        if($cat != '') {
-                            $query = $db->getQuery(true);
-                            $query->select('*')->from('#__ksenmart_categories')->where('title=' . $db->quote($cat))->where('parent_id=' . $parent);
-                            $db->setQuery($query);
-                            $category = $db->loadObject();
-                            if(!$category) {
-                                $alias = KSFunctions::GenAlias($cat);
-                                $qvalues = array(
-                                    $db->quote($cat),
-                                    $db->quote($alias),
-                                    $parent,
-                                    1);
-                                $query = $db->getQuery(true);
-                                $query->insert('#__ksenmart_categories')->columns('title,alias,parent_id,published')->values(implode(',', $qvalues));
-                                $db->setQuery($query);
-                                $db->query();
-                                $prd_cat = $db->insertid();
-                                $parent = $prd_cat;
-                            } else {
-                                $prd_cat = $category->id;
-                                $parent = $prd_cat;
-                            }
-                            $prd_cats[] = $prd_cat;
-                        }
-                    }
-                }
-                if($product_data['parent_id'] != 0) {
-                    $prd_cats = array();
-                    $query = $db->getQuery(true);
-                    $query->select('*')->from('#__ksenmart_products_categories')->where('product_id=' . $product_data['parent_id']);
-                    $db->setQuery($query);
-                    $cats = $db->loadObjectList();
-                    foreach($cats as $cat) $prd_cats[] = $cat->category_id;
                 }
 
-				if(!isset($product_data['id'])) $product_data['id'] = 'NULL';
-                if(!isset($product_data['price'])) $product_data['price'] = 0;
-                if(!isset($product_data['product_code'])) $product_data['product_code'] = '';
-                if(!isset($product_data['product_packaging'])) $product_data['product_packaging'] = 1;
-                if(!isset($product_data['in_stock'])) $product_data['in_stock'] = 1;
-				if(!isset($product_data['introcontent'])) $product_data['introcontent'] = '';
-                if(!isset($product_data['content'])) $product_data['content'] = '';
-				$product_data['recommendation'] = isset($product_data['recommendation']) && !empty($product_data['recommendation']) ? 1 : 0;
-				$product_data['hot'] = isset($product_data['hot']) && !empty($product_data['hot']) ? 1 : 0;
-				$product_data['new'] = isset($product_data['new']) && !empty($product_data['new']) ? 1 : 0;
-				$product_data['type'] = isset($product_data['set']) && !empty($product_data['set']) ? 'set' : $product_data['type'];
+				$prd_cats = array();
+				if(isset($product_data['categories']) && $product_data['categories'] != '')
+				{
+					$categories = explode(';', $product_data['categories']);
+					foreach($categories as $cats) {
+						$parent = 0;
+						$prd_cat = 0;
+						$cats = explode(':', $cats);
+						foreach($cats as $cat) {
+							$cat = trim($cat);
+							if($cat != '') {
+								$query = $db->getQuery(true);
+								$query->select('*')->from('#__ksenmart_categories')->where('title=' . $db->quote($cat))->where('parent_id=' . $parent);
+								$db->setQuery($query);
+								$category = $db->loadObject();
+								if(!$category) {
+									$alias = KSFunctions::GenAlias($cat);
+									$qvalues = array(
+										$db->quote($cat),
+										$db->quote($alias),
+										$parent,
+										1);
+									$query = $db->getQuery(true);
+									$query->insert('#__ksenmart_categories')->columns('title,alias,parent_id,published')->values(implode(',', $qvalues));
+									$db->setQuery($query);
+									$db->query();
+									$prd_cat = $db->insertid();
+									$parent = $prd_cat;
+								} else {
+									$prd_cat = $category->id;
+									$parent = $prd_cat;
+								}
+								$prd_cats[] = $prd_cat;
+							}
+						}
+					}
+					if(isset($product_data['parent_id']) && $product_data['parent_id'] != 0) {
+						$prd_cats = array();
+						$query = $db->getQuery(true);
+						$query->select('*')->from('#__ksenmart_products_categories')->where('product_id=' . $product_data['parent_id']);
+						$db->setQuery($query);
+						$cats = $db->loadObjectList();
+						foreach($cats as $cat) $prd_cats[] = $cat->category_id;
+					}
+				}
 
                 if($unic != '') {
                     $query = $db->getQuery(true);
-                    $query->select('*')->from('#__ksenmart_products')->where($unic . '=' . $db->quote($product_data[$unic]))->where('parent_id=' . $product_data['parent_id']);
+                    $query->select('*')->from('#__ksenmart_products')->where($unic . '=' . $db->quote($product_data[$unic]));
+					if(isset($product_data['parent_id']) && $product_data['parent_id'] != 0) {
+						$query->where('parent_id=' . $product_data['parent_id']);
+					}
                     $db->setQuery($query);
                     $product = $db->loadObjectList();
                 }
 
                 if(count($product) == 0) {
-                    $alias = KSFunctions::GenAlias($product_data['title']);
-                    $values = array(
-						'id' => $product_data['id'],
-                        'parent_id' => $product_data['parent_id'],
-                        'childs_group' => $product_data['childs_group'],
-                        'title' => $db->quote($product_data['title']),
-                        'alias' => $db->quote($alias),
-                        'price' => $db->quote($product_data['price']),
-                        'old_price' => $db->quote($product_data['old_price']),
-                        'price_type' => $product_data['price_type'],
-                        'in_stock' => $db->quote($product_data['in_stock']),
-                        'product_code' => $db->quote($product_data['product_code']),
-                        'product_packaging' => $db->quote($product_data['product_packaging']),
-                        'product_unit' => $product_data['product_unit'],
-                        'introcontent' => $db->quote($product_data['introcontent']),
-                        'content' => $db->quote($product_data['content']),
-                        'promotion' => $product_data['promotion'],
-                        'recommendation' => $product_data['recommendation'],
-                        'hot' => $product_data['hot'],
-                        'new' => $product_data['new'],
-                        'manufacturer' => $product_data['manufacturer'],
-                        'published' => 1,
-                        'metatitle' => $db->quote($product_data['metatitle']),
-                        'metadescription' => $db->quote($product_data['metadescription']),
-                        'metakeywords' => $db->quote($product_data['metakeywords']),
-                        'date_added' => 'NOW()',
-                        'type' => $db->quote($product_data['type']));
+					$product_data['type'] = isset($product_data['type']) ? $product_data['type'] : 'product';					
+					$product_data['type'] = isset($product_data['set']) && !empty($product_data['set']) ? 'set' : $product_data['type'];					
+
+                    $values = array();
+					if (isset($product_data['id'])) $values['id'] = $product_data['id'];
+					if (isset($product_data['parent_id'])) $values['parent_id'] = (int)$product_data['parent_id'];
+					if (isset($product_data['childs_group'])) $values['childs_group'] = (int)$product_data['childs_group'];
+					if (isset($product_data['title']))
+					{
+						$alias = KSFunctions::GenAlias($product_data['title']);
+						$values['title'] = $db->quote($product_data['title']);
+						$values['alias'] = $db->quote($alias);
+					}
+					if (isset($product_data['price'])) $values['price'] = $db->quote($product_data['price']);
+					if (isset($product_data['old_price'])) $values['old_price'] = $db->quote($product_data['old_price']);
+					if (isset($product_data['price_type'])) $values['price_type'] = $db->quote($product_data['price_type']);
+					if (isset($product_data['in_stock'])) $values['in_stock'] = $db->quote($product_data['in_stock']);
+					if (isset($product_data['product_code'])) $values['product_code'] = $db->quote($product_data['product_code']);
+					if (isset($product_data['product_packaging'])) $values['product_packaging'] = (real)$product_data['product_packaging'];
+					if (isset($product_data['product_unit'])) $values['product_unit'] = (int)$product_data['product_unit'];
+					if (isset($product_data['introcontent'])) $values['introcontent'] = $db->quote($product_data['introcontent']);
+					if (isset($product_data['content'])) $values['content'] = $db->quote($product_data['content']);
+					if (isset($product_data['promotion'])) $values['promotion'] = (int)$product_data['promotion'];
+					if (isset($product_data['recommendation'])) $values['recommendation'] = (int)$product_data['recommendation'];
+					if (isset($product_data['hot'])) $values['hot'] = (int)$product_data['hot'];
+					if (isset($product_data['new'])) $values['new'] = (int)$product_data['new'];
+					if (isset($product_data['manufacturer'])) $values['manufacturer'] = (int)$product_data['manufacturer'];
+					if (isset($product_data['metatitle'])) $values['metatitle'] = $db->quote($product_data['metatitle']);
+					if (isset($product_data['metadescription'])) $values['metadescription'] = $db->quote($product_data['metadescription']);
+					if (isset($product_data['metakeywords'])) $values['metakeywords'] = $db->quote($product_data['metakeywords']);
+					if (isset($product_data['type'])) $values['type'] = $db->quote($product_data['type']);
+					$values['published'] = 1;
+					$values['date_added'] = 'NOW()';
 
                     $query = $db->getQuery(true);
                     $query->update('#__ksenmart_products')->set('ordering=ordering+1');
@@ -443,9 +430,9 @@ class plgKMExportimportImport_csv extends KMPlugin {
                     if(isset($product_data['content'])) $to_update[] = 'content=' . $db->quote($product_data['content']);
                     if(isset($product_data['introcontent'])) $to_update[] = 'introcontent=' . $db->quote($product_data['introcontent']);
                     if(isset($product_data['product_packaging'])) $to_update[] = 'product_packaging=' . $db->quote($product_data['product_packaging']);
-                    if($product_data['metatitle'] != '') $to_update[] = 'metatitle=' . $db->quote($product_data['metatitle']);
-                    if($product_data['metadescription'] != '') $to_update[] = 'metadescription=' . $db->quote($product_data['metadescription']);
-                    if($product_data['metakeywords'] != '') $to_update[] = 'metakeywords=' . $db->quote($product_data['metakeywords']);
+                    if(isset($product_data['metatitle'])) $to_update[] = 'metatitle=' . $db->quote($product_data['metatitle']);
+                    if(isset($product_data['metadescription'])) $to_update[] = 'metadescription=' . $db->quote($product_data['metadescription']);
+                    if(isset($product_data['metakeywords'])) $to_update[] = 'metakeywords=' . $db->quote($product_data['metakeywords']);
                     if(isset($product_data['price'])) $to_update[] = 'price=' . $db->quote($product_data['price']);
                     if(isset($product_data['manufacturer'])) $to_update[] = 'manufacturer=' . $db->quote($product_data['manufacturer']);
                     if(isset($product_data['price_type'])) $to_update[] = 'price_type=' . $db->quote($product_data['price_type']);
@@ -455,7 +442,6 @@ class plgKMExportimportImport_csv extends KMPlugin {
                     if(isset($product_data['recommendation'])) $to_update[] = 'recommendation=' . $db->quote($product_data['recommendation']);
                     if(isset($product_data['hot'])) $to_update[] = 'hot=' . $db->quote($product_data['hot']);
                     if(isset($product_data['new'])) $to_update[] = 'new=' . $db->quote($product_data['new']);
-
 
                     foreach($prd_cats as $prd_cat) {
                         $query = $db->getQuery(true);
