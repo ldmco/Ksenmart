@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
     			<?php endforeach; ?>
         	<?php endif; ?>
         <?php endforeach; ?>
-        <input type="hidden" name="WMI_SIGNATURE" value="<?php echo KSMWalletone::getHash($view->payment_params['secretKey']); ?>" />
+        <input type="hidden" name="WMI_SIGNATURE" value="<?php echo KSMWalletone::getHash($view->payment_params->get('secretKey', null)); ?>" />
 		<input type="submit" value="<?php echo JText::_('KSM_PAYMENT_WALLETONE_PAY'); ?>" class="button btn-success btn-large noTransition" />
 	</form>
 </center>
