@@ -41,10 +41,6 @@ function KsenMartBuildRoute(&$query) {
         break;
         case 'search':
             $segments[] = 'searching';
-            if (isset($query['value']) && !empty($query['value'])) {
-                $segments[] = $query['value'];
-                unset($query['value']);
-            }
 		break;
         case 'product':
             if (isset($query['id'])) {
@@ -368,7 +364,6 @@ function KsenMartBuildRoute(&$query) {
 				break;
 			case 'searching':
 				$vars['view'] = 'search';
-				if (isset($segments[1])) $vars['value'] = $segments[1];
 				
 				break;
 			default:
