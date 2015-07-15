@@ -205,7 +205,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         
         $view->user = KSUsers::getUser();
         KSMWalletone::_setFields(array_merge($paymentTypes, array(
-            'WMI_MERCHANT_ID'        => $payment->params->get('merchant_id', null), 
+            'WMI_MERCHANT_ID'        => $view->payment_params->get('merchant_id', null), 
             'WMI_PAYMENT_AMOUNT'     => $view->order->costs['total_cost'], 
             'WMI_PAYMENT_NO'         => $view->order->id, 
             'WMI_CURRENCY_ID'        => 643, 
@@ -216,7 +216,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
             'WMI_FAIL_URL'           => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_error'),
             'WMI_SUCCESS_URL'        => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_success'),
         )));
-        $view->payment_form_params->sign = KSMWalletone::getHash($payment->params->get('secretKey', null));
+        $view->payment_form_params->sign = KSMWalletone::getHash($view->payment_params->get('secretKey', null));
         
         $html.= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'default_paymentform');
         return true;
