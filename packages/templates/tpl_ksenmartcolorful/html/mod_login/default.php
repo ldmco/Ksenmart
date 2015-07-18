@@ -87,7 +87,6 @@ jQuery(document).ready(function(){
 			type: 'POST',
 			url:URI_ROOT+'index.php?option=com_ksenmart&task=shopajax.site_auth&login='+login+'&password='+password,
 			success:function(data){
-			  console.log(data);
 				if (data == 'login'){
 					window.location.reload();
 				}else{
