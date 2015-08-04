@@ -151,7 +151,7 @@ class plgKMExportimportExport_csv extends KMPlugin {
 			$tags = '';
 			$photos = '';
 			
-			if($product->promotion && $product->old_price != 0) {
+			if($product->old_price != 0) {
 				$product->promotion_price = $product->price;
 				$product->price = $product->old_price;
 			} else {
