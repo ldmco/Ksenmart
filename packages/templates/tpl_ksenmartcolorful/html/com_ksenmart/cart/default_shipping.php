@@ -1,20 +1,13 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined('_JEXEC') or die; ?>
 <div class="kmcart-shipping default_shipping">
 	<div class="step">
-		<legend><?php echo JText::_('KSM_CART_PAYMENT_METHODS_TITLE'); ?></legend>
+		<legend>Выберите способ доставки</legend>
         <?php echo $this->loadTemplate('regions'); ?>
         <?php echo $this->loadTemplate('shipping_methods'); ?>        
 	</div>
 	<?php if(count($this->customer_fields) > 0){ ?>
 	<div class="step">
-		<legend><?php echo JText::_('KSM_CART_CUSTOMER_FIELDS_TITLE'); ?></legend>
+		<legend>Введите ваши данные</legend>
         <?php echo $this->loadTemplate('customer_fields'); ?>
 	</div>	
 	<?php } ?>

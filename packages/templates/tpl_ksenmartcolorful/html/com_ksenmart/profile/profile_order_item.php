@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined( '_JEXEC' ) or die(); ?>
 <td class="image">
 	<a href="<?php echo $this->order_item->product->link; ?>"><img src="<?php echo $this->order_item->product->mini_small_img; ?>" alt="<?php echo $this->order_item->product->title; ?>" class="km_img sm" /></a>
 </td>
@@ -13,9 +6,9 @@ defined('_JEXEC') or die;
 	<div class="name"></div>
 	<div class="info">
 		<dl class="dl-horizontal">
-		  <dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
+		  <dt>Артикул:</dt>
 		  <dd><?php echo $this->order_item->product->product_code; ?></dd>
-			<?php foreach($this->order_item->properties as $item_property) {
+		<?php foreach($this->order_item->properties as $item_property) {
 			if (!empty($item_property->value)) { ?>
 			  <dt><?php echo $item_property->title; ?>:</dt>
 			  <dd><?php echo $item_property->value; ?></dd>
@@ -23,8 +16,15 @@ defined('_JEXEC') or die;
 			  <dt><?php echo $item_property->title; ?></dt>
 			  <dd></dd>			
 			<? }
+		}
+		if ($this->order->status_id == 5) {
+			foreach($this->order_item->product->files as $file) { ?>
+			<div class="">
+				<label><a target="_blank" href="<?php echo JURI::root()?>administrator/components/com_ksenmart/files/<?php echo $file->file; ?>"><?php echo $file->title; ?></a></label>
+			</div>				
+			<?
 			}
-			?>
+		} ?>
 		</dl>
 	</div>
 </td>	

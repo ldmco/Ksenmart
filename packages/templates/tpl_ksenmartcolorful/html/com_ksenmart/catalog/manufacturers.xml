@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="KSM_MANUFACTURERS_LAYOUT" >
+		<message>
+			<![CDATA[KSM_MANUFACTURERS_LAYOUT_DESC]]>
+		</message>
+	</layout>
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+        
+	</fields>
+</metadata>

@@ -39,7 +39,6 @@ defined('_JEXEC') or die;
 			if (!in_array($item->id, $path)) {
 				$class .= ' hide';
 			}
-			// echo '<div class="accordion-inner">';
 			echo '<ul class="'.$class.'">';
 		}
 		elseif ($item->shallower) {

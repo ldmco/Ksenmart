@@ -1,11 +1,3 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
 <article class="item row-fluid review_product wrap_rvw_block" data-id="<?php echo $this->review->id; ?>">
     	<div class="span2 info">
     		<div class="img">
@@ -19,7 +11,7 @@ defined('_JEXEC') or die;
     	</div>
     	<div class="span10">
     		<dl class="dl-horizontal">
-                <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_RATE'); ?></dt>
+                <dt>Оценка</dt>
                 <dd>
                     <div class="rating">                                    
         				<?php for($k=1; $k<6; $k++){
@@ -31,26 +23,26 @@ defined('_JEXEC') or die;
         				} ?>
                     </div>                    
                 </dd>
-                <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_COMMENT'); ?></dt>
+                <dt>Комментарий</dt>
                 <dd>
-                    <div class="quick_edit magical_text noTransition" data-type="comment" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->comment; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="comment" data-title="Редактировать" contenteditable="false"><?php echo $this->review->comment; ?></div>
                 </dd>
-                <dt class="text-success"><?php echo JText::_('KSM_PROFILE_REVIEWS_GOOD'); ?></dt>
+                <dt class="text-success">Плюсы</dt>
                 <dd class="text-success">
-                    <div class="quick_edit magical_text noTransition" data-type="good" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->good; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="good" data-title="Редактировать" contenteditable="false"><?php echo $this->review->good; ?></div>
                 </dd>
-                <dt class="text-error"><?php echo JText::_('KSM_PROFILE_REVIEWS_BAD'); ?></dt>
+                <dt class="text-error">Минусы</dt>
                 <dd class="text-error" >
-                    <div class="quick_edit magical_text noTransition" data-type="bad" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->bad; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="bad" data-title="Редактировать" contenteditable="false"><?php echo $this->review->bad; ?></div>
                 </dd>
     		</dl>
             <div class="toolbar hide">                
                 <ul class="inline">
                     <li>
-                        <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_product_review"><i class="icon-ok"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_SAVE'); ?></a>
+                        <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_product_review"><i class="icon-ok"></i> Сохранить</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_CANCEL'); ?></a>
+                        <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> Отменить</a>
                     </li>
                 </ul>
             </div>

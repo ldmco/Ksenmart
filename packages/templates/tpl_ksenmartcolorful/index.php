@@ -176,7 +176,7 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 					</div>
 					<div class="span2 pull-right">
 						<a href="http://ldm-co.ru" class="ldm" title="L.D.M&amp;Co."><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_MADE_BY'); ?></a>
-					</div>
+					</div>					
     			</div>
             </div>
 		</footer>

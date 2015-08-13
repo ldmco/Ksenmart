@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined('_JEXEC') or die; ?>
 <div class="options">
 <?php foreach($this->product->properties as $property) { ?>
     <?php if(!empty($property->values) && $property->type != 'none'){ ?>
@@ -24,7 +17,7 @@ defined('_JEXEC') or die;
     				<label class="control-label"><?php echo $property->title ?>:</label>
     				<div class="controls">
     					<select class="sel" data-prop_id="<?php echo $property->property_id; ?>" name="property_<?php echo $this->product->id."_".$property->property_id; ?>" required="true">
-    						<option value=""><?php echo JText::_('KSM_PRODUCT_PROPERTY_CHOOSE'); ?></option>
+    						<option value="">Выберите</option>
                             <?php foreach ($property->values as $value){ ?>
     						<option value="<?php echo $value->id; ?>"><?php echo $property->prefix; ?><?php echo $value->title; ?><?php echo $property->suffix; ?></option>
     						<?php } ?>

@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined('_JEXEC') or die(); ?>
 <a href="<?php echo $this->product->link; ?>" title="<?php echo $this->product->title; ?>">
 	<img src="<?php echo $this->product->small_img; ?>" alt="" class="span12" />
 </a>

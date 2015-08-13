@@ -103,7 +103,8 @@ textarea {
 	float: right;
 	margin: 0;
 }
-.top-head .right-m ul li {
+.top-head .right-m ul li,
+.auth-tab ul li {
 	float: left;
 	list-style: none;
 	padding: 0 9px 0 10px;
@@ -112,7 +113,8 @@ textarea {
 .top-head .right-m ul li b {
 	display: none;
 }
-.top-head .right-m ul li:first-child {
+.top-head .right-m ul li:first-child,
+.auth-tab ul li:first-child {
 	background: none; 
 }
 .top-head .right-m .menu li a {
@@ -138,7 +140,7 @@ header.masthead {
 }
 header.masthead .header {
 	margin:0;
-	height: 168px;
+	height: 169px;
 }
 header.masthead .header .logo {
 }
@@ -461,7 +463,8 @@ header .gk-main-menu ul ul li a:hover {
 }
 #leftSidebar .ksenmart-search .buttons{
 	padding:0px 15px;
-	  margin: 20px 0 0;
+	margin: 20px 0 0;
+	clear: both;
 }
 #leftSidebar .ksenmart-search .properties ul li {
 	/*padding:3px 30px 0 0;*/
@@ -2181,6 +2184,9 @@ a.btn:hover {
 .unit h1 {
 	font-size: 30px;
 }
+.unit h1 .status_block {
+	margin-left:15px;
+}
 .fav_controll{
     margin-top: 18px;
 }
@@ -2431,9 +2437,9 @@ sup.text-error{
 .popover-title {
 	padding: 8px 14px;
 	margin: 0;
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: normal;
-	line-height: 18px;
+	line-height: 25px;
 	background-color: transparent;
 	border-bottom: 0;
 	-webkit-border-radius: 0;
@@ -2472,7 +2478,7 @@ sup.text-error{
 	border-radius: 0;
 }
 
-.user_panel_top.login .popover ul li {
+.auth-tab ul li {
 	font-size: 13px;
 }
 .user_panel_top.login .span12,
@@ -2840,6 +2846,17 @@ table.trackbar .c {font-size:1px; width:100%;}
 
 .footer .nav-list > li.active > a {
 	color: #FFF;
+}
+
+.reset #jform_email-lbl {
+	margin-top:-5px;
+}
+
+.contact-form #jform_contact_email_copy {
+	margin: 0px 0px 2px 0px;
+}
+.contact-form #jform_contact_email_copy-lbl {
+	display: inline-block;
 }
 
 
@@ -3546,7 +3563,8 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .popover form{
 	width:220px!important;
 }
-.top-head .right-m ul li{
+.top-head .right-m ul li,
+.auth-tab ul li {
 	padding:0 7px 0 9px;
 }
 li.layout_icon {
@@ -3900,4 +3918,8 @@ tr.profile_order :hover>td,tr.profile_order :hover>th{
 	.container .search .span1{
 		text-align:center;
 	}
+}
+
+.auth-tab input {
+	width:220px;
 }

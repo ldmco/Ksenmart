@@ -1,11 +1,3 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
 <div class="kmcart-payments default_payments">
     <div class="step">
     	<legend><?php echo JText::_('KM_CART_CHANGE_PAYMENT_METHOD'); ?></legend>

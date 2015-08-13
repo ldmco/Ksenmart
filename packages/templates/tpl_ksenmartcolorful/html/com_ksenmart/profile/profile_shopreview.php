@@ -1,11 +1,3 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
 <article class="item row-fluid reviews wrap_rvw_block" data-id="<?php echo $this->user_review->id; ?>">
 	<div class="span2 review_product">
 		<div class="img">
@@ -16,7 +8,7 @@ defined('_JEXEC') or die;
 	</div>
 	<div class="span10 content_review_wrapp">
 		<dl class="dl-horizontal">
-            <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_RATE'); ?></dt>
+            <dt>Оценка</dt>
             <dd class="rating">
 				<?php for($k=1; $k<6; $k++){
 					if(floor($this->user_review->rate) >= $k){ ?>
@@ -26,16 +18,16 @@ defined('_JEXEC') or die;
 				<?php }
 				} ?>
             </dd>
-		  <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_COMMENT'); ?></dt>
-		  <dd class="quick_edit magical_text noTransition" data-type="comment" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo nl2br($this->user_review->comment); ?></dd>
+		  <dt>Комментарий</dt>
+		  <dd class="quick_edit magical_text noTransition" data-type="comment" data-title="Редактировать" contenteditable="false"><?php echo nl2br($this->user_review->comment); ?></dd>
 		</dl>
         <div class="toolbar hide">                
             <ul class="inline">
                 <li>
-                    <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_shop_review"><i class="icon-ok"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_SAVE'); ?></a>
+                    <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_shop_review"><i class="icon-ok"></i> Сохранить</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_CANCEL'); ?></a>
+                    <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> Отменить</a>
                 </li>
             </ul>
         </div>

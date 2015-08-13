@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined( '_JEXEC' ) or die; ?>
 	<?php if (count($this->product->comments) > 0) { ?>
 		<?php $i=0;foreach($this->product->comments as $comment) { $i++; ?>
 			<article class="item row-fluid reviews" data-id="<?php echo $comment->id; ?>">
@@ -63,7 +56,7 @@ defined('_JEXEC') or die;
 							</div>
 						</div>
 						<dl class="dl-horizontal">
-							<dt><?php echo JText::_('KSM_COMMENTS_LABEL_TEXT'); ?></dt>
+							<dt>Комментарий</dt>
 							<dd>
 								<?php echo $comment->children->comment; ?>
 							</dd>

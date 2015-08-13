@@ -1,13 +1,5 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
 <div class="row-fluid">
-	<h5><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_SHIPPINGS'); ?></h5>
+	<h5>Доступные способы доставки:</h5>
 	<?php if(count($this->shippings) > 0) { ?>
 		<?php foreach($this->shippings as $ship) { ?>
 		<p>
@@ -19,11 +11,11 @@ defined('_JEXEC') or die;
 		</p>
 		<? } ?>
 	<?php } else { ?>
-		<p><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_NO_SHIPPINGS'); ?></p>
+		<p>Нет способов для этого региона</p>
 	<?php } ?>
 </div>
 <div class="row-fluid">
-	<h5><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_PAYMENTS'); ?></h5>
+	<h5>Доступные способы оплаты:</h5>
 	<?php if(count($this->payments) > 0) { ?>
 		<?php foreach($this->payments as $pay) { ?>
 		<p>
@@ -34,6 +26,6 @@ defined('_JEXEC') or die;
 		</p>
 		<?php } ?>
 	<?php } else { ?>
-	<p><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_NO_PAYMENTS'); ?></p>
+	<p>Нет способов для этого региона</p>
 	<?php } ?>
 </div>

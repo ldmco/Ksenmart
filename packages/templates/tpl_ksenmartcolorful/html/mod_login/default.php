@@ -20,17 +20,17 @@ $block_auth = '
 <form class="auth-tab" method="POST" style="width:200px;">
 	<div class="control-group">
 		<div class="controls">
-			<input type="text" class="inputbox span12" name="login" value="" placeholder="'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_EMAIL').'" required="true" />
+			<input type="text" class="inputbox" name="login" value="" placeholder="'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_EMAIL').'" required="true" />
 		</div>
 	</div>
 	<div class="control-group">
 		<div class="controls">
-			<input type="password" class="inputbox span12" name="password" value="" placeholder="'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_PASSWORD').'" required="true" />
+			<input type="password" class="inputbox" name="password" value="" placeholder="'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_PASSWORD').'" required="true" />
 		</div>
 	</div>
 	<div class="control-group">
 		<div class="controls">
-			<button type="submit" class="button btn btn-success" style="width:100%">'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_ENTER').'</button>
+			<button type="submit" class="button btn btn-success" style="width:228px">'.JText::_('TPL_KSENMARTCOLORFUL_AUTH_ENTER').'</button>
 		</div>
 	</div>
 	<div class="control-group text-center">
@@ -51,7 +51,8 @@ jQuery(document).ready(function(){
 
 	jQuery('#auth, #on_fav, .spy_price').popover({
 		html: 	 true,
-		content: login_form
+		content: login_form,
+		container: 'body'
 	});
 	
 	function hidePopovers(){
