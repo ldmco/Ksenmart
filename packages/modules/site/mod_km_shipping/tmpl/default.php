@@ -29,7 +29,7 @@ defined('_JEXEC') or die;
 					<?php echo $ship->title ?>
 					— <b><?php echo $ship->sum_val ?></b>
 				</p>
-            	<? } ?>
+            	<?php } ?>
             <?php } else { ?>
             	<p><?php echo JText::_('MOD_KM_SHIPPING_NO_SHIPPINGS'); ?></p>
             <?php } ?>
