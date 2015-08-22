@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 
 $flag = true;
@@ -18,7 +18,7 @@ foreach($this->product->properties as $prop){
 ?>
 <li class="span3 item noTransition" data-id="<?php echo $product->id; ?>">
 	<div class="thumbnail">
-		<form method="post" action="<?php echo $product->add_link_cart; ?>" class="clearfix">        
+		<form method="post" action="<?php echo $product->add_link_cart; ?>" class="clearfix">
 			<div class="img">
 				<a href="<?php echo $product->link; ?>" title="<?php echo $product->title; ?>">
 					<img src="<?php echo $product->small_img; ?>" alt="<?php echo $product->title; ?>" class="span12" />
@@ -52,7 +52,7 @@ foreach($this->product->properties as $prop){
                         </span>
                     </div>
     				<?php }?>
-    				
+
     				<div class="muted row-fluid bottom_info">
                         <div class="span6 brand">
                             <?php if(!empty($product->manufacturer_title)){ ?>
@@ -80,7 +80,7 @@ foreach($this->product->properties as $prop){
     						<?php if($product->val_old_price_wou != 0){ ?>
     						<span class="old"><?php echo $product->val_old_price; ?></span>
     						<?php } ?>
-    						<span class="normal"><? echo $product->val_price; ?></span>
+    						<span class="normal"><?php echo $product->val_price; ?></span>
                         </div>
                         <div class="span6 quant_wrapp">
                             <div class="input-prepend input-append quant">
@@ -92,7 +92,7 @@ foreach($this->product->properties as $prop){
 					</div>
                     <div class="bottom span12">
     					<span class="delta">&diams;</span>
-                        <?php if(!$params->get('only_auth_buy', 0) && ($product->val_price_wou != 0 && $product->is_parent == 0 && $flag)){ ?>	
+                        <?php if(!$params->get('only_auth_buy', 0) && ($product->val_price_wou != 0 && $product->is_parent == 0 && $flag)){ ?>
         					<div class="buy">
                                 <button type="submit" class="btn btn-success row-fluid"><?php echo JText::_('KSM_PRODUCT_ADDTOCART_BUTTON_TEXT'); ?></button>
                             </div>
@@ -106,6 +106,6 @@ foreach($this->product->properties as $prop){
 			</div>
 			<input type="hidden" name="product_packaging" value="<?php echo $product->product_packaging; ?>" />
 			<input type="hidden" name="id" value="<?php echo $product->id; ?>" />
-		</form>	
+		</form>
 	</div>
 </li>

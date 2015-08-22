@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
 <td class="image">
@@ -19,21 +19,21 @@ defined('_JEXEC') or die;
 			if (!empty($item_property->value)) { ?>
 			  <dt><?php echo $item_property->title; ?>:</dt>
 			  <dd><?php echo $item_property->value; ?></dd>
-			<? } else { ?>
+			<?php } else { ?>
 			  <dt><?php echo $item_property->title; ?></dt>
-			  <dd></dd>			
-			<? }
+			  <dd></dd>
+			<?php }
 			}
 			?>
 		</dl>
 	</div>
-</td>	
+</td>
 <td class="quantt">
 	<?php echo $this->order_item->count; ?>
 </td>
 <td class="pricee">
 	<?php echo KSMPrice::showPriceWithTransform($this->order_item->price); ?>
-</td>	
+</td>
 <td class="totall">
 	<?php echo KSMPrice::showPriceWithTransform($this->order_item->price*$this->order_item->count); ?>
 </td>

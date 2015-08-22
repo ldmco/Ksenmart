@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 
 $flag = true;
@@ -18,7 +18,7 @@ foreach($this->product->properties as $prop){
 ?>
 <li class="span3 item noTransition" data-id="<?php echo $this->product->id; ?>">
 	<div class="thumbnail">
-		<form method="post" action="<?php echo $this->product->add_link_cart; ?>" class="clearfix">     
+		<form method="post" action="<?php echo $this->product->add_link_cart; ?>" class="clearfix">
 			<div class="img">
 				<?php echo $this->loadTemplate('item_image'); ?>
 			</div>
@@ -46,7 +46,7 @@ foreach($this->product->properties as $prop){
                         </span>
                     </div>
     				<?php }?>
-    				
+
     				<div class="muted row-fluid bottom_info">
                         <div class="span6 brand">
                             <?php if(!empty($this->product->manufacturer_title)){ ?>
@@ -74,7 +74,7 @@ foreach($this->product->properties as $prop){
     						<?php if($this->product->old_price != 0){ ?>
     						<span class="old"><?php echo $this->product->val_old_price; ?></span>
     						<?php } ?>
-    						<span class="normal"><? echo $this->product->val_price; ?></span>
+    						<span class="normal"><?php echo $this->product->val_price; ?></span>
                         </div>
                         <div class="span6 quant_wrapp">
                             <div class="input-prepend input-append quant">
@@ -86,7 +86,7 @@ foreach($this->product->properties as $prop){
 					</div>
                     <div class="bottom span12">
     					<span class="delta">&diams;</span>
-                        <?php if (($this->params->get('only_auth_buy',0) == 0 || ($this->params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)) && ($this->product->price != 0 && $this->product->is_parent == 0 && $flag) && !$this->params->get('catalog_mode', 0)){ ?>	
+                        <?php if (($this->params->get('only_auth_buy',0) == 0 || ($this->params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)) && ($this->product->price != 0 && $this->product->is_parent == 0 && $flag) && !$this->params->get('catalog_mode', 0)){ ?>
         					<div class="buy">
                                 <button type="submit" class="btn btn-success row-fluid"><b></b> <span><?php echo JText::_('KSM_PRODUCT_ADDTOCART_BUTTON_TEXT'); ?></span></button>
                             </div>
@@ -101,6 +101,6 @@ foreach($this->product->properties as $prop){
             <input type="hidden" name="product_packaging" value="<?php echo $this->product->product_packaging; ?>" />
 			<input type="hidden" name="price" value="<?php echo $this->product->price; ?>" />
 			<input type="hidden" name="id" value="<?php echo $this->product->id; ?>" />
-		</form>	
+		</form>
 	</div>
 </li>
