@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
 
@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
         </div>
     </div>
 <?php } ?>
-<?php if ($this->params->get('catalog_mode',0)==0){ ?>				
+<?php if ($this->params->get('catalog_mode',0)==0){ ?>
     <div class="control-group">
         <label class="control-label"><?php echo JText::_('KSM_PRODUCT_PRODCOL'); ?></label>
         <div class="controls">
@@ -33,4 +33,4 @@ defined('_JEXEC') or die;
 	<div class="buy">
 		<button type="submit" class="btn green buyb"><?php echo JText::_('KSM_PRODUCT_ADD_TO_CART_LABEL'); ?></button>
 	</div>
-<? } ?>
+<?php } ?>

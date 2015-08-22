@@ -1,20 +1,20 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
 
-<? if (!empty($this->product->product_code)){ ?>
+<?php if (!empty($this->product->product_code)){ ?>
 <div class="control-group">
 	<label class="control-label"><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></label>
 	<div class="controls">
 		<span class="article muted"><?php echo $this->product->product_code; ?></span>
 	</div>
 </div>
-<? } ?>
+<?php } ?>
 <?php if (!empty($this->product->introcontent)) {?>
 <div class="control-group">
 	<label class="control-label"><?php echo JText::_('KSM_PRODUCT_MINIDESC'); ?></label>
@@ -23,7 +23,7 @@ defined('_JEXEC') or die;
 	</div>
 </div>
 <?php } ?>
-<?php echo $this->loadTemplate('properties'); ?>       
+<?php echo $this->loadTemplate('properties'); ?>
 <?php if(!empty($this->product->manufacturer)){?>
 	<div class="control-group">
 		<label class="control-label"><?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?></label>
@@ -47,4 +47,4 @@ defined('_JEXEC') or die;
 			<span><a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=catalog&countries[]='.$this->product->manufacturer->country->id.'&Itemid='.KSSystem::getShopItemid())?>"><?php echo $this->product->manufacturer->country->title?></a></span>
 		</div>
 	</div>
-<?php } ?>	
+<?php } ?>

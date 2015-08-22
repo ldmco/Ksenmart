@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
 <p class="lead add_address"><span>+</span> <a href="javascript:void(0);" class="link_b_border"><?php echo JText::_('KSM_PROFILE_ADDRESSES_ADD_NEW_ADDRESS'); ?></a></p>
@@ -21,7 +21,7 @@ defined('_JEXEC') or die;
 				<div class="controls">
 					<input type="text" class="inputbox" name="zip" id="zip" />
 				</div>
-			</div>			
+			</div>
 			<div class="control-group">
 				<label class="control-label require" for="street"><?php echo JText::_('KSM_PROFILE_ADDRESSES_STREET'); ?></label>
 				<div class="controls">
@@ -39,7 +39,7 @@ defined('_JEXEC') or die;
 				<div class="controls">
 					<input type="text" class="inputbox" name="entrance" id="entrance" />
 				</div>
-			</div>			
+			</div>
 			<div class="control-group">
 				<label class="control-label require" for="floor"><?php echo JText::_('KSM_PROFILE_ADDRESSES_FLOOR'); ?></label>
 				<div class="controls">
@@ -105,7 +105,7 @@ defined('_JEXEC') or die;
                 				<div class="controls">
                 					<input type="text" class="inputbox" name="zip" id="zip" value="<?php echo $address->zip; ?>" />
                 				</div>
-                			</div>							
+                			</div>
                 			<div class="control-group">
                 				<label class="control-label require" for="street"><?php echo JText::_('KSM_PROFILE_ADDRESSES_STREET'); ?></label>
                 				<div class="controls">
@@ -123,7 +123,7 @@ defined('_JEXEC') or die;
                 				<div class="controls">
                 					<input type="text" class="inputbox" name="entrance" id="entrance" value="<?php echo $address->entrance; ?>" />
                 				</div>
-                			</div>							
+                			</div>
                 			<div class="control-group">
                 				<label class="control-label require" for="floor"><?php echo JText::_('KSM_PROFILE_ADDRESSES_FLOOR'); ?></label>
                 				<div class="controls">
@@ -150,7 +150,7 @@ defined('_JEXEC') or die;
                 	</div>
                 </td>
             </tr>
-			<? } ?>
+			<?php } ?>
 		</tbody>
 	</table>
 	<?php }else{ ?>

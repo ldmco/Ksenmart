@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
 <div class="deliv-info">
@@ -25,11 +25,11 @@ defined('_JEXEC') or die;
             	<p>
 					<?php if (!empty($ship->icon)):?>
 						<span class="icon"><img src="<?php echo $ship->icon; ?>" width="20px" /></span>
-					<?php endif;?>				
+					<?php endif;?>
 					<?php echo $ship->title ?>
 					— <b><?php echo $ship->sum_val ?></b>
 				</p>
-            	<? } ?>
+            	<?php } ?>
             <?php } else { ?>
             	<p><?php echo JText::_('MOD_KM_SHIPPING_NO_SHIPPINGS'); ?></p>
             <?php } ?>
@@ -41,7 +41,7 @@ defined('_JEXEC') or die;
 				<p>
 					<?php if (!empty($pay->icon)):?>
 					<span class="icon"><img src="<?php echo $pay->icon; ?>" width="20px" /></span>
-					<?php endif;?>				
+					<?php endif;?>
 					<?php echo $pay->title; ?>
 				</p>
 				<?php } ?>
