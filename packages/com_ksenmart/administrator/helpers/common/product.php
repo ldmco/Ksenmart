@@ -35,6 +35,8 @@ class KSMProducts extends KSCoreHelper {
             )))
             ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON (
                 ' . $db->qn('f.owner_id') . ' = ' . $db->qn('p.id') . ' AND
+                ' . $db->qn('f.owner_type') . ' = ' . $db->q('product') . ' AND
+                ' . $db->qn('f.media_type') . ' = ' . $db->q('image') . ' AND
                 ' . $db->qn('f.ordering') . ' = (' . $querySelect . ')
             )')
         ;
