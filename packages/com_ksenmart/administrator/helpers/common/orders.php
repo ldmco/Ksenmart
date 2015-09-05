@@ -148,16 +148,29 @@ class KSMOrders extends KSCoreHelper {
     public static function sendOrderMail($order_id, $admin = false) {
 
         self::onExecuteBefore(array(&$order_id, &$admin));
+		$db = JFactory::getDBO();
         JRequest::setVar('id', $order_id);
         $model = KSSystem::getModel('orders');
         $order = $model->getOrder();
 		$order->items = KSMOrders::getOrderItems($order_id);
+
+		$query = $db->getQuery(true);
+		$query->select('*')->from('#__ksenmart_shipping_fields')->where('shipping_id=' . $order->shipping_id)->where('position=' . $db->quote('address'))->where('published=1')->order('ordering');
+		$db->setQuery($query);
+		$address_fields = $db->loadObjectList();	
 		
-        if (!empty($order->address_fields)) {
-            $order->address_fields = implode(', ', $order->address_fields);
-        } else {
-            $order->address_fields = '';
+		$address = array();
+        foreach($address_fields as $address_field) {
+			if ($address_field->system && isset($order->address_fields[$address_field->title]))
+				$value = $order->address_fields[$address_field->title];
+			elseif (!$address_field->system && isset($order->address_fields[$address_field->id]))
+				$value = $order->address_fields[$address_field->id];
+			else 
+				$value = '';
+			$title = $address_field->system ? JText::_('ksm_cart_shipping_field_' . $address_field->title) : $address_field->title;			
+            $address[] = $title.' - '.$value;
         }
+		$order->address_fields = implode(', ', $address);
 		
         $order->customer_name = '';
         if (isset($order->customer_fields['name']) && !empty($order->customer_fields['name'])) $order->customer_name.= $order->customer_fields['name'];
