@@ -43,6 +43,40 @@ class plgSystemSmmhunterInstallerScript
 		
 		$query = $db->getQuery(true);
 		$query
+			->update('#__extensions')
+			->set('enabled = '.$db->quote('1'))
+			->where('element = '.$db->quote('smmhunter'))
+			->where('type = '.$db->quote('plugin'))
+			->where('folder = '.$db->quote('system'))
+		;
+		$db->setQuery($query);
+		$db->query();
+		
+		$values = array(
+			'`extension`' => $db->quote('com_ksenmart'),
+			'`parent_id`' => 0,
+			'`group`' => 4,
+			'`class`' => $db->quote('main'),
+			'`href`' => $db->quote('index.php?option=com_ksenmart&view=smmhunter'),
+			'`image`' => $db->quote('smmhunter.png'),
+			'`name`' => $db->quote('smmhunter'),
+			'`view`' => $db->quote('smmhunter')
+		);
+		$query = $db->getQuery(true);
+		$query
+			->insert('#__ksen_widgets')
+			->columns(array_keys($values))
+			->values(implode(',', $values))
+		;
+		$db->setQuery($query);
+		$db->query();
+
+		$query = 'alter table `#__ksenmart_orders` add `vk_user_id` varchar( 256 ) not null';
+		$db->setQuery($query);
+		$db->query();		
+		
+		$query = $db->getQuery(true);
+		$query
 			->select('user_id, config')
 			->from('#__ksen_widgets_users_config')
 			->where('extension = '.$db->quote('com_ksenmart'))

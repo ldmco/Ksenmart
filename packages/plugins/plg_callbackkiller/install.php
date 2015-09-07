@@ -3,7 +3,7 @@ defined('_JEXEC') or die;
 
 class plgSystemCallbackkillerInstallerScript 
 {
-
+	
     public function postflight($type, $parent)
 	{
 		if ($type != 'install' && $type != 'update')
@@ -40,6 +40,36 @@ class plgSystemCallbackkillerInstallerScript
 		{
             $app->enqueueMessage('Couldnt move file');
         }		
+		
+		$query = $db->getQuery(true);
+		$query
+			->update('#__extensions')
+			->set('enabled = '.$db->quote('1'))
+			->where('element = '.$db->quote('callbackkiller'))
+			->where('type = '.$db->quote('plugin'))
+			->where('folder = '.$db->quote('system'))
+		;
+		$db->setQuery($query);
+		$db->query();
+		
+		$values = array(
+			'`extension`' => $db->quote('com_ksenmart'),
+			'`parent_id`' => 0,
+			'`group`' => 4,
+			'`class`' => $db->quote('main'),
+			'`href`' => $db->quote('index.php?option=com_ksenmart&view=callbackkiller'),
+			'`image`' => $db->quote('callbackkiller.png'),
+			'`name`' => $db->quote('callbackkiller'),
+			'`view`' => $db->quote('callbackkiller')
+		);
+		$query = $db->getQuery(true);
+		$query
+			->insert('#__ksen_widgets')
+			->columns(array_keys($values))
+			->values(implode(',', $values))
+		;
+		$db->setQuery($query);
+		$db->query();		
 		
 		$query = $db->getQuery(true);
 		$query
