@@ -17,23 +17,23 @@ defined('_JEXEC') or die;
 		<dl class="dl-horizontal">
 			<?php if ($this->contact->suburb && $this->params->get('show_suburb')) { ?>
 				<dt><img src="<?php echo $this->params->get('icon_address'); ?>" alt="" /></dt>
-				<dd><?php echo $this->contact->suburb; ?></dd>
+				<dd>г. <?php echo $this->contact->suburb; ?></dd>
 			<?php } ?>
 			<?php if ($this->contact->address && $this->params->get('show_street_address')) : ?>
 				<dt></dt>
-				<dd><?php echo $this->contact->address; ?></dd>
+				<dd>г. <?php echo $this->contact->address; ?></dd>
 			<?php endif; ?>
 			<?php if ($this->contact->address && $this->params->get('show_state')) : ?>
 				<dt></dt>
-				<dd><?php echo $this->contact->state; ?></dd>
+				<dd>г. <?php echo $this->contact->state; ?></dd>
 			<?php endif; ?>
 			<?php if ($this->contact->address && $this->params->get('show_postcode')) : ?>
 				<dt></dt>
-				<dd><?php echo $this->contact->postcode; ?></dd>
+				<dd>г. <?php echo $this->contact->postcode; ?></dd>
 			<?php endif; ?>
 			<?php if ($this->contact->address && $this->params->get('show_country')) : ?>
 				<dt></dt>
-				<dd><?php echo $this->contact->country; ?></dd>
+				<dd>г. <?php echo $this->contact->country; ?></dd>
 			<?php endif; ?>
 		</dl>
 	</div>

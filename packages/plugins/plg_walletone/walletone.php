@@ -195,15 +195,17 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
         if (empty($view->order->region_id)) return;
         if (!$this->checkRegion($payment->regions, $view->order->region_id)) return;
         
-        $view->payment_params = $payment->params = json_decode($payment->params, true);
+        $params = new JRegistry();
+        $params->loadString($payment->params);
+        $view->payment_params = $params;
         
         $view->payment_form_params        = new stdClass();
         $view->payment_form_params->title = 'Оплата заказа №' . $view->order->id . ' на сайте ' . JFactory::getConfig()->get('sitename');
-        $paymentTypes                     = $this->_preparePaymentTypes($payment->params['payment_types']);
+        $paymentTypes                     = $this->_preparePaymentTypes($view->payment_params->get('payment_types', array()));
         
         $view->user = KSUsers::getUser();
         KSMWalletone::_setFields(array_merge($paymentTypes, array(
-            'WMI_MERCHANT_ID'        => $payment->params['merchant_id'], 
+            'WMI_MERCHANT_ID'        => $view->payment_params->get('merchant_id', null), 
             'WMI_PAYMENT_AMOUNT'     => $view->order->costs['total_cost'], 
             'WMI_PAYMENT_NO'         => $view->order->id, 
             'WMI_CURRENCY_ID'        => 643, 
@@ -214,7 +216,7 @@ class plgKMPaymentWalletone extends KMPaymentPlugin {
             'WMI_FAIL_URL'           => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_error'),
             'WMI_SUCCESS_URL'        => JRoute::_(JURI::base() . 'index.php?option=com_ksenmart&view=cart&layout=pay_success'),
         )));
-        $view->payment_form_params->sign = KSMWalletone::getHash($payment->params['secretKey']);
+        $view->payment_form_params->sign = KSMWalletone::getHash($view->payment_params->get('secretKey', null));
         
         $html.= KSSystem::loadPluginTemplate($this->_name, $this->_type, $view, 'default_paymentform');
         return true;

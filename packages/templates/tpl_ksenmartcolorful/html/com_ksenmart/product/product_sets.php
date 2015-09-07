@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined('_JEXEC') or die(); ?>
 <div class="sets row-fluid catalog related">
 	<h3><?php echo JText::_('KSM_PRODUCT_SETS_TITLE'); ?></h3>
     <ul class="thumbnails items catalog-items">

@@ -30,8 +30,11 @@ JHtml::_('behavior.tooltip');
 				<dt><?php echo $this->form->getLabel('contact_message'); ?></dt>
 				<dd><?php echo $this->form->getInput('contact_message'); ?></dd>
 				<?php 	if ($this->params->get('show_email_copy')){ ?>
-						<dt><?php echo $this->form->getLabel('contact_email_copy'); ?></dt>
-						<dd><?php echo $this->form->getInput('contact_email_copy'); ?></dd>
+						<dt></dt>
+						<dd>
+							<?php echo $this->form->getInput('contact_email_copy'); ?>
+							<?php echo $this->form->getLabel('contact_email_copy'); ?>
+						</dd>
 				<?php 	} ?>
 			<?php //Dynamically load any additional fields from plugins. ?>
 			     <?php foreach ($this->form->getFieldsets() as $fieldset): ?>

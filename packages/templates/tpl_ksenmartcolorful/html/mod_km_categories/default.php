@@ -7,71 +7,48 @@
 defined('_JEXEC') or die;
 
 // Note. It is important to remove spaces between elements.
-$activeParentId = JRequest::getVar('categories', null);
-//print_r($list);
-$activeParentId = $activeParentId[0];
 ?>
-<div class="accordion <?php echo $class_sfx?> catalog-menu" id="dropdownCat">
-	<?php if($module->showtitle){ ?>
-	<h3><?php echo $module->title; ?></h3>
-	<?php } ?>
+<div class="accordion catalog-menu ksm-categories <?php echo $class_sfx?>" id="dropdownCat">
+	<h3><?php echo $module->title?></h3>
+	<ul class="nav nav-list menu-list-1">
 	<?php
-	foreach ($list as $i => &$item) {
-		$class = '';
-		$collapsePrent = '';
+	foreach ($list as $i => &$item) :
+		$class = 'ksenmart-categories-item';
 		if ($item->id == $active_id) {
+			$class .= ' current';
+		}
+
+		if (in_array($item->id, $path)) {
 			$class .= ' active';
 		}
-		
-		if ($activeParentId == $item->id) {
-			$collapsePrent = ' in';
-		}
-		
-		if ($item->deeper && isset($active_id)) {
-			$collapse = '';
-			foreach($item->children as $children) {
-				//echo $children->id;
-				if ($active_id == $children->id) {
-					$collapse = ' in';
-				}
-			}
+
+		if ($item->deeper) {
+			$class .= ' deeper in accordion-heading';
 		}
 
 		if (!empty($class)) {
 			$class = ' class="'.trim($class) .'"';
 		}
-		
+
+		echo '<li'.$class.'>';
+
+		require JModuleHelper::getLayoutPath('mod_km_categories', 'default_url');
+
 		if ($item->deeper) {
-			echo '<div class="accordion-group">';
+			$class = 'nav nav-list accordion-inner menu-list-'.($item->level+1);
+			if (!in_array($item->id, $path)) {
+				$class .= ' hide';
+			}
+			echo '<ul class="'.$class.'">';
 		}
-		
-		if ($item->deeper) {
-			echo '
-				<div class="accordion-heading">';
-			echo '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#dropdownCat" href="#collapse_'.htmlspecialchars($item->id).'">'.htmlspecialchars($item->title).'<b class="caret pull-right"></b></a>';
-			echo '</div>
-					<div id="collapse_'.$item->id.'" class="accordion-body collapse'.$collapse.$collapsePrent.'">
-					  <div class="accordion-inner">
-						<ul class="nav nav-list">
-			';
+		elseif ($item->shallower) {
+			echo '</li>';
+			echo str_repeat('</ul></li>', $item->level_diff);
 		}
-		
-		if(!$item->deeper AND $item->parent_id != 0) {
-			echo '<li'.$class.'><a level="'.$item->level.'" class="ksenmart-categories-item-link" href="'.$item->link.'">'.htmlspecialchars($item->title).'</a></li>';
+		else {
+			echo '</li>';
 		}
-		
-		if(!$item->parent_id AND !$item->deeper) {
-			echo '<ul class="nav nav-list">';
-			echo '<li'.$class.'><a level="'.$item->level.'" class="ksenmart-categories-item-link" href="'.$item->link.'">'.htmlspecialchars($item->title).'</a></li>';
-			echo '</ul>';
-		}
-		
-		if($item->shallower) {
-			echo '</ul>
-				</div>
-			</div>';
-			echo '</div>';
-		}
-	}
+	endforeach;
 	?>
+	</ul>
 </div>

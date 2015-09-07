@@ -16,64 +16,6 @@ abstract class KMDiscountPlugin extends KMPlugin {
         parent::__construct($subject, $config);
     }
 	
-	function onAfterExecuteHelperKSMProductsgetProduct($product){    
-		$db = JFactory::getDBO();		
-		$query = $db->getQuery(true);
-        $query->select('*')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where("type!=".$db->quote('onorder'))->where("type!=".$db->quote('coupons'))->where('enabled=1');
-        $db->setQuery($query);
-        $discounts = $db->loadObjectList();
-		
-		$query = $db->getQuery(true);
-		$query->select('id, template')->from('#__ksenmart_currencies');
-		$db->setQuery($query);
-		$price_types = $db->loadObjectList('id');
-		
-		
-        $array_discount_prices = array();
-        $summ_discount_price = 0;
-        foreach($discounts as $discount) {
-			$return = $this->onCheckDiscountDate($discount->id); 
-            if(!$return) continue;  
-            $return = $this->onCheckDiscountCountry($discount->id); 
-            if(!$return) continue;
-			if($product->id!=0){ 
-  			   $return = $this->onCheckDiscountManufacturers($discount->id, $product->id); 
-               if(!$return) continue;
-			}
-            $return = $this->onCheckDiscountUserGroups($discount->id); 
-            if(!$return) continue;
-            $return = $this->onCheckDiscountActions($discount->id); 
-            if($return == 1) continue; 
-                                                      
-            if($discount->sum==1){
-			   $summ_discount_price += $this->calculateDiscountProduct($product->price, json_decode($discount->params));
-    		}else{
-			   $array_discount_prices[] = $this->calculateDiscountProduct($product->price, json_decode($discount->params));
-			}
-        }
-		if($summ_discount_price!=0) $array_discount_prices[] = $summ_discount_price;
-		
-		$final_discount = 0;
-		foreach($array_discount_prices as $discount){
-		    if($discount>$final_discount && $discount<$product->price) $final_discount = $discount;
-		}
-		 		
-		if($final_discount<>0){ 
-		     $product->old_price = $product->price;
-			 $product->price -= $final_discount;
-			 
-			 $product->val_old_price = $product->val_price;
-			 $val_price = str_replace("{price}", $product->price, $price_types[$product->price_type]->template);
-			 if($product->price>999){
-			    $val_price = substr_replace($val_price, " ", 1, 0);
-			 }elseif($product->price>9999){
-			    $val_price = substr_replace($val_price, " ", 2, 0);
-			 }
-			 $product->val_price = $val_price;
-			 $product->discounts[] = $final_discount;
-		}
-	}
-	
     function calculateDiscountProduct($price, $params) {
 		$discount_value = 0;
         $undiscount_price = $price;

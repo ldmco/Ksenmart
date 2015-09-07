@@ -106,7 +106,7 @@ class plgKMExportimportExport_ym extends KMPlugin {
 		$query->select('(select title from #__ksenmart_manufacturers where id=p.manufacturer) as manufacturer_name');
 		$query->select('(select code from #__ksenmart_currencies where id=p.price_type) as code');
 		$query->innerjoin('#__ksenmart_products_categories as pc on pc.product_id=p.id');
-		$query->where('pc.category_id in (' . implode(',', $cats) . ')')->where('p.published=1')->where('p.price>0')->where('p.type='.$db->quote('product'));
+		$query->where('pc.category_id in (' . implode(',', $cats) . ')')->where('p.published=1')->where('p.price>0')->where('p.parent_id=0');
 		$db->setQuery($query);
 		$rows = $db->loadObjectList();			
 		foreach($rows as $row)

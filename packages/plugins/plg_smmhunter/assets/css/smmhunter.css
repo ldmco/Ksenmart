@@ -1,0 +1,89 @@
+.ks-smmhunter {
+	width:500px;
+	margin:20px auto;
+	padding:30px;
+	border:2px solid #1D86BA;
+}
+.ks-smmhunter h1 {
+	font-weight:normal;
+	font-size:30px;
+	text-align:center;
+	margin:0px 0px 10px 0px;
+}
+.ks-smmhunter .hunter-logo {
+	width:250px;
+	height:63px;
+	display:block;
+	margin:30px auto 20px;
+	background:url(../images/hunter-logo.png) 0% 0% no-repeat;
+}
+.ks-smmhunter p {
+	font-weight:bold;
+	text-align:center;
+}
+.ks-smmhunter .form-horizontal {
+	width:350px;
+	margin:30px auto 0px;
+}
+.ks-smmhunter .form-horizontal .row {
+	margin:0px 0px 5px 0px;
+}
+.ks-smmhunter .form-horizontal .star {
+	display:none;
+}
+.ks-smmhunter .form-horizontal input[type="text"] {
+	width:298px;
+	line-height:40px;
+	height:40px;
+	font-size:15px;
+	border-color:#333;
+	padding:0px 5px 0px 45px;
+	background:url(../images/user.png) 1px 50% no-repeat;
+	border-radius:0px;
+}
+.ks-smmhunter .form-horizontal input[type="checkbox"] {
+	float:left;
+	margin:2px 5px 0px 0px;
+}
+.ks-smmhunter .form-horizontal .btn {
+	width:330px;
+	margin:10px auto 0px;
+	display:block;
+	font-size:24px;
+	line-height:24px;
+}
+.ks-smmhunter .form-horizontal .registering {
+	display:none;
+}
+.ks-smmhunter .hunter-data {
+	width:350px;
+	margin:30px auto 0px;
+}
+.ks-smmhunter .hunter-data .row {
+	margin:0px 0px 5px 0px;
+	font-size:17px;
+}
+.ks-smmhunter .hunter-data .row label {
+	float:left;
+	width:150px;
+	margin:0px 10px 0px 0px;
+	font-weight:bold;
+}
+.ks-smmhunter .hunter-data .btn {
+	width:230px;
+	margin:10px auto 0px;
+	display:block;
+	font-size:24px;
+	line-height:24px;
+}
+.ks-smmhunter .hunter-data .update, .ks-smmhunter .hunter-data .updating {
+	width:150px;
+	margin:10px auto 0px;
+	display:block;
+	font-size:14px;
+	line-height:14px;
+	background:#1D86BA;
+}
+.ks-smmhunter .hunter-data .updating {
+	display:none;
+}

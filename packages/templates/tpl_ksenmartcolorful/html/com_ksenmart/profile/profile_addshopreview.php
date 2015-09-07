@@ -1,13 +1,5 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
 <div class="row-fluid">
-    <p class="lead add_shop_review pull-right clearfix"><span>+</span> <a href="javascript:void(0);" class="link_b_border lrg"><?php echo JText::_('KSM_SHOP_REVIEW_ADD'); ?></a></p>
+    <p class="lead add_shop_review pull-right clearfix"><span>+</span> <a href="javascript:void(0);" class="link_b_border lrg">Добавить отзыв о магазине</a></p>
 </div>
 <div class="review add noTransition row-fluid" style="display: none;">
 	<form method="post" action="#tab4">
@@ -22,12 +14,12 @@ defined('_JEXEC') or die;
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<textarea name="review" placeholder="<?php echo JText::_('KSM_SHOP_REVIEW_ADD_COMMENT'); ?>" required="true"></textarea>
+				<textarea name="review" placeholder="Отзыв о магазине" required="true"></textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls top">
-				<button type="submit" class="button btn btn-success"><?php echo JText::_('KSM_SHOP_REVIEW_ADD_BUTTON'); ?></button>
+				<button type="submit" class="button btn btn-success">Добавить</button>
 			</div>
 		</div>
         <input type="hidden" name="rate" id="comment_rate" value="0" />

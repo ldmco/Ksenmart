@@ -32,7 +32,13 @@ class ModKMDiscountHelper {
 			}
 			$query = KSMedia::setItemMainImageToQuery($query, 'discount', 'd.');
 			$results = $db->setQuery($query)->loadObjectList('id');
-			foreach($results as $key=>$res){
+			foreach($results as $key=>$res)
+			{
+				$content = JDispatcher::getInstance()->trigger('onGetDiscountContent', array($res->id));
+				if (isset($content[0]) && !empty($content[0]))
+				{
+					$results[$key]->content = $content[0];
+				}				
 			    $info_methods = json_decode($res->info_methods, true);
 				$results[$key]->image = !empty($results[$key]->filename) ? KSMedia::resizeImage($results[$key]->filename, $results[$key]->folder, $params->get('img_width', 200), $params->get('img_height', 100), json_decode($results[$key]->params, true)) : '';
 				if(!in_array('module', $info_methods)) unset($results[$key]);

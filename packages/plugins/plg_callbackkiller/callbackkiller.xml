@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="system" version="2.5.0" method="upgrade">
+    <name>KSM_PLUGIN_CALLBACKKILLER</name>
+    <creationDate>September 2015</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0.0</version>
+    <description>KSM_PLUGIN_CALLBACKKILLER_DESCRIPTION</description>
+	
+	<scriptfile>install.php</scriptfile>
+
+    <files>
+		<filename plugin="callbackkiller">callbackkiller.php</filename>
+        <filename>index.html</filename>
+        <folder>assets</folder>
+        <folder>install</folder>
+		<folder>sql</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+	
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>	
+    
+    <languages folder="languages">
+		<language tag="ru-RU">ru-RU/ru-RU.plg_system_callbackkiller.sys.ini</language>
+    </languages>
+	
+    <updateservers>
+        <server type="extension" priority="1" name="callbackkiller">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_callbackkiller-update.xml</server>
+    </updateservers>	
+	
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    type="text"
+                    name="login"
+                    description="KSM_PLUGIN_CALLBACKKILLER_LOGIN_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_LOGIN_LBL"
+                />
+				
+                <field
+                    type="text"
+                    name="password"
+                    description="KSM_PLUGIN_CALLBACKKILLER_PASSWORD_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_PASSWORD_LBL"
+                />
+				
+				
+                <field
+                    type="text"
+                    name="loginhash"
+                    description="KSM_PLUGIN_CALLBACKKILLER_LOGINHASH_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_LOGINHASH_LBL"
+                />
+				
+                <field
+                    type="text"
+                    name="callbackkiller_code"
+                    description="KSM_PLUGIN_CALLBACKKILLER_CALLBACKKILLER_CODE_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_CALLBACKKILLER_CODE_LBL"
+                />	
+				
+                <field
+                    type="text"
+                    name="email"
+                    description="KSM_PLUGIN_CALLBACKKILLER_EMAIL_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_EMAIL_LBL"
+                />					
+
+                <field
+                    type="text"
+                    name="name"
+                    description="KSM_PLUGIN_CALLBACKKILLER_NAME_DESC"
+                    label="KSM_PLUGIN_CALLBACKKILLER_NAME_LBL"
+                />					
+            </fieldset>
+        </fields>
+    </config>	
+	
+</extension>

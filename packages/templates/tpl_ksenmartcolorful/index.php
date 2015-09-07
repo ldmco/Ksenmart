@@ -131,8 +131,8 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<jdoc:include type="modules" name="ks-clrful-footer-info1" style="none" />
 					</div>
 					<div class="span4">
-						<h5><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_QUESTIONS'); ?></h5>
 						<?php if (!empty($phone)): ?>
+						<h5><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_QUESTIONS'); ?></h5>
 						<div class="span4" style="margin: 0;">
 							<?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_CALL_US'); ?>
 							<br />
@@ -153,16 +153,18 @@ echo '<?xml version="1.0" encoding="utf-8"?'.">\n"; ?>
 						<?php endif; ?>
 					</div>
 					<div class="span2 pull-right">
-						<span><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_SOCIAL_LINKS'); ?></span><br />
-						<?php if (!empty($vkontakte)): ?>
-						<a href="<?php echo $vkontakte; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/vk.png" alt="" /></a>
+						<?php if (!empty($vkontakte) || !empty($facebook) || !empty($twitter)): ?>
+							<span><?php echo JText::_('TPL_KSENMARTCOLORFUL_FOOTER_SOCIAL_LINKS'); ?></span><br />
+							<?php if (!empty($vkontakte)): ?>
+							<a href="<?php echo $vkontakte; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/vk.png" alt="" /></a>
+							<?php endif; ?>
+							<?php if (!empty($facebook)): ?>
+							<a href="<?php echo $facebook; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/fb.png" alt="" /></a>
+							<?php endif; ?>
+							<?php if (!empty($twitter)): ?>
+							<a href="<?php echo $twitter; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/tw.png" alt="" /></a>
+							<?php endif; ?>
 						<?php endif; ?>
-						<?php if (!empty($facebook)): ?>
-						<a href="<?php echo $facebook; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/fb.png" alt="" /></a>
-						<?php endif; ?>
-						<?php if (!empty($twitter)): ?>
-						<a href="<?php echo $twitter; ?>"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/tw.png" alt="" /></a>
-						<?php endif; ?>						
 					</div>
 					<div class="span2 pull-right">
 						<jdoc:include type="modules" name="ks-clrful-footer-info2" style="none" />

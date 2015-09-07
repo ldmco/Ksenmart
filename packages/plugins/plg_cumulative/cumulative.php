@@ -98,7 +98,7 @@ class plgKMDiscountCumulative extends KMDiscountPlugin {
 			$query = $db->getQuery(true);
 			$query->select('sum(cost)')->from('#__ksenmart_orders')->where('user_id=' . JFactory::getUser()->id);
 			$db->setQuery($query);
-			$orders_sum = $db->loadObject();
+			$orders_sum = $db->loadResult();
 		} else 
 		return false;
 		$discount_set_value = 0;

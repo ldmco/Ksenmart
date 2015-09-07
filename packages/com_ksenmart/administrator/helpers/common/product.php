@@ -15,17 +15,30 @@ class KSMProducts extends KSCoreHelper {
     private $helper_name  = 'Products';
     
     private static function setProductMainImageToQuery($query) {
-        $db = JFactory::getDBO();
+        $db          = JFactory::getDBO();
+        $querySelect = $db->getQuery(true);
+
+        $querySelect
+            ->select('MIN(' . $db->qn('f2.ordering') . ')')
+            ->from($db->qn('#__ksenmart_files', 'f2'))
+            ->where($db->qn('f2.owner_id') . '=' . $db->qn('f.owner_id'))
+            ->where($db->qn('f2.owner_type') . '=' . $db->q('product'))
+            ->where($db->qn('f2.media_type') . '=' . $db->q('image'))
+            ->order($db->qn('f2.ordering') . ' ASC')
+        ;
+
         $query
             ->select($db->qn(array(
                 'f.filename',
                 'f.folder',
                 'f.params',
             )))
-            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON ' . 
-                $db->qn('owner_id') . '=' . $db->qn('p.id') . ' AND ' . 
-                $db->qn('f.owner_type') . '=' . $db->q('product') . ' AND ' . 
-                $db->qn('f.media_type') . '=' . $db->q('image'))
+            ->leftjoin($db->qn('#__ksenmart_files', 'f') . ' ON (
+                ' . $db->qn('f.owner_id') . ' = ' . $db->qn('p.id') . ' AND
+                ' . $db->qn('f.owner_type') . ' = ' . $db->q('product') . ' AND
+                ' . $db->qn('f.media_type') . ' = ' . $db->q('image') . ' AND
+                ' . $db->qn('f.ordering') . ' = (' . $querySelect . ')
+            )')
         ;
         return $query;
     }

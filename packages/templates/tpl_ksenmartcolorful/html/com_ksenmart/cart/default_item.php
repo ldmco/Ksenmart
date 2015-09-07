@@ -1,11 +1,4 @@
-<?php 
-/**
- * @copyright   Copyright (C) 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- */
- 
-defined('_JEXEC') or die;
-?>
+<?php defined('_JEXEC') or die; ?>
 <tr class="item-cart">
 	<td style="width: 16%;">
 		<form>
@@ -15,14 +8,14 @@ defined('_JEXEC') or die;
 	</td>
 	<td style="width: 40%;">
 		<dl class="dl-horizontal">
-			<dt><?php echo JText::_('KSM_PRODUCT_COLUMN_TITLE'); ?></dt>
+			<dt>Название</dt>
 			<dd><a href="<?php echo $this->item->product->link; ?>" title="<?php echo $this->item->product->title; ?>"><?php echo $this->item->product->title; ?></a></dd>
 			<?php if(!empty($this->item->product->product_code)){ ?>
-			<dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
+			<dt>Артикул</dt>
 			<dd><?php echo $this->item->product->product_code; ?></dd>
 			<?php } ?>
 			<?php if(!empty($this->item->product->manufacturer_title)){ ?>
-			<dt><?php echo JText::_('KSM_PRODUCT_MANUFACTURER'); ?></dt>
+			<dt>Производитель</dt>
 			<dd><?php echo $this->item->product->manufacturer_title; ?></dd>
 			<?php } ?>
             <?php foreach($this->item->properties as $item_property){ ?>
