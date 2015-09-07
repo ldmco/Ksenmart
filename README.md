@@ -1,9 +1,9 @@
-KsenMart [![release-v3.1.11-beta](http://img.shields.io/badge/release-v3.1.11--beta-blue.svg)](https://github.com/ldmco/KsenMart/releases/tag/v3.1.11-beta)
+Ksenmart [![release-v3.1.11](http://img.shields.io/badge/release-v3.1.11--blue.svg)](https://github.com/ldmco/Ksenmart/releases/tag/v3.1.11)
 ========
 
-## KsenMart - Component for CMS Joomla 
+## Ksenmart - Component for CMS Joomla 
 
-### Lastest release - [v3.1.11](https://github.com/ldmco/KsenMart/releases/tag/v3.1.11-beta)
+### Lastest release - [v3.1.11](https://github.com/ldmco/Ksenmart/releases/tag/v3.1.11)
 
- * KsenMart [Official site](http://ksenmart.ru/)
- * [Release page](https://github.com/ldmco/KsenMart/releases)
+ * Ksenmart [Official site](http://Ksenmart.ru/)
+ * [Release page](https://github.com/ldmco/Ksenmart/releases)
