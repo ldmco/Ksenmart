@@ -20,12 +20,6 @@
 		<folder>sql</folder>
     </files>
 
-    <install>
-        <sql>
-            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-        </sql>
-    </install>
-	
     <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
