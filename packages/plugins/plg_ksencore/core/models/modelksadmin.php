@@ -96,7 +96,6 @@ abstract class JModelKSAdmin extends JModelAdmin {
             $this->table_prefix = str_replace('com_', '', $this->ext_name_com);
             $this->table_prefix = ucfirst($this->table_prefix) . 'Table';
         }
-        $this->name = $type;
         
         return JTable::getInstance($type, $this->table_prefix, $config);
     }
