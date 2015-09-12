@@ -200,7 +200,12 @@ class KsenMartModelProduct extends JModelKSForm {
         }
         $childs = array();
         $query = $this->_db->getQuery(true);
-        $query->select('id')->from('#__ksenmart_products')->where('parent_id=' . $this->_db->escape($id));
+        $query
+            ->select('id')
+            ->from('#__ksenmart_products')
+            ->where('parent_id=' . $this->_db->q($id))
+            ->where('p.published=1')
+        ;
         $this->_db->setQuery($query);
         $ids = $this->_db->loadObjectList();
         if (!empty($ids)) {
@@ -256,7 +261,7 @@ class KsenMartModelProduct extends JModelKSForm {
                     cg.title,
                     cg.product_id,
                     cg.ordering
-                ')->from('#__ksenmart_products_child_groups AS cg')->where('cg.product_id=' . $this->_db->escape($this->_id))->order('cg.ordering');
+                ')->from('#__ksenmart_products_child_groups AS cg')->where('cg.product_id=' . $this->_db->q($this->_id))->order('cg.ordering');
             $this->_db->setQuery($query);
             $childs_groups = $this->_db->loadObjectList('id');
             array_unshift($childs_groups, $empty_group);
@@ -267,7 +272,13 @@ class KsenMartModelProduct extends JModelKSForm {
                 $where[] = $child->id;
             }
             $sql = $this->_db->getQuery(true);
-            $sql->select('p.id, p.parent_id, p.childs_group')->from("#__ksenmart_products as p")->where('p.parent_id =' . $this->_db->escape($this->_id))->where('(p.childs_group IN(' . implode(', ', $where) . '))')->order('p.ordering');
+            $sql
+                ->select('p.id, p.parent_id, p.childs_group')
+                ->from("#__ksenmart_products as p")->where('p.parent_id =' . $this->_db->q($this->_id))
+                ->where('(p.childs_group IN(' . implode(', ', $where) . '))')
+                ->where('p.published=1')
+                ->order('p.ordering')
+            ;
             $this->_db->setQuery($sql);
             $products = $this->_db->loadObjectList('id');
             
