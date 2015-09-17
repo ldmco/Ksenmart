@@ -561,8 +561,7 @@ class KsenMartModelCart extends JModelKSList {
             't.price',
             't.count',
             't.product_id'
-        ), false);
-        $item       = $item[0];
+        ), false, false, true);
 
         if($price != 0 && $price != $item->price) {
             $order_item_object          = new stdClass();
