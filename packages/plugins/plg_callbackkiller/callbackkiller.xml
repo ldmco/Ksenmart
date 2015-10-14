@@ -28,6 +28,7 @@
     
     <languages folder="languages">
 		<language tag="ru-RU">ru-RU/ru-RU.plg_system_callbackkiller.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_callbackkiller.sys.ini</language>
     </languages>
 	
     <updateservers>
