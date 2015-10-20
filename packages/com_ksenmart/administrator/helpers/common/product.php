@@ -58,7 +58,7 @@ class KSMProducts extends KSCoreHelper {
         $db     = JFactory::getDBO();
         $params = JComponentHelper::getParams('com_ksenmart');
         $query  = $db->getQuery(true);
-        $query  = KSMProducts::setProductMainImageToQuery($query);
+        $query  = KSMedia::setItemMainImageToQuery($query);
         $query
             ->select('`p`.*')
             ->select($db->qn(array(
