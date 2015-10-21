@@ -186,7 +186,7 @@ class KSSystem {
         $lang->load(self::$ext_name_com.'.js', $path, null, false, false);
         
         $lang = $lang->getTag();
-        $filename = JPATH_COMPONENT . DS . 'language' . DS . $lang . DS . $lang . '.'.self::$ext_name_com.'.js.ini';
+        $filename = $path . DS . 'language' . DS . $lang . DS . $lang . '.'.self::$ext_name_com.'.js.ini';
         $version = phpversion();
         
         $php_errormsg = null;
