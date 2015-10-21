@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die(); ?>
 <div class="sets row-fluid catalog related">
-	<h3><?php echo JText::_('KSM_PRODUCT_SETS_TITLE'); ?></h3>
+	<h3><?php echo JText::_('KSM_PRODUCT_SETS_TITLE'); ?>:</h3>
     <ul class="thumbnails items catalog-items">
 		<?php foreach($this->product->sets as $set){ ?>		
 		<li class="span3 item">
