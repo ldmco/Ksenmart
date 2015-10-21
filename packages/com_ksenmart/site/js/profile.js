@@ -56,7 +56,7 @@ function cropImg(class_j){
 
 jQuery(document).ready(function(){
     
-    jQuery('.favorities .thumbnails .item .thumbnail, .watched .thumbnails .item .thumbnail').prepend('<a class="close btn btn-danger l-lose_t_product" href="javascript:void(0);" title="">Убрать</a>');
+    jQuery('.favorities .thumbnails .item .thumbnail, .watched .thumbnails .item .thumbnail').prepend('<a class="close btn btn-danger l-lose_t_product" href="javascript:void(0);" title="">'+Joomla.JText._('KSM_PROFILE_PRODUCT_REMOVE')+'</a>');
     
     jQuery('.favorities .thumbnails .item .thumbnail .l-lose_t_product, .watched .thumbnails .item .thumbnail .l-lose_t_product').on('click', function(){
         var item = jQuery(this).parents('.item');
@@ -270,11 +270,11 @@ jQuery(document).ready(function(){
 		var phone         = form.find('input[name="form[phone]"]').val();
 
 		if (name == ''){
-			KMShowMessage('Введите ваше имя');
+			KMShowMessage(Joomla.JText._('KSM_PROFILE_TYPE_YOUR_NAME'));
 			return false;
 		}
 		if (email == ''){
-			KMShowMessage('Введите ваш E-mail');
+			KMShowMessage(Joomla.JText._('KSM_PROFILE_TYPE_YOUR_EMAIL'));
 			return false;
 		}
         
@@ -282,7 +282,7 @@ jQuery(document).ready(function(){
 		if (!res)
 			return false;	
 		if (form.find('input[name="sendEmail"]:checked').length > 0 && email == ''){
-			KMShowMessage('Введите ваш E-mail');
+			KMShowMessage(Joomla.JText._('KSM_PROFILE_TYPE_YOUR_EMAIL'));;
 			return false;
 		}
 		form.submit();
@@ -354,7 +354,7 @@ jQuery(document).ready(function(){
                 }
                 jQuery("#descr").html(hint);
             } else {
-                jQuery("#descr").html("Введите номер");
+                jQuery("#descr").html(Joomla.JText._('KSM_CART_TYPE_PHONE_NUMBER'));
             }
             jQuery(this).attr("placeholder", jQuery(this).inputmask("getemptymask"));
         }

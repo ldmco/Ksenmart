@@ -2,14 +2,14 @@
 defined( '_JEXEC' ) or die;
 ?>
 <div id="catalog">
-	<h2>Просмотр отзыва</h2>
+	<h2><?php echo JText::_('KSM_REVIEW_TITLE'); ?></h2>
 	<div id="review">
 		<div class="top">
 			<div class="name">
 				<?php if (isset($this->comment->user->social)):?>
 				<div class="socia"><img src="<?php echo JURI::root()?>components/com_ksenmart/css/i/<?php echo $this->comment->user->social_name?>.png" alt=""></div>
 				<?php endif;?>
-				<span><?php echo ($this->comment->name!=''?$this->comment->name:'Аноним')?></span>
+				<span><?php echo ($this->comment->name!=''?$this->comment->name:JText::_('KSM_USERS_ANONYM'))?></span>
 			</div>
 			<div class="date">
 				<?php echo KsenmartHelper::formatCommentDate($this->comment->date_add)?>
@@ -35,7 +35,7 @@ defined( '_JEXEC' ) or die;
 		<?php if (strip_tags($this->comment->good)!=''):?>
 		<br clear="both">
 		<br>
-		<b>Достоинства</b>
+		<b><?php echo JText::_('KSM_REVIEW_GOOD'); ?></b>
 		<div class="txt">
 			<?php echo $this->comment->good?>
 		</div>	
@@ -43,7 +43,7 @@ defined( '_JEXEC' ) or die;
 		<?php if (strip_tags($this->comment->bad)!=''):?>
 		<br clear="both">
 		<br>
-		<b>Недостатки</b>
+		<b><?php echo JText::_('KSM_REVIEW_BAD'); ?></b>
 		<div class="txt">
 			<?php echo $this->comment->bad?>
 		</div>			

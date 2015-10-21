@@ -1,7 +1,7 @@
 <?php defined( '_JEXEC' ) or die; ?>
 <?php if ($this->params->get('only_auth_buy',0) == 0 || ($this->params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)){ ?>
     <div class="control-group">
-        <label class="control-label">Цена:</label>
+        <label class="control-label"><?php echo JText::_('KSM_PRODUCT_PRICE'); ?></label>
         <div class="controls prices">
 			<?php if ($this->product->old_price != 0){ ?>
 			<span class="old-price muted"><?php echo $this->product->val_old_price; ?></span>

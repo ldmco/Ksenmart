@@ -82,11 +82,11 @@ jQuery('.quantt input').on('mouseout',function(e){
                 jQuery.ajax({
                     url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&layout=minicart&task=cart.update_cart&item_id=' + item_id + '&count=' + count + '&tmpl=ksenmart',
                     success: function(data) {
-                        KMShowMessage('<h2>Заказ обновлен.</h2>');
+                        KMShowMessage('<h2>'+Joomla.JText._('KSM_CART_ORDER_UPDATED')+'</h2>');
                         if (count == 0) {
                             input.parents('.item').remove();
                             if (jQuery('#cart .item .del').length == 0) {
-                                jQuery('#cart').html('<h1 class="clear_cart">Ваш заказ пуст</h1>');
+                                jQuery('#cart').html('<h1 class="clear_cart">'+Joomla.JText._('KSM_CART_EMPTY_TITLE')+'</h1>');
                                 jQuery('#order').html('');
                             }
                         } else {
@@ -126,7 +126,7 @@ jQuery('.quantt input').on('mouseout',function(e){
                 }
                 jQuery("#descr").html(hint);
             } else {
-                jQuery("#descr").html("Введите номер");
+                jQuery("#descr").html(Joomla.JText._('KSM_CART_TYPE_PHONE_NUMBER'));
             }
             jQuery(this).attr("placeholder", jQuery(this).inputmask("getemptymask"));
 
@@ -215,11 +215,11 @@ function update_count($this) {
         jQuery.ajax({
             url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&layout=minicart&task=cart.update_cart&item_id=' + item_id + '&count=' + count + '&tmpl=ksenmart',
             success: function(data) {
-                KMShowMessage('<h2>Заказ обновлен.</h2>');
+                KMShowMessage('<h2>'+Joomla.JText._('KSM_CART_ORDER_UPDATED')+'</h2>');
                 if (count == 0) {
                     input.parents('.item').remove();
                     if (jQuery('#cart .item .del').length == 0) {
-                        jQuery('#cart').html('<h1 class="clear_cart">Ваш заказ пуст</h1>');
+                        jQuery('#cart').html('<h1 class="clear_cart">'+Joomla.JText._('KSM_CART_EMPTY_TITLE')+'</h1>');
                         jQuery('#order').html('');
                     }
                 } else {

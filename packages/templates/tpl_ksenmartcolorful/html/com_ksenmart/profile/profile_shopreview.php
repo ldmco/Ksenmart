@@ -8,7 +8,7 @@
 	</div>
 	<div class="span10 content_review_wrapp">
 		<dl class="dl-horizontal">
-            <dt>Оценка</dt>
+            <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_RATE'); ?></dt>
             <dd class="rating">
 				<?php for($k=1; $k<6; $k++){
 					if(floor($this->user_review->rate) >= $k){ ?>
@@ -18,16 +18,16 @@
 				<?php }
 				} ?>
             </dd>
-		  <dt>Комментарий</dt>
-		  <dd class="quick_edit magical_text noTransition" data-type="comment" data-title="Редактировать" contenteditable="false"><?php echo nl2br($this->user_review->comment); ?></dd>
+		  <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_COMMENT'); ?></dt>
+		  <dd class="quick_edit magical_text noTransition" data-type="comment" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo nl2br($this->user_review->comment); ?></dd>
 		</dl>
         <div class="toolbar hide">                
             <ul class="inline">
                 <li>
-                    <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_shop_review"><i class="icon-ok"></i> Сохранить</a>
+                    <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_shop_review"><i class="icon-ok"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_SAVE'); ?></a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> Отменить</a>
+                    <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_CANCEL'); ?></a>
                 </li>
             </ul>
         </div>

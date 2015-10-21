@@ -176,13 +176,14 @@ class KSSystem {
      *
      * @return
      */
-    public static function loadJSLanguage() {
+    public static function loadJSLanguage($admin = true) {
         if (empty(self::$ext_name_com)) {
             self::setGlobalVar('ext_name_com');
         }
 		
+		$path = $admin ? JPATH_ADMINISTRATOR . DS . 'components' . DS . self::$ext_name_com : JPATH_ROOT . DS . 'components' . DS . self::$ext_name_com;
         $lang = JFactory::getLanguage();
-        $lang->load(self::$ext_name_com.'.js', JPATH_ADMINISTRATOR . DS . 'components' . DS . self::$ext_name_com, null, false, false);
+        $lang->load(self::$ext_name_com.'.js', $path, null, false, false);
         
         $lang = $lang->getTag();
         $filename = JPATH_COMPONENT . DS . 'language' . DS . $lang . DS . $lang . '.'.self::$ext_name_com.'.js.ini';

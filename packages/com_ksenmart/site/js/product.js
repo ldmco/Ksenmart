@@ -150,7 +150,7 @@ jQuery(document).ready(function() {
             jQuery.ajax({
                 url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.add_watched&id=' + prd_id,
                 success: function(data) {
-                    KMShowMessage('Теперь вы следите за этим товаром.');
+                    KMShowMessage(Joomla.JText._('KSM_PRODUCT_WATCH_MESSAGE'));
                 }
             });
         }
@@ -166,7 +166,7 @@ jQuery(document).ready(function() {
             jQuery.ajax({
                 url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.add_favorites&id=' + prd_id + '&tmpl=ksenmart',
                 success: function(data) {
-                    KMShowMessage('Товар добавлен вам в избранные');
+                    KMShowMessage(Joomla.JText._('KSM_PRODUCT_FAVORITE_MESSAGE'));
                 }
             });
         }

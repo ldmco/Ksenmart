@@ -11,7 +11,7 @@
     	</div>
     	<div class="span10">
     		<dl class="dl-horizontal">
-                <dt>Оценка</dt>
+                <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_RATE'); ?></dt>
                 <dd>
                     <div class="rating">                                    
         				<?php for($k=1; $k<6; $k++){
@@ -23,26 +23,26 @@
         				} ?>
                     </div>                    
                 </dd>
-                <dt>Комментарий</dt>
+                <dt><?php echo JText::_('KSM_PROFILE_REVIEWS_COMMENT'); ?></dt>
                 <dd>
-                    <div class="quick_edit magical_text noTransition" data-type="comment" data-title="Редактировать" contenteditable="false"><?php echo $this->review->comment; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="comment" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->comment; ?></div>
                 </dd>
-                <dt class="text-success">Плюсы</dt>
+                <dt class="text-success"><?php echo JText::_('KSM_PROFILE_REVIEWS_GOOD'); ?></dt>
                 <dd class="text-success">
-                    <div class="quick_edit magical_text noTransition" data-type="good" data-title="Редактировать" contenteditable="false"><?php echo $this->review->good; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="good" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->good; ?></div>
                 </dd>
-                <dt class="text-error">Минусы</dt>
+                <dt class="text-error"><?php echo JText::_('KSM_PROFILE_REVIEWS_BAD'); ?></dt>
                 <dd class="text-error" >
-                    <div class="quick_edit magical_text noTransition" data-type="bad" data-title="Редактировать" contenteditable="false"><?php echo $this->review->bad; ?></div>
+                    <div class="quick_edit magical_text noTransition" data-type="bad" data-title="<?php echo JText::_('KSM_PROFILE_REVIEWS_EDIT'); ?>" contenteditable="false"><?php echo $this->review->bad; ?></div>
                 </dd>
     		</dl>
             <div class="toolbar hide">                
                 <ul class="inline">
                     <li>
-                        <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_product_review"><i class="icon-ok"></i> Сохранить</a>
+                        <a href="javascript:void(0);" class="link_b_border save_dynamic_link save_product_review"><i class="icon-ok"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_SAVE'); ?></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> Отменить</a>
+                        <a href="javascript:void(0);" class="link_b_border cancel_edit"><i class="icon-remove"></i> <?php echo JText::_('KSM_PROFILE_REVIEWS_CANCEL'); ?></a>
                     </li>
                 </ul>
             </div>

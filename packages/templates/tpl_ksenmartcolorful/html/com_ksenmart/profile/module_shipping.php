@@ -1,5 +1,5 @@
 <div class="row-fluid">
-	<h5>Доступные способы доставки:</h5>
+	<h5><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_SHIPPINGS'); ?></h5>
 	<?php if(count($this->shippings) > 0) { ?>
 		<?php foreach($this->shippings as $ship) { ?>
 		<p>
@@ -11,11 +11,11 @@
 		</p>
 		<? } ?>
 	<?php } else { ?>
-		<p>Нет способов для этого региона</p>
+		<p><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_NO_SHIPPINGS'); ?></p>
 	<?php } ?>
 </div>
 <div class="row-fluid">
-	<h5>Доступные способы оплаты:</h5>
+	<h5><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_PAYMENTS'); ?></h5>
 	<?php if(count($this->payments) > 0) { ?>
 		<?php foreach($this->payments as $pay) { ?>
 		<p>
@@ -26,6 +26,6 @@
 		</p>
 		<?php } ?>
 	<?php } else { ?>
-	<p>Нет способов для этого региона</p>
+	<p><?php echo JText::_('KSM_PROFILE_SHIPPING_MODULE_NO_PAYMENTS'); ?></p>
 	<?php } ?>
 </div>

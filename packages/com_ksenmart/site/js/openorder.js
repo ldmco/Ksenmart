@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
                 }
                 jQuery("#descr").html(hint);
             } else {
-                jQuery("#descr").html("Введите номер");
+                jQuery("#descr").html(Joomla.JText._('KSM_CART_TYPE_PHONE_NUMBER'));
             }
             jQuery(this).attr("placeholder", jQuery(this).inputmask("getemptymask"));
         }

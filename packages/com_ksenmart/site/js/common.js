@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
                                     url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
                                     success: function(data) {
                                         jQuery('#minicart').html(data);
-                                        KMShowCartMessage('Товар добавлен в корзину');
+                                        KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                                     }
                                 });
                             }
@@ -214,7 +214,7 @@ jQuery(document).ready(function() {
                                 url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
                                 success: function(data) {
                                     jQuery('#minicart').html(data);
-                                    KMShowCartMessage('Товар добавлен в корзину');
+                                    KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                                 }
                             });
                         }
@@ -225,7 +225,7 @@ jQuery(document).ready(function() {
                     url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
                     success: function(data) {
                         jQuery('#minicart').html(data);
-                        KMShowCartMessage('Товар добавлен в корзину');
+                        KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                     }
                 });
             }
@@ -287,7 +287,7 @@ jQuery(document).ready(function() {
                             url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
                             success: function(data) {
                                 jQuery('#minicart').html(data);
-                                KMShowCartMessage('Товар добавлен в корзину');
+                                KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                             }
                         });
                     }
@@ -298,7 +298,7 @@ jQuery(document).ready(function() {
                 url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
                 success: function(data) {
                     jQuery('#minicart').html(data);
-                    KMShowCartMessage('Товар добавлен в корзину');
+                    KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                 }
             });
         }
@@ -345,10 +345,10 @@ jQuery(document).ready(function() {
         jQuery.ajax({
             url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&layout=minicart&task=cart.update_cart&item_id=' + item_id + '&count=' + count + '&tmpl=ksenmart',
             success: function(data) {
-                KMShowMessage('<h2>Заказ обновлен.</h2>');
+                KMShowMessage('<h2>Your order updated.</h2>');
                 link.parents('.item-cart').remove();
                 if (jQuery('#cart .item-cart .del').length == 0) {
-                    jQuery('#cart').html('<h1 class="clear_cart">Ваш заказ пуст</h1>');
+                    jQuery('#cart').html('<h1 class="clear_cart">'+Joomla.JText._('KSM_CART_EMPTY_TITLE')+'</h1>');
                     jQuery('#order').html('');
                 } else {
                     update_prices();
@@ -422,7 +422,7 @@ function closeKMMessage(delay) {
 function KMShowCartMessage(text) {
     closeKMMessage(0);
     var heading = '<div class="modal-header"><h3 id="myModalLabel">' + text + '</h3></div>';
-    var bottom = '<div class="km-message-bottom btn-toolbar row-fluid"><div class="btn-group span6"><a class="link_shop btn btn-info btn-large span12 popup_close">Продолжить покупки</a></div><div class="btn-group span6"><a href="' + km_cart_link + '" class="link_cart btn btn-success btn-large span12">Оформить заказ</a></div></div>';
+    var bottom = '<div class="km-message-bottom btn-toolbar row-fluid"><div class="btn-group span6"><a class="link_shop btn btn-info btn-large span12 popup_close">'+Joomla.JText._('KSM_CART_CONTINUE_SHOPPING')+'</a></div><div class="btn-group span6"><a href="' + km_cart_link + '" class="link_cart btn btn-success btn-large span12">'+Joomla.JText._('KSM_CART_CHECKOUT_ORDER')+'</a></div></div>';
 
     jQuery('body').append('<div class="km-message mdl_add_cart modal noTransition">' + heading + bottom + '</div>');
     closeKMMessage(2500);
@@ -457,26 +457,6 @@ function KMShowPopup(parent, obj, rel_left, rel_top) {
 function isValidEmail(email, strict) {
     if (!strict) email = email.replace(/^\s+|\s+$/g, '');
     return (/^([a-z0-9_\-]+\.)*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,4}$/i).test(email);
-}
-
-function validatePhone(phone_country, phone_code, phone) {
-    if (phone_country.length == 1) {
-        KMShowMessage('Введите код страны вашего телефона , например : +7');
-        return false;
-    }
-    if (phone_country[0] != '+') {
-        KMShowMessage('Введите корректно код страны вашего телефона , например : +7');
-        return false;
-    }
-    if (phone_code == '' || phone_code.length < 3) {
-        KMShowMessage('Введите код города вашего телефон , например : 495');
-        return false;
-    }
-    if (phone == '' || phone.length < 4) {
-        KMShowMessage('Введите номер вашего телефона , например : 1234567');
-        return false;
-    }
-    return true;
 }
 
 function isChild(e, p) {

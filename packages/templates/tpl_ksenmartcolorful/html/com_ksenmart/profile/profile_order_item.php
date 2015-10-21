@@ -6,7 +6,7 @@
 	<div class="name"></div>
 	<div class="info">
 		<dl class="dl-horizontal">
-		  <dt>Артикул:</dt>
+		  <dt><?php echo JText::_('KSM_PRODUCT_ARTICLE'); ?></dt>
 		  <dd><?php echo $this->order_item->product->product_code; ?></dd>
 		<?php foreach($this->order_item->properties as $item_property) {
 			if (!empty($item_property->value)) { ?>

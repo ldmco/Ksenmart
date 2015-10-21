@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
     		success: function( data ) {
     			if (window.parent.document.getElementById('minicart'))
     				window.parent.document.getElementById('minicart').innerHTML=data;
-    			window.parent.KMShowCartMessage('Товар добавлен в корзину');
+    			window.parent.KMShowCartMessage(Joomla.JText._('KSM_CART_TYPE_PHONE_NUMBER'));
     			window.parent.KMClosePopupWindow();		
     		}
     	});

@@ -11,6 +11,7 @@ jimport('joomla.application.component.controller');
 $dispatcher = JDispatcher::getInstance();
 $dispatcher->trigger('onLoadKsen', array('ksenmart.KSM', array('common'), array(), array('angularJS' => 0)));
 $dispatcher->trigger('onBeforeStartComponent',array());
+KSSystem::loadJSLanguage(false);
 
 if (!class_exists('KsenmartHtmlHelper')) {
 	require JPATH_ROOT.DS.'components'.DS.'com_ksenmart'.DS. 'helpers'.DS.'head.php';

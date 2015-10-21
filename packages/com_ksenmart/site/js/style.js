@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
 		var phone_country='+7';
 		var phone_code=jQuery('.callback input.phone_code').val();
 		var phone=jQuery('.callback input.phone').val();
-		var res=validatePhone(phone_country,phone_code,phone);
+		var res=true;//validatePhone(phone_country,phone_code,phone);
 		if (!res)
 			return false;
 		phone=phone_country+'-'+phone_code+'-'+phone;	
