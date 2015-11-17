@@ -573,22 +573,21 @@ class KSSystem {
             $query->select($fields)->from($db->qn('#__' . self::$ext_name . '_' . $table, 't'));
             
             if ($implode_keys) {
-                $query->where('(t.id IN (' . KSSystem::key_implode(', ', $ids) . '))');
+                $query->where('(' . $db->qn('t.id') . ' IN (' . KSSystem::key_implode(', ', $ids) . '))');
             } else {
-                $query->where('(t.id IN (' . implode(', ', $ids) . '))');
+                $query->where('(' . $db->qn('t.id') . ' IN (' . implode(', ', $db->q($ids)) . '))');
             }
             if ($published) {
                 $query->where('t.published=1');
             }
             $db->setQuery($query);
+            // exit($query->dump());
             if ($single) {
                 $object = $db->loadObject();
             } else {
                 $object = $db->loadObjectList();
             }
             if (!empty($object)) {
-                
-                
                 return $object;
             }
         }

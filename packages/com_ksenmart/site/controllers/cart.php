@@ -9,16 +9,23 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controller');
 class KsenMartControllerCart extends JControllerLegacy {
 
-    function add_to_cart() {
+    public function add_to_cart() {
         $model = $this->getModel('cart');
         $model->addToCart();
         parent::display();
     }
 
-    function update_cart() {
-        $model = $this->getModel('cart');
-        $model->updateCart();
-        parent::display();
+    public function update_cart() {
+        $app        = JFactory::getApplication();
+        $model      = $this->getModel('cart');
+        $response   = [
+            'orderItem' => $model->updateCart(),
+        ];
+        ob_start();
+            parent::display();
+            $response['minicart'] = ob_get_contents();
+        ob_end_clean();
+        $app->close(new JResponseJson($response));
     }
 
     function set_discount() {
