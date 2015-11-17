@@ -155,9 +155,19 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
-		</field>	
-			
-	</fieldset>	
+		</field>
+		
+		<field
+			name="path_separator"
+			type="text"
+			default=" - "
+			label="KSM_SETTINGS_PATHSEPARATOR_LABEL"
+			description="KSM_SETTINGS_PATHSEPARATOR_DESC"
+			labelclass="inputname"
+			class="inputbox_205"
+		/>
+
+	</fieldset>
 	
 	<fieldset name="KSM_PRODUCT_IMAGES_CONFIG"
 		label="KSM_PRODUCT_IMAGES_CONFIG_LABEL"
@@ -267,42 +277,42 @@
 	<fieldset name="KSM_SEARCH_CONFIG"
 		label="KSM_SEARCH_CONFIG_LABEL"
 		description="KSM_SEARCH_CONFIG_DESC">
-        
+		
 		<field
 			name="count_result"
 			type="text"
-            default="5"
+			default="5"
 			label="KSM_SEARCH_COUNT_RESULT_LABEL"
 			description="KSM_SEARCH_COUNT_RESULT_DESC"
 			labelclass="inputname"
 			class="inputbox_205"
-        />
+		/>
 		<field
 			name="count_relevants"
 			type="text"
-            default="3"
+			default="3"
 			label="KSM_SEARCH_COUNT_RELEVANTS_LABEL"
 			description="KSM_SEARCH_COUNT_RELEVANTS_DESC"
 			labelclass="inputname"
 			class="inputbox_205"
-        />
+		/>
 		<field
 			name="count_categories"
 			type="text"
-            default="1"
+			default="1"
 			label="KSM_SEARCH_COUNT_CAT_LABEL"
 			description="KSM_SEARCH_COUNT_CAT_DESC"
 			labelclass="inputname"
 			class="inputbox_205"
-        />
+		/>
 		<field
 			name="count_manufactured"
 			type="text"
-            default="1"
+			default="1"
 			label="KSM_SEARCH_COUNT_MANUFACTURED_LABEL"
 			description="KSM_SEARCH_COUNT_MANUFACTURED_DESC"
 			labelclass="inputname"
 			class="inputbox_205"
-        />
+		/>
 	</fieldset>
 </config>

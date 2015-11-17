@@ -16,7 +16,7 @@ class KsenMartViewCart extends JViewKS {
         $session         = JFactory::getSession();
         $path            = $app->getPathway();
         $names_komponent = $this->params->get('shop_name');
-        $pref            = $this->params->get('path_separator');
+        $pref            = $this->params->get('path_separator', '-');
         $doc_title       = $names_komponent . $pref . JText::_('KSM_CART_YOUR_ORDER_DOC_TITLE');
         $this->state     = $this->get('State');
 		$order_id        = $session->get('shop_order_id', 0);
