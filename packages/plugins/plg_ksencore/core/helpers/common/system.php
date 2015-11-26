@@ -26,18 +26,28 @@ class KSSystem {
      *
      * @return
      */
-    public static function loadPlugins() {
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('folder')->from('#__extensions')->where('name LIKE "KSM_%"')->where('type="plugin"')->group('folder');
-        $db->setQuery($query);
-        $plugins = $db->loadObjectList();
-        
-        
-        foreach ($plugins as $plugin) {
-            JPluginHelper::importPlugin($plugin->folder);
-        }
-    }
+	public static function loadPlugins() {
+		$db    = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query
+			->select($db->qn('folder'))
+			->from($db->qn('#__extensions'))
+			->where($db->qn('name') . ' LIKE "KSM_%"')
+			->where($db->qn('type') . '=' . $db->q('plugin'))
+			->group($db->qn('folder'))
+		;
+
+		if (JFactory::getApplication()->input->get('view', null, 'string') != 'exportimport') {
+			$query->where($db->qn('folder') . '!=' . $db->q('kmexportimport'));
+		}
+
+		$db->setQuery($query);
+		$plugins = $db->loadObjectList();
+				
+		foreach ($plugins as $plugin) {
+			JPluginHelper::importPlugin($plugin->folder);
+		}
+	}
     
     public static function getKSVersion() {
         
