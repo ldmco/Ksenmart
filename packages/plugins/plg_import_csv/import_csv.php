@@ -51,7 +51,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
 			return false;
 		}
 		
-		$this->view->properties = $this->getProperties();
+		$this->view->properties = $this->_getProperties();
 		$this->view->options = $this->getCSVOptions();	
 		
 		$post_max_size = (int)ini_get('post_max_size');
@@ -97,7 +97,7 @@ class plgKMExportimportImport_csv extends KMPlugin {
         return true;
     }	
 	
-    function getProperties() {
+    private function _getProperties() {
 		$db = JFactory::getDBO();
 		
         $query = $db->getQuery(true);
