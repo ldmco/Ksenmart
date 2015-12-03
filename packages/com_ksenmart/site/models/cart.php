@@ -258,7 +258,7 @@ class KsenMartModelCart extends JModelKSList {
                 }
 
                 $data           = new stdClass;
-                $data->{$type}  = json_encode($field_o);
+                $data->{$type}  = json_encode($field_o, JSON_UNESCAPED_UNICODE);
         
                 KSMOrders::updateOrderFields($this->order_id, $data);
                 
@@ -679,8 +679,8 @@ class KsenMartModelCart extends JModelKSList {
         $order->shipping_id     = $jinput->get('shipping_id', 0, 'int');
         $order->payment_id      = $jinput->get('payment_id', 0, 'int');
         $order->shipping_coords = $jinput->get('shipping_coords', 0, 'string');
-        $order->customer_fields = json_encode($customer_fields);
-        $order->address_fields  = json_encode($address_fields);
+        $order->customer_fields = json_encode($customer_fields, JSON_UNESCAPED_UNICODE);
+        $order->address_fields  = json_encode($address_fields, JSON_UNESCAPED_UNICODE);
         $order->note            = $jinput->get('note', null, 'string');
 
         try {
