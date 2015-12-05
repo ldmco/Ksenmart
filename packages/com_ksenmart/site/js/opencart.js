@@ -19,25 +19,33 @@ jQuery(document).ready(function() {
 			jQuery('.password_row').hide();
 	});
 
-	var intervalId = null;
-	jQuery('#cart').on('click, mousedown', '.quant .minus', function() {
+	var intervalId = null,
+		startEventType = 'mousedown',
+		endEventType = 'mouseup mouseleave';
+
+	if ('ontouchstart' in window) {
+		startEventType = 'touchstart';
+		endEventType = 'touchend';
+	}
+
+	jQuery('#cart').on('click, ' + startEventType, '.quant .minus', function() {
 		var input = jQuery(this).parents('.quant').find('[type="text"]');
 		intervalId = setInterval(function() {
 			delayUpdateClear(input.data('item_id'));
 			quantityUpdate(input, 'down');
 		}, 75);
-	}).on('mouseup mouseleave', '.quant .minus', function(e) {
+	}).on(endEventType, '.quant .minus', function(e) {
 		var input = jQuery(this).parents('.quant').find('[type="text"]');
 		clearInterval(intervalId);
 	});
 
-	jQuery('#cart').on('click, mousedown', '.quant .plus', function() {
+	jQuery('#cart').on('click, ' + startEventType, '.quant .plus', function() {
 		var input = jQuery(this).parents('.quant').find('[type="text"]');
 		intervalId = setInterval(function() {
 			delayUpdateClear(input.data('item_id'));
 			quantityUpdate(input, 'up');
 		}, 75);
-	}).on('mouseup mouseleave', '.quant .plus', function(e) {
+	}).on(endEventType, '.quant .plus', function(e) {
 		var input = jQuery(this).parents('.quant').find('[type="text"]');
 		clearInterval(intervalId);
 	});
