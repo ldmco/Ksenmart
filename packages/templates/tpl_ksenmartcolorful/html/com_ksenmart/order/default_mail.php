@@ -36,7 +36,7 @@
     <?php foreach($this->order->items as $item) { ?>
     		<tr class="row_odd">
     			<td class="vid_produkt">
-    				<a class="title_lookp" href="<?php echo JURI::root() . JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $item->product_id . ':' . $item->product->alias . '&Itemid=' . KSSystem::getShopItemid()); ?>" ><?php echo $item->product->title; ?></a>
+    				<a class="title_lookp" href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=product&id=' . $item->product_id . ':' . $item->product->alias . '&Itemid=' . KSSystem::getShopItemid(), true, -1); ?>" ><?php echo $item->product->title; ?></a>
                     <?php if($item->product->product_code != '') { ?>
                         <i><?php echo JText::_('KSM_ORDER_MAIL_PRODUCT_SKU'); ?> <?php echo $item->product->product_code; ?></i>
                     <?php } ?>
