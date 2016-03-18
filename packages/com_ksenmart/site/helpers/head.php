@@ -20,7 +20,7 @@ class KsenmartHtmlHelper {
 
         $params = JComponentHelper::getParams('com_ksenmart');
 
-        $document->addScript(JURI::base() . 'administrator/components/com_ksenmart/js/jquery.custom.min.js');
+        $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/common.js');
         
         $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
