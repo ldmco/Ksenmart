@@ -688,11 +688,6 @@ class KsenMartModelCart extends JModelKSList {
         }
         catch (exception $e) {}
 
-        try {
-            $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');
-        }
-        catch (exception $e) {}
-
         if(!empty($customer_fields['email'])) {
             KSMOrders::sendOrderMail($this->order_id);
         }
