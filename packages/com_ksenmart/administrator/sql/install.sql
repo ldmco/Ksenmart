@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `#__ksenmart_files` (
   KEY `media_type` (`media_type`),
   KEY `owner_type` (`owner_type`),
   KEY `folder` (`folder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksenmart_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `#__ksenmart_payments` (
   `ordering` int(10) NOT NULL,
   `published` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksenmart_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
