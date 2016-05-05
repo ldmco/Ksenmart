@@ -78,7 +78,16 @@ class KSMProducts extends KSCoreHelper {
         $row = $db->loadObject();
         
         if ($row && !empty($row)) {
+			$row->catalog_buy = ($params->get('only_auth_buy',0) == 0 || ($params->get('only_auth_buy',0) != 0 && JFactory::getUser()->id != 0)) && !empty($row->price) && $row->is_parent == 0 && !$params->get('catalog_mode', 0);
             $row->properties = KSMProducts::getProperties($id);
+			foreach($row->properties as $prop){
+			   if($prop->type == 'select' && ($prop->view == 'select' || $prop->view == 'checkbox' || $prop->view == 'radio')){
+				   if(count($prop->values) > 1){
+					   $row->catalog_buy = false;
+					   break;
+				   }
+			   }
+			}				
             
             if (empty($row->folder)) {
                 $row->folder = 'products';

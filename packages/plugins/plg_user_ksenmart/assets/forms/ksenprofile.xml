@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="ksenprofile">
+		<fieldset name="profile_common"
+			label="PLG_USER_KSENMART_COMMON_BLOCK_LABEL"
+		>
+			<field
+				name="last_name"
+				type="text"
+				id="last_name"
+				description="PLG_USER_KSENMART_LASTNAME_DESC"
+				filter="string"
+				label="PLG_USER_KSENMART_LASTNAME_LBL"
+				size="30"
+			/>
+			
+			<field
+				name="middle_name"
+				type="text"
+				id="middle_name"
+				description="PLG_USER_KSENMART_MIDDLENAME_DESC"
+				filter="string"
+				label="PLG_USER_KSENMART_MIDDLENAME_LBL"
+				size="30"
+			/>			
+			
+			<field
+				name="phone"
+				type="text"
+				id="phone"
+				description="PLG_USER_KSENMART_PHONE_DESC"
+				filter="string"
+				label="PLG_USER_KSENMART_PHONE_LBL"
+				size="30"
+			/>	
+			
+			<field
+				name="region_id"
+				type="region"
+				id="region_id"
+				description="PLG_USER_KSENMART_REGION_DESC"
+				filter="string"
+				label="PLG_USER_KSENMART_REGION_LBL"
+				size="30"
+				>	
+				<option value="0">PLG_USER_KSENMART_SELECT_REGION</option>
+			</field>
+		</fieldset>
+		
+		<fieldset name="profile_orders"
+			label="PLG_USER_KSENMART_ORDERS_BLOCK_LABEL"
+		>	
+			<field
+				name="orders"
+				type="orders"
+				id="orders"
+				description="PLG_USER_KSENMART_ORDERS_DESC"
+				label="PLG_USER_KSENMART_ORDERS_LBL"
+			/>	
+		</fieldset>	
+		
+		<fieldset name="profile_addresses"
+			label="PLG_USER_KSENMART_ADDRESSES_BLOCK_LABEL"
+		>	
+			<field
+				name="addresses"
+				type="addresses"
+				id="addresses"
+				description="PLG_USER_KSENMART_ADDRESSES_DESC"
+				label="PLG_USER_KSENMART_ADDRESSES_LBL"
+			/>	
+		</fieldset>
+		
+		<fieldset name="profile_favorites"
+			label="PLG_USER_KSENMART_FAVORITES_BLOCK_LABEL"
+		>	
+			<field
+				name="favorites"
+				type="products"
+				id="favorites"
+				description="PLG_USER_KSENMART_FAVORITES_DESC"
+				label="PLG_USER_KSENMART_FAVORITES_LBL"
+			/>	
+		</fieldset>		
+		
+		<fieldset name="profile_watched"
+			label="PLG_USER_KSENMART_WATCHED_BLOCK_LABEL"
+		>	
+			<field
+				name="watched"
+				type="products"
+				id="watched"
+				description="PLG_USER_KSENMART_WATCHED_DESC"
+				label="PLG_USER_KSENMART_WATCHED_LBL"
+			/>	
+		</fieldset>			
+		
+		<fieldset name="profile_reviews"
+			label="PLG_USER_KSENMART_REVIEWS_BLOCK_LABEL"
+		>	
+			<field
+				name="reviews"
+				type="reviews"
+				id="reviews"
+				description="PLG_USER_KSENMART_REVIEWS_DESC"
+				label="PLG_USER_KSENMART_REVIEWS_LBL"
+			/>	
+		</fieldset>		
+	</fields>
+</form>
