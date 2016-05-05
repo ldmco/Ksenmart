@@ -75,9 +75,30 @@
 .ksm-profile-products .ksm-profile-products-item-img {
 	margin: 8px;
 	text-align: center;
+	position: relative;
 }
 .ksm-profile-products .ksm-profile-products-item-img img {
 	max-width:100%;
+}
+.ksm-profile-products .ksm-profile-products-item-flag-hot,
+.ksm-profile-products .ksm-profile-products-item-flag-recommendation,
+.ksm-profile-products .ksm-profile-products-item-flag-new,
+.ksm-profile-products .ksm-profile-products-item-flag-promotion {
+    position: absolute;
+    top: -11px;
+    right: 15px;
+    width: 30px;
+    height: 87px;
+    display: block;
+}
+.ksm-profile-products .ksm-profile-products-item-flag-hot {
+    background: url(../images/hit.png) top center no-repeat;	
+}
+.ksm-profile-products .ksm-profile-products-item-flag-recommendation {
+    background: url(../images/super.png) top center no-repeat;	
+}
+.ksm-profile-products .ksm-profile-products-item-flag-new {
+    background: url(../images/new.png) top center no-repeat;	
 }
 .ksm-profile-products .ksm-profile-products-item-name {
 	float: left;

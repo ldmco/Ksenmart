@@ -6,6 +6,20 @@ defined('_JEXEC') or die;
 	<div class="ksm-profile-products-item">
 		<div class="ksm-profile-products-item-img">
 			<img src="<?php echo $product->small_img; ?>">
+			<div class="ksm-profile-products-item-flags">
+				<?php if ($product->hot == 1): ?>
+				<span class="ksm-profile-products-item-flag-hot"></span>
+				<?php endif; ?>
+				<?php if ($product->recommendation == 1): ?>
+				<span class="ksm-profile-products-item-flag-recommendation"></span>
+				<?php endif; ?>
+				<?php if ($product->new == 1): ?>
+				<span class="ksm-profile-products-item-flag-new"></span>
+				<?php endif; ?>
+				<?php if ($product->promotion == 1): ?>
+				<span class="ksm-profile-products-item-flag-promotion"></span>
+				<?php endif; ?>				
+			</div>			
 		</div>
 		<div class="ksm-profile-products-item-name">
 			<a href="<?php echo $product->link; ?>"><?php echo $product->title; ?></a>
