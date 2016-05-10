@@ -32,4 +32,6 @@ $regions   = $modKMShippingHelper->getRegions();
 $shippings = $modKMShippingHelper->getShippings($user_region);
 $payments  = $modKMShippingHelper->getPayments($user_region);
 
+$class_sfx  = htmlspecialchars($params->get('moduleclass_sfx'));
+
 require JModuleHelper::getLayoutPath('mod_km_shipping', $params->get('layout', 'default'));
