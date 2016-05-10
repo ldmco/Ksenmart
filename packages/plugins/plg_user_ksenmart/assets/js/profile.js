@@ -131,58 +131,59 @@ jQuery(document).ready(function(){
 		}		
 	});
 	
-	function KSMProfileSetAddressString(item)
-	{
-		var zip = item.find('input[name*="zip"]').val();
-		var city = item.find('input[name*="city"]').val();
-		var street = item.find('input[name*="street"]').val();
-		var house = item.find('input[name*="house"]').val();
-		var entrance = item.find('input[name*="entrance"]').val();
-		var floor = item.find('input[name*="floor"]').val();
-		var flat = item.find('input[name*="flat"]').val();
-		
-		var addr_parts = [];
-		var address = '';
-		
-		if (zip != '')
-		{
-			addr_parts.push(zip);
-		}				
-		if (city != '')
-		{
-			city = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_CITY_TXT').replace(/%s/g, city);
-			addr_parts.push(city);
-		}
-		if (street != '')
-		{
-			street = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_STREET_TXT').replace(/%s/g, street);
-			addr_parts.push(street);			
-		}
-		if (house != '')
-		{
-			house = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_HOUSE_TXT').replace(/%s/g, house);
-			addr_parts.push(house);			
-		}
-		if (entrance != '')
-		{
-			entrance = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_ENTRANCE_TXT').replace(/%s/g, entrance);
-			addr_parts.push(entrance);			
-		}
-		if (floor != '')
-		{
-			floor = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_FLOOR_TXT').replace(/%s/g, floor);
-			addr_parts.push(floor);			
-		}
-		if (flat != '')
-		{
-			flat = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_FLAT_TXT').replace(/%s/g, flat);
-			addr_parts.push(flat);			
-		}
-
-		address = addr_parts.join(', ');
-		item.find('span:first').html(address);
-
-		return true;		
-	}
-	
 });
+
+	
+function KSMProfileSetAddressString(item)
+{
+	var zip = item.find('input[name*="zip"]').val();
+	var city = item.find('input[name*="city"]').val();
+	var street = item.find('input[name*="street"]').val();
+	var house = item.find('input[name*="house"]').val();
+	var entrance = item.find('input[name*="entrance"]').val();
+	var floor = item.find('input[name*="floor"]').val();
+	var flat = item.find('input[name*="flat"]').val();
+	
+	var addr_parts = [];
+	var address = '';
+	
+	if (zip != '')
+	{
+		addr_parts.push(zip);
+	}				
+	if (city != '')
+	{
+		city = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_CITY_TXT').replace(/%s/g, city);
+		addr_parts.push(city);
+	}
+	if (street != '')
+	{
+		street = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_STREET_TXT').replace(/%s/g, street);
+		addr_parts.push(street);			
+	}
+	if (house != '')
+	{
+		house = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_HOUSE_TXT').replace(/%s/g, house);
+		addr_parts.push(house);			
+	}
+	if (entrance != '')
+	{
+		entrance = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_ENTRANCE_TXT').replace(/%s/g, entrance);
+		addr_parts.push(entrance);			
+	}
+	if (floor != '')
+	{
+		floor = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_FLOOR_TXT').replace(/%s/g, floor);
+		addr_parts.push(floor);			
+	}
+	if (flat != '')
+	{
+		flat = Joomla.JText._('PLG_USER_KSENMART_ADDRESSES_FLAT_TXT').replace(/%s/g, flat);
+		addr_parts.push(flat);			
+	}
+
+	address = addr_parts.join(', ');
+	item.find('span:first').html(address);
+
+	return true;		
+}
