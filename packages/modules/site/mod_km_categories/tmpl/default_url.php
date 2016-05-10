@@ -6,4 +6,4 @@
  
 defined('_JEXEC') or die;
 ?>
-<a level="<?php echo $item->level; ?>" class="ksenmart-categories-item-link" href="<?php echo $item->link; ?>"><?php echo htmlspecialchars($item->title); ?></a>
+<a data-level="<?php echo $item->level; ?>" class="ksm-module-categories-item-link" href="<?php echo $item->link; ?>"><?php echo htmlspecialchars($item->title); ?></a>

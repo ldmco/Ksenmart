@@ -18,7 +18,7 @@ $km_params = JComponentHelper::getParams('com_ksenmart');
 $document  = JFactory::getDocument();
 $document->addScript(JURI::base() . 'modules/mod_km_categories/js/default.js', 'text/javascript', true);
 if($km_params->get('modules_styles', true)){
-
+	$document->addStyleSheet(JURI::base() . 'modules/mod_km_categories/css/default.css');
 }
 
 require_once dirname(__file__) . '/helper.php';

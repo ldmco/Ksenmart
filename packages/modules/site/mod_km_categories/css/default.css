@@ -1,0 +1,70 @@
+.ksm-module-categories {
+    border: 1px solid #DCDCDC;
+    padding: 0 0 20px;
+    margin: 0 0 30px;
+}
+.ksm-module-categories h3 {
+    text-align: left;
+    padding-left: 0;
+    font-size: 20px;
+    margin: 0;
+    height: 54px;
+    line-height: 53px;
+    padding: 0 0 0 15px;
+    overflow: hidden;
+}
+.ksm-module-categories .ksm-module-categories-level {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-level {
+    padding: 0px 15px 9px;
+}
+.ksm-module-categories .ksm-module-categories-level-hide {
+	display:none;
+}
+.ksm-module-categories .ksm-module-categories-item {
+    position: relative;
+    line-height: 20px;	
+}
+.ksm-module-categories .ksm-module-categories-item-deeper:before {
+    cursor: pointer;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    content: '';
+    background: url(../images/collapsed.png) center no-repeat;
+    position: absolute;
+    top: 11px;
+    right: 15px;
+}
+.ksm-module-categories .ksm-module-categories-item-deeper .ksm-module-categories-item-deeper:before {
+	top:4px;
+}
+.ksm-module-categories .ksm-module-categories-item-opened:before,
+.ksm-module-categories .ksm-module-categories-item-deeper.ksm-module-categories-item-active:before {
+	background: url(../images/collapse.png) center no-repeat;
+}
+.ksm-module-categories .ksm-module-categories-item-link {
+    font-size: 16px;
+    margin: 3px 15px;
+    padding: 6px 0px 5px 0px;
+    border: none;
+    border-top: 1px solid #E4E4E4;
+    text-decoration: none;	
+    display: block;	
+}
+.ksm-module-categories .ksm-module-categories-item-link:hover {
+    color: #005580;
+}
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-level .ksm-module-categories-item-link {
+    margin: 0 0 0 20px;
+    padding: 0;
+    border: none;
+	color: #adba04;	
+	font-size: 14px	;
+}
+.ksm-module-categories .ksm-module-categories-item-active > .ksm-module-categories-item-link {
+	font-weight:bold;
+}

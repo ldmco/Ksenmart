@@ -15,9 +15,11 @@
         <filename>mod_km_categories.xml</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
-        <folder>tmpl</folder>
+        <folder>css</folder>
+        <folder>images</folder>
         <folder>js</folder>
         <folder>sql</folder>
+        <folder>tmpl</folder>
     </files>
 
     <languages folder="language">

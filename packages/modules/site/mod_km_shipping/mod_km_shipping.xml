@@ -13,13 +13,14 @@
 	<description>Способы доставки и оплаты KsenMart</description>
 	
     <files>
-        <folder>tmpl</folder>
-        <folder>js</folder>
 		<filename module="mod_km_shipping">mod_km_shipping.php</filename>
         <filename>helper.php</filename>
         <filename>mod_km_shipping.xml</filename>
 		<filename>index.html</filename>
+        <folder>css</folder>		
+        <folder>js</folder>		
         <folder>sql</folder>
+        <folder>tmpl</folder>
     </files>
     
     <languages folder="language">

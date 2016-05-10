@@ -7,7 +7,7 @@
 defined('_JEXEC') or die;
 
 ?>
-<div class="<?php echo $class_sfx?>">
+<div class="ksm-module-categories <?php echo $class_sfx?>">
 	<h3><?php echo $module->title?></h3>
 	<?php echo JText::_('MOD_KM_CATEGORIES_NO_CATEGORIES');?>
 </div>

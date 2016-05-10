@@ -1,0 +1,35 @@
+.ksm-module-shipping {
+    border: 1px solid #DCDCDC;
+    padding: 0 0 20px;
+    margin: 0 0 30px;
+}
+.ksm-module-shipping h3 {
+    text-align: left;
+    padding-left: 0;
+    font-size: 20px;
+    margin: 0;
+    height: 54px;
+    line-height: 53px;
+    padding: 0 0 0 15px;
+    overflow: hidden;
+}
+.ksm-module-shipping h5 {
+    margin: 0 0 5px;
+    font-size: 14px;	
+}
+.ksm-module-shipping .ksm-module-shipping-region-row,
+.ksm-module-shipping .ksm-module-shipping-delivery-row,
+.ksm-module-shipping .ksm-module-shipping-payment-row {
+    padding: 0 15px;
+    margin: 0 0 15px;
+    width: auto;
+}
+#ksm-module-shipping-region-select {
+	width:100%;
+}
+.ksm-module-shipping .ksm-module-shipping-delivery-row p,
+.ksm-module-shipping .ksm-module-shipping-payment-row p {
+	margin:0px;
+    line-height:20px;
+    font-size:14px;	
+}

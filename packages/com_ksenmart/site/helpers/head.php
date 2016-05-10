@@ -12,6 +12,7 @@ class KsenmartHtmlHelper {
 
     public static function AddHeadTags() {
         if(self::$_headAdded == true) return;
+		$app = JFactory::getApplication();
         $session = JFactory::getSession();
         $document = JFactory::getDocument();
 
@@ -23,16 +24,18 @@ class KsenmartHtmlHelper {
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/common.js');
         
-        $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
-
-        if($params->get('include_css', 1)) {
-            $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/template.css');
-        }
+		if($params->get('include_css', 1)) 
+		{
+			$document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/common.css');
+		}
+		
+		$Itemid = $app->input->get('Itemid', 0);
         
         $js = "
         var URI_ROOT='" . JURI::root() . "';
         var km_cart_link='" . JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid=' . KSSystem::getShopItemid()) . "';
         var shopItemid='" . KSSystem::getShopItemid() . "';
+        var Itemid='" . $Itemid . "';
         var order_type='ordering';
         var order_dir='asc';    
         var limit=" . $params->get('site_product_limit', 30) . ";
