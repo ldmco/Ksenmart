@@ -144,18 +144,12 @@ jQuery(document).ready(function() {
         return res;
     });
 
-    jQuery('body').on('click', '.ksm-catalog-buy-form [type="submit"]', function(e) {
+    jQuery('body').on('submit', '.ksm-catalog-buy-form', function(e) {
+        e.preventDefault();
         e.stopPropagation();
 
-        var form = jQuery(this).parents('form');
+        var form = jQuery(this);
         var product_packaging = form.find('[name="product_packaging"]');
-
-        if (!form[0].checkValidity()) {
-            // If the form is invalid, submit it. The form won't actually submit;
-            // this will just cause the browser to display the native HTML5 error messages.
-            form.find(':submit').submit();
-            return;
-        }
 
         if (product_packaging.length) {
 
@@ -202,18 +196,26 @@ jQuery(document).ready(function() {
                                 KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 610, 250);
                             } else {
                                 jQuery.ajax({
-                                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
+                                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&' + form.serialize(),
                                     success: function(data) {
-                                        jQuery('#minicart').html(data);
+										if (window.KSMUpdateMinicart)
+										{
+											KSMUpdateMinicart();
+										}
+
                                         KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                                     }
                                 });
                             }
                         } else {
                             jQuery.ajax({
-                                url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
+                                url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&' + form.serialize(),
                                 success: function(data) {
-                                    jQuery('#minicart').html(data);
+									if (window.KSMUpdateMinicart)
+									{
+										KSMUpdateMinicart();
+									}
+									
                                     KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                                 }
                             });
@@ -222,9 +224,13 @@ jQuery(document).ready(function() {
                 });
             } else {
                 jQuery.ajax({
-                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
+                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&' + form.serialize(),
                     success: function(data) {
-                        jQuery('#minicart').html(data);
+						if (window.KSMUpdateMinicart)
+						{
+							KSMUpdateMinicart();
+						}
+						
                         KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
                     }
                 });
@@ -233,81 +239,6 @@ jQuery(document).ready(function() {
         }
 
         return true;
-    });
-
-    jQuery('.buy-price2 .buy .button').on('click', function() {
-        jQuery('.buy-price .buy .button').click();
-        return false;
-    });
-
-    jQuery('.buy-price .buy a').on('click', function() {
-
-        var form = jQuery(this).parents('form');
-        var flag = true;
-
-        form.find('.options .row').each(function() {
-            if (jQuery(this).find('.cusel').length > 0 && jQuery(this).find('input').val() == 0) {
-                if (!jQuery(this).is('.row_active'))
-                    jQuery(this).addClass('row_active');
-                flag = false;
-            } else if (jQuery(this).find('input[type="radio"]').length > 0 && jQuery(this).find('input[type="radio"]:checked').length == 0) {
-                if (!jQuery(this).is('.row_active'))
-                    jQuery(this).addClass('row_active');
-                flag = false;
-            }
-        });
-        if (!flag) {
-            jQuery('body').animate({
-                'scrollTop': jQuery('#item').offset().top
-            }, 500);
-            return false;
-        }
-        KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&close_order=1&tmpl=component', 920, Math.round(jQuery(window).height() * 9 / 10));
-        return false;
-    });
-
-    jQuery('.buy-price2 .buy a').on('click', function() {
-        jQuery('.buy-price .buy a').click();
-        return false;
-    });
-
-    jQuery('.infos .buy .button').on('click', function() {
-        var prd_id = jQuery(this).attr('prd_id');
-        var prd_price = jQuery(this).attr('prd_price');
-        var form = jQuery(this).parents('form');
-        if (order_process == 1) {
-            jQuery.ajax({
-                url: URI_ROOT + 'index.php?option=com_ksenmart&view=order&task=order.get_order_id&tmpl=ksenmart',
-                success: function(data) {
-                    var order_id = data;
-                    if (order_id == 0) {
-                        KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&tmpl=component', 920, Math.round(jQuery(window).height() * 9 / 10));
-                    } else {
-                        jQuery.ajax({
-                            url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
-                            success: function(data) {
-                                jQuery('#minicart').html(data);
-                                KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
-                            }
-                        });
-                    }
-                }
-            });
-        } else {
-            jQuery.ajax({
-                url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.add_to_cart&layout=minicart&' + form.serialize() + '&tmpl=ksenmart',
-                success: function(data) {
-                    jQuery('#minicart').html(data);
-                    KMShowCartMessage(Joomla.JText._('KSM_CART_PRODUCT_ADDED_TO_CART'));
-                }
-            });
-        }
-        return false;
-    });
-
-    jQuery('.infos .buy a').on('click', function() {
-        KMOpenPopupWindow(URI_ROOT + 'index.php?option=com_ksenmart&view=order&' + form.serialize() + '&close_order=1&tmpl=component', 920, Math.round(jQuery(window).height() * 9 / 10));
-        return false;
     });
 
     jQuery('body').on('click', '.km-message .link_shop', function() {

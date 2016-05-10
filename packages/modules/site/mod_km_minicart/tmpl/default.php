@@ -6,9 +6,9 @@
  
 defined('_JEXEC') or die;
 ?>
-<div id="minicart" class="well">
+<div class="ksm-module-minicart <?php echo $class_sfx?>">
 	<a href="<?php echo $link; ?>">
-		<span class="muted"><strong><?php echo JText::_('MOD_KM_MINICART_LABEL'); ?> [<?php echo $cart->total_prds; ?>]</strong></span>
-		<small class="muted"><?php echo JText::_('MOD_KM_MINICART_TEXT'); ?></small>
+		<div class="ksm-module-minicart-label"><?php echo JText::_('MOD_KM_MINICART_LABEL'); ?> [<?php echo $cart->total_prds; ?>]</div>
+		<div class="ksm-module-minicart-text"><?php echo JText::_('MOD_KM_MINICART_TEXT'); ?></div>
 	</a>
 </div>

@@ -14,20 +14,20 @@ if (!class_exists('KsenmartHtmlHelper')) {
 }
 KsenmartHtmlHelper::AddHeadTags();
 
-if (!class_exists('KsenMartModelCart')) {
-    include (JPATH_ROOT . '/components/com_ksenmart/models/cart.php');
-}
-
 $km_params = JComponentHelper::getParams('com_ksenmart');
 $document  = JFactory::getDocument();
 $document->addScript(JURI::base() . 'modules/mod_km_minicart/js/default.js', 'text/javascript', true);
-if($km_params->get('modules_styles', true)){
+if($km_params->get('modules_styles', true))
+{
     $document->addStyleSheet(JURI::base() . 'modules/mod_km_minicart/css/default.css');
 }
 
-$Itemid     = KSSystem::getShopItemid();
-$cart_model = new KsenMartModelCart();
-$link       = JRoute::_('index.php?option=com_ksenmart&view=cart&Itemid=' . $Itemid);
-$cart       = $cart_model->getCart(); 
+$class_sfx  = htmlspecialchars($params->get('moduleclass_sfx'));
+
+require_once dirname(__file__) . '/helper.php';
+$modKMMinicartHelper = new modKMMinicartHelper();
+
+$cart = $modKMMinicartHelper->getCart();
+$link = $modKMMinicartHelper->getCartLink();
 
 require JModuleHelper::getLayoutPath('mod_km_minicart', $params->get('layout', 'default'));

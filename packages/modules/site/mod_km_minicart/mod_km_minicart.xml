@@ -11,11 +11,12 @@
 	<description>Модуль миникорзины</description>
 	<files>
 		<filename module="mod_km_minicart">mod_km_minicart.php</filename>
+		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_km_minicart.xml</filename>
         <folder>css</folder>
         <folder>js</folder>
-        <folder>i</folder>
+        <folder>images</folder>
         <folder>tmpl</folder>
         <folder>sql</folder>
     </files>

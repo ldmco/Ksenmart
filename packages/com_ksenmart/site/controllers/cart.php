@@ -12,13 +12,13 @@ class KsenMartControllerCart extends JControllerLegacy {
     function add_to_cart() {
         $model = $this->getModel('cart');
         $model->addToCart();
-        parent::display();
+        JFactory::getApplication()->close();
     }
 
     function update_cart() {
         $model = $this->getModel('cart');
         $model->updateCart();
-        parent::display();
+        JFactory::getApplication()->close();
     }
 
     function set_discount() {

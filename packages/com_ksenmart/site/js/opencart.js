@@ -80,7 +80,7 @@ jQuery('.quantt input').on('mouseout',function(e){
                 }
 
                 jQuery.ajax({
-                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&layout=minicart&task=cart.update_cart&item_id=' + item_id + '&count=' + count + '&tmpl=ksenmart',
+                    url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.update_cart&item_id=' + item_id + '&count=' + count,
                     success: function(data) {
                         KMShowMessage('<h2>'+Joomla.JText._('KSM_CART_ORDER_UPDATED')+'</h2>');
                         if (count == 0) {
@@ -93,7 +93,10 @@ jQuery('.quantt input').on('mouseout',function(e){
                             input.attr('count', count);
                             update_prices();
                         }
-                        jQuery('#minicart').html(data);
+						if (window.KSMUpdateMinicart)
+						{
+							KSMUpdateMinicart();
+						}
                     }
                 });
             }
@@ -213,7 +216,7 @@ function update_count($this) {
     }
     if (old_count != count) {
         jQuery.ajax({
-            url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&layout=minicart&task=cart.update_cart&item_id=' + item_id + '&count=' + count + '&tmpl=ksenmart',
+            url: URI_ROOT + 'index.php?option=com_ksenmart&view=cart&task=cart.update_cart&item_id=' + item_id + '&count=' + count,
             success: function(data) {
                 KMShowMessage('<h2>'+Joomla.JText._('KSM_CART_ORDER_UPDATED')+'</h2>');
                 if (count == 0) {
@@ -225,7 +228,10 @@ function update_count($this) {
                 } else {
                     input.attr('count', count);
                 }
-                jQuery('#minicart').html(data);
+				if (window.KSMUpdateMinicart)
+				{
+					KSMUpdateMinicart();
+				}
             }
         });
     }
