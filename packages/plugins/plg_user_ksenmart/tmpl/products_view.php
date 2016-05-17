@@ -35,7 +35,7 @@ defined('_JEXEC') or die;
 		</div>	
 		<div class="ksm-profile-products-item-button">
 			<?php if ($product->catalog_buy): ?> 
-				<form class="ksm-catalog-buy-form">
+				<form class="ksm-catalog-item-buy-form">
 					<button type="submit" class="ksm-profile-products-item-button-buy"><?php echo JText::_('KSM_PRODUCT_ADDTOCART_BUTTON_TEXT'); ?></button>
 					<input type="hidden" name="count" value="<?php echo $product->product_packaging; ?>" />
 					<input type="hidden" name="product_packaging" value="<?php echo $product->product_packaging; ?>" />
