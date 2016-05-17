@@ -144,7 +144,7 @@ jQuery(document).ready(function() {
         return res;
     });
 
-    jQuery('body').on('submit', '.ksm-catalog-buy-form', function(e) {
+    jQuery('body').on('submit', '.ksm-catalog-item-buy-form', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
