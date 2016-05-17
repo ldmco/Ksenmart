@@ -7,9 +7,19 @@
 defined('_JEXEC') or die;
 ?>
 <a href="<?php echo $this->product->link; ?>" title="<?php echo $this->product->title; ?>">
-	<img src="<?php echo $this->product->small_img; ?>" alt="" class="span12" />
+	<img src="<?php echo $this->product->small_img; ?>">
 </a>
-<?php echo ($this->product->hot == 1?'<span class="hit"></span>':'')?>
-<?php echo ($this->product->recommendation == 1?'<span class="super"></span>':''); ?>
-<?php echo ($this->product->new == 1?'<span class="new"></span>':''); ?>
-<?php echo ($this->product->promotion == 1?'<span class="act"></span>':''); ?>
+<div class="ksm-catalog-item-flags">
+	<?php if ($this->product->hot == 1): ?>
+	<span class="ksm-catalog-item-flag-hot"></span>
+	<?php endif; ?>
+	<?php if ($this->product->recommendation == 1): ?>
+	<span class="ksm-catalog-item-flag-recommendation"></span>
+	<?php endif; ?>
+	<?php if ($this->product->new == 1): ?>
+	<span class="ksm-catalog-item-flag-new"></span>
+	<?php endif; ?>
+	<?php if ($this->product->promotion == 1): ?>
+	<span class="ksm-catalog-item-flag-promotion"></span>
+	<?php endif; ?>				
+</div>	
