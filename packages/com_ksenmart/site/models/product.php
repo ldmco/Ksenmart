@@ -26,6 +26,10 @@ class KsenMartModelProduct extends JModelKSForm {
         
         $row = KSMProducts::getProduct($this->_id);
         if (!empty($row)) {
+			$properties = JFactory::getApplication()->input->get('properties', array(), 'ARRAY');
+			if(count($properties)){
+				KSMProducts::getProductPriceProperties($row->id, $properties, $row);
+			}
             $row->rate = KSMProducts::getProductRate($row->id);
             $row->manufacturer = KSMProducts::getProductManufacturer($row->manufacturer);
             $row->add_link_cart = KSFunctions::getAddToCartLink();

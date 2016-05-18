@@ -41,10 +41,12 @@ class KsenMartController extends JControllerLegacy {
     function get_layouts() {
         $view = JRequest::getVar('view');
         $layouts = JRequest::getVar('layouts', array());
+		$format = JRequest::getVar('format', 'html');
         $response = array();
         
         $model = $this->getModel($view);
-        $view = $this->getView($view, 'html');
+		$model->setModelFields();
+        $view = $this->getView($view, $format);
         $view->setModel($model, true);
         
         foreach ($layouts as $layout) {

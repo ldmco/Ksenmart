@@ -82,55 +82,21 @@ jQuery(document).ready(function() {
                     if (typeof properties[propId] == 'undefined') {
                         properties[propId] = {};
                     }
-                    properties[propId][valueId] = {
-                        'propId': propId,
-                        'valueId': valueId,
-                        'checked': element.checked
-                    };
+                    properties[propId]['value_id'] = valueId;
                 }
-            } else if (typeof element.checked != 'undefined' && !element.checked && typeof properties[propId] != 'undefined') {
-                if (typeof properties[propId][valueId] != 'undefined' && !element.checked) {
-                    delete properties[propId][valueId];
-                }
-            } else if (typeof properties[propId] != 'undefined' && !element.selected && typeof element.selected != 'undefined') {
-                delete properties[propId][valueId];
             }
         });
+		
+		var data = {};
+		data['layouts'] = {
+			'0': 'product_prices'
+		};
+		data['view'] = 'product';
+		data['format'] = 'raw';
+		data['id'] = id;
+		data['properties'] = properties;
 
-        jQuery.ajax({
-            type: 'POST',
-            url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.get_product_price_with_properties&tmpl=ksenmart',
-            data: {
-                prop_id: prop_id,
-                val_prop_id: val_prop_id,
-                price: price,
-                id: id,
-                count: count,
-                product_packaging: product_packaging,
-                properties: properties
-            },
-            success: function(data) {
-                data = data.split('^^^');
-                form.find('.prices .price .price_num').text(data[0]);
-                form.find('input[name="price"]').val(data[1]);
-            }
-        });
-    });
-
-    jQuery('.unit .prop .color').click(function() {
-        var form = jQuery(this).parents('form');
-        var prop_value_id = jQuery(this).parents('.item').attr('prop_value_id');
-        jQuery(this).parents('.prop').find('.active').removeClass('active');
-        jQuery(this).parents('.item').addClass('active');
-        jQuery(this).parents('.prop').find('input').val(prop_value_id);
-        jQuery.ajax({
-            url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.get_product_price_with_properties&' + form.serialize() + '&tmpl=ksenmart',
-            success: function(data) {
-                data = data.split('^^^');
-                form.find('.prices .price .price_num').text(data[0]);
-                form.find('input[name="price"]').val(data[1]);
-            }
-        });
+		KMGetLayouts(data);
     });
 
     jQuery('.reviews .head a').click(function() {
@@ -177,7 +143,7 @@ jQuery(document).ready(function() {
         jQuery(this).removeClass('row_active');
     });
 
-    jQuery('.quant .minus').click(function() {
+    jQuery('.unit').on('click', '.quant .minus', function() {
         var input = jQuery(this).parents('form').find('input[name="count"]');
         var count = parseFloat(input.val());
         var product_packaging = parseFloat(jQuery(this).parents('form').find('input[name="product_packaging"]').val());
@@ -192,7 +158,7 @@ jQuery(document).ready(function() {
         return false;
     });
 
-    jQuery('.quant .plus').click(function() {
+    jQuery('.unit').on('click', '.quant .plus', function() {
         var input = jQuery(this).parents('form').find('input[name="count"]');
         var count = parseFloat(input.val());
         var product_packaging = parseFloat(jQuery(this).parents('form').find('input[name="product_packaging"]').val());

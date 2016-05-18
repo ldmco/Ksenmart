@@ -120,6 +120,7 @@ class KSMOrders extends KSCoreHelper {
                 self::setOrderItemsProperties($order, $oid);
                 foreach ($order as $o_item) {
                     $o_item->product = KSMProducts::getProduct($o_item->product_id);
+					$o_item->price_val = KSMPrice::showPriceWithTransform($o_item->price);
                 }
             }
             self::onExecuteAfter(array($order));

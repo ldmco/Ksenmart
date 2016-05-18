@@ -519,8 +519,14 @@ function KMSendActivity() {
 
 
 function KMGetLayouts(data) {
+	if(data.layouts != undefined){
+		for (var key in data.layouts){
+			jQuery('.' + data.layouts[key]).css('position', 'relative');
+			jQuery('.' + data.layouts[key]).append('<div class="ksm-layout-loading"></div>');
+		}
+	}
     jQuery.ajax({
-        url: URI_ROOT + 'index.php?option=com_ksenmart&task=get_layouts&view=cart&tmpl=ksenmart',
+        url: URI_ROOT + 'index.php?option=com_ksenmart&task=get_layouts&tmpl=ksenmart',
         data: data,
         dataType: 'json',
         async: false,

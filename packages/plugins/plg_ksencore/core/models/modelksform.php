@@ -43,6 +43,10 @@ abstract class JModelKSForm extends JModelForm {
         return $this;
     }
 	
+	public function setModelFields(){
+		return true;
+	}
+	
     public function getForm($data = array() , $loadData = true, $control = 'jform') {
         
         JKSForm::addFormPath(JPATH_COMPONENT . '/models/forms');

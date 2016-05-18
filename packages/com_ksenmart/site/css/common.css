@@ -1,0 +1,11 @@
+.ksm-layout-loading {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: RGBA(255,255,255,0.7);
+	background-image: url('/media/com_ksenmart/images/loading.gif');
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	top: 0;
+	left: 0;
+}

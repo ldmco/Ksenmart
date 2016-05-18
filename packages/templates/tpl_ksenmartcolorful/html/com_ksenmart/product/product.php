@@ -7,7 +7,7 @@
 	<div class="row-fluid unit top_prd_block">
         <?php echo $this->loadTemplate('gallery'); ?>
 		<div class="info" id="info">
-			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal">
+			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal ksm-catalog-item-buy-form">
 				<?php echo $this->loadTemplate('info');?>
 				<?php echo $this->loadTemplate('prices');?>	
     			<input type="hidden" name="price" value="<?php echo $this->product->price; ?>">	

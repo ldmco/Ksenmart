@@ -247,6 +247,60 @@ class KSMProducts extends KSCoreHelper {
         }
         return false;
     }
+	
+	public static function getProductPriceProperties($pid = 0, $selectedProperties = array(), $prd = null){
+		
+		self::onExecuteBefore(array(&$pid,&$selectedProperties,&$prd));
+		
+		$db 				= JFactory::getDBO();
+		$productProperties 	= self::getProperties($pid);
+		$prices           	= self::getProductPrices($pid);
+		$price              = $prices->price;
+		$price_type         = $prices->price_type;
+		$checked            = array();
+		
+		foreach ($productProperties as $property){
+			if($property->edit_price && isset($selectedProperties[$property->property_id]) && is_array($selectedProperties[$property->property_id])){
+				foreach($property->values as $value){
+					if($selectedProperties[$property->property_id]['value_id'] == $value->id){
+						$edit_priceC = $value->price;
+						$edit_price_symC = substr($edit_priceC, 0, 1);
+						self::getCalcPriceAsProperties($edit_price_symC, $edit_priceC, $price);
+					}
+				}
+			}
+		}
+		
+		$price = KSMPrice::getPriceInCurrentCurrency($price, $price_type);
+		
+		if(!empty($prd)){
+			$prd->price = $price;
+			$prd->val_price = KSMPrice::showPriceWithTransform($prd->price);
+		}
+		self::onExecuteAfter(array(&$price, &$prd));
+		
+		return $price;
+	}
+	
+	private function getCalcPriceAsProperties($edit_price_sym, $edit_price, &$price) {
+		switch ($edit_price_sym) {
+			case '+':
+				$price += substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '-':
+				$price -= substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '/':
+				$price = $price / substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			case '*':
+				$price = $price * substr($edit_price, 1, strlen($edit_price) - 1);
+			break;
+			default:
+				$price += $edit_price;
+		}
+		return $price;
+	}
     
     public static function getProperties($pid = 0, $prid = 0, $val_id = 0, $by = 'ppv.product_id', $by_sort = 0) {
         

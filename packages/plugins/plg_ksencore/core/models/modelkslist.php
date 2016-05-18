@@ -24,6 +24,10 @@ abstract class JModelKSList extends JModelList {
         $this->context .= ($this->getName() && $layout = JRequest::getVar('layout', 'default')) ? '.' . $layout : '';
         $this->params = JComponentHelper::getParams($this->ext_name_com);
     }
+	
+	public function setModelFields(){
+		return true;
+	}
 
     public function onExecuteBefore($function = null, $vars = array()) {
         $model = &$this;

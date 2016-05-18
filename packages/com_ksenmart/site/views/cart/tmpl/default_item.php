@@ -45,8 +45,11 @@ defined('_JEXEC') or die;
 	</td>
 	<td>
 		<div class="pricee">
-			<?php echo $this->item->product->val_price; ?>
-		</div>	
+			<?php if(!empty($this->item->old_price)){ ?>
+				<div class="old_price muted"><?php echo $this->item->old_price_val; ?></div>
+			<?php } ?>
+			<?php echo $this->item->price_val; ?>
+		</div>
 	</td>
 	<td>
 		<div class="totall">
