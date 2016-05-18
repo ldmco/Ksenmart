@@ -7,6 +7,6 @@
 defined('_JEXEC') or die;
 ?>
 <center>
-	<h2><?php echo JText::_('KSM_NO_MANUFACTURERS'); ?></h2>
+	<h3><?php echo JText::_('KSM_NO_MANUFACTURERS'); ?></h3>
 </center>	
 

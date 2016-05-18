@@ -910,44 +910,6 @@ class KsenMartModelcatalog extends JModelKSList {
         return $manufacturers;
     }
     
-    public function getManufacturersListGroupByCountry(){
-        $this->onExecuteBefore('getManufacturersListGroupByCountry');
-
-        $query   = $this->_db->getQuery(true);
-        $query
-            ->select('
-                m.id,
-                m.title,
-                m.alias,
-                m.country,
-                c.title AS c_title
-            ')
-            ->from('#__ksenmart_manufacturers AS m')
-            ->leftjoin('#__ksenmart_countries AS c ON c.id=m.country')
-            ->where('m.country != 0')
-            ->order('m.ordering')
-        ;
-        $query
-            ->leftjoin("#__ksenmart_files AS f ON m.id=f.owner_id AND f.owner_type='manufacturer'")
-            ->group('m.id')
-        ;       
-        $this->_db->setQuery($query);
-        $manufacturers = $this->_db->loadObjectList();
-        
-        $brands_group = array();
-        foreach($manufacturers as $manufacturer){
-            if (!empty($manufacturer->folder)){
-                $manufacturer->img_link = JURI::root() . 'media/com_ksenmart/images/' . $manufacturer->folder . '/original/' . $manufacturer->filename;
-            }else{
-                $manufacturer->img_link = JURI::root() . 'media/com_ksenmart/images/manufacturers/no.jpg';
-            }       
-            $brands_group[$manufacturer->c_title][] = $manufacturer;
-        }
-        
-        $this->onExecuteAfter('getManufacturersListGroupByCountry', array(&$brands_group));
-        return $brands_group;
-    }
-    
     public function getLetters($brands){
         
         $this->onExecuteBefore('getLetters', array(&$brands));

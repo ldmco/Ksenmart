@@ -21,11 +21,6 @@ class KsenMartViewCatalog extends JViewKS {
         $layout         = $this->getLayout();
 
         switch($layout) {
-            case 'items':
-                $rows = $this->get('Items');
-                $this->assignRef('rows', $rows);
-                $this->setLayout('catalog_ajax_items');
-            break;
             case 'manufacturers':
                 $model   = $this->getModel();
                 $brands  = $this->get('Manufacturers');
@@ -39,23 +34,9 @@ class KsenMartViewCatalog extends JViewKS {
                 $this->assignRef('brands', $brands);
                 $this->assignRef('letters', $letters);
             break;
-            case 'countries':
-                $model   = $this->getModel();
-                $brands  = $this->get('ManufacturersListGroupByCountry');
-                
-                $document->setTitle(JText::_('KSM_MANUFACTURERS_PATHWAY_ITEM'));
-                $path->addItem(JText::_('KSM_MANUFACTURERS_PATHWAY_ITEM'), JRoute::_('index.php?option=com_ksenmart&view=catalog&layout=manufacturers'));
-                
-                $this->assignRef('brands', $brands);
-            break;
             default:
-
                 $model      = $this->getModel();
-                
-                $document->addScript(JURI::base() . 'components/com_ksenmart/js/catalog.js', 'text/javascript', true);
-                $document->addScript(JURI::base() . 'components/com_ksenmart/js/highslide/highslide-with-gallery.js', 'text/javascript', true);
-                $document->addScript(JURI::base() . 'components/com_ksenmart/js/highslide.js', 'text/javascript', true);
-                $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/js/highslide/highslide.css');
+				$document->addScript(JURI::base() . 'components/com_ksenmart/js/catalog.js', 'text/javascript', true);
                 
                 if(count($this->state->get('com_ksenmart.categories', array())) == 1) {
                     $category   = $this->get('Category');
