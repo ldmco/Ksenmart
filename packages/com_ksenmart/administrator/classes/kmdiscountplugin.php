@@ -11,32 +11,38 @@ if(!class_exists('KMPlugin')) {
 }
 
 abstract class KMDiscountPlugin extends KMPlugin {
+	
+	private $_discounts = null;
+	protected $_discount_catalog = 0;
+	protected $db;
 
     function __construct(&$subject, $config) {
+		$params = JComponentHelper::getParams('com_ksenmart');
+		$this->_discount_catalog = $params->get('discount_catalog', 0);
         parent::__construct($subject, $config);
     }
 	
     function calculateDiscountProduct($price, $params) {
 		$discount_value = 0;
         $undiscount_price = $price;
-        if($params->type==1 && $price>$discount_value) {
-            $discount_value = $params->value;   
-        }elseif($params->type == 0) {
-		    $discount = $price*$params->value/100;
+        if($params['type']==1 && $price>$discount_value) {
+            $discount_value = $params['value'];   
+        }elseif($params['type'] == 0) {
+		    $discount = $price*$params['value']/100;
             if($price > $price-$discount) $discount_value = $discount;
         }
+		
         return $discount_value;
     }
 	
     function onBeforeStartComponent() {
-        $db = JFactory::getDBO();
         $view = JRequest::getVar('view','noneview');
         $product_id = 0;		
         if($view=='product') $product_id = JRequest::getVar('id',0);	
-        $query = $db->getQuery(true);
-        $query->select('id, type')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('enabled=1');
-        $db->setQuery($query);
-        $discounts = $db->loadObjectList();
+        $query = $this->db->getQuery(true);
+        $query->select('id, type')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('enabled=1');
+        $this->db->setQuery($query);
+        $discounts = $this->db->loadObjectList();
 		$active_discounts = array(); 
         foreach($discounts as &$discount) {  
 			$return = $this->onCheckDiscountDate($discount->id); 
@@ -62,12 +68,8 @@ abstract class KMDiscountPlugin extends KMPlugin {
     }
 
     function onAfterExecuteKSMCartGetcart($model,$cart=null) {
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('id')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('enabled=1')->order('ordering');
-        $db->setQuery($query);
-        $discounts = $db->loadObjectList();
-        foreach($discounts as $discount) {
+		if(empty($this->_discounts)) $this->getDiscounts();
+        foreach($this->_discounts as $discount) {
             $return = $this->onCheckDiscountDate($discount->id);
             if(!$return) continue;
             $return = $this->onCheckDiscountCountry($discount->id);
@@ -79,6 +81,56 @@ abstract class KMDiscountPlugin extends KMPlugin {
             $this->onSetCartDiscount($cart, $discount->id);
         }
     }
+	
+	protected function getDiscounts(){
+		$query = $this->db->getQuery(true);
+		$query->select('id')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('enabled=1')->order('ordering');
+		$this->db->setQuery($query);
+		$this->_discounts = $this->db->loadObjectList();
+	} 
+	
+	function onAfterExecuteHelperKSMProductsGetProduct($prd = null){
+		if(!$this->_discount_catalog)
+			return false;
+		if(empty($prd)) 
+			return false;
+		if(empty($this->_discounts)) $this->getDiscounts();
+		foreach($this->_discounts as $discount) {
+            $return = $this->onCheckDiscountDate($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountCountry($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountUserGroups($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountActions($discount->id);
+            if($return == 1) continue;
+            $prd = $this->onSetProductDiscount($prd, $discount->id);
+        }
+	}
+	
+	function onAfterExecuteHelperKSMProductsGetProductPriceProperties($price = 0, $prd = null){
+		if(!$this->_discount_catalog)
+			return false;
+		if(empty($prd)) 
+			return false;
+		if(empty($this->_discounts)) $this->getDiscounts();
+		unset($prd->original_price);
+		foreach($this->_discounts as $discount) {
+            $return = $this->onCheckDiscountDate($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountCountry($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountUserGroups($discount->id);
+            if(!$return) continue;
+            $return = $this->onCheckDiscountActions($discount->id);
+            if($return == 1) continue;
+            $prd = $this->onSetProductDiscount($prd, $discount->id);
+        }
+	}
+	
+	function onSetProductDiscount($prd = null, $discount_id = null){
+		return $prd;
+	}
 
     function onAfterExecuteKSMOrdersGetorder($model,$order=null) {
         if(empty($order)) return false;
@@ -86,11 +138,10 @@ abstract class KMDiscountPlugin extends KMPlugin {
         if(!count($order_discounts)) return false;
         $order_discounts_ids = array();
         foreach($order_discounts as $key => $params) $order_discounts_ids[] = $key;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('id')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id in (' . implode(',', $order_discounts_ids) . ')');
-        $db->setQuery($query);
-        $discounts = $db->loadObjectList();
+        $query = $this->db->getQuery(true);
+        $query->select('id')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id in (' . implode(',', $order_discounts_ids) . ')');
+        $this->db->setQuery($query);
+        $discounts = $this->db->loadObjectList();
         foreach($discounts as $discount) {
             $this->onSetOrderDiscount($order, $discount->id, $order_discounts[$discount->id]);
         }
@@ -99,11 +150,10 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountDate($discount_id = null) {
         if(empty($discount_id)) return true;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('from_date,to_date')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $discount = $db->loadObject();
+        $query = $this->db->getQuery(true);
+        $query->select('from_date,to_date')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $discount = $this->db->loadObject();
         if(empty($discount)) return true;
         $date = date('Y-m-d');
         if($date > $discount->to_date || $date < $discount->from_date) return false;
@@ -112,11 +162,10 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountActions($discount_id = null) {
         if(empty($discount_id)) return 0;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('id,actions_limit')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $discount = $db->loadObject();
+        $query = $this->db->getQuery(true);
+        $query->select('id,actions_limit')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $discount = $this->db->loadObject();
         if(empty($discount)) return 0;
         $dispatcher = JDispatcher::getInstance();
         $results = $dispatcher->trigger('onValidateAction', array($discount->id));
@@ -138,11 +187,10 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountUserGroups($discount_id = null) {
         if(empty($discount_id)) return true;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('user_groups')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $user_groups = $db->loadResult(); 
+        $query = $this->db->getQuery(true);
+        $query->select('user_groups')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $user_groups = $this->db->loadResult(); 
         if(empty($user_groups)) return true;
         $user_groups = json_decode($user_groups, true); 
         if(!count($user_groups)) return true;
@@ -156,11 +204,10 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountCountry($discount_id = null) {
         if(empty($discount_id)) return true;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('regions')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $regions = $db->loadResult();
+        $query = $this->db->getQuery(true);
+        $query->select('regions')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $regions = $this->db->loadResult();
         if(empty($regions)) return true;
         
 		$app = JFactory::getApplication();
@@ -172,19 +219,18 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountManufacturers($discount_id = null, $product_id = null) {
         if(empty($discount_id)) return true;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('manufacturers')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $manufacturers = $db->loadResult();
+        $query = $this->db->getQuery(true);
+        $query->select('manufacturers')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $manufacturers = $this->db->loadResult();
         if(empty($manufacturers)) return true;
         $manufacturers = json_decode($manufacturers, true); 
         if(!count($manufacturers)) return true;
         if(empty($product_id)) return true;
-        $query = $db->getQuery(true);
-        $query->select('manufacturer')->from('#__ksenmart_products')->where('id=' . $product_id);
-        $db->setQuery($query);
-        $manufacturer = $db->loadResult();
+        $query = $this->db->getQuery(true);
+        $query->select('manufacturer')->from('#__ksenmart_products')->where('id=' . (int)$product_id);
+        $this->db->setQuery($query);
+        $manufacturer = $this->db->loadResult();
         if(empty($manufacturer)) return false;
         if(!in_array($manufacturer, $manufacturers)) return false;
         return true;
@@ -192,19 +238,18 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onCheckDiscountCategories($discount_id = null, $product_id = null) {
         if(empty($discount_id)) return true;
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('categories')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $categories = $db->loadResult();
+        $query = $this->db->getQuery(true);
+        $query->select('categories')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $categories = $this->db->loadResult();
         if(empty($categories)) return true;
         $categories = json_decode($categories, true);
         if(!count($categories)) return true;
         if(empty($product_id)) return true;
-        $query = $db->getQuery(true);
-        $query->select('category_id')->from('#__ksenmart_products_categories')->where('product_id=' . $product_id);
-        $db->setQuery($query);
-        $prd_categories = $db->loadObjectList();
+        $query = $this->db->getQuery(true);
+        $query->select('category_id')->from('#__ksenmart_products_categories')->where('product_id=' . (int)$product_id);
+        $this->db->setQuery($query);
+        $prd_categories = $this->db->loadObjectList();
         if(!count($prd_categories)) return false;
         foreach($prd_categories as $category)
             if(in_array($category->category_id, $categories)) return true;
@@ -237,14 +282,13 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onSendDiscountEmail($discount_id = null) {
         if(empty($discount_id)) return false;
-        $db = JFactory::getDBO();
         $session = JFactory::getSession();
         $emailed = $session->get('com_ksenmart.emailed_discount_' . $discount_id, null);
         if(empty($emailed)) {
-            $query = $db->getQuery(true);
-            $query->select('content,info_methods')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-            $db->setQuery($query);
-            $discount = $db->loadObject();
+            $query = $this->db->getQuery(true);
+            $query->select('content,info_methods')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+            $this->db->setQuery($query);
+            $discount = $this->db->loadObject();
             if(empty($discount)) return;
             $info_methods = json_decode($discount->info_methods, true);
             if(KSUsers::getUser()->id == 0 || KSUsers::getUser()->email == '' || !in_array('email', $info_methods)) return;
@@ -264,12 +308,11 @@ abstract class KMDiscountPlugin extends KMPlugin {
 
     function onSendDiscountModule($discount_id = null) {
         if(empty($discount_id)) return;
-        $db = JFactory::getDBO();
         $session = JFactory::getSession();
-        $query = $db->getQuery(true);
-        $query->select('info_methods')->from('#__ksenmart_discounts')->where('type=' . $db->quote($this->_name))->where('id=' . $discount_id)->where('enabled=1');
-        $db->setQuery($query);
-        $info_methods = $db->loadResult();
+        $query = $this->db->getQuery(true);
+        $query->select('info_methods')->from('#__ksenmart_discounts')->where('type=' . $this->db->quote($this->_name))->where('id=' . (int)$discount_id)->where('enabled=1');
+        $this->db->setQuery($query);
+        $info_methods = $this->db->loadResult();
         if(empty($info_methods)) return;
         $info_methods = json_decode($info_methods, true);
         if(!in_array('module', $info_methods)) return;

@@ -415,7 +415,6 @@ class KsenMartModelCart extends JModelKSList {
         $jinput     = JFactory::getApplication()->input;
         
         $count      = $jinput->get('count', 1);
-        $price      = $jinput->get('price', 0, 'float');
         $id         = $jinput->get('id', 0, 'int');
         $prd        = KSMProducts::getProduct($id);
         
@@ -435,7 +434,7 @@ class KsenMartModelCart extends JModelKSList {
         }
         
         if(count($prd) > 0 && ($count <= $prd->in_stock || $this->params->get('use_stock', 1) == 0)) {
-            if($price == 0) $price = $prd->val_price_wou;
+            $price = KSMProducts::getProductPrices($prd->id)->price;
             if($prd->type == 'set') {
                 $related         = KSMProducts::getSetRelated($id);
                 $properties      = $this->getProperties();
@@ -459,6 +458,7 @@ class KsenMartModelCart extends JModelKSList {
                         $item_properties[$property->id] = array('value_id' => $value);
                     }
                 }
+				$price = KSMProducts::getProductPriceProperties($prd->id, $item_properties);
             }
             
             $query = $this->_db->getQuery(true);
@@ -551,11 +551,11 @@ class KsenMartModelCart extends JModelKSList {
     public function updateCart() {
         $this->onExecuteBefore('updateCart');
 
-        $params     = JComponentHelper::getParams('com_ksenmart');
-        $count      = JRequest::getVar('count', 0);
-        $price      = JRequest::getVar('price', 0);
-        $item_id    = JRequest::getVar('item_id', 0);
-        $item       = KSSystem::getTableByIds(array($item_id), 'order_items', array(
+		$params  = JComponentHelper::getParams('com_ksenmart');
+		$jinput  = JFactory::getApplication()->input;
+		$count   = $jinput->get('count', 0, 'float');
+		$item_id = $jinput->get('item_id', 0, 'int');
+		$item    = KSSystem::getTableByIds(array($item_id), 'order_items', array(
             't.id',
             't.order_id',
             't.price',
@@ -563,45 +563,50 @@ class KsenMartModelCart extends JModelKSList {
             't.product_id'
         ), false, false, true);
 
-        if($price != 0 && $price != $item->price) {
-            $order_item_object          = new stdClass();
-            $order_item_object->id      = $item_id;
-            $order_item_object->price   = $price;
-            $order_item_object->count   = $count;
-    
-            try{
-                $result = $this->_db->updateObject('#__ksenmart_order_items', $order_item_object, 'id');
-            }catch(Exception $e){}
+		$prd = KSMProducts::getProduct($item->product_id);
+		$item_properties = array();
+		foreach($prd->properties as $property) {
+			$value = JRequest::getVar('property_' . $property->id, '');
+			if(!empty($value)){
+				$item_properties[] = $property->id . ':' . $value;
+			}
+		}
+		
+        if(count($item_properties) > 0){
+			$price = KSMProducts::getProductPrices($item->product_id)->price;
+			$price = KSMProducts::getProductPriceProperties($prd->id, $item_properties);
+			if($price != 0 && $price != $item->price) {
+				$order_item_object         		= new stdClass();
+				$order_item_object->id      	= $item_id;
+				$order_item_object->price   	= $price;
+				$order_item_object->count   	= $count;
+				$order_item_object->properties 	= json_encode($item_properties);
+		
+				try{
+					$result = $this->_db->updateObject('#__ksenmart_order_items', $order_item_object, 'id');
+				}catch(Exception $e){}
 
-            $diff        = ($price - $item->price) * $item->count;
-            $item->price = $price;
-            
-            $order_object        = new stdClass();
-            $order_object->id    = $item->order_id;
-            $order_object->cost  = $this->getOrderCost($this->order_id) + $diff;
-    
-            try{
-                $result = $this->_db->updateObject('#__ksenmart_orders', $order_object, 'id');
-            }catch(Exception $e){}
-        }
-
-        $prd = KSMProducts::getProduct($item->product_id);
-        $item_properties = array();
-
-        foreach($prd->properties as $property) {
-            $value = JRequest::getVar('property_' . $property->id, '');
-            if(!empty($value)){
-                $item_properties[] = $property->id . ':' . $value;
-            }
-        }
-
-        $order_item_object             = new stdClass();
-        $order_item_object->id         = $item_id;
-        $order_item_object->properties = json_encode($item_properties);
-
-        try{
-            $result = $this->_db->updateObject('#__ksenmart_order_items', $order_item_object, 'id');
-        }catch(Exception $e){}
+				$diff        = ($price - $item->price) * $item->count;
+				$item->price = $price;
+				
+				$order_object        = new stdClass();
+				$order_object->id    = $item->order_id;
+				$order_object->cost  = $this->getOrderCost($this->order_id) + $diff;
+		
+				try{
+					$result = $this->_db->updateObject('#__ksenmart_orders', $order_object, 'id');
+				}catch(Exception $e){}
+			}
+		} else {
+			$price = $item->price;
+			$order_item_object = new stdClass();
+			$order_item_object->id = $item_id;
+			$order_item_object->count = $count;
+			
+			try{
+				$result = $this->_db->updateObject('#__ksenmart_order_items', $order_item_object, 'id');
+			}catch(Exception $e){}
+		}
 
         $diff_count = $count - $item->count;
         $diff       = ($count - $item->count) * $item->price;
@@ -622,14 +627,6 @@ class KsenMartModelCart extends JModelKSList {
             try {
                 $result = $this->_db->query(); // $this->_db->execute(); for Joomla 3.0.
             } catch (Exception $e) {} 
-        }else{
-            $order_item_object        = new stdClass();
-            $order_item_object->id    = $item_id;
-            $order_item_object->count = $count;
-    
-            try{
-                $result = $this->_db->updateObject('#__ksenmart_order_items', $order_item_object, 'id');
-            }catch(Exception $e){}
         }
 
         if($params->get('use_stock', 1)) {
@@ -696,6 +693,21 @@ class KsenMartModelCart extends JModelKSList {
 				
         return true;
     }
+	
+	public function setModelFields(){
+		$jinput 			= JFactory::getApplication()->input;
+		$order				= new stdClass();
+		$order->id			= $this->order_id;
+		$order->region_id	= $jinput->get('region_id', null, 'int');
+        $order->shipping_id	= $jinput->get('shipping_id', null, 'int');
+        $order->payment_id	= $jinput->get('payment_id', null, 'int');
+		try {
+            $result = $this->_db->updateObject('#__ksenmart_orders', $order, 'id');
+        }
+        catch (exception $e) {}
+		
+		return true;
+	}
 
     public function clearCart() {
         $this->onExecuteBefore('clearCart', array(&$this));

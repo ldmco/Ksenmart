@@ -16,37 +16,52 @@ class plgKMPluginsDiscountdisplay extends KMPlugin {
         parent::__construct($subject, $config);
     }
     
-    function onBeforeDisplayKSMCartDefault_total($view, &$tpl = null, &$html) {
+    function onAfterViewKSMcart($view, &$tpl = null, &$html = null) {
         if (empty($view->cart)) 
         return;
         $discount = 0;
         $discounts = array();
         
-        foreach ($view->cart->items as $item) {
+        foreach ($view->cart->items as &$item) {
             if (isset($item->discounts)) {
-                
+                $item_discount = 0;
                 foreach ($item->discounts as $discount_id => $discount) {
                     if ($discount->sum) {
                         if (!isset($discounts[0])) $discounts[0] = 0;
                         $discounts[0]+= $discount->discount_value;
+						$item_discount += $discount->discount_value;
                     } else {
                         if (!isset($discounts[$discount_id])) $discounts[$discount_id] = 0;
                         $discounts[$discount_id]+= $discount->discount_value;
                     }
                 }
+				if($item_discount > 0){
+					$item->old_price = $item->price;
+					$item->price -= $item_discount;
+					$item->old_price_val = KSMPrice::showPriceWithTransform($item->old_price);
+					$item->price_val = KSMPrice::showPriceWithTransform($item->price);
+				}
             }
         }
-        if (!count($discounts)) 
-        return;
+        if (!count($discounts)) return;
         $discount = max($discounts);
-        if (!$discount) 
-        return;
+        if (!$discount) return;
+		$discount_id = array_search($discount, $discounts);
+		if($discount_id > 0){
+			foreach($view->cart->items as &$item){
+				$discount_value = $item->discounts[$discount_id]->discount_value;
+				if(empty($discount_value)) continue;
+				$item->old_price = $item->price;
+				$item->price -= $discount_value;
+				$item->old_price_val = KSMPrice::showPriceWithTransform($item->old_price);
+				$item->price_val = KSMPrice::showPriceWithTransform($item->price);
+			}
+		}
         $view->cart->discount_sum = $discount;
         $view->cart->discount_sum_val = KSMPrice::showPriceWithTransform($discount);
         $view->cart->total_sum = $view->cart->total_sum - $discount;
         if ($view->cart->total_sum < 0) $view->cart->total_sum = 0;
         $view->cart->total_sum_val = KSMPrice::showPriceWithTransform($view->cart->total_sum);
-        
         
         return;
     }

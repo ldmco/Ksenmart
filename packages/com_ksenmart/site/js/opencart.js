@@ -1,7 +1,7 @@
 var maskList, maskOpts;
 jQuery(document).ready(function() {
 
-    jQuery('#order_info_show').on('click', function() {
+    jQuery('#cart').on('click', '#order_info_show', function() {
         jQuery('.order_info_block').slideDown('normal', function() {
             var destination = jQuery('.order_info_block').offset().top;
             jQuery('body').animate({
@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
             jQuery('.password_row').hide();
     });
 
-    jQuery('.quant .minus').on('click', function() {
+    jQuery('#cart').on('click', '.quant .minus', function() {
         var input = jQuery(this).parents('.quant').find('[type="text"]');
         var count = parseFloat(input.val());
         var product_packaging = parseFloat(input.attr('product_packaging'));
@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('.quant .plus').on('click', function() {
+    jQuery('#cart').on('click', '.quant .plus', function() {
         var input = jQuery(this).parents('.quant').find('[type="text"]');
         var count = parseFloat(input.val());
         var product_packaging = parseFloat(input.attr('product_packaging'));
@@ -49,7 +49,7 @@ jQuery('.quantt input').on('mouseout',function(e){
     update_count(jQuery(this));
 });*/
 
-    jQuery('.quantt input').on('keypress', function(e) {
+    jQuery('#cart').on('keypress', '.quantt input', function(e) {
         //e.preventDefault();
         if (e.keyCode == 13) {
             var input = jQuery(this);
@@ -239,39 +239,13 @@ function update_count($this) {
 }
 
 function update_prices() {
-    var prd_price = 0;
-    var item_price = 0;
-    var item_count = 0;
-    var deliverycost = jQuery('#deliverycost').val();
-
-    jQuery('#cart .item-cart').each(function() {
-        var item = jQuery(this);
-
-        item_price = item.find('.quantt input').attr('price');
-        item_count = item.find('.quantt input').val();
-        jQuery.ajax({
-            url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.get_transform_price&price=' + (item_price * item_count) + '&tmpl=ksenmart',
-            async: false,
-            success: function(data) {
-                item.find('.totall').html(data);
-            }
-        });
-        prd_price += item_price * item_count;
-    });
-    jQuery.ajax({
-        url: URI_ROOT + 'index.php?option=com_ksenmart&task=shopajax.get_transform_price&price=' + prd_price + '&tmpl=ksenmart',
-        async: false,
-        success: function(data) {
-            jQuery('.total_cost_items span').html(data);
-            jQuery('.total span').html(data);
-        }
-    });
-
     var data = {};
     data['layouts'] = {
         '0': 'default_on_display_after_content',
-        '1': 'default_total'
+        '1': 'default_total',
+		'2': 'default_content'
     };
+	data['view'] = 'cart';
 
     KMGetLayouts(data);
 }
@@ -307,11 +281,12 @@ function KMCartChangeRegion(obj) {
     data['layouts'] = {
         '0': 'default_shipping',
         '2': 'default_payments',
-        '1': 'default_total'
+        '1': 'default_total',
+		'3': 'default_content'
     };
+	data['view'] = 'cart';
     data['region_id'] = region_id;
 
-    setOrderField('region_id', region_id);
     KMGetLayouts(data);
 
     setTimeout(function() {
@@ -328,9 +303,9 @@ function KMCartChangeShipping(obj) {
         '0': 'default_shipping',
         '1': 'default_total'
     };
+	data['view'] = 'cart';
     data['shipping_id'] = shipping_id;
 
-    setOrderField('shipping_id', shipping_id);
     KMGetLayouts(data);
 
     setTimeout(function() {
@@ -346,8 +321,8 @@ function KMCartChangePayment(obj) {
     data['layouts'] = {
         '0': 'default_total'
     };
+	data['view'] = 'cart';
     data['payment_id'] = payment_id;
 
-    setOrderField('payment_id', payment_id);
     KMGetLayouts(data);
 }
