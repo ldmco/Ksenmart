@@ -240,29 +240,25 @@ class KsenMartModelComments extends JModelKSList {
     public function getShopReviewById($id){
         $this->onExecuteBefore('getShopReviewById', array(&$id));
 
-        $this->_db = JFactory::getDbo();
-
-        $query = $this->_db->getQuery(true);
-        $query->select('
-            c.id,
-            c.user_id AS user, 
-            c.name, 
-            c.comment, 
-            c.date_add, 
-            c.rate,
-            uf.filename AS logo
-        ');
-        $query->from('#__ksenmart_comments AS c');
-        $query->leftjoin('#__ksen_users AS u ON u.id=c.user_id');
-        $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
-        $query->where("c.type='shop_review'");
-        $query->where("c.published=1");
-        $query->where('c.id=' . $this->_db->q($id));
-        $query->order('c.date_add DESC');
+		$query = $this->_db->getQuery(true);
+        $query
+			->select('
+				c.id,
+				c.user_id as user, 
+				c.comment, 
+				c.date_add,
+				c.rate,  
+				u.name
+			')
+			->from('#__ksenmart_comments as c')
+			->leftjoin('#__users as u on u.id = c.user_id')
+			->where('c.type = '.$this->_db->quote('shop_review'))
+			->where('c.id = ' . $this->_db->q($id))
+			->where('c.published = 1')
+			->order('c.date_add desc')
+		;
         $this->_db->setQuery($query);
         $review = $this->_db->loadObject();
-        
-        KSUsers::setAvatarLogoInObject($review);
         
         $this->onExecuteAfter('getShopReviewById', array(&$review));
         return $review;
@@ -274,24 +270,23 @@ class KsenMartModelComments extends JModelKSList {
         $this->_db = JFactory::getDbo();
 
         $query = $this->_db->getQuery(true);
-        $query->select('
-            c.id,
-            c.user_id AS user, 
-            c.name, 
-            c.comment, 
-            c.date_add, 
-            c.rate,
-            uf.filename AS logo
-        ');
-        $query->from('#__ksenmart_comments AS c');
-        $query->leftjoin('#__ksen_users AS u ON u.id=c.user_id');
-        $query->leftjoin('#__ksenmart_files AS uf ON uf.owner_id=u.id');
-        $query->where("type='shop_review'");
-        $query->where("published=1");
-        $query->order('date_add DESC');
+        $query
+			->select('
+				c.id,
+				c.user_id as user, 
+				c.comment, 
+				c.date_add,
+				c.rate,  
+				u.name
+			')
+			->from('#__ksenmart_comments as c')
+			->leftjoin('#__users as u on u.id = c.user_id')
+			->where('type = '.$this->_db->quote('shop_review'))
+			->where('published = 1')
+			->order('date_add desc')
+		;
         $this->_db->setQuery($query);
         $reviews = $this->_db->loadObjectList();
-        KSUsers::setAvatarLogoInObject($reviews);
         
         $this->onExecuteAfter('getShopReviewsList', array(&$reviews));
         return $reviews;
