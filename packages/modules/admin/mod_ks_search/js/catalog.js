@@ -9,6 +9,7 @@ jQuery(document).ready(function() {
 
     jQuery('.mod_km_search .button').on('click', function() {
         ProductsList.loadListPage(1);
+        return false;
     });
 
 });
