@@ -19,10 +19,8 @@ JHTML::_('behavior.modal');
         <?php echo KSSystem::loadModules('ks-top-bottom'); ?>
     </div>
 </div>
-<div id="center">
-	<table id="cat" width="100%">
-		<tr>
-			<td width="250" class="left-column">
+	<div id="cat">
+			<div class="left-column">
 				<div id="tree">
 					<form id="list-filters">
 						<ul>
@@ -32,16 +30,14 @@ JHTML::_('behavior.modal');
 						<input type="hidden" name="to_date" value="<?php echo $this->state->get('to_date')?>">						
 					</form>			
 				</div>	
-			</td>
-			<td valign="top">
-				<div id="content">
+			</div>
+			<div class="right-column">
+				<div class="right-column-wra">
                     <?php echo $this->loadTemplate('items_list_top');?>
 					<?php echo $this->loadTemplate('items_list');?>
 				</div>	
-			</td>	
-		</tr>	
-	</table>	
-</div>
+			</div>
+	</div>
 <script>
 var OrdersList=new KMList({
 	'view':'orders',

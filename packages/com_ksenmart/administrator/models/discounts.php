@@ -44,6 +44,11 @@ class KsenMartModelDiscounts extends JModelKSAdmin {
         $this->setState('discount_params', null);
         $this->setState('discount_id', null);
 
+        $items_tpl=$app->getUserStateFromRequest($this->context . '.items_tpl', 'items_tpl', null);
+        $this->setState('items_tpl',$items_tpl);
+        $items_to=$app->getUserStateFromRequest($this->context . '.items_to', 'items_to', null);
+        $this->setState('items_to',$items_to);
+
         $this->onExecuteAfter('populateState');
     }
 
@@ -88,6 +93,18 @@ class KsenMartModelDiscounts extends JModelKSAdmin {
 
         $this->onExecuteAfter('deleteListItems', array(&$ids));
         return true;
+    }
+
+    function getDiscounts($ids){
+        $this->onExecuteBefore('getDiscounts', array(&$ids));
+
+        $query=$this->_db->getQuery(true);
+        $query->select('*')->from('#__ksenmart_discounts')->where('id in ('.implode(',',$ids).')');
+        $this->_db->setQuery($query);
+        $items=$this->_db->loadObjectList();
+        
+        $this->onExecuteAfter('getDiscounts', array(&$items));
+        return $items;
     }
 
     function getDiscount() {

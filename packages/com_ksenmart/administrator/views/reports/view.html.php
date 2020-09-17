@@ -10,7 +10,7 @@ KSSystem::import('views.viewksadmin');
 class KsenMartViewReports extends JViewKSAdmin {
 	
 	function display($tpl = null) {
-		$this->path->addItem(JText::_('ksm_trade') ,'index.php?option=com_ksen&widget_type=trade&extension=com_ksenmart');
+		$this->path->addItem(JText::_('ks_panel'), 'index.php?option=com_ksen&extension=com_ksenmart');
 		$this->path->addItem(JText::_('ksm_reports'));
 		$this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
 		$this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.ui.datepicker-ru.js');

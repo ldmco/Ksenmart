@@ -10,7 +10,7 @@ KSSystem::import('views.viewksadmin');
 class KsenMartViewComments extends JViewKSAdmin {
 
     function display($tpl = null) {
-		$this->path->addItem(JText::_('ksm_users'),'index.php?option=com_ksen&widget_type=users&extension=com_ksenmart');
+		$this->path->addItem(JText::_('ks_panel'), 'index.php?option=com_ksen&extension=com_ksenmart');
 		$this->path->addItem(JText::_('ksm_comments'));	
         switch ($this->getLayout()) {
 			case 'rate':
@@ -34,9 +34,6 @@ class KsenMartViewComments extends JViewKSAdmin {
                 $this->form = $form;
 				break;
             default:
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/list.js');
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/listmodule.js');
                 $this->items = $this->get('ListItems');
                 $this->total = $this->get('Total');
         }

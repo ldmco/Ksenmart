@@ -6,7 +6,7 @@
  
 defined('_JEXEC') or die;
 
-$dispatcher = JDispatcher::getInstance();
+$dispatcher = JEventDispatcher::getInstance();
 JPluginHelper::importPlugin('system');
 $result = $dispatcher->trigger('onLoadKsen', array('ksen.KS', array('admin', 'common'), array(), array('angularJS' => 0, 'admin' => true)));
 

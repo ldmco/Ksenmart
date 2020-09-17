@@ -11,9 +11,19 @@
 			type="text"
 			default=""
 			label="KSM_ORDERS_ORDERSTATUS_TITLE_LBL"
-			description ="KSM_ORDERS_ORDERSTATUS_TITLE_DESC"
+			description="KSM_ORDERS_ORDERSTATUS_TITLE_DESC"
 			class="inputbox"
 			labelclass="inputname"
+		/>
+
+		<field
+			name="withdraw"
+			type="checkbox"
+			default="0"
+			label="KSM_ORDERS_ORDERSTATUS_WITHDRAW_LBL"
+			description="KSM_ORDERS_ORDERSTATUS_WITHDRAW_DESC"
+			class="inputbox"
+			labelclass="inputname2"
 		/>
 		
 	</fieldset>

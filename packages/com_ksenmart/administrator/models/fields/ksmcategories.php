@@ -15,7 +15,7 @@ class JFormFieldKSMCategories extends JFormFieldCheckboxes {
 	
 	public function getInput() {
 		$this->buildCategoriesTree();
-		if ($this->menu) $this->makeCategoriesTree($this->menu[0]);
+		if ($this->menu) $this->makeCategoriesTree($this->menu[(int) $this->element['parent_id']]);
 		$path = $this->getPath();
 		$html = '<ul>';
 		if (count($this->tree) > 0) {
@@ -81,14 +81,15 @@ class JFormFieldKSMCategories extends JFormFieldCheckboxes {
 		$query->select('*')->from('#__ksenmart_categories')->order('ordering');
 		$db->setQuery($query);
 		$categories = $db->loadObjectList('id');
+		if (empty($this->element['parent_id'])) $this->element['parent_id'] = 0;
 		$top_parent = (object)array(
-			'id' => 0,
+			'id' => (int) $this->element['parent_id'],
 			'children' => array()
 		);
 		$menu = array(
-			0 => $top_parent
+			(int) $this->element['parent_id'] => $top_parent
 		);
-		
+
 		foreach ($categories as $id => $category) {
 			if (!empty($this->value) && in_array($id, $this->value)) $category->selected = true;
 			else $category->selected = false;

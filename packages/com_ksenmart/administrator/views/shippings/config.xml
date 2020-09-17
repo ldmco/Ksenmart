@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="KSM_PRODUCT_SHIPPINGS_CONFIG"
+		addfieldpath="/administrator/components/com_ksenmart/models/fields"
+		label="KSM_PRODUCT_SHIPPINGS_CONFIG_LABEL"
+		description="KSM_PRODUCT_SHIPPINGS_CONFIG_DESC">
+
+		<field
+			name="region_id"
+			type="region"
+			default="1"
+			label="KSM_SETTINGS_SHIPPING_DEFAULT_REGION_LBL"
+			description ="KSM_SETTINGS_SHIPPING_DEFAULT_REGION_DESC"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="customer_fields"
+			type="settingcustomerfields"
+			default=""
+			label="KSM_SETTINGS_SHIPPING_USERFIELDS_LBL"
+			description ="KSM_SETTINGS_SHIPPING_USERFIELDS_DESC"
+			labelclass="headname"
+		/>	
+		
+		<field
+			name="address_fields"
+			type="settingaddressfields"
+			default=""
+			label="KSM_SETTINGS_SHIPPING_ADDRESSFIELDS_LBL"
+			description ="KSM_SETTINGS_SHIPPING_ADDRESSFIELDS_DESC"
+			labelclass="headname"
+		/>	
+		
+		<field
+			name="show_regions"
+			type="hidden"
+			default="0"
+		/>	
+	</fieldset>
+</config>

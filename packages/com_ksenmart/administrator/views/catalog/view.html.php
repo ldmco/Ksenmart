@@ -10,7 +10,7 @@ KSSystem::import('views.viewksadmin');
 class KsenMartViewCatalog extends JViewKSAdmin {
 
     function display($tpl = null) {
-		$this->path->addItem(JText::_('ksm_trade'), 'index.php?option=com_ksen&widget_type=trade&extension=com_ksenmart');
+		$this->path->addItem(JText::_('ks_panel'), 'index.php?option=com_ksen&extension=com_ksenmart');
         $this->path->addItem(JText::_('ksm_catalog'));
 				
         switch($this->getLayout()) {
@@ -37,7 +37,8 @@ class KsenMartViewCatalog extends JViewKSAdmin {
             case 'product':
                 $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/product.js');
                 $model = $this->getModel();
-                $this->product = $model->getProduct();
+				$categories = $model->getCurrentCategories();
+                $this->product = $model->getProduct($categories);
                 $model->form = 'product';
                 $form = $model->getForm();
                 if($form) $form->bind($this->product);
@@ -75,18 +76,14 @@ class KsenMartViewCatalog extends JViewKSAdmin {
                 $this->form = $form;
                 break;
 			 case 'search':
-				$this->document->addScript(JURI::base().'components/com_ksenmart/js/jquery.custom.min.js');
-				$this->document->addScript(JURI::base().'components/com_ksenmart/js/list.js');
-				$this->document->addScript(JURI::base().'components/com_ksenmart/js/listmodule.js');
 				$this->document->addScript(JURI::base().'components/com_ksenmart/js/catalogsearch.js');
 				$this->title = JText::_('ksm_catalog_search');
 				$this->items=$this->get('ListItems');
 				$this->total=$this->get('Total');
 				break;
+	        case 'default_item_form':
+		        break;
             default:
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/list.js');
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/listmodule.js');
                 $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/catalog.js');
                 $this->items = $this->get('ListItems');
                 $this->total = $this->get('Total');

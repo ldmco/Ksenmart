@@ -33,7 +33,7 @@ class JFormFieldCurrency extends JFormField {
 		return JHTML::_('select.genericlist', $currencies, $this->name, array(
 			'class' => 'sel',
 			'id'    => $this->name,
-			'style' => 'width:40px;'
+			'style' => 'width:80px;'
 		), 'value', 'text', $this->value);
 	}
 }

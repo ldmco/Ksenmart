@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
 
     jQuery('body').on('click', '.add_childs', function() {
         jQuery('.form input[name="close"]').val(0);
-        jQuery('.form input[name="jform[is_parent]"]').val(1);
+        jQuery('.form input[name="jform[add_child]"]').val(1);
         jQuery('.form [type="submit"]').click();
         return false;
     });

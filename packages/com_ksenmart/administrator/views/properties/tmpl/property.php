@@ -18,9 +18,7 @@ JHtml::_('behavior.tooltip');
 		</div>
 	</div>
 	<div class="edit">
-		<table width="100%">
-			<tr>
-				<td class="leftcol">
+				<div class="leftcol">
 					<div class="row">
 						<?php echo $this->form->getLabel('title');?>
 						<?php echo $this->form->getInput('title');?>
@@ -64,19 +62,23 @@ JHtml::_('behavior.tooltip');
 							<?php echo $this->form->getInput('edit_price'); ?>
 							<?php echo $this->form->getLabel('edit_price'); ?>
 						</div>
+                        <div class="checkb">
+							<?php echo $this->form->getInput('range'); ?>
+							<?php echo $this->form->getLabel('range'); ?>
+                        </div>
 					</div>					
 					<div class="row values" <?php echo ($this->property->type!='select'?'style="display:none;"':'');?>>
 						<?php echo $this->form->getInput('values'); ?>
 					</div>		
-				</td>
-				<td class="rightcol">	
-					<div <?php echo ($this->property->type!='select'?'style="display:none;"':'');?>>
-						<?php echo $this->form->getInput('view'); ?>	
-					</div>					
-					<?php echo $this->form->getInput('categories'); ?>	
-				</td>
-			</tr>	
-		</table>
+				</div>
+				<div class="rightcol">
+					<div class="rightcol-wra">
+						<div <?php echo ($this->property->type!='select'?'style="display:none;"':'');?>>
+							<?php echo $this->form->getInput('view'); ?>
+						</div>
+						<?php echo $this->form->getInput('categories'); ?>
+					</div>
+				</div>
 	</div>	
 	<input type="hidden" name="task" value="save_form_item">
 	<?php echo $this->form->getInput('id'); ?>

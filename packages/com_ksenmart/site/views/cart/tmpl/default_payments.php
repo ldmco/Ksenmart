@@ -6,29 +6,30 @@
  
 defined('_JEXEC') or die;
 ?>
-<div class="kmcart-payments default_payments">
-    <div class="step">
-    	<legend><?php echo JText::_('KM_CART_CHANGE_PAYMENT_METHOD'); ?></legend>
-        <?php if(count($this->payments) == 0){ ?>	
-		<div class="control-group">
-			<div class="controls no_payments">
-				<label><?php echo JText::_('KSM_CART_NOPAYMENT_TEXT'); ?></label>
-			</div>
-		</div>
-        <?php } ?>
-        <div class="control-group payments">
-            <div class="controls">
-    		<?php foreach($this->payments as $payment){ ?>
-    			<div class="payment">
-    				<label class="radio clearfix checkbox">
-						<?php if (!empty($payment->icon)):?>
-                        <span class="icon"><img src="<?php echo $payment->icon; ?>" width="120px" /></span>
-						<?php endif;?>
-    					<input type="radio" name="payment_id" value="<?php echo $payment->id;?>" required="true" onclick="KMCartChangePayment(this);" <?php echo ($payment->selected?'checked':''); ?> /> <?php echo JText::_($payment->title); ?>
-    				</label>
-    			</div>
-    		<?php } ?>
+<div class="ksm-cart-order-payments default_payments">
+	<?php if (!$this->payments) { ?>
+        <div class="ksm-cart-order-step-row">
+            <div class="ksm-cart-order-step-row-control">
+                <label><?php echo JText::_('KSM_CART_NOPAYMENT_TEXT'); ?></label>
             </div>
-        </div>		
-    </div>
+        </div>
+	<?php } else { ?>
+        <div class="ksm-cart-order-step-row">
+            <div class="ksm-cart-order-step-row-control">
+				<?php foreach ($this->payments as $payment) { ?>
+                    <div class="ksm-cart-order-payment-method">
+                        <label>
+                            <input type="radio" id="payment_id" name="payment_id" value="<?php echo $payment->id; ?>"
+                                   required="true"
+                                   onclick="KMCartChangePayment(this);" <?php echo($payment->selected ? 'checked' : ''); ?> />
+							<?php if (!empty($payment->icon)) { ?>
+                                <span class="icon"><img src="<?php echo $payment->icon; ?>"/></span>
+							<?php } ?>
+							<?php echo JText::_($payment->title); ?>
+                        </label>
+                    </div>
+				<?php } ?>
+            </div>
+        </div>
+	<?php } ?>
 </div>

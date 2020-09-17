@@ -10,7 +10,7 @@ KSSystem::import('views.viewksadmin');
 class KsenMartViewPayments extends JViewKSAdmin {
     
     function display($tpl = null) {
-        $this->path->addItem(JText::_('ksm_trade'),'index.php?option=com_ksen&widget_type=trade&extension=com_ksenmart');
+		$this->path->addItem(JText::_('ks_panel'), 'index.php?option=com_ksen&extension=com_ksenmart');
         $this->path->addItem(JText::_('ksm_payments'));
         
         
@@ -20,12 +20,16 @@ class KsenMartViewPayments extends JViewKSAdmin {
                 $this->paramsform = $this->get('PaymentParamsForm');
             break;
             case 'payment':
-                $this->document->addScript(JURI::base() . 'components/com_ksenmart/js/payment.js');
+                $this->document->addScript(JUri::base() . 'components/com_ksenmart/js/payment.js');
                 $model = $this->getModel();
-                $payment = $model->getPayment();
+                $this->payment = $model->getPayment();
                 $model->form = 'payment';
                 $form = $model->getForm();
-                if ($form) $form->bind($payment);
+	            $disabled = KSSystem::checkExtension('payment', $this->payment->type);
+	            if ($disabled) {
+		            $this->setLayout('disabled');
+	            }
+                if ($form) $form->bind($this->payment);
                 $this->title = JText::_('ksm_payments_payment_editor');
                 $this->form = $form;
                 $this->paramsform = $this->get('PaymentParamsForm');

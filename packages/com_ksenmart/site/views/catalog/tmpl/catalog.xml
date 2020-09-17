@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="KSM_CATALOG_LAYOUT" >
+	<layout title="KSM_CATALOG_LAYOUT" option="view">
 		<message>
 			<![CDATA[KSM_CATALOG_LAYOUT_DESC]]>
 		</message>

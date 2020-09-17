@@ -7,6 +7,8 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item">
+	<td class="handler"><span></span></td>
+	<td class="check"><input type="checkbox" class="check-item" /></td>		
 	<td class="name stretch">
 		<div class="descr">
 			<a class="km-modal" rel='{"x":"500","y":"390"}' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=currencies&layout=currency&id='.$this->item->id.'&tmpl=component'); ?>" ><?php echo $this->item->title?></a>

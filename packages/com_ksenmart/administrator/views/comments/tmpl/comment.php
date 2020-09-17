@@ -17,9 +17,7 @@ JHtml::_('behavior.tooltip');
 		</div>
 	</div>
 	<div class="edit">
-		<table width="100%">
-			<tr>
-				<td class="leftcol">
+				<div class="leftcol">
 					<div class="row">
 						<?php echo $this->form->getLabel('name'); ?>
 						<?php echo $this->form->getInput('name'); ?>
@@ -49,13 +47,13 @@ JHtml::_('behavior.tooltip');
 					<div class="row">
 						<?php echo $this->form->getInput('bad'); ?>
 					</div>					
-				</td>
-				<td class="rightcol">	
-					<?php echo $this->form->getInput('user_id'); ?>
-					<?php echo $this->form->getInput('product_id'); ?>
-				</td>
-			</tr>	
-		</table>	
+				</div>
+				<div class="rightcol">	
+					<div class="rightcol-wra">	
+						<?php echo $this->form->getInput('user_id'); ?>
+						<?php echo $this->form->getInput('product_id'); ?>
+					</div>
+				</div>
 	</div>	
 	<input type="hidden" name="task" value="save_form_item">
 	<?php echo $this->form->getInput('id');?>

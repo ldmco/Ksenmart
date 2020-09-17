@@ -11,12 +11,12 @@ class JFormFieldShippingCustomerFields extends JFormField {
 	protected $type = 'ShippingCustomerFields';
 	
 	public function getInput() {
-		if (count($this->value) == 0) {
+		if (count($this->value) == 0 || $this->value == '') {
 			$this->value = array(
 				'-1' => array(
 					'position' => 'customer',
 					'type' => 'text',
-					'title' => 'name',
+					'title' => 'first_name',
 					'required' => 1,
 					'system' => 1,
 					'ordering' => 1,

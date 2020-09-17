@@ -7,6 +7,8 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item <?php echo ($this->item->enabled==0?'disabled':'');?>">
+	<td class="handler"><span></span></td>
+	<td class="check"><input type="checkbox" class="check-item" /></td>	
 	<td class="name stretch sort-handler">
 		<div class="descr">	
 			<a class="km-modal" rel='{"x":"90%","y":"90%"}' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=discounts&layout=discount&id='.$this->item->id.'&tmpl=component');?>"><?php echo $this->item->title;?></a>

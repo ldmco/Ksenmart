@@ -6,18 +6,18 @@ var KsenmartMap = {
 		header_height:50,
 		actions_height:50,
 		inner_padding:15,
-		map_frame:'ksenmart-map',
-		map_frame_inner:'ksenmart-map-inner',
-		map_header:'ksenmart-map-header',
-		map_actions:'ksenmart-map-actions',
-		map_layer:'ksenmart-map-layer',
-		map_address:'ksenmart-map-to',
-		map_center:'ksenmart-map-to-center',
-		map_area:'ksenmart-map-to-area',
-		map_me:'ksenmart-map-to-me',
-		map_ok:'ksenmart-map-ok',
-		map_clear:'ksenmart-map-clear',	
-		map_search:'ksenmart-map-search',		
+		map_frame:'ksm-map',
+		map_frame_inner:'ksm-map-body',
+		map_header:'ksm-map-header',
+		map_actions:'ksm-map-actions',
+		map_layer:'ksm-map-layer',
+		map_address:'ksm-map-to',
+		map_center:'ksm-map-to-center',
+		map_area:'ksm-map-to-area',
+		map_close:'ksm-map-close',
+		map_ok:'ksm-map-ok',
+		map_clear:'ksm-map-clear',	
+		map_search:'ksm-map-search',		
 		ymap:'',
 		ymap_center:[55.76, 37.64],
 		ymap_zoom:10,
@@ -62,6 +62,13 @@ var KsenmartMap = {
 	},
 	
 	initEvents:function(){
+		if (document.getElementById(this.options.map_close))
+		{		
+			document.getElementById(this.options.map_close).onclick=function(){	
+				jQuery('#ksm-map').hide();
+				return false;
+			}
+		}		
 		if (document.getElementById(this.options.map_center))
 		{
 			document.getElementById(this.options.map_center).onclick=function(){	
@@ -76,21 +83,12 @@ var KsenmartMap = {
 				return false;
 			}	
 		}
-		if (document.getElementById(this.options.map_me))
-		{		
-			document.getElementById(this.options.map_me).onclick=function(){	
-				navigator.geolocation.getCurrentPosition(function(position) {
-					KsenmartMap.setPointCoords([position.coords.latitude,position.coords.longitude]);
-				});			
-				return false;
-			}
-		}
 		if (document.getElementById(this.options.map_ok))
 		{		
 			document.getElementById(this.options.map_ok).onclick=function(){	
 				var address=document.getElementById(KsenmartMap.options.map_address).value;
 				KsenmartMap.setPointAddress(address);
-				jQuery('#ksenmart-map').modal('hide');
+				jQuery('#ksm-map').hide();
 				return false;
 			}
 		}
@@ -120,16 +118,16 @@ var KsenmartMap = {
 						var selected=0;
 						for(var k=0;k<items.length;k++)
 						{
-							if (items[k].className=='ksenmart-map-search-item-active')
+							if (items[k].className=='ksm-map-search-item-active')
 							{
-								items[k].className='ksenmart-map-search-item';
+								items[k].className='ksm-map-search-item';
 								selected=k;
 							}	
 						}
 						selected--;
 						if (selected>-1)
 						{
-							items[selected].className='ksenmart-map-search-item-active';
+							items[selected].className='ksm-map-search-item-active';
 							document.getElementById(KsenmartMap.options.map_address).value=items[selected].innerHTML;
 						}	
 					}				
@@ -144,17 +142,17 @@ var KsenmartMap = {
 						var selected=-1;
 						for(var k=0;k<items.length;k++)
 						{
-							if (items[k].className=='ksenmart-map-search-item-active')
+							if (items[k].className=='ksm-map-search-item-active')
 							{
 								if (k+1<items.length)
-									items[k].className='ksenmart-map-search-item';
+									items[k].className='ksm-map-search-item';
 								selected=k;
 							}	
 						}
 						selected++;
 						if (selected<items.length)
 						{
-							items[selected].className='ksenmart-map-search-item-active';
+							items[selected].className='ksm-map-search-item-active';
 							document.getElementById(KsenmartMap.options.map_address).value=items[selected].innerHTML;
 						}	
 					}		
@@ -166,7 +164,7 @@ var KsenmartMap = {
 					var list=document.createElement('ul');
 					res.geoObjects.each(function (obj) {
 						var item=document.createElement('li');
-						item.className='ksenmart-map-search-item';
+						item.className='ksm-map-search-item';
 						item.innerHTML=obj.properties.get('description')+', '+obj.properties.get('name');
 						list.appendChild(item);
 					});		
@@ -176,7 +174,7 @@ var KsenmartMap = {
 			}
 
 			document.onclick=function(event){
-				if (event.target.className=='ksenmart-map-search-item' || event.target.className=='ksenmart-map-search-item-active')
+				if (event.target.className=='ksm-map-search-item' || event.target.className=='ksm-map-search-item-active')
 				{
 					KsenmartMap.setPointAddress(event.target.innerHTML);
 				}

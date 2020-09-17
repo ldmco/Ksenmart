@@ -16,6 +16,7 @@ var KMList = function(variables){
 	this.delete_button=true;
 	this.ctrl=false;	
 	this.sortable=true;
+	this.childs=false;
 	
 	this.init = function(){
 		var List=this;	
@@ -91,6 +92,48 @@ var KMList = function(variables){
 		var items=jQuery('#content .cat tbody').sortable({
 			distance: 10,
 			items:'.list_item',
+			//placeholder:'ui-state-highlight',
+			sort: function(event, ui) {
+				if(List.childs){
+					var offset = ui.helper.offset();
+					var prevItem = ui.placeholder.prev();
+					if(ui.item.find('input.id').val() == prevItem.find('input.id').val())
+						prevItem = prevItem.prev();
+					if(prevItem.length)
+						var max_level = prevItem.data().level+1;
+					else
+						var max_level = 1;
+					var lmargin = 40;
+					var state_left = ui.originalPosition.left;
+					var new_level = Math.floor((offset.left-state_left)/lmargin)+1;
+					var parent_id = 0;
+					if(new_level < 1) new_level = 1;
+					if(new_level > max_level) new_level = max_level;
+					ui.placeholder.css('margin-left', (new_level-1)*lmargin+'px');
+					if(max_level == new_level){
+						parent_id = prevItem.find('input.id').val();
+						if(parent_id==undefined) parent_id=0;
+					} else if(new_level == 1){
+						parent_id = 0;
+					} else {
+						var parent_item=true;
+						var cur_item=prevItem;
+						while(parent_item){
+							if(new_level-1 == cur_item.data().level){
+								parent_id=cur_item.find('input.id').val();
+								parent_item=false;
+							} else {
+								cur_item=cur_item.prev();
+								if(cur_item==undefined){
+									parent_id=0;
+									parent_item=false;
+								}
+							}
+						}
+					}
+					ui.item.data().parent = parent_id;
+				}
+			},
 			beforeStop:function(event, ui){
 				if (ui.item.find('.id').length==0)
 				{
@@ -114,22 +157,32 @@ var KMList = function(variables){
 				}	
 			},			
 			stop: function(event, ui){
-				var items={},data={},ordering=[],ids=[];
+				var items={},data={},ordering=[],ids=[],parents=[];
 				data['task']='sort_list_items';
 				data['table']=List.table;
 				jQuery('#content .cat tbody tr.list_item').each(function(){
 					ids.push(jQuery(this).find('input.id').val());
 					ordering.push(parseInt(jQuery(this).find('input.ordering').val()));
-				});				
+					if(List.childs) parents[ids.length-1] = parseInt((jQuery(this).data().parent));
+				});		
 				if (order_dir=='asc')
 					ordering.sort(function(a,b){return a-b;});
 				else
 					ordering.sort(function(a,b){return b-a;});	
 				
 				for(var k=0;k<ordering.length;k++){
-					if (k>0 && ordering[k]<=ordering[k-1])
-						ordering[k]=ordering[k-1]+1;
-					items[ids[k]]=ordering[k];
+					if(List.childs){
+						if (k>0 && ordering[k]<=ordering[k-1])
+							ordering[k]=ordering[k-1]+1;
+						var item={};
+						item['ordering']=ordering[k];
+						item['parent']=parents[k];
+						items[ids[k]]=item;
+					} else {
+						if (k>0 && ordering[k]<=ordering[k-1])
+							ordering[k]=ordering[k-1]+1;
+						items[ids[k]]=ordering[k];
+					}
 				}
 				data['items']=items;
 				jQuery.ajax({
@@ -137,9 +190,19 @@ var KMList = function(variables){
 					data:data,
 					dataType:'json',
 					success:function(responce){
-						if (responce.errors == 0)
-							List.refreshList();
-						else
+						if (responce.errors == 0){
+							if(List.childs){
+								var opened = [];
+								jQuery('#content .cat tbody tr.list_item .prod-parent-opened').each(function(){
+									opened.push(parseInt(jQuery(this).closest('.list_item').find('input.id').val()));
+								});
+								List.refreshList();
+								for(var k=0;k<opened.length;k++){
+									jQuery('#content .cat tbody tr.list_item_'+opened[k]+' .prod-parent-closed').click();
+								}
+							} else
+								List.refreshList();
+						} else
 							KMShowMessage(responce.message.join('<br>'));
 					}
 				});

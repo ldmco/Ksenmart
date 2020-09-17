@@ -23,6 +23,6 @@ defined('_JEXEC') or die;
 	<div class="col4">
 		<?php echo $this->item->in_stock;?>
 	</div>
-	<input type="hidden" class="price" value="<?php echo $this->item->val_price_wou;?>">
+	<input type="hidden" class="price" value="<?php echo $this->item->price;?>">
 	<input type="hidden" name="jform[relative][<?php echo $this->item->id;?>][relative_id]" value="<?php echo $this->item->id;?>">
 </div>

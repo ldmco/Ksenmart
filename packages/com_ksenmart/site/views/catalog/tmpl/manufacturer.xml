@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="KSM_MANUFACTURER_LAYOUT" option="view">
+		<message>
+			<![CDATA[KSM_MANUFACTURER_LAYOUT_DESC]]>
+		</message>
+	</layout>
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset 
+            name="request" 
+            addfieldpath="/plugins/system/ksencore/core/models/fields"
+        >
+
+			<field 
+				type="ksmanufacturers"
+				name="manufacturers"
+                extension="ksenmart"
+				default="" 
+				label="KSM_FIELD_MANUFACTURER_LBL"
+				description="KSM_FIELD_MANUFACTURER_DESC"
+				usedefault="0"
+				multiple="false"
+			/>
+		
+		</fieldset>
+	</fields>
+</metadata>

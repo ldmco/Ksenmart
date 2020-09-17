@@ -6,27 +6,11 @@
  
 defined('_JEXEC') or die;
 ?>
-<aside class="tabbable noTransition">
-	<ul class="nav nav-tabs">
-		<?php if(!empty($this->product->content)){ ?>
-		<li class="active"><a href="#tab1" data-toggle="tab"><?php echo JText::_('KSM_PRODUCT_TABS_TAB1'); ?></a></li>
-		<?php } ?>
-		<li <?php echo empty($this->product->content)?' class="active"':''; ?>><a href="#tab3" data-toggle="tab"><?php echo JText::_('KSM_PRODUCT_TABS_TAB2'); ?></a></li>
-		<li><a href="#tab4" data-toggle="tab"><?php echo JText::_('KSM_PRODUCT_TABS_TAB3'); ?></a></li>
+<div class="ksm-product-tabs">
+	<ul class="ksm-product-tabs-nav">
+		<?php echo $this->loadTemplate('tabs_nav','product');?>
 	</ul>
-	<div class="tab-content">
-		<?php if(!empty($this->product->content)){ ?>
-		<div class="tab-pane active" id="tab1">
-			<?php echo html_entity_decode($this->product->content); ?>
-		</div>
-		<?php } ?>
-		<div class="tab-pane reviews<?php echo empty($this->product->content)?' active':''; ?>" id="tab3">
-			<?php echo $this->loadTemplate('comments','product');?>			
-		</div>
-		<div class="tab-pane" id="tab4">
-		<?php if ($this->params->get('show_comment_form') == 1){ ?>
-			<?php echo $this->loadTemplate('comment_form','product');?>			
-		<?php } ?>
-		</div>
+	<div class="ksm-product-tabs-contents">
+		<?php echo $this->loadTemplate('tabs_contents','product');?>
 	</div>
-</aside>
+</div>

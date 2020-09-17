@@ -19,10 +19,8 @@ JHTML::_('behavior.modal');
         <?php echo KSSystem::loadModules('ks-top-bottom'); ?>
     </div>
 </div>
-<div id="center">
-	<table id="cat" width="100%">
-		<tr>
-			<td width="250" class="left-column">
+	<div id="cat">
+			<div class="left-column">
 				<div id="tree">
 					<ul>
 						<li>			
@@ -30,12 +28,12 @@ JHTML::_('behavior.modal');
 						</li>
 					</ul>	
 				</div>								
-			</td>
-			<td valign="top">
-				<div id="exportinport_content">
-					<?php echo $this->loadTemplate('text');?>
-				</div>	
-			</td>	
-		</tr>	
-	</table>	
-</div>	
+			</div>
+			<div class="right-column">
+				<div class="right-column-wra">
+					<div id="exportinport_content">
+						<?php echo $this->loadTemplate('text');?>
+					</div>
+				</div>
+			</div>
+	</div>

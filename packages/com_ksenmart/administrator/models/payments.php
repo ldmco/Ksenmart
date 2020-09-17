@@ -100,6 +100,7 @@ class KsenMartModelPayments extends JModelKSAdmin {
 			$this->_db->setQuery($query);
 			$this->_db->query();		
 		}
+		//KSMShipping::checkRegions();
 		
         $this->onExecuteAfter('deleteListItems',array(&$ids));
 		return true;
@@ -179,6 +180,7 @@ class KsenMartModelPayments extends JModelKSAdmin {
 		}
 		$id = $table->id;
 		KSMedia::saveItemMedia($id,$data,'payment','payments');
+		//KSMShipping::checkRegions();
 		
 		$dispatcher	= JDispatcher::getInstance();
 		$dispatcher->trigger('onAfterSavePayment',array($id));		

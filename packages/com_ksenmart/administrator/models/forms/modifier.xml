@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details"
+              addfieldpath="/plugins/system/ksencore/core/models/fields"
+    >
+
+        <field name="id" type="hidden" class="id"/>
+
+        <field
+                name="title"
+                type="text"
+                default=""
+                label="KSM_COMPLECTS_MODIFIER_TITLE_LBL"
+                description="KSM_COMPLECTS_MODIFIER_TITLE_DESC"
+                class="inputbox"
+                labelclass="inputname"
+        />
+
+        <field
+                name="ratio"
+                type="text"
+                default=""
+                label="KSM_COMPLECTS_MODIFIER_RATIO_LBL"
+                description="KSM_COMPLECTS_MODIFIER_RATIO_DESC"
+                class="inputbox"
+                labelclass="inputname"
+        />
+
+        <field
+                name="images"
+                type="images"
+                label="KSM_PHOTOS"
+                class="active"
+                upload_to="media/com_ksenmart/images/modifiers/original"
+                upload_folder="modifiers"
+                extension="com_ksenmart"
+        />
+
+    </fieldset>
+</form>

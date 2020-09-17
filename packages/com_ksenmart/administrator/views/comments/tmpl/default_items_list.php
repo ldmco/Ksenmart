@@ -9,6 +9,8 @@ defined('_JEXEC') or die;
 <table class="cat" width="100%" cellspacing="0">	
 	<thead>
 		<tr>
+			<th class="handler"><span></span></th>
+			<th class="check"><input type="checkbox" class="check-all" /></th>		
 			<th class="comment_rate"><span class="sort_field" rel="rate"><?php echo JText::_('ksm_comments_rate')?></span></th>
 			<th class="comment_name"><?php echo JText::_('ksm_comments_name')?></th>
 			<th class="name stretch"><?php echo JText::_('ksm_comments_text')?></th>

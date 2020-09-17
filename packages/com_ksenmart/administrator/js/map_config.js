@@ -1,7 +1,7 @@
 jQuery(window).load(function(){
 
-	jQuery('.form #ksenmart-map-layer').height('300px');	
-	jQuery('.form #ksenmart-map-layer').width(jQuery('.form .rightcol').width());	
+	jQuery('.form #ksm-map-layer').height('300px');
+	jQuery('.form #ksm-map-layer').width(jQuery('.form .rightcol').width());
 	KsenmartMap.options.coords_field='jform_shipping_coords';
 	KsenmartMap.initMapSize=function(){};
 	KsenmartMap.init();

@@ -23,7 +23,7 @@ class KsenController extends KsenControllerAdmin {
     }
     
     public function display($cachable = false, $urlparams = false) {
-        $db = JFactory::getDBO();
+        $db = JFactory::getDbo();
         
         $query = $db->getQuery(true);
         $query->select('date')->from('#__ksen_ping');
@@ -34,7 +34,7 @@ class KsenController extends KsenControllerAdmin {
             $query = $db->getQuery(true);
             $query->update('#__ksen_ping')->set('`date`=' . $db->quote($cur_date));
             $db->setQuery($query);
-            $db->query();
+            $db->execute();
             
             $query = $db->getQuery(true);
             $query->select('manifest_cache')->from('#__extensions')->where('name="ksenmart"');
@@ -43,7 +43,7 @@ class KsenController extends KsenControllerAdmin {
             $manifest = json_decode($manifest, true);
             $version = $manifest['version'];
             
-            file_get_contents('http://update.ksenmart.ru/statistic/?domain=' . $_SERVER['HTTP_HOST'] . '&version=' . $version);
+            //file_get_contents('http://update.ksenmart.ru/statistic/?domain=' . $_SERVER['HTTP_HOST'] . '&version=' . $version);
         }
         
         parent::display();

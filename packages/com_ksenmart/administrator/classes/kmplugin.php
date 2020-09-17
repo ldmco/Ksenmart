@@ -8,14 +8,20 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 abstract class KMPlugin extends JPlugin {
+	
+	var $ksm_params = null;
     
     public function __construct(&$subject, $config) {
         parent::__construct($subject, $config);
+		$this->ksm_params = JComponentHelper::getParams('com_ksenmart');
+		JDispatcher::getInstance()->trigger('onLoadKsen', array('ksenmart', array('common'), array(), array('angularJS' => 0)));
+		KSLoader::loadLocalHelpers(array('common'));
         $this->loadLanguage();
     }
     
     public function loadLanguage($extension = '', $basePath = JPATH_ADMINISTRATOR){
         $lang = JFactory::getLanguage();
+        $lang->load('plg_' . $this->_type . '_' . $this->_name, JPATH_ADMINISTRATOR, null, false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name, JPATH_PLUGINS . DS . $this->_type . DS . $this->_name, null, false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name, JPATH_ADMINISTRATOR, $lang->getDefault() , false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name, JPATH_PLUGINS . DS . $this->_type . DS . $this->_name, $lang->getDefault() , false, false);
         $lang->load('plg_' . $this->_type . '_' . $this->_name . '.sys', JPATH_ADMINISTRATOR, null, false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name . '.sys', JPATH_PLUGINS . DS . $this->_type . DS . $this->_name, null, false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault() , false, false) || $lang->load('plg_' . $this->_type . '_' . $this->_name . '.sys', JPATH_PLUGINS . DS . $this->_type . DS . $this->_name, $lang->getDefault() , false, false);
     }
     

@@ -14,21 +14,14 @@ class KsenMartViewComments extends JViewKS {
         $document       = JFactory::getDocument();
         $this->params   = JComponentHelper::getParams('com_ksenmart');
         
-        $shop_name = $this->params->get('shop_name', 'магазине');
-        $pref      = $this->params->get('path_separator', '-');
-        $doc_title = $shop_name . $pref . 'Отзывы';
+        $shop_name = $this->params->get('shop_name');
+        $pref      = $this->params->get('path_separator');
         $id        = $app->input->get('id', 0, 'int');
         $layout    = $this->getLayout();
-        
-        $document->setTitle($doc_title);
-        $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/shop_reviews.css');
         
         switch ($layout) {
 
             case 'comments':
-                if(!JFactory::getConfig()->get('config.caching', 0)){
-                    $path->addItem(JText::_('KSM_REVIEWS_LIST_PATH_TITLE'));
-                }
                 $comments = $this->get('comments');
                 $pagination = $this->get('Pagination');
                 
@@ -39,7 +32,6 @@ class KsenMartViewComments extends JViewKS {
             case 'comment':
                 if($id > 0) {
                     if(!JFactory::getConfig()->get('config.caching', 0)) {
-                        $path->addItem(JText::_('KSM_REVIEWS_LIST_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=comments&Itemid=' . KSSystem::getShopItemid());
                         $path->addItem(JText::_('KSM_REVIEW_ITEM_PATH_TITLE'));
                     }
                     
@@ -57,9 +49,7 @@ class KsenMartViewComments extends JViewKS {
             break;
 
             case 'reviews':
-                if(!JFactory::getConfig()->get('config.caching', 0)) {
-                    $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'));
-                }
+				$document->addScript(JURI::base() . 'components/com_ksenmart/js/reviews.js', 'text/javascript', true);
                 
                 $reviews      = $this->get('ShopReviewsList');
                 $user         = KSUsers::getUser();
@@ -87,10 +77,8 @@ class KsenMartViewComments extends JViewKS {
                     $this->assignRef('user', $user);
                     $this->assignref('show_shop_review', $isset_review);
 
-                    $document->setTitle(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
                     if(!JFactory::getConfig()->get('config.caching', 0)) {
-                        $path->addItem(JText::_('KSM_SHOP_REVIEWS_PATH_TITLE'), 'index.php?option=com_ksenmart&view=comments&layout=reviews&Itemid=' . KSSystem::getShopItemid());
-                        $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->user->name, $shop_name));
+                        $path->addItem(JText::sprintf('KSM_SHOP_REVIEW_PATH_TITLE_TEXT', $review->name, $shop_name));
                     }
                 }else{
                     JError::raiseError(404, 'Page not found');

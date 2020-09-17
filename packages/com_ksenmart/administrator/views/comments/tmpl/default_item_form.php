@@ -7,6 +7,8 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item <?php echo ($this->item->published==0?'disabled':'')?>">
+	<td class="handler"><span></span></td>
+	<td class="check"><input type="checkbox" class="check-item" /></td>		
 	<td class="comment_rate">
 		<?php for($k=1;$k<6;$k++):?>
 			<?php if (floor($this->item->rate)>=$k):?>

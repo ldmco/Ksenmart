@@ -6,11 +6,12 @@
  
 defined('_JEXEC') or die;
 ?>
-<div id="end">
-	<h2 class="lead"><?php echo JText::_('KSM_CART_CONGRATULATION_INTRO'); ?></h2>
-	<div class="txt">
-		<div class="info">
-			<?php echo JText::sprintf($this->params->get('printforms_congritulation_message_template', 'KSM_CART_CONGRATULATION_ORDER_NUMBES'), $this->order->id, $this->params->get('shop_phone', '')); ?>
-		</div>
-	</div>
+<div class="ksm-cart ksm-congratulation ksm-block">
+    <h2><?php echo JText::_('KSM_CART_CONGRATULATION_INTRO'); ?></h2>
+    <div class="ksm-cart-order-step-left">
+		<?php echo $this->loadTemplate('message'); ?>
+    </div>
+    <div class="ksm-cart-order-step-right">
+		<?php echo $this->loadTemplate('total'); ?>
+    </div>
 </div>

@@ -18,12 +18,9 @@ class KsenMartViewProduct extends JViewKS {
         
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/highslide/highslide-with-gallery.js', 'text/javascript', true);
         $document->addScript(JURI::base() . 'components/com_ksenmart/js/highslide.js', 'text/javascript', true);
-        $document->addScript(JURI::base() . 'components/com_ksenmart/js/slides.min.jquery.js', 'text/javascript', true);
-        
         $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/js/highslide/highslide.css');
-        $document->addStyleSheet(JURI::base() . 'components/com_ksenmart/css/slides.css');
         
-        if ($model->_id && $this->getLayout() != 'comment_congratulation') {
+        if ($model->_id) {
             $this->product = $model->getProduct();
 
             if ($this->product) {
@@ -37,7 +34,6 @@ class KsenMartViewProduct extends JViewKS {
                 $title         = $model->getProductTitle();
                 $this->images  = $model->getImages();
                 $this->related = KSMProducts::getRelated($this->product->id);
-                $this->links   = KSMProducts::getLinks($this->product->id);
                 
                 $document->setTitle($title);
                 $model->setProductMetaData();
@@ -60,10 +56,17 @@ class KsenMartViewProduct extends JViewKS {
                         }
                     }
                     $this->setLayout('parent_product_' . $template);
+					if (!JFactory::getConfig()->get('config.caching', 0)) {
+						$path->addItem($this->product->title);
+					}					
                 } elseif ($this->product->parent_id != 0) {
                     $this->product->parent = KSMProducts::getProduct($this->product->parent_id);
+					if (!JFactory::getConfig()->get('config.caching', 0)) {
+						$path->addItem($this->product->parent->title, $this->product->parent->link);
+						$path->addItem($this->product->title);
+					}					
                     if ($this->params->get('parent_products_template', 'list') != 'list') {
-                        
+
                         $template             = $this->params->get('parent_products_template', 'list');
                         $this->product->title = $this->product->parent->title;
 
@@ -74,15 +77,13 @@ class KsenMartViewProduct extends JViewKS {
                     } else {
                         $this->setLayout($this->product->type);
                     }
-                    if (!JFactory::getConfig()->get('config.caching', 0)) {
-                        $path->addItem($this->product->parent->title, $this->product->parent->link);
-                    }
                 } else {
                     $this->setLayout($this->product->type);
+					if (!JFactory::getConfig()->get('config.caching', 0)) {
+						$path->addItem($this->product->title);
+					}					
                 }
-                if (!JFactory::getConfig()->get('config.caching', 0)) {
-                    $path->addItem($this->product->title);
-                }
+
                 $model->form      = 'review';
                 $this->reviewform = $model->getForm();
             } else {

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="2.5.0" method="upgrade">
+<extension type="component" version="3.1" method="upgrade">
 	<name>Ядро Ksen</name>
-	<creationDate>March 2014</creationDate>
+	<creationDate>May 2017</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>1.0.6</version>
+	<copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+	<version>4.1.11</version>
 
 	<scriptfile>install.php</scriptfile>
 	
 	<updateservers>
-		<server type="extension" priority="1" name="Ksen">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksen/com_ksen-update.xml</server>
+		<server type="extension" priority="1" name="Ksen">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksen/com_ksen-update.xml</server>
 	</updateservers>		
 
 	<install>

@@ -9,6 +9,8 @@ defined('_JEXEC') or die;
 <table class="cat" width="100%" cellspacing="0">	
 	<thead>
 		<tr>
+			<th class="handler"><span></span></th>
+			<th class="check"><input type="checkbox" class="check-all" /></th>		
 			<th class="name stretch sort-handler" align="left"><span class="sort_field" rel="title"><?php echo JText::_('ksm_payments_name')?></span></th>
 			<th class="payment_type"><?php echo JText::_('ksm_payments_type')?></th>			
 			<th class="sort"><span class="sort_field" rel="ordering"><?php echo JText::_('ksm_ordering')?></span></th>			

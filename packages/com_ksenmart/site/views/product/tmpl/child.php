@@ -6,15 +6,21 @@
  
 defined('_JEXEC') or die;
 ?>
-<article class="unit row-fluid">
-	<div class="top row-fluid">
-		<?php echo $this->loadTemplate('title', 'product'); ?>
-		<?php echo $this->loadTemplate('toplinks', 'product'); ?>
+<div class="ksm-product-child ksm-product ksm-block">
+	<div class="ksm-product-head">
+		<div class="ksm-product-head-left">
+			<?php echo $this->loadTemplate('title', 'product');?>		
+		</div>
+		<div class="ksm-product-head-right">
+			<?php echo $this->loadTemplate('toplinks', 'product');?>
+		</div>
 	</div>
-	<div class="row-fluid top_prd_block">
-		<?php echo $this->loadTemplate('gallery', 'product'); ?>
-		<div class="info span6">
-			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal">
+	<div class="ksm-product-body">
+		<div class="ksm-product-body-left">
+			<?php echo $this->loadTemplate('gallery', 'product'); ?>
+		</div>
+		<div class="ksm-product-body-right">
+			<form action="<?php echo $this->product->add_link_cart; ?>" class="ksm-catalog-item-buy-form" method="post">
                 <?php echo $this->loadTemplate('info', 'product'); ?>			
                 <?php echo $this->loadTemplate('prices', 'product'); ?>		
                 <input type="hidden" name="price" value="<?php echo $this->product->val_price_wou; ?>"/>	
@@ -23,13 +29,9 @@ defined('_JEXEC') or die;
 			</form>
 		</div>
 	</div>
-	
-    <?php echo $this->loadTemplate('social', 'product'); ?>
-    
-    <?php echo $this->loadTemplate('tabs', 'product'); ?>
-    
-    <?php if (count($this->product->sets) > 0) { ?>
-	   <?php echo $this->loadTemplate('sets', 'product'); ?>
-	<?php } ?>
-</article>
-<?php echo $this->loadTemplate('related', 'product'); ?>
+	<div class="ksm-product-footer">
+		<?php echo $this->loadTemplate('tabs', 'product'); ?>
+		<?php echo $this->loadTemplate('sets', 'product'); ?>
+		<?php echo $this->loadTemplate('related', 'product'); ?>
+	</div>
+</div>

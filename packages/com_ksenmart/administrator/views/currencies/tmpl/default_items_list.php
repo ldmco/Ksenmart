@@ -9,6 +9,8 @@ defined('_JEXEC') or die;
 <table class="cat" width="100%" cellspacing="0">	
 	<thead>
 		<tr>
+			<th class="handler"><span></span></th>
+			<th class="check"><input type="checkbox" class="check-all" /></th>		
 			<th class="name stretch"><?php echo JText::_('ksm_currencies_name')?></th>
 			<th class="currency_template"><?php echo JText::_('ksm_currencies_template')?></th>
 			<th class="del"><span></span></th>

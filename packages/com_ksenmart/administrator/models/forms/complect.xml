@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details"
+              addfieldpath="/plugins/system/ksencore/core/models/fields"
+    >
+
+        <field name="id" type="hidden" class="id"/>
+
+        <field
+                name="title"
+                type="text"
+                default=""
+                label="KSM_COMPLECTS_COMPLECT_TITLE_LBL"
+                description="KSM_COMPLECTS_COMPLECT_TITLE_DESC"
+                class="inputbox"
+                labelclass="inputname"
+        />
+
+        <field
+                name="duration"
+                type="text"
+                default="0"
+                label="KSM_COMPLECTS_COMPLECT_DURATION_LBL"
+                description="KSM_COMPLECTS_COMPLECT_DURATION_DESC"
+                class="inputbox"
+                labelclass="inputname"
+        />
+
+        <field
+                type="complectservices"
+                name="services"
+                label="KSM_COMPLECTS_COMPLECT_SERVICES_LBL"
+                onclick="setActive(this);"
+                class="active"
+                wrap="slidemodule"
+        />
+
+    </fieldset>
+</form>

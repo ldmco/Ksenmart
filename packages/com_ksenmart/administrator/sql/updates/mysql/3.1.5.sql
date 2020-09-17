@@ -1,1 +1,0 @@
-ALTER TABLE `#__ksenmart_products` ADD `purchase_price` DOUBLE NOT NULL AFTER `old_price`;

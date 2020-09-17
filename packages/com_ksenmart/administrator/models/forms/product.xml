@@ -15,6 +15,15 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
+
+		<field
+			name="published"
+			default="1"
+			value="1"
+			label="KSM_PUBLISHED_LBL"
+			description="KSM_PUBLISHED_DESC"
+			type="checkbox"
+		/>
 		
 		<field
 			name="alias"
@@ -101,6 +110,46 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
+
+		<field
+			name="weight"
+			type="text"
+			label="KSM_CATALOG_PRODUCT_WEIGHT_LBL"
+			description="KSM_CATALOG_PRODUCT_WEIGHT_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+	/>
+
+		<field
+			name="length"
+			type="text"
+			label="KSM_CATALOG_PRODUCT_LENGTH_LBL"
+			description="KSM_CATALOG_PRODUCT_LENGTH_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="width"
+			type="text"
+			label="KSM_CATALOG_PRODUCT_WIDTH_LBL"
+			description="KSM_CATALOG_PRODUCT_WIDTH_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="height"
+			type="text"
+			label="KSM_CATALOG_PRODUCT_HEIGHT_LBL"
+			description="KSM_CATALOG_PRODUCT_HEIGHT_DESC"
+			default="0"
+			class="inputbox"
+			labelclass="inputname"
+		/>
 		
 		<field
 			name="product_unit" 
@@ -131,11 +180,11 @@
 			class="inputbox"
 			labelclass="inputname"
 		/>
-		
-		<field name="tags" type="tag" mode="ajax"
-		    label="JTAG" description="JTAG_DESC"
-		    multiple="true"
-		    labelclass="inputname"
+
+		<field name="tags" type="tag"
+		   label="JTAG" description="JTAG_DESC"
+		   multiple="true"
+		   labelclass="inputname"
 		/>
 		
 		<field
@@ -209,21 +258,28 @@
 			label="KSM_CATALOG_PRODUCT_CATEGORIES_LBL" 
 			class="active"
 			wrap="slidemodule"
-            add_pcat="true"
+			add_button="true"
+			view="catalog"
+			item_type="category"
 		/>
 		
 		<field
 			name="properties"
 			type="productproperties" 
 			label="KSM_CATALOG_PRODUCT_PROPERTIES_LBL"
+			add_button="true"
+            view="properties"
+            item_type="property"
 		/>
 		
 		<field
 			name="manufacturer"
 			type="manufacturer"
 			label="KSM_CATALOG_PRODUCT_MANUFACTURER_LBL"
-			class="active"
 			wrap="slidemodule"
+			add_button="true"
+            view="catalog"
+            item_type="manufacturer"
 		/>
 		
 		<field
@@ -239,6 +295,7 @@
 			type="images" 
 			label="KSM_PHOTOS"
 			class="active"
+			remove_button="true"
 			upload_to="media/com_ksenmart/images/products/original"
 			upload_folder="products"
 			extension="com_ksenmart"
@@ -255,6 +312,12 @@
 			name="is_parent"
 			class="is_parent"
 			default="0" 
+		/>
+
+		<field
+			type="hidden"
+			name="add_child"
+			default="0"
 		/>
 		
 	</fieldset>

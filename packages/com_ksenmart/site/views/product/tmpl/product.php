@@ -6,27 +6,33 @@
  
 defined('_JEXEC') or die;
 ?>
-<article class="unit row-fluid">
-	<div class="top row-fluid">
-		<?php echo $this->loadTemplate('title');?>		
-		<?php echo $this->loadTemplate('toplinks');?>
+<div <?php echo JMicrodata::htmlScope('product'); ?> class="ksm-product ksm-block">
+	<?php echo $this->loadTemplate('edit'); ?>
+	<div class="ksm-product-head">
+		<div class="ksm-product-head-left">
+			<?php echo $this->loadTemplate('title');?>		
+		</div>
+		<div class="ksm-product-head-right">
+			<?php echo $this->loadTemplate('toplinks');?>
+		</div>
 	</div>
-	<div class="row-fluid top_prd_block">
-        <?php echo $this->loadTemplate('gallery'); ?>
-		<div class="info span6">
-			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal">
+	<div class="ksm-product-body">
+		<div class="ksm-product-body-left">
+			<?php echo $this->loadTemplate('gallery'); ?>
+		</div>
+		<div class="ksm-product-body-right">
+			<form action="<?php echo $this->product->add_link_cart; ?>" class="ksm-catalog-item-buy-form" method="post">
 				<?php echo $this->loadTemplate('info');?>	
 				<?php echo $this->loadTemplate('prices');?>	
-    			<input type="hidden" name="price" value="<?php echo $this->product->price; ?>">	
     			<input type="hidden" name="id" value="<?php echo $this->product->id; ?>">	
+    			<input type="hidden" name="price" value="<?php echo $this->product->price; ?>">	
     			<input type="hidden" name="product_packaging" class="product_packaging" value="<?php echo $this->product->product_packaging; ?>">
 			</form>
 		</div>
 	</div>
-	<?php echo $this->loadTemplate('social');?>
-    <?php echo $this->loadTemplate('tabs'); ?>
-    <?php if (count($this->product->sets) > 0) { ?>
-        <?php echo $this->loadTemplate('sets'); ?>
-	<?php } ?>
-</article>
-<?php echo $this->loadTemplate('related'); ?>
+	<div class="ksm-product-footer">
+		<?php echo $this->loadTemplate('tabs'); ?>
+		<?php echo $this->loadTemplate('sets'); ?>
+		<?php echo $this->loadTemplate('related'); ?>
+	</div>
+</div>

@@ -76,6 +76,14 @@
 			default="0"
 		/>
 
+		<field
+				name="discounts"
+				type="orderdiscounts"
+				label="KSM_ORDERS_ORDER_DISCOUNTS_LBL"
+				class="active"
+				wrap="slidemodule"
+		/>
+
 		<field 
 			name="customer_fields"
 			type="ordercustomerfields"

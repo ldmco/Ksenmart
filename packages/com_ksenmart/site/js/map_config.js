@@ -4,16 +4,8 @@ jQuery(window).load(function(){
 	KsenmartMap.options.height = Math.round(jQuery(window).height()*9/10);
 	KsenmartMap.init();
 	
-	jQuery('body').on('click', '#mapselect', function(){
-		jQuery('#ksenmart-map').modal('show');
+	jQuery('body').on('click', '#ksm-map-show', function(){
+		jQuery('#ksm-map').show();
 	});
-	
-	jQuery('body').on('keyup','.address_field',function(){
-		if(KsenmartMap.options.changable){
-			var address = KsenmartMap.getAddress();
-            
-			KsenmartMap.removePoint();
-			KsenmartMap.setPointAddress(address);
-		}
-	});
+
 });

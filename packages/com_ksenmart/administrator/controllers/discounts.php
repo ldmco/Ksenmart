@@ -24,4 +24,37 @@ class KsenMartControllerDiscounts extends KsenMartController {
 		if (isset($results[0]) && $results[0]) echo $results[0];
 		JFactory::getApplication()->close();
 	}
+
+	public function get_search_items_html(){
+		$ids = JRequest::getVar('ids');
+		$items_tpl = JRequest::getVar('items_tpl');
+		$html = '';
+
+		$model = $this->getModel('discounts');
+		$view = $this->getView('discounts','html');
+		$view->setModel($model,true);
+		$items = $model->getDiscounts($ids);
+		$total = count($items);
+		if ($total>0)
+		{
+			$view->setLayout($items_tpl);
+			foreach($items as $item)
+			{
+				$view->item = &$item;
+				ob_start();
+				$view->display();
+				$html.=ob_get_contents();
+				ob_end_clean();
+			}
+		}
+
+		$response=array(
+			'html'=>$html,
+			'total'=>$total
+		);
+		$response=json_encode($response);
+		JFactory::getDocument()->setMimeEncoding('application/json');
+		echo $response;
+		JFactory::getApplication()->close();
+	}
 }

@@ -6,10 +6,9 @@
  
 defined('_JEXEC') or die;
 ?>
-<div class="control-group">
-	<label class="control-label"><?php echo JText::_('KSM_CART_YOUR_REGION'); ?></label>
-	<div class="controls">
-		<select id="region_id" name="region_id" onchange="KMCartChangeRegion(this);" required="">
+<div class="ksm-cart-order-shipping-regions ksm-cart-order-step-row">
+	<div class="ksm-cart-order-step-row-control">
+		<select id="ksm-cart-order-region_id" name="region_id" onchange="KMCartChangeRegion(this);" required="true">
 			<option value=""><?php echo JText::_('KSM_CART_YOUR_CHOOSE_REGION'); ?></option>
 			<?php foreach($this->regions as $region):?>
 			<option value="<?php echo $region->id; ?>" <?php echo ($region->selected?'selected':''); ?>><?php echo $region->title; ?></option>

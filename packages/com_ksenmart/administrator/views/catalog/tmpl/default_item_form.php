@@ -7,6 +7,8 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item <?php echo ($this->item->published==0?'disabled':'')?> <?php echo ($this->item->parent_id!=0?'child_item child_item_'.$this->item->parent_id:'');?> <?php echo (isset($this->item->set_id)?'child_item child_item_'.$this->item->set_id:'');?>" >
+	<td class="handler"><span></span></td>
+	<td class="check"><input type="checkbox" class="check-item" /></td>		
 	<td class="art sort-handler"><?php echo $this->item->product_code?></td>
 	<td class="name stretch"> 
 		<div class="img <?php echo ($this->item->parent_id!=0?'prod-parent prod-parent-child':'')?> <?php echo (isset($this->item->set_id)?'prod-set prod-set-child':'')?> <?php echo ($this->item->type=='set'?'prod-set prod-set-closed':'')?> <?php echo ($this->item->is_parent==1?'prod-parent prod-parent-closed':'')?>">

@@ -21,12 +21,12 @@ defined('_JEXEC') or die;
 			<input name="jform[items][-<?php echo $this->item->id;?>][count]" class="inputbox pos-count" value="<?php echo $this->item->product_packaging;?>">
 			<span class="plus"></span>
 		</div>
-		<div class="total"><?php echo JText::_('ksm_orders_order_item_total_price').KSMPrice::showPriceWithTransform($this->item->val_price_wou*$this->item->product_packaging);?></div>
+		<div class="total"><?php echo JText::_('ksm_orders_order_item_total_price').KSMPrice::showPriceWithTransform($this->item->price);?></div>
 	</div>
 	<a class="del" href="#"></a>
 	<input type="hidden" class="product_packaging" value="<?php echo $this->item->product_packaging;?>">
-	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][basic_price]" class="pos-prd-basic-price" value="<?php echo $this->item->val_price_wou;?>">
-	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][price]" class="pos-prd-price" value="<?php echo $this->item->val_price_wou;?>">
+	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][basic_price]" class="pos-prd-basic-price" value="<?php echo $this->item->basic_price;?>">
+	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][price]" class="pos-prd-price" value="<?php echo $this->item->price;?>">
 	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][product_id]" class="pos-prd-id" value="<?php echo $this->item->id;?>">
 	<input type="hidden" name="jform[items][-<?php echo $this->item->id;?>][id]" class="pos-id" value="-<?php echo $this->item->id;?>">
 </div>

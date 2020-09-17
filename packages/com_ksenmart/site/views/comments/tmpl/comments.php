@@ -6,20 +6,20 @@
  
 defined('_JEXEC') or die;
 ?>
-<div class="">
+<div class="ksm-comments ksm-block">
 	<h2><?php echo JText::_('KSM_REVIEWS_LIST_PATH_TITLE'); ?></h2>
-	<div id="reviews" class="items shop_reviews comment-items">
-	<?php if (!empty($this->rows)):?>
-	<?php foreach($this->rows as $comment):?>
-	<?php echo $this->loadTemplate('item', null, array('review' => $comment)); ?>
-	<?php endforeach;?>
-	<?php else:?>
-	<?php require_once('no_comments.php');?>
-	<?php endif;?>
+	<div class="ksm-comments-items">
+		<?php if (!empty($this->rows)):?>
+			<?php foreach($this->rows as $comment):?>
+				<?php echo $this->loadTemplate('item', null, array('review' => $comment)); ?>
+			<?php endforeach;?>
+		<?php else:?>
+			<?php $this->loadTemplate('no_comments');?>
+		<?php endif;?>
 	</div>
-	<?php if ($this->params->get('site_use_pagination',1)==1 && !empty($this->pagination)):?>
-	<div class="pagi">
-	<?php echo $this->pagination->getPagesLinks(); ?>
-	</div>	
+	<?php if (!empty($this->pagination)):?>
+		<div class="ksm-pagination">
+			<?php echo $this->pagination->getPagesLinks(); ?>
+		</div>	
 	<?php endif;?>
 </div>

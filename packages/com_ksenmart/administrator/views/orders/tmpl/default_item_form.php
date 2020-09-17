@@ -7,6 +7,7 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item">
+	<td class="check"><input type="checkbox" class="check-item" /></td>		
 	<td class="order_number"><?php echo $this->item->id?></td>
 	<td class="name stretch">
 		<div class="img prod-parent prod-parent-closed">

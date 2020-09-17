@@ -7,6 +7,8 @@
 defined('_JEXEC') or die;
 ?>
 <tr class="list_item <?php echo ($this->item->published==0?'disabled':'');?>">
+	<td class="handler"><span></span></td>
+	<td class="check"><input type="checkbox" class="check-item" /></td>		
 	<td class="name stretch sort-handler">
 		<div class="img">
 			<img class="min_img" src="<?php echo $this->item->small_img; ?>" title="<?php echo $this->item->title?>">

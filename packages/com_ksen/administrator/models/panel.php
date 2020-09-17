@@ -29,6 +29,7 @@ class KsenModelPanel extends JModelKSAdmin {
         $widget_type = $this->getState('widget_type');
         $query = $this->_db->getQuery(true);
         $query->select('kw.*')->from('#__ksen_widgets as kw')->where('kw.extension=' . $this->_db->quote($extension));
+		$query->where('kw.class!=' . $this->_db->quote('hide'));
         if ($widget_type != 'all') {
             $query->leftjoin('#__ksen_widgets_types_values as kwtv on kwtv.widget_id=kw.id');
             $query->innerjoin('#__ksen_widgets_types as kwt on kwtv.type_id=kwt.id and kwt.name=' . $this->_db->quote($widget_type));

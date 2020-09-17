@@ -6,9 +6,13 @@
  
 defined('_JEXEC') or die;
 ?>
-<div class="step">
+<div class="ksm-cart-order-step ksm-cart-order-step-note">
 	<legend><?php echo JText::_('KSM_CART_ORDER_NOTE_TITLE'); ?></legend>	
-	<div class="control-group">
-		<textarea name="note" id="inputComment" class="textarea" placeholder="<?php echo JText::_('KSM_CART_ORDER_NOTE_INPUT_TEXT'); ?>"></textarea>
+	<div class="ksm-cart-order-step-row">
+		<textarea name="note" placeholder="<?php echo JText::_('KSM_CART_ORDER_NOTE_INPUT_TEXT'); ?>"><?php echo $this->cart->note; ?></textarea>
+        <div class="ksm-cart-order-field-example">
+            <span><?php echo JText::_('KSM_CART_SHIPPING_FIELD_EXAMPLE'); ?>:</span>
+			<?php echo JText::_('KSM_CART_SHIPPING_FIELD_NODE_EXAMPLE'); ?>
+        </div>
 	</div>	
 </div>

@@ -20,7 +20,7 @@ class KsenModelSettings extends JModelKSAdmin {
         $this->onExecuteAfter('populateState');
     }
     
-    function getForm($data = array(), $loadData = true) {
+    function getForm($data = array(), $loadData = true, $control = 'jform') {
         $extension = $this->getState('extension');
         
         $path = JPATH_ADMINISTRATOR . '/components/' . $extension;

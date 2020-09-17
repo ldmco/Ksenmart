@@ -1,0 +1,1 @@
+ALTER TABLE `#__ksenmart_property_values` ADD `is_default` INT(1) NOT NULL AFTER `ordering`;

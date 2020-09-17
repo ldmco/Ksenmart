@@ -8,7 +8,7 @@ defined('_JEXEC') or die;
 ?>
 
 <?php if (!empty($this->pagination)): ?>
-	<div class="pagination pagination-centered">
-		<?php echo $this->pagination->getPagesLinks(); ?>
-	</div>
+<div class="ksm-pagination">
+	<?php echo $this->pagination->getPagesLinks(); ?>
+</div>
 <?php endif; ?>

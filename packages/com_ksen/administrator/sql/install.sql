@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS `#__ksen_billing_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `data` blob NOT NULL,
-  `sessid` decimal(12,0) NOT NULL,
-  `type` varchar(5) NOT NULL,
+  `disabled` int(1) NOT NULL,
+  `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extension` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_files` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `#__ksen_files` (
   KEY `media_type` (`media_type`),
   KEY `owner_type` (`owner_type`),
   KEY `folder` (`folder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_seo_config` (
   `id` int(10) NOT NULL AUTO_INCREMENT,	
@@ -31,13 +31,13 @@ CREATE TABLE IF NOT EXISTS `#__ksen_seo_config` (
   `type` varchar(256) NOT NULL,
   `config` text NOT NULL,
   PRIMARY KEY (`id`)  
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_seo_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=5 ;
 
 INSERT INTO `#__ksen_seo_types` (`id`, `title`) VALUES
 (1, 'seo-urls-config'),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `#__ksen_users` (
   `social` varchar(10) NOT NULL,
   `settings` varchar(255) NOT NULL DEFAULT '{"catalog_layout":"grid"} ',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_user_addresses` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -71,14 +71,14 @@ CREATE TABLE IF NOT EXISTS `#__ksen_user_addresses` (
   `coords` varchar(256) NOT NULL,
   `default` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_user_fields` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) NOT NULL,
   `ordering` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_user_fields_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -87,20 +87,20 @@ CREATE TABLE IF NOT EXISTS `#__ksen_user_fields_values` (
   `value` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`,`field_id`,`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_widgets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `extension` varchar(255) NOT NULL,
   `parent_id` int(11) NOT NULL,
   `group` int(2) NOT NULL,
-  `class` set('double','half','main','sub') NOT NULL DEFAULT 'sub',
+  `class` set('double','half','main','sub','hide') NOT NULL DEFAULT 'sub',
   `href` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `view` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_widgets_types` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -108,14 +108,14 @@ CREATE TABLE IF NOT EXISTS `#__ksen_widgets_types` (
   `name` varchar(256) NOT NULL,
   `published` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_widgets_types_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `widget_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_widgets_users_config` (
   `user_id` int(11) NOT NULL,
@@ -123,11 +123,11 @@ CREATE TABLE IF NOT EXISTS `#__ksen_widgets_users_config` (
   `widget_type` varchar(30) NOT NULL,
   `config` text NOT NULL,
   PRIMARY KEY (`user_id`,`extension`,`widget_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__ksen_ping` (
   `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `#__ksen_ping` (`date`) VALUES
 ('0000-00-00');

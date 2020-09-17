@@ -6,38 +6,28 @@
  
 defined('_JEXEC') or die;
 ?>
-<article class="">
-	<div class="top row-fluid">
-		<?php echo $this->loadTemplate('title','product');?>	
-		<?php echo $this->loadTemplate('toplinks','product');?>
+<div <?php echo JMicrodata::htmlScope('product'); ?> class="ksm-product ksm-product-parent-list ksm-block">
+	<div class="ksm-product-head">
+		<div class="ksm-product-head-left">
+			<?php echo $this->loadTemplate('title', 'product');?>		
+		</div>
+		<div class="ksm-product-head-right">
+			<?php echo $this->loadTemplate('toplinks', 'product');?>
+		</div>
 	</div>
-	<div class="row-fluid unit top_prd_block">
-        <?php echo $this->loadTemplate('gallery', 'product'); ?>
-		<div class="info span6">
-			<form action="<?php echo $this->product->add_link_cart; ?>" method="post" class="form-horizontal">
+	<div class="ksm-product-body">
+		<div class="ksm-product-body-left">
+			<?php echo $this->loadTemplate('gallery', 'product'); ?>
+		</div>	
+		<div class="ksm-product-body-right">
+			<form action="<?php echo $this->product->add_link_cart; ?>" class="ksm-catalog-item-buy-form" method="post">
                 <?php echo $this->loadTemplate('info','product');?>			
-                <?php echo $this->loadTemplate('prices','product');?>	
-    			<input type="hidden" name="price" value="<?php echo $this->product->val_price_wou?>" />
-    			<input type="hidden" name="id" value="<?php echo $this->product->id?>" />
-    			<input type="hidden" name="product_packaging" class="product_packaging" value="<?php echo $this->product->product_packaging?>" />
 			</form>
 		</div>
 	</div>
-	<?php echo $this->loadTemplate('social','product');?>
-    <?php echo $this->loadTemplate('tabs','product');?>
-	<?php foreach($this->childs_groups as $childs_group){ ?>
-       <?php if (count($childs_group->products) > 0){ ?>
-    	<div class="catalog">
-    		<h3><?php echo $childs_group->title?></h3>
-    		<ul class="thumbnails items catalog-items">
-    			<?php foreach($childs_group->products as $product) { ?>
-                    <?php echo $this->loadOtherTemplate('item', 'default', 'catalog', array('product' => $product, 'params' => $this->params)); ?>
-    			<?php } ?>
-    		</ul>	
-    	</div>
-    	<?php } ?>
-	<?php } ?>	
-</article>
-<?php if (count($this->related) > 0){ ?>
-    <?php echo $this->loadTemplate('related', 'product'); ?>
-<?php } ?>
+	<div class="ksm-product-footer">
+		<?php echo $this->loadTemplate('childs'); ?>
+		<?php echo $this->loadTemplate('tabs','product');?>
+		<?php echo $this->loadTemplate('related', 'product'); ?>
+	</div>
+</div>

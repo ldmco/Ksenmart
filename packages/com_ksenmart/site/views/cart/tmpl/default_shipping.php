@@ -1,36 +1,38 @@
-﻿<?php 
+﻿<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 ?>
-<div class="kmcart-shipping default_shipping">
-	<div class="step">
-		<legend><?php echo JText::_('KSM_CART_PAYMENT_METHODS_TITLE'); ?></legend>
-        <?php echo $this->loadTemplate('regions'); ?>
-        <?php echo $this->loadTemplate('shipping_methods'); ?>        
-	</div>
-	<?php if(count($this->customer_fields) > 0){ ?>
-	<div class="step">
-		<legend><?php echo JText::_('KSM_CART_CUSTOMER_FIELDS_TITLE'); ?></legend>
-        <?php echo $this->loadTemplate('customer_fields'); ?>
-	</div>	
+<div class="ksm-cart-order-shipping default_shipping">
+	<?php if (!$this->shippings) { ?>
+        <div class="ksm-cart-order-step-row">
+            <div class="ksm-cart-order-step-row-control">
+                <label><?php echo JText::_('KSM_CART_NOSHIPING_TEXT'); ?></label>
+            </div>
+        </div>
+	<?php } else { ?>
+        <div class="ksm-cart-order-step-row">
+            <div class="ksm-cart-order-step-row-control">
+				<?php foreach ($this->shippings as $shipping) { ?>
+                    <div class="ksm-cart-order-shipping-method">
+                        <label>
+                            <input type="radio" id="shipping_id"
+                                   name="shipping_id"
+                                   value="<?php echo $shipping->id; ?>"
+                                   required="true"
+                                   onclick="<?php echo !empty($shipping->action) ? $shipping->action : 'KMCartChangeShipping(this);'; ?>" <?php echo($shipping->selected ? 'checked' : ''); ?> />
+							<?php if (!empty($shipping->icon)) { ?>
+                                <span class="icon"><img src="<?php echo $shipping->icon; ?>"/></span>
+							<?php } ?>
+							<?php echo JText::_($shipping->title); ?>
+                        </label>
+                        <span class="ksm-cart-order-shipping-method-price"><?php echo $shipping->shipping_sum_val; ?></span>
+                    </div>
+				<?php } ?>
+            </div>
+        </div>
 	<?php } ?>
-	<?php if($this->address_fields){ ?>
-	<div class="step row-fluid address_fields_b">
-        <div class="span6">
-            <legend><?php echo JText::_('KSM_CART_ADDRESS_FIELDS_TITLE'); ?></legend>
-            <?php echo $this->loadTemplate('address_fields'); ?>
-        </div>
-        <?php if(KSUsers::getUser()->id && $this->addresses){ ?>
-        <div class="span6">
-            <legend><?php echo JText::_('KSM_CART_ADDRESS_CHANGE_TITLE'); ?></legend>
-            <?php echo $this->loadTemplate('change_addresses'); ?>
-        </div>
-        <?php } ?>
-	</div>	
-	<?php } ?>	
-	<input type="hidden" id="shipping_coords" name="shipping_coords" value="<?php echo $this->state->get('shipping_coords'); ?>" />
 </div>

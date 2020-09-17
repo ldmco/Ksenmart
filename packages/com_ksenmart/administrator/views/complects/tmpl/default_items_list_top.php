@@ -1,0 +1,13 @@
+<?php 
+/**
+ * @copyright   Copyright (C) 2013. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+ 
+defined('_JEXEC') or die;
+?>
+<div class="top ">
+	<a class="adds km-modal" rel='{"x":"90%","y":"90%"}' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=complects&layout=service&tmpl=component');?>"><?php echo JText::_('ksm_complects_add_service')?></a>
+	<a class="button copy-items"><?php echo JText::_('KS_COPY'); ?></a>
+	<a class="button delete-items"><?php echo JText::_('KS_REMOVE'); ?></a>
+</div>

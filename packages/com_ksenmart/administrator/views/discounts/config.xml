@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="KSN_SHOPDISCOUNTS_CONFIG"
+		label="KSN_SHOPDISCOUNTS_LABEL"
+		description="KSN_SHOPDISCOUNTS_CONFIG_DESC">
+
+		<field
+			name="discount_catalog"
+			type="radio"
+			default="0"
+			label="KSM_SHOPDISCOUNTS_DISCOUNT_CATALOG_LABEL"
+			description="KSM_SHOPDISCOUNTS_DISCOUNT_CATALOG_DESC"
+			labelclass="inputname"
+			>
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+		
+		<field
+			name="mindiscount"
+			type="mindiscount"
+			label="KSM_SHOPDISCOUNTS_MINDISCOUNT_LABEL"
+			description="KSM_SHOPDISCOUNTS_MINDISCOUNT_DESC"
+			labelclass="inputname"
+			/>
+	</fieldset>
+</config>

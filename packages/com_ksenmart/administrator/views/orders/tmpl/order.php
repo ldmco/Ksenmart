@@ -18,9 +18,7 @@ JHtml::_('behavior.tooltip');
 		</div>
 	</div>
 	<div class="edit">
-		<table width="100%">
-			<tr>
-				<td class="leftcol">
+				<div class="leftcol">
 					<?php echo $this->loadTemplate('info');?>
 					<br clear="both"><br>
 					<div class="row">
@@ -40,20 +38,23 @@ JHtml::_('behavior.tooltip');
 					<div class="row items">
 						<?php echo $this->form->getInput('items'); ?>
 					</div>
+					<div class="row discounts">
+						<?php echo $this->form->getInput('discounts'); ?>
+					</div>
 					<div class="row costs">
 						<?php echo $this->form->getInput('costs'); ?>
 					</div>
-				</td>
-				<td class="rightcol">
-					<?php echo $this->form->getInput('user_id'); ?>
-					<?php echo $this->form->getInput('customer_fields'); ?>
-					<?php echo $this->form->getInput('address_fields'); ?>
-					<div class="row">
-						<div id="ksenmart-map-layer"></div>
+				</div>
+				<div class="rightcol">
+					<div class="rightcol-wra">
+						<?php echo $this->form->getInput('user_id'); ?>
+						<?php echo $this->form->getInput('customer_fields'); ?>
+						<?php echo $this->form->getInput('address_fields'); ?>
+						<div class="row">
+							<div id="ksm-map-layer"></div>
+						</div>
 					</div>
-				</td>
-			</tr>
-		</table>
+				</div>
 	</div>
 	<input type="hidden" name="task" value="save_form_item">
 	<?php echo $this->form->getInput('id'); ?>

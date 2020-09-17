@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details"
+              addfieldpath="/plugins/system/ksencore/core/models/fields"
+    >
+
+        <field name="id" type="hidden" class="id"/>
+
+        <field
+                name="title"
+                type="text"
+                default=""
+                label="KSM_COMPLECTS_SERVICE_TITLE_LBL"
+                description="KSM_COMPLECTS_SERVICE_TITLE_DESC"
+                class="inputbox"
+                labelclass="inputname"
+        />
+
+        <field
+                type="servicegroup"
+                name="group"
+                label="KSM_COMPLECTS_SERVICE_GROUPS_LBL"
+                onclick="setActiveOne(this);"
+                class="active"
+                wrap="slidemodule"
+        />
+
+        <field
+                type="servicecomplects"
+                name="complects"
+                label="KSM_COMPLECTS_SERVICE_COMPLECTS_LBL"
+                onclick="setActive(this);"
+                class="active"
+                wrap="slidemodule"
+        />
+
+    </fieldset>
+</form>

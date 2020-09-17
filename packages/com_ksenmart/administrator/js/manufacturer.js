@@ -10,6 +10,7 @@ jQuery(document).ready(function(){
 			KMShowMessage(Joomla.JText._('KSM_CATALOG_MANUFACTURER_INVALID_TITLE_LBL'));
 			return false;
 		}
+		form.unbind('submit');
 		form.submit();
 		return false;
 	});
