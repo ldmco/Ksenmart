@@ -20,8 +20,10 @@ class JFormFieldPropertyValues extends JFormField {
 		foreach ($this->value as $value) {
 			$html.= '	<div class="position">';
 			$html.= '		<div class="property-value">';
-			$html.= '			<label class="inputname">' . JText::_('ksm_properties_property_value') . ' ' . $k . '</label>';
+			$html.= '			<label style="width:60px;" class="inputname">№ ' . $k . '</label>';
 			$html.= '			<input type="text" name="' . $this->name . '[' . $value->id . '][title]" value="' . $value->title . '" class="inputbox">';
+			$html.= '			<label style="width:105px;margin-top:7px;" class="inputname">' . JText::_('KSM_PROPERTIES_PROPERTY_DEFAULT_VALUE_LBL') . '</label>';
+			$html.= '			<input class="is_default" style="margin:0 5px;" type="checkbox" name="' . $this->name . '[' . $value->id . '][is_default]" ' . ($value->is_default?'checked':'') . ' value="1">';
 			$html.= '			<div class="property-image" id="property-image' . $value->id . '">';
 			if ($value->image != '') $html.= '			<img height="30px" src="' . JURI::root() . $value->image . '">';
 			$html.= '				<input type="hidden" name="' . $this->name . '[' . $value->id . '][image]" value="' . $value->image . '">';
@@ -37,6 +39,7 @@ class JFormFieldPropertyValues extends JFormField {
 			$html.= '			<input type="text" name="' . $this->name . '[' . $value->id . '][alias]" value="' . $value->alias . '" class="inputbox">';
 			$html.= '		</div>';
 			$html.= '		<input type="hidden" name="' . $this->name . '[' . $value->id . '][ordering]" value="' . $value->ordering . '" class="ordering">';
+			$html.= '		<input type="hidden" name="' . $this->name . '[' . $value->id . '][id]" value="' . $value->id . '" class="value_id">';
 			$html.= '</div>';
 			$k++;
 		}
@@ -57,6 +60,17 @@ class JFormFieldPropertyValues extends JFormField {
 					refreshValues();
 				}
 			});	
+			
+			jQuery("body").on("change", ".is_default", function(){
+				if(jQuery(this).is(":checked")){
+					jQuery(".is_default").removeAttr("checked");
+					jQuery(this).attr("checked","checked");
+					var is_default = jQuery(this).closest(".position").find(".value_id").val();
+					jQuery(".row.default input").val(is_default);
+				} else {
+					jQuery(".row.default input").val("");
+				}
+			});
 
 			jQuery("body").on("click", ".ksm-slidemodule-propertyvalues .add", function(){
 				

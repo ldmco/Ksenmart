@@ -1,61 +1,78 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 
 JFormHelper::loadFieldClass('checkboxes');
-class JFormFieldProductCategories extends JFormFieldCheckboxes {
 
-    protected $type = 'ProductCategories';
-    private $tree = array();
-    private $menu = array();
+class JFormFieldProductCategories extends JFormFieldCheckboxes
+{
 
-    public function getInput() {
-        $this->buildCategoriesTree();
-        if($this->menu) $this->makeCategoriesTree($this->menu[0]);
-        $path = $this->getPath();
-        $defname = str_replace('[]', '[default]', $this->name);
-        $html = '<ul ng-controller="CategoryChangeCtrl">';
-        if(count($this->tree) > 0) {
-            foreach($this->tree as $category) {
-                $checked = '';
-                $fchecked = '';
-                $disabled = ' disabled="disabled" ';
-                if($category->selected) {
-                    $checked = ' checked="checked" ';
-                    $disabled = '';
-                    if($this->value[$category->id]->is_default) {
-                        $category->class .= ' favorite';
-                        $fchecked = ' checked="checked" ';
-                    }
-                }
-                $html .= '<li class="' . $category->class . '" ng-click="selectCat($event)">';
-                $html .= '	<label class="cat-lbl">' . $category->title;
-                $html .= '	 	<input type="checkbox" ' . $checked . ' value="' . $category->id . '" name="' . $this->name . '" onclick="setCategoryActive(this);" />';
-                if($category->deeper) $html .= '	 <a href="javascript:void(0);" class="sh ' . (in_array($category->id, $path) ? 'hides' : 'show') . '" ng-class="{\'hides\':collapseChildCats_'.$category->id.',\'show\':!collapseChildCats_'.$category->id.'}" ng-click="$event.stopPropagation(); collapseChildCats_'.$category->id.' = ! collapseChildCats_'.$category->id.'"></a>';
-                $html .= '	</label>';
-                $html .= '	<label class="def-lbl" ng-click="setCategoryDefault($event)">';
-                $html .= '		<input type="radio" value="' . $category->id . '" name="' . $defname . '" onclick="setCategoryFavorite(this);" ' . $disabled . $fchecked . ' />';
-                $html .= '	</label>';
-                if($category->deeper) {
-                    $html .= '<ul class="' . (in_array($category->id, $path) ? 'opened' : '') . '" ng-show="collapseChildCats_'.$category->id.'">';
-                } elseif($category->shallower) {
-                    $html .= '</li>';
-                    $html .= str_repeat('</ul></li>', $category->level_diff);
-                } else {
-                    $html .= '</li>';
-                }
-            }
-        } else {
-            $html .= '<li>';
-            $html .= '<label>' . JText::_('KS_CATEGORIES_NO_ITEMS') . '</label>';
-            $html .= '</li>';
-        }
-        $html .= '</ul>';
-        $script = '
+	protected $type = 'ProductCategories';
+	private $tree = array();
+	private $menu = array();
+
+	public function getInput()
+	{
+		$this->buildCategoriesTree();
+		if ($this->menu)
+		{
+			$this->makeCategoriesTree($this->menu[0]);
+		}
+		$path    = $this->getPath();
+		$defname = str_replace('[]', '[default]', $this->name);
+		$html    = '<ul ng-controller="CategoryChangeCtrl">';
+		if (count($this->tree) > 0)
+		{
+			foreach ($this->tree as $category)
+			{
+				$checked  = '';
+				$fchecked = '';
+				$disabled = ' disabled="disabled" ';
+				if ($category->selected)
+				{
+					$checked  = ' checked="checked" ';
+					$disabled = '';
+					if ($this->value[$category->id]->is_default)
+					{
+						$category->class .= ' favorite';
+						$fchecked        = ' checked="checked" ';
+					}
+				}
+				$html .= '<li class="' . $category->class . '" ng-click="selectCat($event)">';
+				$html .= '	<label class="cat-lbl">' . $category->title;
+				$html .= '	 	<input type="checkbox" ' . $checked . ' value="' . $category->id . '" name="' . $this->name . '" onclick="setCategoryActive(this);" />';
+				if ($category->deeper) $html .= '	 <a href="javascript:void(0);" class="sh ' . (in_array($category->id, $path) ? 'hides' : 'show') . '" ng-class="{\'hides\':collapseChildCats_' . $category->id . ',\'show\':!collapseChildCats_' . $category->id . '}" ng-click="$event.stopPropagation(); collapseChildCats_' . $category->id . ' = ! collapseChildCats_' . $category->id . '"></a>';
+				$html .= '	</label>';
+				$html .= '	<label class="def-lbl" ng-click="setCategoryDefault($event)">';
+				$html .= '		<input type="radio" value="' . $category->id . '" name="' . $defname . '" onclick="setCategoryFavorite(this);" ' . $disabled . $fchecked . ' />';
+				$html .= '	</label>';
+				if ($category->deeper)
+				{
+					$html .= '<ul class="' . (in_array($category->id, $path) ? 'opened' : '') . '" ng-show="collapseChildCats_' . $category->id . '">';
+				}
+				elseif ($category->shallower)
+				{
+					$html .= '</li>';
+					$html .= str_repeat('</ul></li>', $category->level_diff);
+				}
+				else
+				{
+					$html .= '</li>';
+				}
+			}
+		}
+		else
+		{
+			$html .= '<li>';
+			$html .= '<label>' . JText::_('KS_CATEGORIES_NO_ITEMS') . '</label>';
+			$html .= '</li>';
+		}
+		$html     .= '</ul>';
+		$script   = '
 		jQuery(document).ready(function(){
 				
 			jQuery("body").on("click", ".ksm-slidemodule-productcategories ul li a.show", function(){
@@ -126,82 +143,113 @@ class JFormFieldProductCategories extends JFormFieldCheckboxes {
 				jQuery(".ksm-slidemodule-productcategories ul li").removeClass("favorite");
 				item.addClass("favorite");
 			}
-		}		
+		}
+
+		function updateCategories(){
+			var data = {};
+			var form = jQuery(".form");
+			data["model"] = "catalog";
+			data["form"] = "product";
+			data["fields"] = ["categories"];
+			data["id"] = form.find(".id").val();
+			KMRenewFormFields(data);
+		}
 		';
-        $document = JFactory::getDocument();
-        $document->addScriptDeclaration($script);
-        return $html;
-    }
+		$document = JFactory::getDocument();
+		$document->addScriptDeclaration($script);
 
-    function buildCategoriesTree() {
-        
-        $option          = JFactory::getApplication()->input->get('option', 'com_ksenmart', 'string');
-        $component_name = str_replace('com_', '', $option);
-        $prefix          = ucfirst($component_name);
-        
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('*')->from('#__'.$component_name.'_categories')->order('ordering');
-        $db->setQuery($query);
-        $categories = $db->loadObjectList('id');
-        $top_parent = (object)array('id' => 0, 'children' => array());
-        $menu = array(0 => $top_parent);
-        
-        foreach($categories as $id => $category) {
-            if(array_key_exists($id, $this->value)) $category->selected = true;
-            else  $category->selected = false;
-            if(isset($menu[$id])) $category->children = $menu[$id]->children;
-            else  $category->children = array();
-            $menu[$id] = $category;
-            if(!isset($menu[$category->parent_id])) {
-                $menu[$category->parent_id] = new stdClass();
-                $menu[$category->parent_id]->children = array();
-            }
-            $menu[$category->parent_id]->children[] = $category;
-        }
-        $this->menu = $menu;
-    }
+		return $html;
+	}
 
-    function getPath() {
-        $path = array();
-        $get_path = false;
-        $level = false;
-        for($k = count($this->tree) - 1; $k >= 0; $k--) {
-            if($get_path && ($this->tree[$k]->level < $level || !$level)) {
-                $path[] = $this->tree[$k]->id;
-                $level = $this->tree[$k]->level;
-            }
-            if($this->tree[$k]->id == $this->value) {
-                $get_path = true;
-                $level = $this->tree[$k]->level;
-            }
-            if($level == 1) $get_path = false;
-        }
+	function buildCategoriesTree()
+	{
 
-        return $path;
-    }
+		$option         = JFactory::getApplication()->input->get('option', 'com_ksenmart', 'string');
+		$component_name = str_replace('com_', '', $option);
+		$prefix         = ucfirst($component_name);
 
-    function makeCategoriesTree($category, $level = 1) {
-        if(isset($category->children) && !empty($category->children)) {
-            foreach($category->children as $child) {
-                $child->level = $level;
-                $child->deeper = false;
-                $child->shallower = false;
-                $child->level_diff = 0;
-                $child->class = array_key_exists($child->id, $this->value) ? ' active' : '';
-                if(isset($this->tree[count($this->tree) - 1])) {
-                    $this->tree[count($this->tree) - 1]->deeper = ($child->level > $this->tree[count($this->tree) - 1]->level);
-                    $this->tree[count($this->tree) - 1]->shallower = ($child->level < $this->tree[count($this->tree) - 1]->level);
-                    $this->tree[count($this->tree) - 1]->level_diff = ($this->tree[count($this->tree) - 1]->level - $child->level);
-                }
-                $this->tree[] = $child;
-                if(isset($this->tree[count($this->tree) - 1])) {
-                    $this->tree[count($this->tree) - 1]->deeper = (1 > $this->tree[count($this->tree) - 1]->level);
-                    $this->tree[count($this->tree) - 1]->shallower = (1 < $this->tree[count($this->tree) - 1]->level);
-                    $this->tree[count($this->tree) - 1]->level_diff = ($this->tree[count($this->tree) - 1]->level - 1);
-                }
-                $this->makeCategoriesTree($this->menu[$child->id], $level + 1);
-            }
-        }
-    }
+		$db    = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('*')->from('#__' . $component_name . '_categories')->order('ordering');
+		$db->setQuery($query);
+		$categories = $db->loadObjectList('id');
+		$top_parent = (object) array('id' => 0, 'children' => array());
+		$menu       = array(0 => $top_parent);
+
+		foreach ($categories as $id => $category)
+		{
+			if (array_key_exists($id, $this->value)) $category->selected = true;
+			else  $category->selected = false;
+			if (isset($menu[$id])) $category->children = $menu[$id]->children;
+			else  $category->children = array();
+			$menu[$id] = $category;
+			if (!isset($menu[$category->parent_id]))
+			{
+				$menu[$category->parent_id]           = new stdClass();
+				$menu[$category->parent_id]->children = array();
+			}
+			$menu[$category->parent_id]->children[] = $category;
+		}
+		$this->menu = $menu;
+	}
+
+	function getPath()
+	{
+		if (empty($this->value))
+		{
+			return [];
+		}
+		$path     = [];
+		$get_path = false;
+		$level    = false;
+		for ($k = count($this->tree) - 1; $k >= 0; $k--)
+		{
+			if ($get_path && ($this->tree[$k]->level < $level || !$level))
+			{
+				$path[] = $this->tree[$k]->id;
+				$level  = $this->tree[$k]->level;
+			}
+
+			if (!empty($this->value[$this->tree[$k]->id]))
+			{
+				$get_path = true;
+				$level    = $this->tree[$k]->level;
+			}
+			if ($level == 1)
+			{
+				$get_path = false;
+			}
+		}
+
+		return $path;
+	}
+
+	function makeCategoriesTree($category, $level = 1)
+	{
+		if (isset($category->children) && !empty($category->children))
+		{
+			foreach ($category->children as $child)
+			{
+				$child->level      = $level;
+				$child->deeper     = false;
+				$child->shallower  = false;
+				$child->level_diff = 0;
+				$child->class      = array_key_exists($child->id, $this->value) ? ' active' : '';
+				if (isset($this->tree[count($this->tree) - 1]))
+				{
+					$this->tree[count($this->tree) - 1]->deeper     = ($child->level > $this->tree[count($this->tree) - 1]->level);
+					$this->tree[count($this->tree) - 1]->shallower  = ($child->level < $this->tree[count($this->tree) - 1]->level);
+					$this->tree[count($this->tree) - 1]->level_diff = ($this->tree[count($this->tree) - 1]->level - $child->level);
+				}
+				$this->tree[] = $child;
+				if (isset($this->tree[count($this->tree) - 1]))
+				{
+					$this->tree[count($this->tree) - 1]->deeper     = (1 > $this->tree[count($this->tree) - 1]->level);
+					$this->tree[count($this->tree) - 1]->shallower  = (1 < $this->tree[count($this->tree) - 1]->level);
+					$this->tree[count($this->tree) - 1]->level_diff = ($this->tree[count($this->tree) - 1]->level - 1);
+				}
+				$this->makeCategoriesTree($this->menu[$child->id], $level + 1);
+			}
+		}
+	}
 }

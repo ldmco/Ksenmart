@@ -44,9 +44,9 @@ class plgKMExportimportExport_ym extends KMPlugin {
 		$app = JFactory::getApplication();
 		$db = JFactory::getDBO();
 		$jinput = $app->input;
-		$exportym = $jinput->get('exportym', null);
+		$exportym = $jinput->get('export', null);
 		
-		if (empty($exportym))
+		if ($exportym != 'exportym')
 			return false;
 		
 		$currencies = '';
@@ -73,12 +73,12 @@ class plgKMExportimportExport_ym extends KMPlugin {
 		if (!count($cats)) $cats[] = 0;	
 
 		$query = $db->getQuery(true);
-		$query->select('rate')->from('#__ksenmart_currencies')->where('code = '.$db->quote('RUR'));
+		$query->select('rate')->from('#__ksenmart_currencies')->where('code = '.$db->quote('RUB'));
 		$db->setQuery($query);
 		$rur_rate = $db->loadResult();	
 		
 		$query = $db->getQuery(true);
-		$query->select('rate')->from('#__ksenmart_currencies')->where('code = '.$db->quote('RUR'));
+		$query->select('rate')->from('#__ksenmart_currencies')->where('code = '.$db->quote('RUB'));
 		$db->setQuery($query);
 		$rur_rate = $db->loadResult();		
 
@@ -137,7 +137,7 @@ class plgKMExportimportExport_ym extends KMPlugin {
 			<company>' . $company . '</company>
 			<url>' . JURI::root() . '</url>
 			<platform>KsenMart based on Joomla</platform>
-			<version>3.0</version>
+			<version>4.1</version>
 			<agency>L.D.M. Co</agency>
 			<email>boss.dm@gmail.com</email>	
 			<currencies>

@@ -18,7 +18,7 @@ abstract class JViewKSAdmin extends JViewLegacy {
         $this->ext_name_com = $ext_name_com;
         $this->ext_prefix   = $ext_prefix;
 
-        $dispatcher = JDispatcher::getInstance();
+        $dispatcher = JEventDispatcher::getInstance();
         $dispatcher->trigger('onBeforeViewAdmin' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
 
         $this->path = KSPath::getInstance();
@@ -27,7 +27,7 @@ abstract class JViewKSAdmin extends JViewLegacy {
     }
 
     public function display($tpl = null) {
-        $dispatcher = JDispatcher::getInstance();
+        $dispatcher = JEventDispatcher::getInstance();
         $dispatcher->trigger('onAfterViewAdmin' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
 
         parent::display($tpl);
@@ -39,7 +39,7 @@ abstract class JViewKSAdmin extends JViewLegacy {
         $html = '';
 
         $function = isset($tpl) ? $layout . '_' . $tpl : $layout;
-        $dispatcher = JDispatcher::getInstance();
+        $dispatcher = JEventDispatcher::getInstance();
         $dispatcher->trigger('onBeforeDisplayAdmin' . strtoupper($this->ext_prefix) . $name . $function, array(&$this, &$tpl, &$html));
         if($tpl != 'empty') $html .= parent::loadTemplate($tpl);
 

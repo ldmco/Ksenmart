@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="kmexportimport" version="2.5.0" method="upgrade">
+    <name>KSM_EXPORTIMPORT_1C_EXCHANGE</name>
+    <creationDate>March 2016</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>4.1.11</version>
+    <description>KSM_EXPORTIMPORT_1C_EXCHANGE_DESCRIPTION</description>
+
+    <scriptfile>install.php</scriptfile>
+    
+    <files>
+		<filename plugin="1C_exchange">1C_exchange.php</filename>
+        <filename>index.html</filename>
+        <folder>sql</folder>
+        <folder>import</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    
+    <languages folder="language">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmexportimport_1c_exchange.sys.ini</language>
+    </languages>
+
+    <updateservers>
+        <server type="extension" priority="1" name="1C_exchange">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/plugins/plg_1c_exchange-update.xml</server>
+    </updateservers>
+	
+</extension>

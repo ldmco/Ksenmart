@@ -36,6 +36,8 @@ class JFormFieldPaymentType extends JFormField {
 			$html.= '							<ul>';
 			
 			foreach ($plugins as $plugin) {
+				$disabled = KSSystem::checkExtension('payment', $plugin->element);
+				if ($disabled) continue;
 				$html.= '							<li class="' . ($plugin->element == $this->value ? 'active' : '') . '">';
 				$html.= '								<label>' . JText::_($plugin->name) . '<input onclick="setPaymentType(this);" type="radio" name="' . $this->name . '" value="' . $plugin->element . '" ' . ($plugin->element == $this->value ? 'checked' : '') . ' style="visibility:hidden;" ></label>';
 				$html.= '							</li>';

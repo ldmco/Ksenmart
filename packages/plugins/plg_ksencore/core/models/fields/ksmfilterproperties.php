@@ -32,6 +32,7 @@ class JFormFieldKSMFilterProperties extends JFormField {
 			$html .= '				<option value="radio" '.($view == 'radio' ? 'selected' : '').'>'.JText::_('MOD_KM_FILTER_VIEW_RADIO').'</option>';
 			$html .= '				<option value="text" '.($view == 'text' ? 'selected' : '').'>'.JText::_('MOD_KM_FILTER_VIEW_TEXT').'</option>';
 			$html .= '				<option value="images" '.($view == 'images' ? 'selected' : '').'>'.JText::_('MOD_KM_FILTER_VIEW_IMAGES').'</option>';
+			$html .= '				<option value="band" '.($view == 'band' ? 'selected' : '').'>'.JText::_('MOD_KM_FILTER_VIEW_BAND').'</option>';
 			$html .= '			</select>';
 			$html .= '		</div>';
 			$html .= '	</div>';			

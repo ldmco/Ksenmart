@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="plugin" group="kmpayment" version="2.5.0" method="upgrade">
+<extension type="plugin" group="kmpayment" version="3.1" method="upgrade">
     <name>KSM_PAYMENT_COURIER</name>
-    <version>2.0.2</version>
-    <creationDate>March 2014</creationDate>
+    <version>4.1.11</version>
+    <creationDate>March 2017</creationDate>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
     <description>KSM_PAYMENT_COURIER_DESCRIPTION</description>
 
     <files>
@@ -28,7 +28,7 @@
     </install>
 	   
     <updateservers>
-        <server type="extension" priority="1" name="courier">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_courier-update.xml</server>
+        <server type="extension" priority="1" name="courier">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/plugins/plg_courier-update.xml</server>
     </updateservers>
 
 </extension>

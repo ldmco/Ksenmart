@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
-<extension type="plugin" version="3.0" method="upgrade" group="system">
+<extension type="plugin" version="3.1" method="upgrade" group="system">
     <name>KsenCore</name>
-    <author>TakT</author>
-    <authorEmail>kirill.bereza@yandex.ru</authorEmail>
-    <authorUrl>http://brainstorage.me/TakT</authorUrl>
-    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0.12</version>
+    <version>4.1.11</version>
+    <creationDate>July 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
     <description>PLG_KSENCORE_DESC</description>
     <scriptfile>script.php</scriptfile>
     
@@ -39,7 +40,7 @@
     </config>
     
     <updateservers>
-        <server type="extension" priority="1" name="ksencore">http://update.ksenmart.ru/update-info/j3/ksen_extensions/plugins/plg_ksencore-update.xml</server>
+        <server type="extension" priority="1" name="ksencore">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/ksen_extensions/plugins/plg_ksencore-update.xml</server>
     </updateservers>
 
 </extension>

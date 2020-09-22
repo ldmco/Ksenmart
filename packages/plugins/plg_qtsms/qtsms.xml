@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="kmplugins" version="3.1" method="upgrade">
+    <name>KSM_PLUGIN_QTSMS</name>
+    <creationDate>May 2017</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <version>4.1.11</version>
+    <description>KSM_PLUGIN_QTSMS_DESCRIPTION</description>
+
+    <files>
+		<filename plugin="qtsms">qtsms.php</filename>
+        <filename>index.html</filename>
+        <folder>helper</folder>
+        <folder>sql</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>	
+    
+    <languages folder="language">
+		<language tag="ru-RU">ru-RU/ru-RU.plg_kmplugins_qtsms.sys.ini</language>
+    </languages>
+	
+    <config>
+        <fields name="params">
+		
+            <fieldset name="basic" addfieldpath="/plugins/system/ksencore/core/models/fields">
+				<field 
+					name="phone"
+					type="text"
+					label="KSM_PLUGIN_QTSMS_PHONE"
+					class="inputbox"
+					labelclass="inputname"
+				/>
+				
+				<field 
+					name="sender"
+					type="text"
+					label="KSM_PLUGIN_QTSMS_SENDER"
+					class="inputbox"
+					labelclass="inputname"
+				/>
+				
+				<field 
+					name="host"
+					type="text"
+					label="KSM_PLUGIN_QTSMS_HOST"
+					class="inputbox"
+					labelclass="inputname"
+				/>
+				
+				<field 
+					name="login"
+					type="text"
+					label="KSM_PLUGIN_QTSMS_LOGIN"
+					class="inputbox"
+					labelclass="inputname"
+				/>
+				
+				<field 
+					name="password"
+					type="password"
+					label="KSM_PLUGIN_QTSMS_PASSWORD"
+					class="inputbox"
+					labelclass="inputname"
+				/>
+				
+				<field
+					name="status_id"
+					type="orderstatus"
+					label="KSM_PLUGIN_QTSMS_LOGIN_STATUS_LBL"
+					description ="KSM_PLUGIN_QTSMS_LOGIN_STATUS_DESC"
+					labelclass="inputname"
+				/>
+				
+				<field 
+					name="message"
+					type="textarea"
+					default=""
+					label="KSM_PLUGIN_QTSMS_MESSAGE_LBL"
+					class="textarea"
+				/>
+				
+				<field 
+					name="note"
+					type="note"
+					default=""
+					label="KSM_PLUGIN_QTSMS_NOTE_LBL"
+				/>
+				
+				<field 
+					name="message_client"
+					type="textarea"
+					default=""
+					label="KSM_PLUGIN_QTSMS_MESSAGE_CLIENT_LBL"
+					class="textarea"
+				/>
+				
+				<field 
+					name="note_client"
+					type="note"
+					default=""
+					label="KSM_PLUGIN_QTSMS_NOTE_CLIENT_LBL"
+				/>
+				
+            </fieldset>
+	
+        </fields>
+    </config>	
+	
+</extension>

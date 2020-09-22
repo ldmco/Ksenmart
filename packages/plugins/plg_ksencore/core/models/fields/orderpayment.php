@@ -16,9 +16,10 @@ class JFormFieldOrderPayment extends JFormField {
 		$region_id = $this->form->getValue('region_id');
 		$payments = array();
 		$payment_selected = 0;
+		$show_regions = KSMShipping::checkRegions();
 		$html = '';
 		
-		if (!empty($region_id)) {
+		if (!empty($region_id) || !$show_regions) {
 			$query = $db->getQuery(true);
 			$query->select('id as value,title as text,regions')->from('#__ksenmart_payments')->where('published=1')->order('ordering');
 			$db->setQuery($query);
@@ -26,12 +27,16 @@ class JFormFieldOrderPayment extends JFormField {
 			
 			foreach ($rows as $row) {
 				$row->regions = json_decode($row->regions, true);
-				
-				foreach ($row->regions as $country) {
-					if (in_array($region_id, $country)) {
-						$payment_selected = $row->value == $this->value ? $row->value : $payment_selected;
-						$payments[] = $row;
+				if($show_regions){
+					foreach ($row->regions as $country) {
+						if (in_array($region_id, $country)) {
+							$payment_selected = $row->value == $this->value ? $row->value : $payment_selected;
+							$payments[] = $row;
+						}
 					}
+				} else {
+					$payment_selected = $row->value == $this->value ? $row->value : $payment_selected;
+					$payments[] = $row;
 				}
 			}
 		}

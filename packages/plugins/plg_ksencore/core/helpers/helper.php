@@ -12,16 +12,16 @@ class KSLoader {
         self::loadHelpers($folders, KSC_ADMIN_PATH_CORE_HELPERS, $ignoreHelpers, 'KS');
     }
 
-    public static function loadLocalHelpers(array $folders, array $ignoreHelpers = array(), $ext_name_com = null, $prefix = null){
+    public static function loadLocalHelpers(array $folders, array $ignoreHelpers = array(), $ext_name_component = null, $prefix = null){
         if(empty($prefix)){
             global $ext_prefix;
             $prefix = $ext_prefix;
         }
-        if(empty($ext_name_com)){
+        if(empty($ext_name_component)){
             global $ext_name_com;
-            $ext_name_com = $ext_name_com;
+	        $ext_name_component = $ext_name_com;
         }
-        $base = JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . $ext_name_com . DS . 'helpers' . DS;
+        $base = JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . $ext_name_component . DS . 'helpers' . DS;
         
         self::loadHelpers($folders, $base, $ignoreHelpers, $prefix);
     }
@@ -44,6 +44,19 @@ class KSLoader {
         }
     }
 
+    public static function loadClass($class, $ext_name_component = null){
+
+	    if(empty($ext_name_component)){
+		    global $ext_name_com;
+		    $ext_name_component = $ext_name_com;
+	    }
+
+	    $path = JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . $ext_name_component . DS . 'classes' . DS . $class . '.php';
+
+	    JLoader::register($class, $path);
+	    JLoader::load($class);
+    }
+
     private static function loadHelper($class, $path, $prefix = null){
         if(empty($prefix)){
             global $ext_prefix;
@@ -53,5 +66,14 @@ class KSLoader {
 
         JLoader::register($class, $path);
         JLoader::load($class);
+    }
+
+    private static function loadAnimate(){
+    	$templateConfig = JPATH_THEMES . '/' . JFactory::getApplication()->getTemplate() . '/html/com_ksenmart/animateconfig.php';
+	    if (JFile::exists($templateConfig)){
+		    require_once($templateConfig);
+	    } else {
+		    require_once(KSC_ADMIN_PATH_CORE . 'animateconfig.php');
+	    }
     }
 }

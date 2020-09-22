@@ -418,7 +418,7 @@ table td {
 #tree {
    float: left;
    width:250px;
-   margin: 1px 20px 0 0;
+   margin: 1px 0 0;
 }
 #tree ul li {
    list-style:none;
@@ -808,9 +808,74 @@ table.cat td .inputbox {
 .form {
    width: 100%;
    background: white;
-   clear: both;
    display: table;
    content: "";
+}
+
+.disabled_block > iframe {
+   box-shadow: 0 0 20px #777;
+}
+
+.disabled-form {
+   background: url("i/probg.jpg");
+   width: 1000px;
+   height: 400px;
+   padding: 40px 50px;
+   box-sizing: border-box;
+}
+
+.disabled-form .save-close .close {
+   background: url("i/close2.png");
+   height: 13px;
+   width: 13px;
+   display: block;
+   position: absolute;
+   right: 5px;
+   top: 5px;
+   border: 0;
+   opacity: 1;
+}
+
+.disabled-form .disabled-text {
+   color: #fff;
+   text-transform: uppercase;
+}
+
+.disabled-form .disabled-text h3 {
+   font-size: 18px;
+   line-height: normal;
+   font-weight: normal;
+   margin-bottom: 20px;
+}
+
+.disabled-form .disabled-text h2 {
+   font-size: 28px;
+   line-height: 38px;
+   margin-bottom: 30px;
+}
+
+.disabled-form .buy-pro {
+   background: #eaff00;
+   display: inline-block;
+   color: #000;
+   padding: 10px 30px;
+   margin-right: 25px;
+   font-weight: bold;
+   font-size: 24px;
+}
+
+.disabled-form .info-pro {
+   color: #eaff00;
+   font-size: 24px;
+   font-weight: bold;
+}
+
+.disabled_ext {
+   opacity: 0.4;
+}
+
+#popup-window_1 html {
+   background: transparent;
 }
 
 .form .heading {
@@ -824,7 +889,8 @@ table.cat td .inputbox {
    font-size:17px;
    color:#ffffff;
    font-weight: normal;
-   margin: 8px 0 0 15px;
+   margin: 0 0 0 15px;
+   line-height: 40px;
 }
 .form .heading .save-close {
    position:absolute;
@@ -833,7 +899,25 @@ table.cat td .inputbox {
    width:150px;
    height:40px;
 }
-
+.form .heading .head-link{
+	position:absolute;
+	top:0px;
+	right:160px;
+	height:40px;
+}
+.head-link a {
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: normal;
+	line-height: 40px;
+	text-decoration: none;
+	border-bottom: 1px dashed #fff;
+}
+.head-link a:hover, .head-link a:focus {
+	text-decoration: none;
+	color: #fff;
+	border-bottom: none;
+}
 .btn.btn-save, 
 .form .heading .save-anglr,
 .form .heading .save {
@@ -950,28 +1034,49 @@ table.cat td .inputbox {
     text-decoration: none;
 }
 
-.form .inputbox {
+.form .inputbox,
+textarea,
+.textarea {
    float: left;
    width: 185px;
-   padding: 5px 5px 5px 9px;
    color: #4c4c4c;
    font-size: 15px;
-   height: 20px;
-   font-family: "Trebuchet MS";
-   background: url(i/inputbox.png) top left no-repeat;
-   border-top: none;
-   border-left: none;
-   border-bottom: none;
-   border-right: 1px solid #F3F3F3;
+   height: 30px;
    margin: 0 20px 0 0;
+   border-radius: 0;
+   background-color: #FAFAFA;
+	border-top: 1px solid #D0D0D0;
+	border-right: 1px solid #F3F3F3;
+	border-bottom: 1px solid #F3F3F3;
+	border-left: 1px solid #D0D0D0;
+	-webkit-box-shadow: inset 1px 1px 1px #ccc;
+	-moz-box-shadow: inset 1px 1px 1px #ccc;
+	box-shadow: inset 1px 1px 1px #ccc;
+	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+	transition: border linear 0.2s, box-shadow linear 0.2s;
+	box-sizing: border-box;
 }
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+	border-color: rgba(82,168,236,0.8);
+	outline: 0;
+	outline: thin dotted \9;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+.form .textarea {width:100%;height:100px;}
 .form .red {
    color: #ee1c25;
 }
 .form .col .cusel {
    margin: 0 20px 0 0
 }
-
+.form .edit #ksm-map-layer,
+.form .edit #ksm-map-layer .ymaps-map {
+	width: 100% !important;
+}
 
 .form .cats {
    float: left;
@@ -1177,9 +1282,10 @@ table.cat td .inputbox {
    overflow: hidden;
    position: relative;
    z-index: 1;
-   padding: 5px;
+   padding: 7px 6px;
    color: #4c4c4c;
    font-size: 15px;
+   line-height: normal;
    position: absolute;
    top: 0;
    left: 0;
@@ -1380,7 +1486,10 @@ table.cat td .inputbox {
    width:100%;
    margin: 0 0 20px;
 }
-.set h3.headname, .lists h3.headname, .properties h3.headname  {
+.list_item_parents .properties .row {
+   margin-left: 0;
+}
+.set h3.headname, .lists h3.headname, .properties h3.headname, label.headname  {
    background: #ccc;
    font-size: 17px;
    color: #333;
@@ -1398,6 +1507,13 @@ table.cat td .inputbox {
 }
 .form .set .inputbox {
    width:130px;
+}
+table.cat td .shipping-user-fields .inputbox, table.cat td .shipping-address-fields .inputbox {
+	float: left;
+	width: 130px;
+	background: url(i/inputbox.png) top left no-repeat;
+	margin: 0 20px 0 0;
+	padding: 5px;
 }
 .form .inputbox:disabled {
    background: #F3F3F3;
@@ -1420,6 +1536,12 @@ a.add {
    text-decoration: none;
    color: white;
    height: 18px;
+}
+a.fileinput-button {
+   padding: 11px 11px 11px 30px !important;
+   position: relative;
+   overflow: hidden;
+   display: inline-block;
 }
 a.add:hover {
    background: #1D86BA  url(i/add.png) 9px 14px no-repeat;
@@ -1530,6 +1652,19 @@ a.add-field {
 a.add-field:hover {
    background: #1D86BA  url(i/add.png) center no-repeat;
 }
+.hover-visible {
+   overflow: hidden;
+   height: 0;
+   box-sizing: border-box;
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   transition: all 0.3s ease;
+}
+.parent-hover:hover .hover-visible {
+   padding-top: 10px !important;
+   padding-bottom: 10px !important;
+   height: 44px;
+}
 
 
 
@@ -1547,6 +1682,10 @@ a.add-field:hover {
    padding: 10px 40px 10px 15px;
    background: #EDEDED;
    position: relative;
+}
+.lists ul li .line span {
+	float: left;
+	padding: 0 20px 0 0;
 }
 .lists ul li a {
    position: absolute;
@@ -1571,6 +1710,11 @@ a.add-field:hover {
    padding: 10px 40px 10px 15px;
    background: #EDEDED;
    position: relative;
+}
+.lists ul li .line::after {
+	display: table;
+	content: '';
+	clear: both;
 }
 .lists ul li .line .inputname {
    margin:0 10px 0 0;
@@ -1730,7 +1874,9 @@ div.active .module-content{
 }
 
 
-
+.positions a.add {
+	margin: 9px 10px 0 0;
+}
 .positions .heads {
    float:left;
    background: #CCC;
@@ -1739,31 +1885,31 @@ div.active .module-content{
    font-weight: bold;
    padding: 11px 0 11px 15px;
    margin: 0 0 1px;
+   width: 100%;
+   box-sizing: border-box;
 }
 .positions .col1 {
-   width:380px;
+   width:45%;
    float:left;
-   margin: 0 20px 0 0;
 }
 .positions .col2 {
-   width:100px;
+   width:15%;
    float:left;
 }
 .positions .col3 {
-   width:100px;
+   width:15%;
    float:left;
 }
 .positions .col4 {
-   width:100px;
+   width:15%;
    float:left;
 }
 .positions .col5 {
-   width:85px;
+   width:7%;
    float:left;
+   text-align: center;
 }
 .positions .position .col5 {
-   padding: 0 0 0 15px;
-   width:70px;
 }
 .positions .position {
    font-size: 14px;
@@ -1773,6 +1919,8 @@ div.active .module-content{
    background: #EDEDED;
    position: relative;
    float:left;
+   width: 100%;
+   box-sizing: border-box;
 }
 .rightcol .positions {
    margin: 10px 0 0;
@@ -1834,7 +1982,7 @@ div.active .module-content{
 }
 .properties ul li .property {
    float:left;
-   width:780px;
+   width:calc(100% - 20px);
    list-style: none;
    position: relative;
    margin: 0 0 1px;
@@ -1846,7 +1994,7 @@ div.active .module-content{
    padding:11px 10px;
 }
 .properties ul li ul li .property {
-   width:750px;
+   width: calc(100% - 50px);
    margin:0 0 1px 30px;
    height: 18px;
 }
@@ -1861,7 +2009,7 @@ div.active .module-content{
 }
 .properties ul li .item .inputbox,
 .properties ul li .item .cusel {
-   margin: -6px 0 0 0;
+   margin: 4px 0 0 0;
 }
 .properties .property.active {
    background: #ECF0BE
@@ -2221,4 +2369,31 @@ body {
 iframe{
    border: none;
    max-width: none !important;
+}
+
+.images-drag-block {
+   display: none;
+   position: fixed;
+   height: 100%;
+   width: 100%;
+   background: #000;
+   opacity: 0.5;
+   z-index: 9999;
+   left: 0;
+   top: 0;
+}
+.images-drag-text {
+   display: none;
+   text-align: center;
+   color: #fff;
+   font-size: 24px;
+   position: fixed;
+   left: calc(50% - 200px);
+   top: calc(50% - 100px);
+   width: 400px;
+   height: 200px;
+   line-height: 200px;
+   border: 5px dashed #fff;
+   border-radius: 20px;
+   z-index: 9999;
 }

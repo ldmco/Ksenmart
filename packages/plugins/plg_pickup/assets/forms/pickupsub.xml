@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+
+		<field
+			name="title"
+			type="text"
+			label="KSM_SHIPPING_PICKUP_PARAMS_TITLE_LBL"
+			class="inputbox"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="address"
+			type="textarea"
+			label="KSM_SHIPPING_PICKUP_PARAMS_ADDRESS_LBL"
+			class="textarea"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="price"
+			type="text"
+			label="KSM_SHIPPING_PICKUP_PRICE_LBL"
+			description="KSM_SHIPPING_PICKUP_PRICE_DESC"
+			default="0"
+			class="inputbox width50px"
+			labelclass="inputname"
+			size="100px"
+		/>
+
+		<field
+			name="price_type"
+			type="currency"
+			label="KSM_SHIPPING_PICKUP_CURRENCY_LBL"
+			description="KSM_SHIPPING_PICKUP_CURRENCY_DESC"
+			default="0"
+		/>
+
+		<field
+			name="id"
+			type="hidden"
+		/>
+		
+	</fieldset>
+</form>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="plugin" group="kmplugins" version="2.5.0" method="upgrade">
+<extension type="plugin" group="kmplugins" version="3.1" method="upgrade">
     <name>KSM_PLUGIN_MODULES</name>
-    <creationDate>September 2014</creationDate>
+    <creationDate>May 2017</creationDate>
     <author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2014 L.D.M. Co All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0.1</version>
+	<copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <version>4.1.11</version>
     <description>KSM_PLUGIN_MODULES_DESCRIPTION</description>
 
     <scriptfile>install.php</scriptfile>
@@ -32,7 +32,7 @@
     </languages>
 	
     <updateservers>
-        <server type="extension" priority="1" name="modules">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_kmplugins_modules-update.xml</server>
+        <server type="extension" priority="1" name="modules">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/plugins/plg_modules-update.xml</server>
     </updateservers>
 
     <config>

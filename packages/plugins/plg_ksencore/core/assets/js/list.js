@@ -14,7 +14,6 @@ var KMList = function(variables) {
     this.layout = 'default';
     this.copy_button = false;
     this.delete_button = true;
-    this.ctrl = false;
     this.sortable = true;
 
     this.init = function() {
@@ -40,6 +39,7 @@ var KMList = function(variables) {
         jQuery('#content .cat .list_item').unbind('mouseout');
         jQuery('#content .cat .list_item .changeble').unbind('keypress');
         jQuery('#content .cat .list_item').unbind('click');
+        jQuery('#content .cat thead .check-all').unbind('click');
         jQuery('#content .cat .list_item input[type="checkbox"]').unbind('click');
         jQuery('#content .cat .list_item .del a').unbind('click');
         jQuery('#content .cat th.del span').unbind('click');
@@ -93,6 +93,7 @@ var KMList = function(variables) {
         var items = jQuery('#content .cat tbody').sortable({
             distance: 10,
             items: '.list_item',
+			handle: '.handler',
             beforeStop: function(event, ui) {
                 if (ui.item.find('.id').length == 0) {
                     ui.item.remove();
@@ -154,13 +155,13 @@ var KMList = function(variables) {
     this.setListButtons = function() {
         var List = this;
         if (List.delete_button) {
-            jQuery('body').on('click', '#content .top .delete-items', function() {
+            jQuery('body').on('click', '#content .top .delete-items:not(.inactive)', function() {
                 List.deleteSelectedItems();
                 return false;
             });
         }
         if (List.copy_button) {
-            jQuery('body').on('click', '#content .top .copy-items', function() {
+            jQuery('body').on('click', '#content .top .copy-items:not(.inactive)', function() {
                 List.copySelectedItems();
                 return false;
             });
@@ -169,14 +170,7 @@ var KMList = function(variables) {
 
     this.setItemsActions = function() {
         var List = this;
-        jQuery(document).keydown(function(e) {
-            if (e.which == 17)
-                List.ctrl = true;
-        });
-        jQuery(document).keyup(function(e) {
-            if (e.which == 17)
-                List.ctrl = false;
-        });
+
         jQuery('body').on('mouseover', '#content .cat .list_item', function() {
             jQuery(this).find('.name p').css('visibility', 'visible');
             jQuery(this).find('.changeble span').hide();
@@ -197,28 +191,41 @@ var KMList = function(variables) {
                     List.saveItem(data);
             }
         });
-        jQuery('body').on('click', '#content .cat .list_item', function() {
-            if (jQuery(this).is('.active'))
-                jQuery(this).removeClass('active');
-            else {
-                if (!List.ctrl)
-                    jQuery('#content .cat .list_item').removeClass('active');
-                jQuery(this).addClass('active');
-            }
-            if (jQuery('#content .cat tr.active').length > 0)
-                jQuery('#content .top .button').show();
-            else
-                jQuery('#content .top .button').hide();
-        });
+		jQuery('body').on('click', '#content .cat thead .check-all', function() {
+			if (!jQuery('#content .cat .list_item .check-item').length)
+			{
+				return;
+			}
+			if (jQuery(this).is(':checked'))
+			{
+				jQuery('#content .cat .list_item .check-item').prop('checked', true);
+				jQuery('#content .top .button').removeClass('inactive');
+			}
+			else
+			{
+				jQuery('#content .cat .list_item .check-item').prop('checked', false);
+				jQuery('#content .top .button').addClass('inactive');
+			}
+		});
         jQuery('body').on('click', '#content .cat .list_item input[type="checkbox"]', function() {
             var data = {};
             var value = jQuery(this).is(':checked') ? 1 : 0;
+
+			if (jQuery(this).is('.check-item')) {
+				if (jQuery('#content .cat input[type="checkbox"].check-item:checked').length > 0)
+					jQuery('#content .top .button').removeClass('inactive');
+				else
+					jQuery('#content .top .button').addClass('inactive');
+				return;
+			}
+
             if (jQuery(this).is('.status')) {
                 if (value == 1)
                     jQuery(this).parents('.list_item').removeClass('disabled');
                 else
                     jQuery(this).parents('.list_item').addClass('disabled');
             }
+
             data[jQuery(this).attr('name')] = value;
             List.saveItem(data);
         });
@@ -288,7 +295,7 @@ var KMList = function(variables) {
 
     this.loadListItems = function(limitstart, limit) {
         var List = this;
-        jQuery('#content .top .button').hide();
+        jQuery('#content .top .button').addClass('inactive');
         jQuery('#content .cat tbody .no_list_items').remove();
         var items = List.getListItems(limitstart, limit);
         if (items.no_items) {
@@ -346,11 +353,11 @@ var KMList = function(variables) {
             var data = {
                 "items": []
             };
-            jQuery('#content .cat tr.active').each(function() {
-                data['items'].push(jQuery(this).find('.id').val());
+            jQuery('#content .cat .list_item .check-item:checked').each(function() {
+                data['items'].push(jQuery(this).closest('.list_item').find('.id').val());
             });
             List.deleteListItems(data);
-            jQuery('#content .cat tr.active').remove();
+            jQuery('#content .cat .check-all, #content .cat .check-item').prop('checked', false);
             List.refreshList();
         }
     }
@@ -361,11 +368,11 @@ var KMList = function(variables) {
             var data = {
                 "items": []
             };
-            jQuery('#content .cat tr.active').each(function() {
-                data['items'].push(jQuery(this).find('.id').val());
+            jQuery('#content .cat .list_item .check-item:checked').each(function() {
+                data['items'].push(jQuery(this).closest('.list_item').find('.id').val());
             });
             List.copyListItems(data);
-            jQuery('#content .cat tr.active').remove();
+            jQuery('#content .cat .check-all, #content .cat .check-item').prop('checked', false);
             List.refreshList();
         }
     }
@@ -470,6 +477,7 @@ var KMList = function(variables) {
         jQuery('#content .cat .list_item').unbind('mouseout');
         jQuery('#content .cat .list_item .changeble').unbind('keypress');
         jQuery('#content .cat .list_item').unbind('click');
+        jQuery('#content .cat thead .check-all').unbind('click');
         jQuery('#content .cat .list_item input[type="checkbox"]').unbind('click');
         jQuery('#content .cat .list_item .del a').unbind('click');
         jQuery('#content .cat th.del span').unbind('click');

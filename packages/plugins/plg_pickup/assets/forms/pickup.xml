@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+
+		<field
+			name="params"
+			type="subform"
+			class="inputrepeate"
+			component="com_ksenmart"
+			formsource="plugins/kmshipping/pickup/assets/forms/pickupsub.xml"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			label="KSM_SHIPPING_PICKUP_PICKUPS_TITLE_LBL"
+			description="KSM_SHIPPING_PICKUP_PICKUPS_TITLE_DESC" />
+		
+	</fieldset>
+</form>

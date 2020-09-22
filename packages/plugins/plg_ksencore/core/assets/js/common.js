@@ -1,12 +1,18 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 
-    jQuery('body').on('click', '.km-modal', function() {
+    jQuery('body').on('click', '.km-modal', function (e) {
+        e.preventDefault();
         var rel = jQuery(this).attr('rel');
         var url = jQuery(this).attr('href');
+        var width = jQuery(window).width();
         rel = JSON.parse(rel);
+        if (width < 768) {
+            if (rel.x.indexOf('%') != -1) rel.x = '100%';
+            if (rel.y.indexOf('%') != -1) rel.y = '100%';
+        }
         if (rel.x.indexOf('%') != -1) {
             rel.x = parseInt(rel.x);
-            rel.x = Math.round(jQuery(window).width() * rel.x / 100);
+            rel.x = Math.round(width * rel.x / 100);
         } else
             rel.x = parseInt(rel.x);
         if (rel.y.indexOf('%') != -1) {
@@ -14,11 +20,14 @@ jQuery(document).ready(function() {
             rel.y = Math.round(jQuery(window).height() * rel.y / 100);
         } else
             rel.y = parseInt(rel.y);
-        openPopupWindow(url, rel.x, rel.y);
+        if (jQuery(this).closest('.disabled_ext').length)
+            openPopupDisabledWindow(url, rel.x, rel.y);
+        else
+            openPopupWindow(url, rel.x, rel.y);
         return false;
     });
 
-    jQuery('.linka').click(function() {
+    jQuery('.linka').click(function () {
         var class_name = '.form div.' + jQuery(this).attr('rel');
         if (jQuery(class_name).is(':visible')) {
             jQuery(class_name).hide();
@@ -28,7 +37,7 @@ jQuery(document).ready(function() {
         return false;
     });
 
-    jQuery('.slide_module').on('click', 'ul li a', function() {
+    jQuery('.slide_module').on('click', 'ul li a', function () {
         var a = jQuery(this);
         if (a.hasClass('sh')) {
             if (a.hasClass('show')) {
@@ -49,9 +58,9 @@ jQuery(document).ready(function() {
 });
 
 function createPopup(title, p_class, save_button) {
-    var html = '<div class="overlay ' + p_class + '"></div><form id="' + p_class + '" method="POST" action="index.php?option=com_ksenmart"><div class="popup ' + p_class + '"><header class="heading clearfix"><div class="title">' + title + '</div><div class="buttonPannel clearfix">';
+    var html = '<div class="overlay ' + p_class + '"></div><form class="form" id="' + p_class + '" method="POST" action="index.php?option=com_ksenmart"><div class="popup ' + p_class + '"><header class="heading clearfix"><div class="title">' + title + '</div><div class="buttonPannel clearfix">';
 
-    html += '<input type="button" class="btn close js-popup_close" value="Закрыть" />';
+    html += '<input type="button" class="btn close js-popup_close" value="" />';
     if (save_button) {
         html += '<input type="submit" value="Сохранить" class="btn save" />';
     }
@@ -87,7 +96,7 @@ function popupBlockResize(e) {
 function createPopupNotice(text, p_class) {
     var notice = '<div class="notice">' + text + '</div>';
     jQuery(p_class).children('.body').prepend(notice);
-    jQuery(p_class + ' .notice').fadeIn(400).delay(5000).fadeOut(400, function() {
+    jQuery(p_class + ' .notice').fadeIn(400).delay(5000).fadeOut(400, function () {
         jQuery(this).remove()
     });
 }
@@ -95,7 +104,7 @@ function createPopupNotice(text, p_class) {
 function createPopupNoticeTextarea(text, p_class) {
     var notice = '<div class="notice">' + text + '</div>';
     jQuery(p_class).children('.body').children('#send_form').prepend(notice);
-    jQuery(p_class + ' .notice').fadeIn(400).delay(5000).fadeOut(400, function() {
+    jQuery(p_class + ' .notice').fadeIn(400).delay(5000).fadeOut(400, function () {
         jQuery(this).remove()
     });
 }
@@ -103,10 +112,11 @@ function createPopupNoticeTextarea(text, p_class) {
 function closePopup(e) {
     var popup = e.parents('.popup');
     var popup_class = popup.attr('class').replace('popup ', '');
+    popup_class = popup_class.replace(' ', '.');
 
-    popup.fadeOut(400, function() {
+    popup.fadeOut(400, function () {
         jQuery(this).parent().remove();
-        jQuery('.overlay.' + popup_class).fadeOut(400, function() {
+        jQuery('.overlay.' + popup_class).fadeOut(400, function () {
             jQuery(this).remove();
             if (jQuery('.popup').length == 0) {
                 jQuery('html').css('overflow-y', 'scroll');
@@ -220,6 +230,18 @@ function KMHideLoading() {
 
 var popup_count = 0;
 
+function openPopupDisabledWindow(url, width, height) {
+    popup_count++;
+
+    jQuery('body').append('<div id="popup-window_' + popup_count + '" class="disabled_block">' + '<iframe scrolling="no" src="' + url + '"></iframe>' + '</div>');
+    jQuery('#popup-window_' + popup_count + ' iframe').css({
+        'width': 1000,
+        'height': 400,
+        'margin-left': Math.round(-1000 / 2),
+        'margin-top': Math.round(-400 / 2)
+    });
+}
+
 function openPopupWindow(url, width, height) {
     popup_count++;
 
@@ -258,7 +280,7 @@ function changeOrder(obj, dest) {
             'orderBy': orderByObj.val(),
             'orderDir': orderDirObj.val()
         },
-        function(data) {
+        function (data) {
             jQuery(document).scrollTop('0px');
             jQuery(dest).replaceWith(data);
             renews();
@@ -276,7 +298,7 @@ function setFilter(obj, item, parent, dest) {
     jQuery.post(
         '',
         data,
-        function(data) {
+        function (data) {
             jQuery(document).scrollTop('0px');
             jQuery(dest).replaceWith(data);
             renews();
@@ -318,7 +340,7 @@ function KMShowMessage(message) {
     return true;
     jQuery('.km-message').remove();
     jQuery('body').append('<div class="km-message">' + message + '</div>');
-    jQuery('.km-message').fadeIn(500).delay(2500).fadeOut(500, function() {
+    jQuery('.km-message').fadeIn(500).delay(2500).fadeOut(500, function () {
         jQuery('.km-message').remove()
     });
 }
@@ -330,7 +352,7 @@ function KMRenewFormFields(data) {
         data: data,
         dataType: 'json',
         async: false,
-        success: function(responce) {
+        success: function (responce) {
             for (var k = 0; k < data['fields'].length; k++)
                 jQuery('.form .' + data['fields'][k]).html(responce[data['fields'][k]]);
             cuSel({

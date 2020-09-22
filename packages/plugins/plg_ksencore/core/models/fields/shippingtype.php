@@ -11,7 +11,7 @@ class JFormFieldShippingType extends JFormField {
 	protected $type = 'ShippingType';
 	
 	public function getInput() {
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('name,element')->from('#__extensions')->where('folder="kmshipping"')->where('enabled=1');
 		$db->setQuery($query);
@@ -37,6 +37,8 @@ class JFormFieldShippingType extends JFormField {
 			
 			
 			foreach ($plugins as $plugin) {
+				$disabled = KSSystem::checkExtension('shipping', $plugin->element);
+				if ($disabled) continue;
 				$html.= '							<li class="' . ($plugin->element == $this->value ? 'active' : '') . '">';
 				$html.= '								<label>' . JText::_($plugin->name) . '<input onclick="setShippingType(this);" type="radio" name="' . $this->name . '" value="' . $plugin->element . '" ' . ($plugin->element == $this->value ? 'checked' : '') . ' style="visibility:hidden;" ></label>';
 				$html.= '							</li>';

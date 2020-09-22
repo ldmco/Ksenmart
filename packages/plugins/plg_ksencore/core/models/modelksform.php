@@ -22,15 +22,16 @@ abstract class JModelKSForm extends JModelForm {
         global $ext_name_com, $ext_prefix;
         $this->ext_name_com = $ext_name_com;
         $this->ext_prefix   = $ext_prefix;
+        $jinput = JFactory::getApplication()->input;
 
-        $this->context .= ($this->getName() && $layout = JRequest::getVar('layout', 'default')) ? '.' . $layout : '';
+        $this->context .= ($this->getName() && $layout = $jinput->getCmd('layout', 'default')) ? '.' . $layout : '';
         $this->params = JComponentHelper::getParams($this->ext_name_com);
     }
 
     public function onExecuteBefore($function = null, $vars = array()) {
         $model = &$this;
         array_unshift($vars, $model);
-        JDispatcher::getInstance()->trigger('onBeforeExecute' . strtoupper($this->ext_prefix) . $this->getName() . $function, $vars);
+        JEventDispatcher::getInstance()->trigger('onBeforeExecute' . strtoupper($this->ext_prefix) . $this->getName() . $function, $vars);
         
         return $this;
     }
@@ -38,10 +39,14 @@ abstract class JModelKSForm extends JModelForm {
     public function onExecuteAfter($function = null, $vars = array()) {
         $model = &$this;
         array_unshift($vars, $model);
-        JDispatcher::getInstance()->trigger('onAfterExecute' . strtoupper($this->ext_prefix) . $this->getName() . $function, $vars);
+	    JEventDispatcher::getInstance()->trigger('onAfterExecute' . strtoupper($this->ext_prefix) . $this->getName() . $function, $vars);
         
         return $this;
     }
+	
+	public function setModelFields(){
+		return true;
+	}
 	
     public function getForm($data = array() , $loadData = true, $control = 'jform') {
         

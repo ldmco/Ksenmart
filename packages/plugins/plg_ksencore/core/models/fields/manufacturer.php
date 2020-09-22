@@ -38,6 +38,19 @@ class JFormFieldManufacturer extends JFormFieldRadio {
 			$html.= '</li>';
 		}
 		$html.= '</ul>';
+		$script = '
+			function updateManufacturers(){
+				var data = {};
+				var form = jQuery(".form");
+				data["model"] = "catalog";
+				data["form"] = "product";
+				data["fields"] = ["manufacturer"];
+				data["id"] = form.find(".id").val();
+				KMRenewFormFields(data);
+			}
+		';
+		$document = JFactory::getDocument();
+        $document->addScriptDeclaration($script);
 		
 		return $html;
 	}

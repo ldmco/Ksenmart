@@ -12,20 +12,25 @@ class JFormFieldOrderCustomerFields extends JFormField {
 	
 	public function getInput() {
 		$db = JFactory::getDBO();
-		$session = JFactory::getSession();
 		$task = JRequest::getVar('task');
 		$shipping_id = $this->form->getValue('shipping_id');
 		$user_id = $this->form->getValue('user_id');
 		$user = KSUsers::getUser($user_id);
 		$html = '';
-		
+
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__ksenmart_shipping_fields')->where('shipping_id=' . (int)$shipping_id)->where('position=' . $db->quote('customer'))->where('published=1')->order('ordering');
 		$db->setQuery($query);
-		$customer_fields = $db->loadObjectList();
+		$customer_fields = $db->loadObjectList('title');
+		$params = JComponentHelper::getParams('com_ksenmart');
+		$fields = $params->get('customer_fields', array());
+		foreach ($fields as $field)
+		{
+			if (!$field->published) continue;
+			if (!isset($customer_fields[$field->title])) $customer_fields[$field->title] = $field;
+		}
 		$html.= '<div class="positions">';
 		if (count($customer_fields)) {
-			
 			foreach ($customer_fields as $customer_field) {
 				$html.= '<div class="position">';
 				if ($customer_field->system && isset($this->value[$customer_field->title])) $value = $this->value[$customer_field->title];

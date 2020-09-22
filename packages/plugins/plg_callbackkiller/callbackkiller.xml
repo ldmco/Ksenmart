@@ -6,8 +6,8 @@
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2015 L.D.M. Co All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>1.0.0</version>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <version>4.1.11</version>
     <description>KSM_PLUGIN_CALLBACKKILLER_DESCRIPTION</description>
 	
 	<scriptfile>install.php</scriptfile>
@@ -19,19 +19,13 @@
         <folder>install</folder>
 		<folder>sql</folder>
     </files>
-	
-    <uninstall>
-        <sql>
-            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
-        </sql>
-    </uninstall>	
     
     <languages folder="languages">
 		<language tag="ru-RU">ru-RU/ru-RU.plg_system_callbackkiller.sys.ini</language>
     </languages>
 	
     <updateservers>
-        <server type="extension" priority="1" name="callbackkiller">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/plugins/plg_callbackkiller-update.xml</server>
+        <server type="extension" priority="1" name="callbackkiller">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/plugins/plg_callbackkiller-update.xml</server>
     </updateservers>	
 	
     <config>

@@ -20,7 +20,7 @@ defined('_JEXEC') or die;
 		<tr>
 			<td class="rightcol" style="background:#f9f9f9!important;padding:15px 10px;">
 				<div class="row">
-					<a href="<?php echo JURI::root().'index.php?option=com_ksenmart&view=catalog&exportym=1'?>" target="_blank">
+					<a href="<?php echo JURI::root().'index.php?option=com_ksenmart&view=catalog&export=exportym'?>" target="_blank">
 						<?php echo JText::_('ksm_exportimport_export_ym_text')?>
 					</a>	
 				</div>

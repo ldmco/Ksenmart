@@ -43,18 +43,11 @@ class plgKMDiscountactionsSitevisits extends KMPlugin {
 	}
 	
 	function onValidateAction($discount_id = null) {
-		if (empty($discount_id)) 
-		return;
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select('user_actions')->from('#__ksenmart_discounts')->where('id=' . $discount_id);
-		$db->setQuery($query);
-		$user_actions = $db->loadResult();
-		if (empty($user_actions)) 
-		return;
+		if (empty($discount_id)) return;
+		$user_actions = KSMPrice::getDiscount($discount_id)->user_actions;
+		if (empty($user_actions)) return;
 		$user_actions = json_decode($user_actions, true);
-		if (!isset($user_actions[$this->_name])) 
-		return;
+		if (!isset($user_actions[$this->_name])) return;
 		$session = JFactory::getSession();
 		$user_last_activity = $session->get('com_ksenmart.user_last_activity', null);
 		$user_last_visit = $session->get('com_ksenmart.user_last_visit', null);

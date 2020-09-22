@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+		addfieldpath="/plugins/system/ksencore/core/models/fields"
+	>
+
+		<field
+			name="categories"
+			type="ksmcategories"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_CATEGORIES_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>
+		<field
+			name="discounts"
+			type="exportdiscounts"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_DISCOUNTS_LBL"
+			onclick="setActive(this);"
+			class="active"
+			wrap="slidemodule"
+		/>
+		
+		<field
+			name="utm_source"
+			type="text"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_UTM_LBL"
+			class="inputbox_205"
+			labelclass="inputname"
+		/>
+		
+		<field
+			name="shopname"
+			type="text"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_SHOPNAME_LBL"
+			class="inputbox_205"
+			labelclass="inputname"
+		/>
+
+		<field
+			name="company"
+			type="text"
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_COMPANY_LBL"
+			class="inputbox_205"
+			labelclass="inputname"
+		/>	
+
+		<field 
+			name="postpaid_regions" 
+			type="regions" 
+			label="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_POSTPAID_LBL"
+			sublabel="KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_POSTPAID_LBL"
+			wrap="slidemodule"
+		/>	
+		
+	</fieldset>
+</form>

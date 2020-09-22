@@ -25,6 +25,13 @@ class JFormFieldOrderAddressFields extends JFormField {
 		$query->select('*')->from('#__ksenmart_shipping_fields')->where('shipping_id=' . (int)$shipping_id)->where('position=' . $db->quote('address'))->where('published=1')->order('ordering');
 		$db->setQuery($query);
 		$address_fields = $db->loadObjectList();
+		$params = JComponentHelper::getParams('com_ksenmart');
+		$fields = $params->get('address_fields', array());
+		foreach ($fields as $field)
+		{
+			if (!$field->published) continue;
+			if (!isset($address_fields[$field->title])) $address_fields[$field->title] = $field;
+		}
 		$html.= '<div class="positions">';
 		if (count($user_addresses)>0){
 			$html.= '<div class="position">';

@@ -1,0 +1,1 @@
+ALTER TABLE  `#__ksenmart_orders` DROP  `utmtags`, DROP  `referer`;

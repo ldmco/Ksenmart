@@ -1,22 +1,22 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 
 /*
 
   The PHP SimpleImage class - v2
-  
+
     By Cory LaViska for A Beautiful Site, LLC. (http://www.abeautifulsite.net/)
-  
+
   License:
-  
-    This software is dual-licensed under the GNU General Public License and 
+
+    This software is dual-licensed under the GNU General Public License and
     the MIT License and is copyright A Beautiful Site, LLC.
-	
+
 */
 
 class SimpleImage {
@@ -97,13 +97,13 @@ class SimpleImage {
 	public function save($filename = null,$format=null,$quality = null) {
 
 		if( !$filename ) $filename = $this->filename;
-	
+
 		if (empty($format))
 		{
 			// Determine format via file extension (fall back to original format)
 			$format = $this->file_ext($filename);
 			if( !$format ) $format = $this->original_info['format'];
-		}	
+		}
 
 		// Determine output format
 		switch( strtolower($format) ) {
@@ -232,7 +232,7 @@ class SimpleImage {
 	}
 
 	//
-	// Rotates and/or flips an image automatically so the orientation will 
+	// Rotates and/or flips an image automatically so the orientation will
 	// be correct (based on exif 'Orientation')
 	//
 	public function auto_orient() {
@@ -285,18 +285,18 @@ class SimpleImage {
 	//	$height - the height of the resulting image
 	//
 	public function resize($width, $height) {
-		
+
 		$new = imagecreatetruecolor($width, $height);
 		imagealphablending($new, false);
 		imagesavealpha($new, true);
 		imagecopyresampled($new, $this->image, 0, 0, 0, 0, $width, $height, $this->width, $this->height);
-		
+
 		$this->width = $width;
 		$this->height = $height;
 		$this->image = $new;
-		
+
 		return $this;
-		
+
 	}
 
 	//
@@ -306,7 +306,7 @@ class SimpleImage {
 		$aspect_ratio = $this->height / $this->width;
 		$height = $width * $aspect_ratio;
 		return $this->resize($width, $height);
-	}	
+	}
 
 	//
 	// Fit to height (proportionally resize to specified height)
@@ -315,7 +315,7 @@ class SimpleImage {
 		$aspect_ratio = $this->height / $this->width;
 		$width = $height / $aspect_ratio;
 		return $this->resize($width, $height);
-	}	
+	}
 
 	//
 	// Best fit (proportionally resize to fit in specified width/height)
@@ -345,7 +345,7 @@ class SimpleImage {
 
 		return $this->resize($width, $height);
 
-	}	
+	}
 
 	//
 	// Crop an image
@@ -374,7 +374,7 @@ class SimpleImage {
 
 		return $this;
 
-	}	
+	}
 
 	//
 	// Square crop (great for thumbnails)
@@ -543,7 +543,7 @@ class SimpleImage {
 	// Overlay (overlay an image on top of another; works with 24-big PNG alpha-transparency)
 	//
 	//	$overlay_file - the image to use as a overlay (required)
-	//	$position - 'center', 'top', 'left', 'bottom', 'right', 'top left', 
+	//	$position - 'center', 'top', 'left', 'bottom', 'right', 'top left',
 	//				'top right', 'bottom left', 'bottom right'
 	//	$opacity - overlay opacity (0 - 1)
 	//	$x_offset - horizontal offset in pixels
@@ -553,14 +553,14 @@ class SimpleImage {
 
 		// Load overlay image
 		$overlay = new SimpleImage($overlay_file);
-		
+
 		if ($overlay->width>$this->width || $overlay->height>$this->height)
 		{
 			$ratio_in = $overlay->width/$overlay->heigth;
 			if ($overlay->width/$ratio_in>$overlay->heigth)
 				$overlay->resize($overlay->heigth*$ratio_in, $overlay->heigth);
-			else	
-				$overlay->resize($overlay->width, $overlay->width/$ratio_in);		
+			else
+				$overlay->resize($overlay->width, $overlay->width/$ratio_in);
 		}
 
 		// Convert opacity
@@ -617,20 +617,20 @@ class SimpleImage {
 
 		}
 
-		$this->imagecopymerge_alpha($this->image, $overlay->image, $x, $y, 0, 0, $overlay->width, $overlay->height, $opacity);  
+		$this->imagecopymerge_alpha($this->image, $overlay->image, $x, $y, 0, 0, $overlay->width, $overlay->height, $opacity);
 
 		return $this;
 
-	}		
+	}
 
-	// 
+	//
 	// Text (adds text to an image)
 	//
 	//	$text - the text to add (required)
 	//	$font_file - the font to use (required)
 	//	$font_size - font size in points
 	//	$color - font color in hex
-	//	$position - 'center', 'top', 'left', 'bottom', 'right', 'top left', 
+	//	$position - 'center', 'top', 'left', 'bottom', 'right', 'top left',
 	//				'top right', 'bottom left', 'bottom right'
 	//	$x_offset - horizontal offset in pixels
 	//	$y_offset - vertical offset in pixels
@@ -667,7 +667,7 @@ class SimpleImage {
 				break;
 
 			case 'bottom left':
-				$x = 0 + $x_offset; 
+				$x = 0 + $x_offset;
 				$y = $this->height - $box_height + $y_offset + $box_height;
 				break;
 
@@ -707,7 +707,7 @@ class SimpleImage {
 
 	// Same as PHP's imagecopymerge() function, except preserves alpha-transparency in 24-bit PNGs
 	// Courtest of: http://www.php.net/manual/en/function.imagecopymerge.php#88456
-	private function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct ) { 
+	private function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct ) {
 		$pct /= 100;
 		// Get image width and height
 		$w = imagesx($src_im);
@@ -744,7 +744,7 @@ class SimpleImage {
 			}
 		}
 		imagecopy($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h);
-	} 
+	}
 
 	//
 	// Ensures $value is always within $min and $max range.
@@ -789,14 +789,14 @@ class SimpleImage {
 			return false;
 		}
 
-	    return array(
+		return array(
 			'r' => hexdec($r),
 			'g' => hexdec($g),
 			'b' => hexdec($b)
 		);
 
 	}
-	
+
 	function background($width=0,$height=0,$params=array(),$file=null,$color=null)
 	{
 		$bg = imagecreatetruecolor($width,$height);
@@ -810,18 +810,25 @@ class SimpleImage {
 				}
 				else
 				{
-					$font = imagecolorallocatealpha($bg,0,0,0,127); 
-					imagefill($bg,0,0,$font); 
+					$font = imagecolorallocatealpha($bg,0,0,0,127);
+					imagefill($bg,0,0,$font);
 					imagesavealpha($bg,true);
 				}
 				break;
 			case 'color':
-				sscanf($color,"%2x%2x%2x",$red,$green,$blue);
-				$font=imagecolorallocate($bg,$red,$green,$blue);
-				imagefill($bg,0,0,$font); 
-				break;				
+				$info = getimagesize($this->filename);
+				if((empty($color) || $color == 'ffffff') && $info['mime'] == 'image/png'){
+					$transparent = imagecolorallocatealpha($bg, 0, 0, 0, 127);
+					imagefill($bg, 0, 0, $transparent);
+					imagesavealpha($bg, true);
+				} else {
+					sscanf($color,"%2x%2x%2x",$red,$green,$blue);
+					$font=imagecolorallocate($bg,$red,$green,$blue);
+					imagefill($bg,0,0,$font);
+				}
+				break;
 		}
-		
+
 		$dst_x=0;
 		$dst_y=0;
 		switch($params['halign'])
@@ -833,13 +840,13 @@ class SimpleImage {
 		{
 			case 'middle':$dst_y=round($height/2-$this->height/2);break;
 			case 'bottom':$dst_y=round($height-$this->height);break;
-		}		
+		}
 		imagecopy($bg,$this->image,$dst_x,$dst_y,0,0,$this->width,$this->height);
 		$this->width = $width;
 		$this->height = $height;
-		$this->image = $bg;		
+		$this->image = $bg;
 	}
-	
+
 	public function watermark($watermark_file,$params=array()) {
 
 		$watermark = new SimpleImage($watermark_file);
@@ -847,14 +854,14 @@ class SimpleImage {
 		{
 			case '0':
 				$ratio=round(min($this->original_info['width']/$this->width,$this->original_info['height']/$this->height));
-				$watermark->resize(round($watermark->width/$ratio), round($watermark->height/$ratio));		
+				$watermark->resize(round($watermark->width/$ratio), round($watermark->height/$ratio));
 				if ($watermark->width>$this->width || $watermark->height>$this->height)
 				{
 					$ratio = $watermark->width/$watermark->height;
 					if ($this->width/$ratio>$this->height)
 						$watermark->resize($this->height*$ratio, $this->height);
-					else	
-						$watermark->resize($this->width, $this->width/$ratio);		
+					else
+						$watermark->resize($this->width, $this->width/$ratio);
 				}
 				$x=0;
 				$y=0;
@@ -874,23 +881,23 @@ class SimpleImage {
 						$y = round($this->height - $watermark->height);
 						break;
 				}
-				$this->imagecopymerge_alpha($this->image, $watermark->image, $x, $y, 0, 0, $watermark->width, $watermark->height,0); 				
+				$this->imagecopymerge_alpha($this->image, $watermark->image, $x, $y, 0, 0, $watermark->width, $watermark->height,0);
 				break;
 			case '1':
 				$watermark->resize($this->width,$this->height);
-				$this->imagecopymerge_alpha($this->image, $watermark->image, 0, 0, 0, 0, $watermark->width, $watermark->height,0);  
+				$this->imagecopymerge_alpha($this->image, $watermark->image, 0, 0, 0, 0, $watermark->width, $watermark->height,0);
 				break;
 			case '2':
 				$ratio=round(min($this->original_info['width']/$this->width,$this->original_info['height']/$this->height));
-				$watermark->resize(round($watermark->width/$ratio), round($watermark->height/$ratio));		
+				$watermark->resize(round($watermark->width/$ratio), round($watermark->height/$ratio));
 				if ($watermark->width>$this->width || $watermark->height>$this->height)
 				{
 					$ratio = $this->width/$this->height;
 					if ($watermark->width/$ratio>$watermark->height)
 						$watermark->resize($watermark->height*$ratio, $watermark->height);
-					else	
-						$watermark->resize($watermark->width, $watermark->width/$ratio);		
-				}	
+					else
+						$watermark->resize($watermark->width, $watermark->width/$ratio);
+				}
 				$count_x=floor($this->width/$watermark->width*2/3);
 				$count_y=floor($this->height/$watermark->height*2/3);
 				$diff_x=floor(($this->width - $watermark->width*$count_x)/($count_x+1));
@@ -901,14 +908,14 @@ class SimpleImage {
 					{
 						$x=($k+1)*$diff_x+$k*$watermark->width;
 						$y=($i+1)*$diff_y+$i*$watermark->height;
-						$this->imagecopymerge_alpha($this->image, $watermark->image, $x, $y, 0, 0, $watermark->width, $watermark->height,0);  					
-					}				
+						$this->imagecopymerge_alpha($this->image, $watermark->image, $x, $y, 0, 0, $watermark->width, $watermark->height,0);
+					}
 				}
-				break;				
+				break;
 		}
 
 		return $this;
 
-	}			
+	}
 
 }

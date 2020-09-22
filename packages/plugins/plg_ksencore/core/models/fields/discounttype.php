@@ -36,6 +36,8 @@ class JFormFieldDiscountType extends JFormField {
 			$html.= '							<ul>';
 			
 			foreach ($plugins as $plugin) {
+				$disabled = KSSystem::checkExtension('discount', $plugin->element);
+				if ($disabled) continue;
 				$html.= '							<li class="' . ($plugin->element == $this->value ? 'active' : '') . '">';
 				$html.= '								<label>' . JText::_($plugin->name) . '<input onclick="setDiscountType(this);" type="radio" name="' . $this->name . '" value="' . $plugin->element . '" ' . ($plugin->element == $this->value ? 'checked' : '') . ' style="visibility:hidden;" ></label>';
 				$html.= '							</li>';

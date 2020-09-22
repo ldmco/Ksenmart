@@ -11,9 +11,9 @@ class JFormFieldKSMFilterField extends JFormField {
 	public $type = 'KSMFilterField';
 	
 	public function getInput() {
-		$db = JFactory::getDBO();
 		$view = isset($this->value['view']) ? $this->value['view'] : 'checkbox';
 		$display = isset($this->value['display']) ? $this->value['display'] : 'row';
+		$show_image = isset($this->value['show_image']) ? $this->value['show_image'] : 'no';
 		$html = '<div style="margin-left:-180px;">';
 		$html .= '<div class="'.$this->element['name'].'">';
 		$html .= '	<h3>'.JText::_($this->element['title']).'</h3>';
@@ -38,7 +38,16 @@ class JFormFieldKSMFilterField extends JFormField {
 		$html .= '				<option value="inline" '.($display == 'inline' ? 'selected' : '').'>'.JText::_('MOD_KM_FILTER_DISPLAY_INLINE').'</option>';
 		$html .= '			</select>';
 		$html .= '		</div>';
-		$html .= '	</div>';				
+		$html .= '	</div>';
+		$html .= '	<div class="control-group">';
+		$html .= '		<div class="control-label"><label>'.JText::_('MOD_KM_FILTER_SHOW_IMAGE').'</label></div>';
+		$html .= '		<div class="controls">';
+		$html .= '			<select name="'.$this->name.'[show_image]">';
+		$html .= '				<option value="no" '.($show_image == 'no' ? 'selected' : '').'>'.JText::_('JNO').'</option>';
+		$html .= '				<option value="Yes" '.($show_image == 'yes' ? 'selected' : '').'>'.JText::_('JYES').'</option>';
+		$html .= '			</select>';
+		$html .= '		</div>';
+		$html .= '	</div>';
 		$html .= '	<hr>';
 		$html .= '</div>';
 		$html .= '</div>';

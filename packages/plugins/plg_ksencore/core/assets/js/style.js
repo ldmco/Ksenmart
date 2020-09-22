@@ -31,10 +31,12 @@ jQuery(document).ready(function() {
     jQuery('.set .add').on('click', function() {
         jQuery('#popup-window1').fadeIn(400);
     });
-    jQuery('#add-country').on('click', function() {
+    jQuery('#add-country').on('click', function(e) {
+		e.preventDefault();
         jQuery('#popup-window3').fadeIn(400);
     });
-    jQuery('#add-city').on('click', function() {
+    jQuery('#add-city').on('click', function(e) {
+		e.preventDefault();
         jQuery('#popup-window4').fadeIn(400);
     });
     jQuery('#add-action').on('click', function() {

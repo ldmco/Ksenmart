@@ -422,7 +422,6 @@ class KSFunctions {
 
         //копейки
         $kop = round($n * 100 - round(floor($n) * 100));
-        //var_dump(array($n,$billions,$millions,$grands,$roubles,$kop));
         if($kop < 10) $kop = "0" . (string )$kop;
 
         $s = "";

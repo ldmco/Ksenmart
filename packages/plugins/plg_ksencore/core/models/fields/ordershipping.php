@@ -16,9 +16,10 @@ class JFormFieldOrderShipping extends JFormField {
 		$region_id = $this->form->getValue('region_id');
 		$shippings = array();
 		$shipping_selected = 0;
+		$show_regions = KSMShipping::checkRegions();
 		$html = '';
 		
-		if (!empty($region_id)) {
+		if (!empty($region_id) || !$show_regions) {
 			$query = $db->getQuery(true);
 			$query->select('id as value,title as text,regions')->from('#__ksenmart_shippings')->where('published=1')->order('ordering');
 			$db->setQuery($query);
@@ -26,12 +27,16 @@ class JFormFieldOrderShipping extends JFormField {
 			
 			foreach ($rows as $row) {
 				$row->regions = json_decode($row->regions, true);
-				
-				foreach ($row->regions as $country) {
-					if (in_array($region_id, $country)) {
-						$shipping_selected = $row->value == $this->value ? $row->value : $shipping_selected;
-						$shippings[] = $row;
+				if($show_regions){
+					foreach ($row->regions as $country) {
+						if (in_array($region_id, $country)) {
+							$shipping_selected = $row->value == $this->value ? $row->value : $shipping_selected;
+							$shippings[] = $row;
+						}
 					}
+				} else {
+					$shipping_selected = $row->value == $this->value ? $row->value : $shipping_selected;
+					$shippings[] = $row;
 				}
 			}
 		}

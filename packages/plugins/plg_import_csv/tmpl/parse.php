@@ -60,7 +60,13 @@ defined('_JEXEC') or die;
 					<select class="sel" id="promotion_price" name="promotion_price">
 						<?php echo $view->options?>
 					</select>
-				</div>				
+				</div>
+				<div class="row">
+					<label class="inputname" style="width:200px;"><?php echo JText::_('ksm_exportimport_import_csv_product_purchase_price')?></label>
+					<select class="sel" id="purchase_price" name="purchase_price">
+						<?php echo $view->options?>
+					</select>
+				</div>
 				<div class="row">
 					<label class="inputname" style="width:200px;"><?php echo JText::_('ksm_exportimport_import_csv_product_currency')?></label>
 					<select class="sel" id="price_type" name="price_type">

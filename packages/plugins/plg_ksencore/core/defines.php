@@ -12,7 +12,7 @@ define('KSC_PLUGIN', 'plg_system_ksencore');
 
 define('KSC_ADMIN', 'ksencore');
 define('KSC_ADMIN_PATH', JPATH_ROOT . '/plugins/system/' . KSC_ADMIN);
-define('KSC_ADMIN_URL', JURI::root(true) . '/plugins/system/' . KSC_ADMIN);
+define('KSC_ADMIN_URL', JUri::root(true) . '/plugins/system/' . KSC_ADMIN);
 define('KSC_ADMIN_REL', 'plugins/system/' . KSC_ADMIN);
 
 define('KSC_ADMIN_PATH_CORE', KSC_ADMIN_PATH . '/core/');

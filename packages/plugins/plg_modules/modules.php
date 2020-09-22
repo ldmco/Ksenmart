@@ -1,87 +1,79 @@
-<?php 
+<?php
 /**
  * @copyright   Copyright (C) 2013. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
-if (!class_exists('KMPlugin')) {
-	require (JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmplugin.php');
+if (!class_exists('KMPlugin'))
+{
+	require(JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_ksenmart' . DS . 'classes' . DS . 'kmplugin.php');
 }
 
-class plgKMPluginsModules extends KMPlugin {
+class plgKMPluginsModules extends KMPlugin
+{
 
-	public $pages = array(1 => 'catalog',2 => 'product',3 => 'cart',4 => 'profile');
-	
-	function __construct(&$subject, $config) {
+	public $pages = array(1 => 'catalog', 2 => 'product', 3 => 'cart', 4 => 'profile');
+
+	function __construct(&$subject, $config)
+	{
 		parent::__construct($subject, $config);
 	}
-	
-	public static function __callStatic($name,array $func_params)
-    {
-		$params = self::getParams();
-		$layouts  = $params->get('layouts', array());		
-		
-		foreach($layouts as $layout){
-			$func = 'on'.$layout->event.'DisplayKSM'.$layout->layout;
-			if ($name == $func){
+
+	public static function __callStatic($name, array $func_params)
+	{
+		$params  = self::getParams();
+		$layouts = $params->get('layouts', array());
+
+		foreach ($layouts as $layout)
+		{
+			$func = 'on' . $layout->event . 'DisplayKSM' . $layout->layout;
+			if ($name == $func)
+			{
 				$view = $func_params[0];
-				$tpl = &$func_params[1];
+				$tpl  = &$func_params[1];
 				$html = &$func_params[2];
-				
+
 				$html .= KSSystem::loadModules($layout->position);
 			}
 		}
-       
-		return;
-    }
 
-	function getParams(){
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true)
-			->select('params')
-			->from('#__extensions')
-			->where('enabled = 1')
-			->where('type =' . $db->quote('plugin'))
-			->where('folder =' . $db->quote('kmplugins'))
-			->where('element =' . $db->quote('modules'));
-		$db_params = $db->setQuery($query)->loadResult();
-		
-		$params = new Registry;
-		if (!empty($db_params))
+		return;
+	}
+
+	function getParams()
+	{
+		return $this->params;
+	}
+
+	function onBeforeStartComponent()
+	{
+		$layouts = $this->params->get('layouts', array());
+
+		$dispatcher = JEventDispatcher::getInstance();
+		foreach ($layouts as $layout)
 		{
-			$params->loadString($db_params);
-		}	
-
-		return $params;
-	}
-	
-	function onBeforeStartComponent(){
-		$params = self::getParams();
-		$layouts  = $params->get('layouts', array());	
-		
-		$dispatcher = JDispatcher::getInstance();
-		foreach($layouts as $layout){
-			$func = 'on'.$layout->event.'DisplayKSM'.$layout->layout;
-			$dispatcher->register($func, 'plgKMPluginsModules::'.$func);
+			$func = 'on' . $layout->event . 'DisplayKSM' . $layout->layout;
+			$dispatcher->register($func, 'plgKMPluginsModules::' . $func);
 		}
-		
+
 		return;
 	}
 
-	public function onAfterDispatch(){
+	public function onAfterModuleList(&$allmodules = array())
+	{
 		if (JFactory::getApplication()->isAdmin())
 		{
 			return true;
 		}
-		
-		$input = JFactory::getApplication()->input;
-		$extension = $input->get('option', '', 'cmd');
-		$view = $input->get('view', '', 'cmd');
-		$categories = $input->get('categories', array(), 'array');
+		$input       = JFactory::getApplication()->input;
+		$extension   = $input->get('option', '', 'cmd');
+		$id          = $input->get('id', '', 'INT');
+		$view        = $input->get('view', '', 'cmd');
+		$categories  = $input->get('categories', array(), 'array');
 		$category_id = count($categories) == 1 ? array_shift($categories) : null;
 
 		if ($extension !== 'com_ksenmart')
@@ -94,45 +86,73 @@ class plgKMPluginsModules extends KMPlugin {
 			return true;
 		}
 
-		$doc      = JFactory::getDocument();
-		$renderer = $doc->loadRenderer('module');
-		$modules  = $this->params->get('modules', new stdClass);
-		
-		foreach($modules as $position => $mods){
-			$attribs  = array(
-				'name' => $position
-			);
-			$buf = $doc->getBuffer('modules', $position, $attribs);
-			foreach(JModuleHelper::getModules($position) as $mod)
+		$modules = $this->params->get('modules', new stdClass);
+
+		if ($view == 'product' && !empty($id))
+		{
+			$db    = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('id')->from('#__ksenmart_products_categories')->where('product_id=' . (int) $id);
+			$db->setQuery($query);
+			$pcategories = $db->loadColumn();
+		}
+		foreach ($modules as $position => $mods)
+		{
+			foreach ($allmodules as $key_module => $allmodule)
 			{
-				foreach($mods as $mod_id => $mod_params){
+				foreach ($mods as $mod_id => $mod_params)
+				{
+					if ($allmodule->id != $mod_id) continue;
+
 					$registry   = new JRegistry;
 					$mod_params = $registry->loadObject($mod_params);
 					$categories = $mod_params->get('categories', array());
 					$pages      = $mod_params->get('pages', array());
+					$flag       = true;
 
-					if ($mod->id == $mod_id){
-						if ($view == 'catalog' && !empty($category_id)){
-							if (in_array(-1, $categories) || (!in_array($category_id, $categories) && !in_array(0, $categories))){
-								$moduleHtml = $renderer->render($mod, $attribs, null);
-								$buf = str_replace($moduleHtml, '', $buf);
+					if ($view == 'product' && !empty($id) && (count($categories) && !in_array(0, $categories)))
+					{
+						$flag = false;
+
+						if (count($pcategories))
+						{
+							foreach ($pcategories as $category)
+							{
+								if (in_array($category, $categories))
+								{
+									$flag = true;
+								}
 							}
-						} else {
-							$page_id = 0;
-							foreach($this->pages as $key => $page)
-								if ($page == $view)
-									$page_id = $key;
-							if (in_array(-1, $pages) || (!in_array($page_id, $pages) && !in_array(0, $pages))){
-								$moduleHtml = $renderer->render($mod, $attribs, null);
-								$buf = str_replace($moduleHtml, '', $buf);
-							}
+						}
+					}
+
+					if ($view == 'catalog' && !empty($category_id))
+					{
+						if (in_array(-1, $categories) || (!in_array($category_id, $categories) && !in_array(0, $categories)))
+						{
+							unset($allmodules[$key_module]);
+						}
+					}
+					else
+					{
+						if ($view == 'catalog' && empty($category_id) && in_array(-2, $categories)) {
+							unset($allmodules[$key_module]);
+							continue;
+						}
+						$page_id = 0;
+						foreach ($this->pages as $key => $page)
+							if ($page == $view)
+								$page_id = $key;
+						if ((in_array(-1, $pages) || (!in_array($page_id, $pages) && !in_array(0, $pages))) || !$flag)
+						{
+							unset($allmodules[$key_module]);
 						}
 					}
 				}
 			}
-			$doc->setBuffer($buf, 'modules', $position);
 		}
+
 		return true;
 	}
-	
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="kmexportimport" version="3.1" method="upgrade">
+    <name>KSM_EXPORTIMPORT_EXPORT_YM_EXTEND</name>
+    <creationDate>March 2017</creationDate>
+    <author>L.D.M. Co</author>
+	<authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <version>4.1.11</version>
+    <description>KSM_EXPORTIMPORT_EXPORT_YM_EXTEND_DESCRIPTION</description>
+
+    <scriptfile>install.php</scriptfile>
+    
+    <files>
+		<filename plugin="export_ym_extend">export_ym_extend.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+		<folder>assets</folder>
+    </files>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    
+    <languages folder="languages">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_kmexportimport_export_ym_extend.sys.ini</language>
+    </languages>
+
+    <updateservers>
+        <server type="extension" priority="1" name="export_ym_extend">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/plugins/plg_export_ym_extend-update.xml</server>
+    </updateservers>
+	
+</extension>

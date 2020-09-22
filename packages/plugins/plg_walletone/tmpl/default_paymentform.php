@@ -6,18 +6,20 @@
  
 defined('_JEXEC') or die;
 ?>
-<center>
-	<form method="post" action="https://www.walletone.com/checkout/default.aspx" accept-charset="UTF-8">
-        <?php foreach(KSMWalletone::_getFields() as $fieldName => $fieldValue): ?>
-        	<?php if(!is_array($fieldValue)): ?>
-        		<input type="hidden" name="<?php echo $fieldName; ?>" value="<?php echo $fieldValue; ?>" />
-        	<?php else: ?>
-    			<?php foreach($fieldValue as $fieldArrayValue): ?>
-    				<input type="hidden" name="<?php echo $fieldName; ?>" value="<?php echo $fieldArrayValue; ?>" />
-    			<?php endforeach; ?>
-        	<?php endif; ?>
-        <?php endforeach; ?>
-        <input type="hidden" name="WMI_SIGNATURE" value="<?php echo KSMWalletone::getHash($view->payment_params->get('secretKey', null)); ?>" />
-		<input type="submit" value="<?php echo JText::_('KSM_PAYMENT_WALLETONE_PAY'); ?>" class="button btn-success btn-large noTransition" />
-	</form>
-</center>
+<div class="ksm-block">
+	<center>
+		<form method="post" action="https://www.walletone.com/checkout/default.aspx" accept-charset="UTF-8">
+			<?php foreach(KSMWalletone::_getFields() as $fieldName => $fieldValue): ?>
+				<?php if(!is_array($fieldValue)): ?>
+					<input type="hidden" name="<?php echo $fieldName; ?>" value="<?php echo $fieldValue; ?>" />
+				<?php else: ?>
+					<?php foreach($fieldValue as $fieldArrayValue): ?>
+						<input type="hidden" name="<?php echo $fieldName; ?>" value="<?php echo $fieldArrayValue; ?>" />
+					<?php endforeach; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			<input type="hidden" name="WMI_SIGNATURE" value="<?php echo KSMWalletone::getHash($view->payment_params->get('secretKey', null)); ?>" />
+			<input type="submit" value="<?php echo JText::_('KSM_PAYMENT_WALLETONE_PAY'); ?>" />
+		</form>
+	</center>
+</div>

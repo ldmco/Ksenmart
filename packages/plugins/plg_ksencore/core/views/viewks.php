@@ -23,11 +23,11 @@ abstract class JViewKS extends JViewLegacy {
         $config['base_path'] = JPATH_ROOT . DS . 'components' . DS . $this->ext_name_com;
         parent::__construct($config);
 
-        JDispatcher::getInstance()->trigger('onBeforeView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
+        JEventDispatcher::getInstance()->trigger('onBeforeView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
     }
 
     public function display($tpl = null) {
-        JDispatcher::getInstance()->trigger('onAfterView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
+	    JEventDispatcher::getInstance()->trigger('onAfterView' . strtoupper($this->ext_prefix) . $this->getName(), array(&$this));
         parent::display($tpl);
     }
     
@@ -42,7 +42,7 @@ abstract class JViewKS extends JViewLegacy {
             $view->setLayout($layout);
             
             foreach($vars as $name => $var){
-                $view->assign($vars);
+            	$view->{$name} = $var;
             }
             
             $html = $view->loadTemplate($tpl);
@@ -59,8 +59,8 @@ abstract class JViewKS extends JViewLegacy {
         $current_layout = $this->getLayout();
         $html           = '';
 
-        $function   = isset($tpl) ? $current_layout . '_' . $tpl : $current_layout;
-        $dispatcher = JDispatcher::getInstance();
+	    $function   = isset($tpl) ? !empty($layout) ? $layout . '_' . $tpl : $current_layout . '_' . $tpl : $current_layout;
+        $dispatcher = JEventDispatcher::getInstance();
         $dispatcher->trigger('onBeforeDisplay' . strtoupper($this->ext_prefix) . $name . $function, array(&$this, &$tpl, &$html));
         
         if(!empty($layout)){
@@ -68,7 +68,7 @@ abstract class JViewKS extends JViewLegacy {
         }
         
         foreach($vars as $name => &$var){
-            $this->assignRef($name, $var);
+	        $this->{$name} = $var;
         }
         
         if($tpl != 'empty'){
