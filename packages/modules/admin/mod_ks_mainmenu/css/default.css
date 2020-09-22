@@ -1,7 +1,7 @@
 .ksenmart-mainmenu {
    float:left;
    width:100%;
-   margin: 0 0 10px;
+   margin: 0 0 50px;
 }
 .ksenmart-mainmenu #main-menu ul li {
    list-style: none;
@@ -143,6 +143,25 @@ float: left;
 .ksenmart-mainmenu #cat-menu ul li a.active {
    background-color: #1D86BA;
 }
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more {
+	overflow:visible;
+}
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more > a {
+	min-width:auto;
+}
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more .caret {
+    margin-top: 7px;
+	border-top-color: #fff;
+}
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more .dropdown-menu {
+    border: none;
+    padding: 0px;	
+	border-radius: 0px;
+}
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more .dropdown-menu li,
+.ksenmart-mainmenu #cat-menu .ksenmart-mainmenu-more .dropdown-menu a {
+	width:100%;
+}
 
 .ksenmart-mainmenu #cat-menu  .ksenmart-mainmenu-settings{
 	/*display: block;
@@ -236,4 +255,7 @@ float: left;
 
 .popup.license tbody td{
     padding: 5px;
+}
+.popup.license.auth tbody td:first-child{
+    width: 30%;
 }

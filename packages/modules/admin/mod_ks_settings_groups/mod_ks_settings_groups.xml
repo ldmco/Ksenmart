@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="module" client="administrator" method="upgrade">
+<extension version="3.1" type="module" client="administrator" method="upgrade">
     <name>Группы настроек Ksenmart</name>
-	<version>2.0.1</version>
-	<creationDate>March 2013</creationDate>
+	<version>4.1.11</version>
+	<creationDate>May 2017</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
 	<description>MOD_KS_SETTINGS_GROUPS_DESCRIPTION</description>
 	<files>
 		<filename module="mod_ks_settings_groups">mod_ks_settings_groups.php</filename>
@@ -39,7 +39,7 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_ks_settings_groups">http://update.ksenmart.ru/update-info/j3/ksen_extensions/modules/administrator/mod_ks_settings_groups-update.xml</server>
+        <server type="extension" priority="1" name="mod_ks_settings_groups">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/ksen_extensions/modules/administrator/mod_ks_settings_groups-update.xml</server>
     </updateservers>
     
 	<config>

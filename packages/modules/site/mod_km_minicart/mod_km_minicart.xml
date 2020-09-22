@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade">
-	<name>mod_km_minicart</name>
-	<author>ToMuH</author>
-	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
-	<license>GNU General Public License</license>
-	<authorEmail>tominpasha@mail.ru</authorEmail>
-	<authorUrl></authorUrl>
-	<version>2.0.2</version>
-    <creationDate>March 2014</creationDate>
-	<description>Модуль миникорзины</description>
+<extension type="module" version="3.1" method="upgrade">
+    <name>MOD_KM_MINICART</name>
+    <version>4.1.11</version>
+    <creationDate>May 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <description>MOD_KM_MINICART_XML_DESCRIPTION</description>
+
 	<files>
 		<filename module="mod_km_minicart">mod_km_minicart.php</filename>
+		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_km_minicart.xml</filename>
-        <folder>css</folder>
-        <folder>js</folder>
-        <folder>i</folder>
         <folder>tmpl</folder>
         <folder>sql</folder>
     </files>
+
+    <media folder="media" destination="mod_km_minicart">
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>images</folder>
+        <filename>index.html</filename>
+    </media>
+
     <languages folder="language">
 		<language tag="ru-RU">ru-RU.mod_km_minicart.ini</language>
 		<language tag="ru-RU">ru-RU.mod_km_minicart.sys.ini</language>
@@ -39,18 +46,27 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_minicart">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_minicart-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_minicart">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_minicart-update.xml
+        </server>
     </updateservers>
 
 	<config>
 		<fields name="params">
-			<fieldset name="basic">	
+			<fieldset name="basic">
+                <field
+                        name="title"
+                        type="text"
+                        default=""
+                        label="MOD_KM_MINICART_TITLE_LBL"
+                        description="MOD_KM_MINICART_TITLE_DESC" />
+
 				<field
 					name="layout"
 					type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />	
-			</fieldset>		
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+            </fieldset>
 		</fields>	
 	</config>		
 </extension>

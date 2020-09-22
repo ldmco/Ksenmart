@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade">
+<extension type="module" version="3.1" method="upgrade">
     <name>MOD_KM_CATEGORIES</name>
-    <version>2.0.4</version>
-    <creationDate>March 2014</creationDate>
+    <version>4.1.11</version>
+    <creationDate>July 2017</creationDate>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
     <description>MOD_KM_CATEGORIES_XML_DESCRIPTION</description>
-    
+
     <files>
         <filename module="mod_km_categories">mod_km_categories.php</filename>
         <filename>mod_km_categories.xml</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
-        <folder>tmpl</folder>
+        <folder>css</folder>
+        <folder>images</folder>
         <folder>js</folder>
         <folder>sql</folder>
+        <folder>tmpl</folder>
     </files>
 
     <languages folder="language">
@@ -32,7 +34,7 @@
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
-    
+
     <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
@@ -40,57 +42,66 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_categories">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_categories-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_categories">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_categories-update.xml
+        </server>
     </updateservers>
 
     <config>
         <fields name="params">
-            <fieldset 
-                name="basic" 
-                addfieldpath="/plugins/system/ksencore/core/models/fields"
+            <fieldset
+                    name="basic"
+                    addfieldpath="/plugins/system/ksencore/core/models/fields"
             >
 
                 <field name="categories" type="kscategories"
-                    extension="ksenmart"
-                    label="MOD_KM_CATEGORIES_CATS_LABEL"
-                    multiple="true"
+                       extension="ksenmart"
+                       label="MOD_KM_CATEGORIES_CATS_LABEL"
+                       multiple="true"
                 />
-				
+
+                <field
+                        name="show_images"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        default="0"
+                        label="MOD_KM_CATEGORIES_SHOW_IMAGES"
+                        description="MOD_KM_CATEGORIES_SHOW_IMAGES">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
                 <field name="img_width" type="text"
-                        default="200"
-                        label="MOD_KM_CATEGORIES_IMG_WIDTH_LABEL"
-                        description="MOD_KM_CATEGORIES_IMG_WIDTH_DESC" />	
-						
+                       default="200"
+                       label="MOD_KM_CATEGORIES_IMG_WIDTH_LABEL"
+                       description="MOD_KM_CATEGORIES_IMG_WIDTH_DESC"/>
+
                 <field name="img_height" type="text"
-                        default="200"
-                        label="MOD_KM_CATEGORIES_IMG_HEIGHT_LABEL"
-                        description="MOD_KM_CATEGORIES_IMG_HEIGHT_DESC" />	
+                       default="200"
+                       label="MOD_KM_CATEGORIES_IMG_HEIGHT_LABEL"
+                       description="MOD_KM_CATEGORIES_IMG_HEIGHT_DESC"/>
 
                 <field name="layout" type="modulelayout"
-                        label="JFIELD_ALT_LAYOUT_LABEL"
-                        description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+                       label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
 
                 <field name="moduleclass_sfx" type="text"
-                        label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-                        description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+                       label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                       description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
 
-                <field name="cache" type="list"
+                <field name="cache_time" type="text"
+                       default="900"
+                       label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                       description="COM_MODULES_FIELD_CACHE_TIME_DESC"/>
+
+                <field
+                        name="owncache"
+                        type="list"
                         default="1"
                         label="COM_MODULES_FIELD_CACHING_LABEL"
                         description="COM_MODULES_FIELD_CACHING_DESC">
-                        <option value="1">JGLOBAL_USE_GLOBAL</option>
-                        <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
-                </field>
-
-                <field name="cache_time" type="text"
-                        default="900"
-                        label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-                        description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-                <field name="cachemode"
-                        type="hidden"
-                        default="static">
-                        <option
-                                value="static"></option>
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
                 </field>
             </fieldset>
         </fields>

@@ -29,6 +29,7 @@ class ModKSMShippingMethodsHelper {
 			}else{
 				$method->selected = false;
 			}
+			$method->disabled = KSSystem::checkExtension('shipping', $method->element);
 		}
 		
 		return $methods;

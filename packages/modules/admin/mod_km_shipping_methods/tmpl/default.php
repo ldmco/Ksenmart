@@ -18,11 +18,11 @@ defined('_JEXEC') or die;
 				<ul>
 					<?php if (count($methods)>0):?>
 					<?php foreach($methods as $method):?>
-					<li class="<?php echo ($method->selected?'active':'');?>">
+					<li class="<?php echo ($method->selected?'active':'');?> <?php echo ($method->disabled?'disabled':'');?>">
 						<label>
 							<?php echo JText::_($method->name)?>
 							<input type="checkbox" value="<?php echo $method->element;?>" name="methods[]" onclick="ShippingMethodsModule.setItem(this);" <?php echo ($method->selected?'checked':'')?>>
-							<a class="add km-modal" rel='{"x":"90%","y":"90%"}' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=shippings&layout=shipping&type='.$method->element.'&tmpl=component');?>"></a>
+							<a class="add km-modal" rel='<?php echo ($method->disabled?'{"x":"1000px","y":"400px"}':'{"x":"90%","y":"90%"}');?>' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=shippings&layout=shipping&type='.$method->element.'&tmpl=component');?>"></a>
 						</label>
 					</li>
 					<?php endforeach;?>

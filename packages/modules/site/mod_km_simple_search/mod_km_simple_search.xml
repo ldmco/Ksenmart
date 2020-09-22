@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade" client="site">
-	<name>mod_km_simple_search</name>
-	<author>TakT</author>
-    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<authorEmail>takt.bereza@gmail.com</authorEmail>
-	<authorUrl></authorUrl>
-    <version>2.0.5</version>
-    <creationDate>March 2014</creationDate>
-	<description>Крутой поиск KsenMart</description>
-	<files>
-		<filename module="mod_km_simple_search">mod_km_simple_search.php</filename>
-		<folder>tmpl</folder>
-		<filename>index.html</filename>
-		<filename>mod_km_simple_search.xml</filename>
+<extension type="module" version="3.1" method="upgrade" client="site">
+    <name>mod_km_simple_search</name>
+    <version>4.1.11</version>
+    <creationDate>March 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <description>mod_km_simple_search_desc</description>
+    <files>
+        <filename module="mod_km_simple_search">mod_km_simple_search.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <filename>mod_km_simple_search.xml</filename>
         <folder>css</folder>
         <folder>js</folder>
         <folder>sql</folder>
+        <folder>tmpl</folder>
     </files>
+
     <languages folder="language">
         <language tag="ru-RU">ru-RU.mod_km_simple_search.ini</language>
         <language tag="ru-RU">ru-RU.mod_km_simple_search.sys.ini</language>
-		<language tag="en-GB">en-GB.mod_km_simple_search.ini</language>
-		<language tag="en-GB">en-GB.mod_km_simple_search.sys.ini</language>
-	</languages>
-	
+        <language tag="en-GB">en-GB.mod_km_simple_search.ini</language>
+        <language tag="en-GB">en-GB.mod_km_simple_search.sys.ini</language>
+    </languages>
+
     <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
-    
+
     <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
@@ -38,55 +40,47 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_simple_search">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_simple_search-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_simple_search">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_simple_search-update.xml
+        </server>
     </updateservers>
 
-	<config>
-		<fields name="params">
-			<fieldset name="basic">	
-				<field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="JFIELD_ALT_MODULE_LAYOUT_DESC"
-                />
-        		<field
-        			name="count_result"
-        			type="text"
-                    default="5"
-        			label="MOD_KM_SIMPLE_SEARCH_COUNT_RESULT_LABEL"
-        			description="MOD_KM_SIMPLE_SEARCH_COUNT_RESULT_DESC"
-        			labelclass="inputname"
-        			class="inputbox_205"
-                />
-        		<field
-        			name="count_relevants"
-        			type="text"
-                    default="3"
-        			label="MOD_KM_SIMPLE_SEARCH_COUNT_RELEVANTS_LABEL"
-        			description="MOD_KM_SIMPLE_SEARCH_COUNT_RELEVANTS_DESC"
-        			labelclass="inputname"
-        			class="inputbox_205"
-                />
-        		<field
-        			name="count_categories"
-        			type="text"
-                    default="1"
-        			label="MOD_KM_SIMPLE_SEARCH_COUNT_CAT_LABEL"
-        			description="MOD_KM_SIMPLE_SEARCH_COUNT_CAT_DESC"
-        			labelclass="inputname"
-        			class="inputbox_205"
-                />
-        		<field
-        			name="count_manufactured"
-        			type="text"
-                    default="1"
-        			label="MOD_KM_SIMPLE_SEARCH_COUNT_MANUFACTURED_LABEL"
-        			description="MOD_KM_SIMPLE_SEARCH_COUNT_MANUFACTURED_DESC"
-        			labelclass="inputname"
-        			class="inputbox_205"
-                />
-			</fieldset>		
-		</fields>	
-	</config>		
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                        name="columns"
+                        type="list"
+                        default="title"
+                        label="MOD_KM_SIMPLE_SEARCH_COLUMNS_LBL"
+                        description="MOD_KM_SIMPLE_SEARCH_COLUMNS_DESC"
+                        multiple="true">
+                    <option value="title">MOD_KM_SIMPLE_SEARCH_TITLE</option>
+                    <option value="content">MOD_KM_SIMPLE_SEARCH_CONTENT</option>
+                    <option value="introcontent">MOD_KM_SIMPLE_SEARCH_INTROCONTENT</option>
+                    <option value="product_code">MOD_KM_SIMPLE_SEARCH_PRODUCT_CODE</option>
+                </field>
+
+                <field
+                        name="columnsdetail"
+                        type="list"
+                        default="title"
+                        label="MOD_KM_SIMPLE_SEARCH_COLUMNSDETAIL_LBL"
+                        description="MOD_KM_SIMPLE_SEARCH_COLUMNSDETAIL_DESC"
+                        multiple="true">
+                    <option value="title">MOD_KM_SIMPLE_SEARCH_TITLE</option>
+                    <option value="content">MOD_KM_SIMPLE_SEARCH_CONTENT</option>
+                    <option value="introcontent">MOD_KM_SIMPLE_SEARCH_INTROCONTENT</option>
+                    <option value="product_code">MOD_KM_SIMPLE_SEARCH_PRODUCT_CODE</option>
+                </field>
+
+                <field
+                        name="count"
+                        type="text"
+                        default="6"
+                        label="MOD_KM_SIMPLE_SEARCH_COUNT_LBL"
+                        description="MOD_KM_SIMPLE_SEARCH_COUNT_DESC"/>
+            </fieldset>
+        </fields>
+    </config>
 </extension>

@@ -13,27 +13,25 @@ if (!class_exists('KsenmartHtmlHelper')) {
 	require JPATH_ROOT.DS.'components'.DS.'com_ksenmart'.DS. 'helpers'.DS.'head.php';
 }
 KsenmartHtmlHelper::AddHeadTags();
-if(!class_exists('KsenMartModelProfile')){
-    include (JPATH_ROOT . '/components/com_ksenmart/models/profile.php');
+
+$km_params = JComponentHelper::getParams('com_ksenmart');
+$document  = JFactory::getDocument();
+$document->addScript(JURI::base() . 'modules/mod_km_shipping/js/default.js', 'text/javascript', true);
+if($km_params->get('modules_styles', true)){
+	$document->addStyleSheet(JURI::base() . 'modules/mod_km_shipping/css/default.css');
 }
-
-require_once(dirname(__file__) . '/helper.php');
-
-$session     = JFactory::getSession();
 
 $app = JFactory::getApplication();
 $user = KSUsers::getUser();
-$user_region = (int)$app->getUserState('com_ksenmart.region_id', $user->region_id);
-$model       = new KsenMartModelProfile();
-$km_params   = JComponentHelper::getParams('com_ksenmart');
+$user_region = (int)$app->getUserState('com_ksenmart.region_id', 'region_id', $user->region_id);
 
-if($km_params->get('modules_styles', true)) {
-    $document = JFactory::getDocument();
-    $document->addScript(JURI::base() . 'modules/mod_km_shipping/js/mod_km_shipping.js');
-}
+require_once dirname(__file__) . '/helper.php';
+$modKMShippingHelper = new modKMShippingHelper();
 
-$regions   = $model->getRegions();
-$shippings = $model->getShippingsByRegionId($user_region);
-$payments  = $model->getPaymentsByRegionId($user_region);
+$regions   = $modKMShippingHelper->getRegions();
+$shippings = $modKMShippingHelper->getShippings($user_region);
+$payments  = $modKMShippingHelper->getPayments($user_region);
 
-require(JModuleHelper::getLayoutPath('mod_km_shipping', $params->get('layout', 'default')));
+$class_sfx  = htmlspecialchars($params->get('moduleclass_sfx'));
+
+require JModuleHelper::getLayoutPath('mod_km_shipping', $params->get('layout', 'default'));

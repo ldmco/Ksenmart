@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="module" client="administrator" method="upgrade">
+<extension version="3.1" type="module" client="administrator" method="upgrade">
     <name>Категории KsenMart</name>
-	<version>2.0.1</version>
-	<creationDate>March 2014</creationDate>
+	<version>4.1.11</version>
+	<creationDate>May 2017</creationDate>
 	<author>L.D.M. Co</author>
 	<authorEmail>boss.ldm@gmail.com</authorEmail>
 	<authorUrl>http://www.lukyan-dm.ru/</authorUrl>
 	<copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
 	<description>MOD_KM_CATEGORIES_DESCRIPTION</description>
 	
 	<files>
@@ -40,7 +40,7 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_categories">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/administrator/mod_km_categories-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_categories">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/administrator/mod_km_categories-update.xml</server>
     </updateservers>
     
 	<config>
@@ -55,6 +55,12 @@
 					size="7"
 					label="MOD_KS_PAGES_LABEL"
 					description="MOD_KS_PAGES_DESC" />
+
+				<field name="parent" type="kscategories"
+					   extension="ksenmart"
+					   label="MOD_KM_CATEGORIES_PARENT_LABEL"
+					   multiple="false"
+				/>
 			</fieldset>
 			<fieldset
 				name="advanced">

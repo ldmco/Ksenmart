@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" method="upgrade">
+    <name>mod_km_best_product</name>
+    <version>4.1.11</version>
+    <creationDate>May 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <description>MOD_KM_BEST_PRODUCT_XML_DESCRIPTION</description>
+    <files>
+        <filename module="mod_km_best_product">mod_km_best_product.php</filename>
+        <folder>css</folder>
+        <folder>tmpl</folder>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>mod_km_best_product.xml</filename>
+    </files>
+    <languages folder="language">
+        <language tag="ru-RU">ru-RU.mod_km_best_product.ini</language>
+        <language tag="ru-RU">ru-RU.mod_km_best_product.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/plugins/system/ksencore/core/models/fields">
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="JFIELD_ALT_LAYOUT_LABEL"
+                        description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field
+                        type="ksproducts"
+                        name="product_id"
+                        extension="ksenmart"
+                        default=""
+                        label="MOD_KM_BEST_PRODUCT_PRODUCT_LBL"
+                        description="MOD_KM_BEST_PRODUCT_PRODUCT_DESC"
+                        usedefault="0"
+                        multiple="false"
+                />
+            </fieldset>
+        </fields>
+    </config>
+
+    <updateservers>
+        <server type="extension" priority="1" name="mod_km_best_product">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_best_product-update.xml
+        </server>
+    </updateservers>
+
+</extension>

@@ -10,8 +10,13 @@ class ModKMCategoriesHelper {
 	
 	private $tree = array();
 	private $menu = array();
+	private $parent = 0;
 	private $selected_categories = array();
-	
+
+	function setParent($parent = 0) {
+		$this->parent = $parent;
+	}
+
 	function buildCategoriesTree() {
 		$app = JFactory::getApplication();
 		$db = JFactory::getDBO();
@@ -26,11 +31,11 @@ class ModKMCategoriesHelper {
 		$db->setQuery($query);
 		$categories = $db->loadObjectList('id');
 		$top_parent = (object)array(
-			'id' => 0,
+			'id' => $this->parent,
 			'children' => array()
 		);
 		$menu = array(
-			0 => $top_parent
+			$this->parent => $top_parent
 		);
 		
 		foreach ($categories as $id => $category) {
@@ -100,7 +105,7 @@ class ModKMCategoriesHelper {
 	
 	function getCategories() {
 		$this->buildCategoriesTree();
-		if ($this->menu) $this->makeCategoriesTree($this->menu[0]);
+		if ($this->menu) $this->makeCategoriesTree($this->menu[$this->parent]);
 		
 		return $this->tree;
 	}

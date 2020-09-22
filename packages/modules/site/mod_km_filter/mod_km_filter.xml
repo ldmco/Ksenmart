@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade">
+<extension type="module" version="3.1" method="upgrade">
     <name>MOD_KM_FILTER</name>
-    <version>2.0.7</version>
-    <creationDate>March 2014</creationDate>
+    <version>4.1.11</version>
+    <creationDate>May 2017</creationDate>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
-    <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
     <description>MOD_KM_FILTER_XML_DESCRIPTION</description>
     
     <files>
@@ -16,11 +16,14 @@
         <filename>index.html</filename>
         <filename>helper.php</filename>
         <folder>tmpl</folder>
-        <folder>images</folder>
-        <folder>js</folder>
-        <folder>css</folder>
         <folder>sql</folder>
     </files>
+
+	<media destination="mod_km_filter" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+	</media>
 
     <languages folder="language">
         <language tag="ru-RU">ru-RU/ru-RU.mod_km_filter.ini</language>
@@ -42,13 +45,26 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_filter">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_filter-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_filter">
+			http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_filter-update.xml
+		</server>
     </updateservers>
 
     <config>
         <fields name="params">
             <fieldset name="basic">
-			
+
+				<field
+						name="show_categories"
+						type="radio"
+						class="btn-group btn-group-yesno"
+						default="0"
+						label="MOD_KM_FILTER_SHOW_CATEGORIES"
+						description="MOD_KM_FILTER_SHOW_CATEGORIES">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
 				<field
 					name="show_filter_button"
 					type="radio"

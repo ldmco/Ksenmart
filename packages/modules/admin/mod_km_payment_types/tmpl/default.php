@@ -18,11 +18,11 @@ defined('_JEXEC') or die;
 				<ul>
 					<?php if (count($payment_types)>0):?>
 					<?php foreach($payment_types as $payment_type):?>
-					<li class="<?php echo ($payment_type->selected?'active':'');?>">
+					<li class="<?php echo ($payment_type->selected?'active':'');?> <?php echo ($payment_type->disabled?'disabled':'');?>">
 						<label>
 							<?php echo JText::_($payment_type->name)?>
 							<input type="checkbox" value="<?php echo $payment_type->element;?>" name="types[]" onclick="PaymentTypesModule.setItem(this);" <?php echo ($payment_type->selected?'checked':'')?>>
-							<a class="add km-modal" rel='{"x":"90%","y":"90%"}' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=payments&layout=payment&type='.$payment_type->element.'&tmpl=component');?>"></a>
+							<a class="add km-modal" rel='<?php echo ($payment_type->disabled?'{"x":"1000px","y":"400px"}':'{"x":"90%","y":"90%"}');?>' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=payments&layout=payment&type='.$payment_type->element.'&tmpl=component');?>"></a>
 						</label>
 					</li>
 					<?php endforeach;?>

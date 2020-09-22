@@ -5,25 +5,22 @@
  */
  
 defined('_JEXEC') or die;
-
-// Note. It is important to remove spaces between elements.
 ?>
-<div class="accordion ksm-categories <?php echo $class_sfx?>">
-	<h3><?php echo $module->title?></h3>
-	<ul class="nav nav-list menu-list-1">
+<div class="ksm-module-categories ksm-block <?php echo $class_sfx?>">
+	<ul class="ksm-module-categories-level ksm-module-categories-level-1">
 	<?php
 	foreach ($list as $i => &$item) :
-		$class = 'ksenmart-categories-item';
+		$class = 'ksm-module-categories-item';
 		if ($item->id == $active_id) {
-			$class .= ' current';
+			$class .= ' ksm-module-categories-item-current';
 		}
 
 		if (in_array($item->id, $path)) {
-			$class .= ' active';
+			$class .= ' ksm-module-categories-item-active ksm-module-categories-item-opened';
 		}
 
 		if ($item->deeper) {
-			$class .= ' deeper in';
+			$class .= ' ksm-module-categories-item-deeper';
 		}
 
 		if (!empty($class)) {
@@ -31,13 +28,16 @@ defined('_JEXEC') or die;
 		}
 
 		echo '<li'.$class.'>';
+		if ($item->deeper) {
+			echo '<span class="ksm-module-categories-item-caret"></span>';
+		}		
 
 		require JModuleHelper::getLayoutPath('mod_km_categories', 'default_url');
 
 		if ($item->deeper) {
-			$class = 'nav nav-list menu-list-'.($item->level+1);
+			$class = 'ksm-module-categories-level ksm-module-categories-level-'.($item->level+1);
 			if (!in_array($item->id, $path)) {
-				$class .= ' hide';
+				$class .= ' ksm-module-categories-level-hide';
 			}		
 			echo '<ul class="'.$class.'">';
 		}

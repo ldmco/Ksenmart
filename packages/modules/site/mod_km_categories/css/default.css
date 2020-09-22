@@ -1,0 +1,90 @@
+.ksm-module-categories {
+    padding: 0 0 20px;
+    margin: 0 0 30px;
+}
+
+.ksm-module-categories h3 {
+    text-align: left;
+    font-size: 20px;
+    margin: 0;
+    height: 54px;
+    line-height: 53px;
+    padding: 0 0 0 15px;
+    overflow: hidden;
+}
+
+.ksm-module-categories .ksm-module-categories-level {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-level {
+    padding: 0 0 9px;
+    margin-left: 10px;
+}
+
+.ksm-module-categories .ksm-module-categories-level-hide {
+    display: none;
+}
+
+.ksm-module-categories .ksm-module-categories-item {
+    position: relative;
+    line-height: 20px;
+}
+
+.ksm-module-categories .ksm-module-categories-item-deeper > .ksm-module-categories-item-caret {
+    cursor: pointer;
+    display: inline-block;
+    width: 11px;
+    height: 7px;
+    content: '';
+    background: url(../images/mini_arrow_big.png) center no-repeat;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+}
+
+.ksm-module-categories .ksm-module-categories-item-deeper .ksm-module-categories-item-deeper > .ksm-module-categories-item-caret {
+    top: 4px;
+}
+
+.ksm-module-categories .ksm-module-categories-item-opened > .ksm-module-categories-item-caret {
+    transform: rotate(180deg);
+}
+
+.ksm-module-categories .ksm-module-categories-item-link {
+    font-size: 16px;
+    margin: 3px 15px;
+    padding: 6px 15px 5px 0;
+    border: none;
+    text-decoration: none;
+    display: block;
+}
+
+.ksm-module-categories .ksm-module-categories-item-link:hover {
+    color: #005580;
+}
+
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-level .ksm-module-categories-item-link {
+    margin: 0 0 0 20px;
+    padding: 0 30px 0 0;
+    border: none;
+    color: #adba04;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-item-link::before {
+    position: absolute;
+    margin-left: -10px;
+}
+
+.ksm-module-categories .ksm-module-categories-item-active > .ksm-module-categories-item-link {
+    font-weight: bold;
+}
+
+.ksm-module-categories .ksm-module-categories-level .ksm-module-categories-level .ksm-module-categories-level .ksm-module-categories-item-link {
+    color: #08c;
+    line-height: 24px;
+}

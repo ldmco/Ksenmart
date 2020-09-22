@@ -1,0 +1,66 @@
+.ksm-module-categories-horizontal {
+    //border: 1px solid #DCDCDC;
+    //padding: 0 0 20px;
+    margin: 20px 0;
+}
+.ksm-module-categories-horizontal h3 {
+    text-align: left;
+    padding-left: 0;
+    font-size: 20px;
+    margin: 0;
+    height: 54px;
+    line-height: 53px;
+    padding: 0 0 0 15px;
+    overflow: hidden;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level > li {
+	padding: 0 20px;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level > li:hover > a {
+	color: #fff;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level > li > a:before {
+	margin: 0;
+	content: '';
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level-1 > li {
+	display: inline-block;
+	border-left: 1px solid #ddd;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level-1 > li:first-child{
+	border-left: 0;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level > li:hover {
+	background-color: #536940;
+	color: #fff;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level .ksm-module-categories-level-1 {
+    padding: 0px 15px 9px;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-item {
+    position: relative;
+    line-height: 20px;	
+	border-bottom: 0;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-level-1 > li.ksm-module-categories-item-deeper > a:after {
+	font-family: FontAwesome;
+	content: "\f107";
+	margin-left: 8px;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-item-deeper > ul {
+	display: none;
+	position: absolute;
+	background: #fff;
+	box-shadow: 1px 1px 3px #bbb;
+	z-index: 999;
+	left: 0;
+	min-width: 100%;
+}
+.ksm-module-categories-horizontal .ksm-module-categories-item-deeper:hover > ul {
+	display: block;
+}

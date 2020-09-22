@@ -20,10 +20,13 @@ class ModKMExportImportTypesHelper
 		$types = $db->loadObjectList('element');
 		
 		foreach($types as &$type)
-			if ($type->element==$selected_type)
-				$type->selected=true;
-			else	
-				$type->selected=false;
+		{
+			if ($type->element == $selected_type)
+				$type->selected = true;
+			else
+				$type->selected = false;
+			$type->disabled = KSSystem::checkExtension('exportimport', $type->element);
+		}
 			
 		return $types;
     }

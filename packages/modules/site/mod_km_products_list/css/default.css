@@ -1,0 +1,149 @@
+.ksm-module-products-list {
+    float: left;
+    width: 100%;
+}
+.ksm-module-products-list h3 {
+    font-size: 30px;
+    color: #343434;
+    line-height: 30px;
+    font-weight: bold;
+    margin: 5px 0 30px;
+}
+.ksm-module-products-list .ksm-catalog-item {
+	float: left;
+	width:22.75%;
+	margin:0px 0px 20px 3%;
+	border: 1px solid #dcdcdc;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+.ksm-module-products-list .ksm-catalog-item:hover {
+	-webkit-box-shadow: inset 0 0 7px #bbb;
+     -moz-box-shadow: inset 0 0 7px #bbb;
+          box-shadow: inset 0 0 7px #bbb;
+}
+.ksm-module-products-list .ksm-catalog-item:nth-child(4n+1) {
+    margin-left: 0px;
+    clear: left;
+}
+.ksm-module-products-list .ksm-catalog-item-img {
+	margin: 8px;
+	text-align: center;
+	position: relative;
+}
+.ksm-module-products-list .ksm-catalog-item-img img {
+	max-width:100%;
+}
+.ksm-module-products-list .ksm-catalog-item-flag-hot,
+.ksm-module-products-list .ksm-catalog-item-flag-recommendation,
+.ksm-module-products-list .ksm-catalog-item-item-flag-new,
+.ksm-module-products-list .ksm-catalog-item-flag-promotion {
+    position: absolute;
+    top: -11px;
+    right: 15px;
+    width: 30px;
+    height: 87px;
+    display: block;
+}
+.ksm-module-products-list .ksm-catalog-item-flag-hot {
+    background: url(../images/hit.png) top center no-repeat;
+}
+.ksm-module-products-list .ksm-catalog-item-flag-recommendation {
+    background: url(../images/super.png) top center no-repeat;
+}
+.ksm-module-products-list .ksm-catalog-item-flag-new {
+    background: url(../images/new.png) top center no-repeat;
+}
+.ksm-module-products-list .ksm-catalog-item-flag-promotion {
+    background: url(../images/promo.png) top center no-repeat;
+}
+.ksm-module-products-list .ksm-catalog-item-name {
+	float: left;
+    width: 90%;
+    margin: 0 5% 7px;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+    height: 62px;
+    overflow: hidden;
+}
+.ksm-module-products-list .ksm-catalog-item-name span {
+	display:block;
+    margin: 8px 0;
+}
+.ksm-module-products-list .ksm-catalog-item-name-introcontent,
+.ksm-module-products-list .ksm-catalog-item-name span.ksm-catalog-item-name-art,
+.ksm-module-products-list .ksm-catalog-item-name span.ksm-catalog-item-name-rate {
+	display:none;
+}
+.ksm-module-products-list .ksm-catalog-item-price {
+    color: #adba04;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+	margin:0px 0px 8px 0px;
+}
+.ksm-module-products-list .ksm-catalog-item-price-old {
+    text-decoration: line-through;
+    font-size: 17px;
+    color: #e97c7c;
+}
+.ksm-module-products-list .ksm-catalog-item-button {
+	padding:0px 8px 15px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	text-align: center;
+}
+.ksm-module-products-list .ksm-catalog-item-button .ksm-catalog-item-buy-form {
+	margin:0px;
+	padding:0px;
+	float:none;
+}
+@media screen and (max-width: 979px) {
+	.ksm-module-products-list .ksm-catalog-item {
+		width: 32%;
+		margin-left: 2%;
+	}
+	.ksm-module-products-list .ksm-catalog-item:nth-child(4n+1){
+		clear: none;
+		margin-left: 2%;
+	}
+	.ksm-module-products-list .ksm-catalog-item:nth-child(3n+1){
+		clear: left;
+		margin-left: 0;
+	}
+}
+
+@media screen and (max-width: 559px) {
+	.ksm-module-products-list .ksm-catalog-item {
+		width: 48%;
+		margin-left: 4%;
+	}
+	.ksm-module-products-list .ksm-catalog-item:nth-child(3n+1){
+		clear: none;
+		margin-left: 4%;
+	}
+	.ksm-module-products-list .ksm-catalog-item:nth-child(2n+1){
+		clear: left;
+		margin-left: 0;
+	}
+}
+@media screen and (max-width: 399px) {
+	.ksm-module-products-list .ksm-catalog-item {
+		width: 100%;
+		margin-left: 0;
+	}
+	.ksm-module-products-list .ksm-catalog-item:nth-child(3n+1){
+		margin-left: 0;
+	}
+}

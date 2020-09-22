@@ -1,19 +1,19 @@
-jQuery(document).ready(function() {
-    jQuery('.js-info').on('click', function() {
+jQuery(document).ready(function () {
+    jQuery('.js-info').on('click', function () {
         var extension = jQuery(this).attr('rel');
         createPopup('Лицензионное соглашение', 'license', false);
 
         var popup_license = jQuery('.popup.license');
         var license = null;
 
-        jQuery('.overlay.license').fadeIn(400, function() {
+        jQuery('.overlay.license').fadeIn(400, function () {
 
             jQuery.ajax({
                 url: 'index.php?option=com_ksen&task=settings.getKSVersion&extension=' + extension,
                 type: 'POST',
                 dataType: 'JSON',
-                success: function(data) {
-                    popup_license.fadeIn(400, function() {
+                success: function (data) {
+                    popup_license.fadeIn(400, function () {
                         var html = '';
                         html += '<table><tbody>';
 
@@ -54,7 +54,50 @@ jQuery(document).ready(function() {
         });
     });
 
-    jQuery('body').on('click', '.popup .close', function(){
+    jQuery('.ksm-show-billing-info').on('click', function (e) {
+        e.preventDefault();
+
+        createPopup('Регистрация лицензии', 'license auth', false);
+
+        var popup_license = jQuery('.popup.license');
+        var license = null;
+
+        jQuery('.overlay.license').fadeIn(400, function () {
+            popup_license.fadeIn(400, function () {
+                var html = '';
+                html += '<table><tbody>';
+
+                html += '<tr>';
+                html += '<td colspan="2"><br /><strong>Для получения PRO функций выполните следующие шаги</strong></td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Шаг №1</td>';
+                html += '<td><a href="http://billing.ksenmart.ru" target="_blank">Зарегистрируйтесь</a>, либо <a href="http://billing.ksenmart.ru" target="_blank">авторизуйтесь</a> на сайте <a href="http://billing.ksenmart.ru" target="_blank">billing.ksenmart.ru</a></td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Шаг №2</td>';
+                html += '<td>В разделе "Мои магазины" нажмите "Добавить Магазин"</td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Шаг №3</td>';
+                html += '<td>Введите название магазина и ключ: <strong>' + shop_key + '</strong></td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Шаг №4</td>';
+                html += '<td>Скопируйте токен нового магазина и введите в это поле: <br /><br /><input class="ksm-add-token inputbox width240px" type="text" name="shop_token" value="" /><br /><br />' +
+                    '<input type="hidden" name="task" value="addtoken">' +
+                    '<input type="hidden" name="option" value="com_ksenmart">' +
+                    '<input class="btn btn-save" type="submit" value="Отправить"></td>';
+                html += '</tr>';
+
+                html += '</tbody></table>';
+                console.log(html);
+                popup_license.children('.body').html(html);
+            });
+        });
+    });
+
+    jQuery('body').on('click', '.popup .close', function () {
         closePopup(jQuery(this));
     });
 });

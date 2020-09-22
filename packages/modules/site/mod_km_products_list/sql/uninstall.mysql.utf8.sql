@@ -1,1 +1,1 @@
-DELETE FROM `#__modules` WHERE `module`='mod_km_products_list';
+DELETE FROM `#__modules` WHERE `module`='mod_km_best_product';

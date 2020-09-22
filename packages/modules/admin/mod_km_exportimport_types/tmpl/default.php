@@ -18,10 +18,14 @@ defined('_JEXEC') or die;
 				<ul>
 					<?php if (count($types)>0):?>
 					<?php foreach($types as $type):?>
-					<li class="<?php echo ($type->selected?'active':'');?>">
+					<li class="<?php echo ($type->selected?'active':'');?> <?php echo ($type->disabled?'disabled':'');?>">
 						<label>
 							<?php echo JText::_($type->name);?>
-							<input type="radio" value="<?php echo $type->element?>" onclick="setExportImportType(this);" name="type" <?php echo ($type->selected?'checked':'')?>>
+                            <?php if ($type->disabled): ?>
+                                <a class="add km-modal" rel='<?php echo ($type->disabled?'{"x":"1000px","y":"400px"}':'{"x":"90%","y":"90%"}');?>' href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=payments&layout=disabled&tmpl=component');?>"></a>
+                            <?php else: ?>
+                                <input type="radio" value="<?php echo $type->element?>" onclick="setExportImportType(this);" name="type" <?php echo ($type->selected?'checked':'')?>>
+                            <?php endif; ?>
 						</label>
 					</li>
 					<?php endforeach;?>

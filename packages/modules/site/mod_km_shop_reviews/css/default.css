@@ -1,0 +1,47 @@
+.ksm-module-shopreviews {
+    margin: 0 0 30px;
+}
+.ksm-module-shopreviews h3 {
+    text-align: left;
+    padding-left: 0;
+    font-size: 20px;
+    height: 54px;
+    line-height: 53px;
+    padding: 0 0 0 15px;
+    overflow: hidden;
+    color: #fff;
+    margin: 0 0 25px;	
+	background: url(../images/bg.png) top left repeat-x;	
+}
+.ksm-module-shopreviews .ksm-module-shopreviews-item {
+    margin-bottom: 20px;
+}
+.ksm-module-shopreviews .ksm-module-shopreviews-item-comment {
+    padding: 5px 10px;
+    position: relative;
+    border: 1px solid #DCDCDC;
+    background-color: #fff;
+    margin: 15px 0 0;
+}
+.ksm-module-shopreviews .ksm-module-shopreviews-item-comment:before {
+	content:' ';
+    position: absolute;
+    top: -14px;
+    left: 18px;
+    width: 13px;
+    height: 14px;
+    z-index: 5;
+    background: url(../images/rev.png) center no-repeat;
+}
+.ksm-module-shopreviews .ksm-module-shopreviews-item-more {
+	display:block;
+	margin-top:5px;
+	text-decoration:underline;
+}
+.ksm-module-shopreviews .ksm-module-shopreviews-link {
+	display:block;
+    border-top: 1px solid #dcdcdc;
+    padding: 10px 0 0;
+    font-size: 15px;	
+	text-decoration:underline;
+}

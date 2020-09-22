@@ -7,40 +7,26 @@
 defined('_JEXEC') or die;
 ?>
 
-<?php if(!empty($reviews)){ ?>
-<section class="shop_reviews_module<?php echo $moduleclass_sfx; ?>">
-    <?php if($module->showtitle){ ?>
-    <h3><?php echo $module->title; ?></h3>
-    <?php } ?>
-    <?php foreach($reviews as $review){ ?>
-        <article class="row-fluid item">
-            <div class="span4 avatar">
-                <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=review&id='.$review->id); ?>" title="<?php echo $review->name; ?>">
-                    <img src="<?php echo JURI::root().$review->logo_thumb; ?>" alt="<?php echo $review->name; ?>" class="border_ksen" />
-                </a>
-            </div>
-            <div class="span8 comment_wrapp">
-                <div class="name"><?php echo $review->name; ?></div>
-				<div class="rating">
-					<?php for($k=1;$k<6;$k++) {
-						if(floor($review->rate) >= $k){ ?>
-					<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star-small.png" alt="" />
-					<?php }else{ ?>
-					<img src="<?php echo JURI::root()?>components/com_ksenmart/images/star2-small.png" alt="" />
-					<?php }
-					} ?>
-				</div>
-                <div class="row-fluid comment">
-                    <?php echo mb_substr($review->comment, 0, $params->get('count_symbol', 200)); ?>
-                </div>
-                <div class="read_more">
-                    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=review&id='.$review->id); ?>" title="<?php echo JText::_('MODULE_KM_SHOP_REVIEWS_MORE'); ?>"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_MORE'); ?></a>
-                </div>
-            </div>
-        </article>
-    <?php } ?>
-    <div class="row-fluid text-center">
-        <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=reviews'); ?>" title="<?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?>"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?></a>
-    </div>
-</section>
-<?php } ?>
+<?php if(!empty($reviews)): ?>
+<div class="ksm-module-shopreviews ksm-block <?php echo $moduleclass_sfx?>">
+    <?php foreach($reviews as $review): ?>
+        <div class="ksm-module-shopreviews-item">
+			<div class="ksm-module-shopreviews-item-name"><?php echo $review->name; ?></div>
+			<div class="ksm-module-shopreviews-item-rating">
+				<?php for($k = 1; $k < 6; $k++): ?>
+					<?php if (floor($review->rate) >= $k): ?>
+						<img src="<?php echo JURI::root()?>modules/mod_km_shop_reviews/images/star-small.png" alt="" />
+					<?php else: ?>
+						<img src="<?php echo JURI::root()?>modules/mod_km_shop_reviews/images/star2-small.png" alt="" />
+					<?php endif; ?>
+				<?php endfor; ?>
+			</div>
+			<div class="ksm-module-shopreviews-item-comment">
+				<?php echo $review->comment; ?>
+				<a href="<?php echo $review->link; ?>" class="ksm-module-shopreviews-item-more"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_MORE'); ?></a>
+			</div>
+        </div>
+    <?php endforeach; ?>
+    <a href="<?php echo JRoute::_('index.php?option=com_ksenmart&view=comments&layout=reviews&Itemid='.$Itemid); ?>" class="ksm-module-shopreviews-link"><?php echo JText::_('MODULE_KM_SHOP_REVIEWS_ALL_REVIEWS'); ?></a>
+</div>
+<?php endif; ?>

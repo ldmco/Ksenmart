@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade">
+<extension type="module" version="3.1" method="upgrade">
 	<name>mod_km_shipping</name>
     <author>L.D.M. Co</author>
     <authorEmail>boss.ldm@gmail.com</authorEmail>
     <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
     <copyright>Copyright (C) 2008-2013 L.D.M. Co All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <version>2.0.3</version>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+    <version>4.1.11</version>
     <description>COM_KSENMART_DESC</description>
-    <creationDate>10 March 2014</creationDate>
-    <creationDate>March 2014</creationDate>
+    <creationDate>May 2017</creationDate>
 	<description>Способы доставки и оплаты KsenMart</description>
 	
     <files>
-        <folder>tmpl</folder>
-        <folder>js</folder>
 		<filename module="mod_km_shipping">mod_km_shipping.php</filename>
         <filename>helper.php</filename>
         <filename>mod_km_shipping.xml</filename>
 		<filename>index.html</filename>
+        <folder>css</folder>		
+        <folder>js</folder>		
         <folder>sql</folder>
+        <folder>tmpl</folder>
     </files>
     
     <languages folder="language">
@@ -42,7 +42,9 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_shipping">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_shipping-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_shipping">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_shipping-update.xml
+        </server>
     </updateservers>
 
     <config>

@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" method="upgrade">
+<extension type="module" version="3.1" method="upgrade">
 	<name>mod_km_products_list</name>
-	<author>ToMuH</author>
-	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail>tominpasha@mail.ru</authorEmail>
-	<authorUrl></authorUrl>
-	<version>2.0.2</version>
-    <creationDate>March 2014</creationDate>
-	<description>Список продуктов KsenMart 2.0</description>
+	<version>4.1.11</version>
+	<creationDate>May 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+    <copyright>Copyright (C) 2008-2017 L.D.M. Co All rights reserved.</copyright>
+	<license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
+	<description>Список продуктов KsenMart 4.0</description>
+
 	<files>
 		<filename module="mod_km_products_list">mod_km_products_list.php</filename>
+        <folder>sql</folder>
 		<folder>tmpl</folder>
 		<filename>index.html</filename>
 		<filename>helper.php</filename>
 		<filename>mod_km_products_list.xml</filename>
-        <folder>sql</folder>
     </files>
+
+	<media folder="media" destination="mod_km_products_list">
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+		<filename>index.html</filename>
+	</media>
+
     <languages folder="language">
 		<language tag="ru-RU">ru-RU.mod_km_products_list.ini</language>
 		<language tag="ru-RU">ru-RU.mod_km_products_list.sys.ini</language>
@@ -37,7 +46,9 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_products_list">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_products_list-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_products_list">
+			http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_products_list-update.xml
+		</server>
     </updateservers>
 
 	<config>

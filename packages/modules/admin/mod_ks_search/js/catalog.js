@@ -7,7 +7,8 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('.mod_km_search .button').on('click', function() {
+    jQuery('.mod_km_search .button').on('click', function(e) {
+		e.preventDefault();
         ProductsList.loadListPage(1);
     });
 

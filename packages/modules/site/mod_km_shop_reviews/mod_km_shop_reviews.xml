@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
-<extension type="module" version="1.0.0" method="upgrade" client="site">
+<extension type="module" version="3.1" method="upgrade" client="site">
     <name>MODULE_KM_SHOP_REVIEWS</name>
-    <author>Bereza Kirill</author>
-    <authorEmail>takt.bereza@gmail.com</authorEmail>
-    <authorUrl>http://brainstorage.me/TakT</authorUrl>
-	<copyright>Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-    <version>2.0.5</version>
-    <creationDate>March 2014</creationDate>
+    <version>4.1.11</version>
+    <creationDate>May 2017</creationDate>
+    <author>L.D.M. Co</author>
+    <authorEmail>boss.ldm@gmail.com</authorEmail>
+    <authorUrl>http://www.lukyan-dm.ru/</authorUrl>
+	<copyright>Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.</copyright>
+    <license>https://creativecommons.org/licenses/by-sa/3.0/deed.ru CC BY-SA 3.0</license>
     <description>MOD_KM_SHOP_REVIEWS_DESC</description>
     <files>
         <filename module="mod_km_shop_reviews">mod_km_shop_reviews.php</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
+        <folder>images</folder>
         <folder>tmpl</folder>
         <folder>css</folder>
         <folder>sql</folder>
@@ -37,7 +38,9 @@
     </uninstall>
 
     <updateservers>
-        <server type="extension" priority="1" name="mod_km_shop_reviews">http://update.ksenmart.ru/update-info/j3/pkg_ksenmart/com_ksenmart/modules/site/mod_km_shop_reviews-update.xml</server>
+        <server type="extension" priority="1" name="mod_km_shop_reviews">
+            http://update.ksenmart.ru/update-info/j3/pkg_ksenmart_4/com_ksenmart/modules/site/mod_km_shop_reviews-update.xml
+        </server>
     </updateservers>
 
     <config>
