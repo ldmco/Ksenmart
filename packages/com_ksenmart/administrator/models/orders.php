@@ -81,9 +81,10 @@ class KsenMartModelOrders extends JModelKSAdmin
 		$query->select('FOUND_ROWS()');
 		$this->_db->setQuery($query);
 		$this->total = $this->_db->loadResult();
+        KSMOrders::getOrdersItems(array_column($orders, 'id'));
 		foreach ($orders as &$order)
 		{
-			$order       = KSMOrders::getOrder($order->id, true);
+			$order       = KSMOrders::getOrder($order->id, false);
 			$order->user = KSUsers::getUser($order->user_id);
 			foreach ($order->costs as $key => $cost)
 			{

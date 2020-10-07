@@ -12,8 +12,9 @@ class KSMOrders extends KSCoreHelper
 {
 	private static $_orders = [];
 	private static $statuses = [];
+    private static $items;
 
-	public static function getOrder($oid, $product_info = false)
+    public static function getOrder($oid, $product_info = false)
 	{
 		if (empty($oid)) return new stdClass;
 		if (!empty(self::$_orders[$oid][$product_info])) return self::$_orders[$oid][$product_info];
@@ -44,11 +45,16 @@ class KSMOrders extends KSCoreHelper
 		self::setUserInfoField2Order($order);
 		if (!empty($order->status_name)) $order->status_name = $order->status_system ? JText::_('ksm_orders_' . $order->status_name) : $order->status_name;
 
-		$query = $db->getQuery(true);
-		$query->select('*')->from('#__ksenmart_order_items')->where('order_id=' . $oid);
-		$db->setQuery($query);
+        if (empty(self::$items[$order->id])) {
+            $query = $db->getQuery(true);
+            $query->select('*')->from('#__ksenmart_order_items')->where('order_id='.$oid);
+            $db->setQuery($query);
 
-		$order->items = $db->loadObjectList();
+            $order->items = $db->loadObjectList();
+        } else {
+            $order->items = self::$items[$order->id];
+        }
+
 		if ($product_info) $order->items = self::getOrderItems($oid);
 
 		$order->costs = array(
@@ -152,7 +158,44 @@ class KSMOrders extends KSCoreHelper
 		return new stdClass;
 	}
 
-	public static function setUserInfoField2Order(&$order)
+    public static function getOrdersItems($orderIds)
+    {
+        if (empty($orderIds)) {
+            return [];
+        }
+
+        $db    = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('
+                o.id,
+                o.order_id,
+                o.product_id,
+                o.price,
+                o.count,
+                o.properties
+            ');
+        $query->from('#__ksenmart_order_items AS o');
+        $query->where('o.order_id IN ('.implode(',', $orderIds).')');
+        $db->setQuery($query);
+        $items = $db->loadObjectList();
+
+        foreach ($items as $item) {
+            if (empty(self::$items[$item->order_id])) {
+                self::$items[$item->order_id] = [];
+            }
+
+            if (!empty(self::$items[$item->order_id][$item->id])) {
+                continue;
+            }
+
+            self::$items[$item->order_id][$item->id] = $item;
+        }
+
+        return self::$items;
+    }
+
+
+    public static function setUserInfoField2Order(&$order)
 	{
 
 		self::onExecuteBefore(array($order));
