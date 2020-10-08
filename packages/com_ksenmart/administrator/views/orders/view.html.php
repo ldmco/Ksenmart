@@ -72,6 +72,8 @@ class KsenMartViewOrders extends JViewKSAdmin
 				$this->order = $order;
 
 				break;
+            case 'default_item_form':
+                break;
 			default:
 				$this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.custom.min.js');
 				$this->document->addScript(JURI::base() . 'components/com_ksenmart/js/jquery.ui.datepicker-ru.js');
