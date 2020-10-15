@@ -15,14 +15,14 @@ abstract class KMDiscountPlugin extends KMPlugin
 {
 
 	private $_discounts = null;
-	protected $_discount_catalog = 0;
+	protected $_discount_catalog = 1;
 	protected $db;
 	protected $_mindiscount = array();
 
 	function __construct(&$subject, $config)
 	{
 		$params                  = JComponentHelper::getParams('com_ksenmart');
-		$this->_discount_catalog = $params->get('discount_catalog', 0);
+		$this->_discount_catalog = $params->get('discount_catalog', 1);
 		$this->_mindiscount      = $params->get('mindiscount', null);
 		if (empty($this->_mindiscount))
 		{

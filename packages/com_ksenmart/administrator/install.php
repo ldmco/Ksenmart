@@ -204,7 +204,7 @@ class com_ksenmartInstallerScript
 			'count_symbol'                               => '400',
 			'review_moderation'                          => '0',
 			'review_notice'                              => '0',
-			'discount_catalog'                           => '0',
+			'discount_catalog'                           => '1',
 			'mindiscount'                                => array(
 				'mindifprice' => '0',
 				'type'        => '1'

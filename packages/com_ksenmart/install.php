@@ -203,7 +203,7 @@ class com_ksenmartInstallerScript
 			'shipping_height'                            => '30',
 			'count_symbol'                               => '400',
 			'review_moderation'                          => '0',
-			'review_notice'                              => '0',
+			'review_notice'                              => '1',
 			'discount_catalog'                           => '0',
 			'mindiscount'                                => array(
 				'mindifprice' => '0',
