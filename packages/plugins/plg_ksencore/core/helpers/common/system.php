@@ -544,17 +544,19 @@ class KSSystem
 
 			foreach ($menuitems as $menuitem)
 			{
-				if ($menuitem->query['view'] == 'catalog' && $menuitem->query['layout'] == 'catalog')
-				{
-					self::$_Itemid[0] = $menuitem->id;
-				}
+                if ($menuitem->query['view'] == 'catalog' && $menuitem->query['layout'] == 'catalog'
+                    && empty($menuitem->query['new']) && empty($menuitem->query['promotion']))
+                {
+                    self::$_Itemid[0] = $menuitem->id;
+                }
 
-				if ($menuitem->query['view'] == 'catalog'
-					&& $menuitem->query['layout'] == 'category'
-					&& count($menuitem->query['categories']))
-				{
-					self::$_Itemid[$menuitem->query['categories'][0]] = $menuitem->id;
-				}
+                if ($menuitem->query['view'] == 'catalog'
+                    && $menuitem->query['layout'] == 'category'
+                    && !empty($menuitem->query['categories'])
+                    && empty($menuitem->query['properties']))
+                {
+                    self::$_Itemid[$menuitem->query['categories'][0]] = $menuitem->id;
+                }
 			}
 		}
 		if (empty(self::$_Itemid[$cat_id])) $cat_id = 0;
