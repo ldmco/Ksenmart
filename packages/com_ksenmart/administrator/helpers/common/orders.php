@@ -474,54 +474,46 @@ class KSMOrders extends KSCoreHelper
 		self::$statuses = $db->loadObjectList('id');
 	}
 
-	public static function setOrderStatus($id = 0, $status_id = 0)
-	{
-		self::onExecuteBefore(array(&$id, &$status_id));
+    public static function setOrderStatus($id = 0, $status_id = 0)
+    {
+        self::onExecuteBefore(array(&$id, &$status_id));
 
-		if (empty($id) || empty($id))
-		{
-			return false;
-		}
+        if (empty($id) || empty($id)) {
+            return false;
+        }
 
-		$params = JComponentHelper::getParams('com_ksenmart');
-		$db     = JFactory::getDbo();
+        $params = JComponentHelper::getParams('com_ksenmart');
+        $db     = JFactory::getDbo();
+        $order  = self::getOrder($id);
 
-		if ($params->get('use_stock', 1))
-		{
-			$order = self::getOrder($id);
+        if ($order->id == $status_id) {
+            return true;
+        }
 
-			if (KSMOrders::getStatus($status_id)->withdraw != KSMOrders::getStatus($order->status_id)->withdraw)
-			{
-				foreach ($order->items as $item)
-				{
-					$query = $db->getQuery(true);
-					$query->update('#__ksenmart_products');
+        if ($params->get('use_stock', 1)) {
+            if (KSMOrders::getStatus($status_id)->withdraw != KSMOrders::getStatus($order->status_id)->withdraw) {
+                foreach ($order->items as $item) {
+                    $product = KSMProducts::getProduct($item->product_id);
+                    if (KSMOrders::getStatus($status_id)->withdraw) {
+                        $product->in_stock -= $item->count;
+                    } else {
+                        $product->in_stock += $item->count;
+                    }
 
-					if (KSMOrders::getStatus($status_id)->withdraw)
-					{
-						$query->set('in_stock=in_stock-' . $item->count);
-					}
-					else
-					{
-						$query->set('in_stock=in_stock+' . $item->count);
-					}
+                    $product->save(['in_stock']);
+                }
+            }
+        }
 
-					$query->where('id=' . $item->product_id);
-					$db->setQuery($query);
-					$db->execute();
-				}
-			}
-		}
+        $obj_order = (object) [
+            'id'        => $id,
+            'status_id' => $status_id,
+        ];
 
-		$obj_order = (object) [
-			'id'        => $id,
-			'status_id' => $status_id,
-		];
+        $db->updateObject('#__ksenmart_orders', $obj_order, 'id');
 
-		$db->updateObject('#__ksenmart_orders', $obj_order, 'id');
+        self::onExecuteAfter(array($id));
 
-		self::onExecuteAfter(array($id));
-
-		return true;
-	}
+        return true;
+    }
 }

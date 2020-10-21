@@ -267,154 +267,149 @@ class KsenMartModelOrders extends JModelKSAdmin
 		return $order;
 	}
 
-	public function saveOrder($data = null, $order = null)
-	{
-		$this->onExecuteBefore('saveOrder', array(&$data));
+    public function saveOrder($data = null, $order = null)
+    {
+        $this->onExecuteBefore('saveOrder', array(&$data));
 
-		$data['customer_fields'] = isset($data['customer_fields']) ? $data['customer_fields'] : array();
-		$data['customer_fields'] = json_encode($data['customer_fields']);
-		$data['address_fields']  = isset($data['address_fields']) ? $data['address_fields'] : array();
-		$data['address_fields']  = json_encode($data['address_fields']);
-		$data['cost']            = 0;
-		$data['discounts']       = isset($data['discounts']) ? $this->updateOrderDiscounts($data['id'], $data['discounts']) : '[]';
-		$data['params']          = isset($data['params']) ? $data['params'] : array();
-		$data['params']          = json_encode($data['params']);
+        $data['customer_fields'] = isset($data['customer_fields']) ? $data['customer_fields'] : array();
+        $data['customer_fields'] = json_encode($data['customer_fields']);
+        $data['address_fields']  = isset($data['address_fields']) ? $data['address_fields'] : array();
+        $data['address_fields']  = json_encode($data['address_fields']);
+        $data['cost']            = 0;
+        $data['discounts']       = isset($data['discounts']) ? $this->updateOrderDiscounts($data['id'], $data['discounts']) : '[]';
+        $data['params']          = isset($data['params']) ? $data['params'] : array();
+        $data['params']          = json_encode($data['params']);
 
-		$old_status = 0;
-		$old_items  = array();
-		$new_items  = array();
-		$in         = array();
-		if (isset($data['items']) && $data['items'])
-		{
-			foreach ($data['items'] as $k => $v)
-			{
-				$new_items[$v['product_id']] = isset($new_items[$v['product_id']]) ? $new_items[$v['product_id']] + $v['count'] : $v['count'];
-				$data['cost']                += $v['price'] * $v['count'];
-			}
-		}
+        $old_status = 0;
+        $old_items  = array();
+        $new_items  = array();
+        $in         = array();
+        if (isset($data['items']) && $data['items'])
+        {
+            foreach ($data['items'] as $k => $v)
+            {
+                $new_items[$v['product_id']] = isset($new_items[$v['product_id']]) ? $new_items[$v['product_id']] + $v['count'] : $v['count'];
+                $data['cost']                += $v['price'] * $v['count'];
+            }
+        }
 
-		$table = $this->getTable('orders');
-		if (empty($data['id']))
-		{
-			$data['date_add'] = JFactory::getDate()->toSql();
-		}
-		else
-		{
-			$order      = KSSystem::loadDbItem($data['id'], 'orders');
-			$old_status = $order->status_id;
-			$query      = $this->_db->getQuery(true);
-			$query->select('product_id, sum(count) as count')->from('#__ksenmart_order_items')->where('order_id=' . $data['id'])->group('product_id');
-			$this->_db->setQuery($query);
-			$old_items = $this->_db->loadObjectList('product_id');
-		}
+        $table = $this->getTable('orders');
+        if (empty($data['id']))
+        {
+            $data['date_add'] = JFactory::getDate()->toSql();
+        }
+        else
+        {
+            $order      = KSSystem::loadDbItem($data['id'], 'orders');
+            $old_status = $order->status_id;
+            $query      = $this->_db->getQuery(true);
+            $query->select('product_id, sum(count) as count')->from('#__ksenmart_order_items')->where('order_id=' . $data['id'])->group('product_id');
+            $this->_db->setQuery($query);
+            $old_items = $this->_db->loadObjectList('product_id');
+        }
 
-		if (!$table->bindCheckStore($data))
-		{
-			$this->setError($table->getError());
+        if (!$table->bindCheckStore($data))
+        {
+            $this->setError($table->getError());
 
-			return false;
-		}
-		$id = $table->id;
+            return false;
+        }
+        $id = $table->id;
 
-		$in = array();
-		if (isset($data['items']) && $data['items'])
-		{
-			foreach ($data['items'] as $k => $v)
-			{
-				$v['order_id'] = $id;
-				if ($v['id'] < 0) unset($v['id']);
-				$v['properties'] = isset($v['properties']) ? $v['properties'] : array();
-				$v['properties'] = json_encode($v['properties']);
-				$table           = $this->getTable('orderitems');
+        $in = array();
+        if (isset($data['items']) && $data['items'])
+        {
+            foreach ($data['items'] as $k => $v)
+            {
+                $v['order_id'] = $id;
+                if ($v['id'] < 0) unset($v['id']);
+                $v['properties'] = isset($v['properties']) ? $v['properties'] : array();
+                $v['properties'] = json_encode($v['properties']);
+                $table           = $this->getTable('orderitems');
 
-				if (!$table->bindCheckStore($v))
-				{
-					$this->setError($table->getError());
+                if (!$table->bindCheckStore($v))
+                {
+                    $this->setError($table->getError());
 
-					return false;
-				}
+                    return false;
+                }
 
-				$in[] = $table->id;
-			}
-		}
+                $in[] = $table->id;
+            }
+        }
 
-		$query = $this->_db->getQuery(true);
-		$query->delete('#__ksenmart_order_items')->where('order_id=' . $id);
-		if (count($in))
-		{
-			$query->where('id not in (' . implode(', ', $in) . ')');
-		}
-		$this->_db->setQuery($query);
-		$this->_db->execute();
+        $query = $this->_db->getQuery(true);
+        $query->delete('#__ksenmart_order_items')->where('order_id=' . $id);
+        if (count($in))
+        {
+            $query->where('id not in (' . implode(', ', $in) . ')');
+        }
+        $this->_db->setQuery($query);
+        $this->_db->execute();
 
-		if ($this->params->get('use_stock', 1))
-		{
-			if (!KSMOrders::getStatus($data['status_id'])->withdraw && KSMOrders::getStatus($old_status)->withdraw)
-			{
-				foreach ($old_items as $old_item)
-				{
-					$query = $this->_db->getQuery(true);
-					$query->update('#__ksenmart_products')->set('in_stock=in_stock+' . $old_item->count)->where('id=' . $old_item->product_id);
-					$this->_db->setQuery($query);
-					$this->_db->execute();
-				}
-			}
-			elseif (KSMOrders::getStatus($data['status_id'])->withdraw && !KSMOrders::getStatus($old_status)->withdraw)
-			{
-				foreach ($new_items as $product_id => $count)
-				{
-					$query = $this->_db->getQuery(true);
-					$query->update('#__ksenmart_products')->set('in_stock=in_stock-' . $count)->where('id=' . $product_id);
-					$this->_db->setQuery($query);
-					$this->_db->execute();
-				}
-			}
-			elseif (KSMOrders::getStatus($data['status_id'])->withdraw)
-			{
-				foreach ($old_items as $old_item)
-				{
-					if (!isset($new_items[$old_item->product_id]))
-					{
-						$query = $this->_db->getQuery(true);
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock+' . $old_item->count)->where('id=' . $old_item->product_id);
-						$this->_db->setQuery($query);
-						$this->_db->execute();
-					}
-					elseif ($old_item->count > $new_items[$old_item->product_id])
-					{
-						$query = $this->_db->getQuery(true);
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock+' . ($old_item->count - $new_items[$old_item->product_id]))->where('id=' . $old_item->product_id);
-						$this->_db->setQuery($query);
-						$this->_db->execute();
-					}
-					elseif ($old_item->count < $new_items[$old_item->product_id])
-					{
-						$query = $this->_db->getQuery(true);
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock-' . ($new_items[$old_item->product_id] - $old_item->count))->where('id=' . $old_item->product_id);
-						$this->_db->setQuery($query);
-						$this->_db->execute();
-					}
-				}
-				foreach ($new_items as $product_id => $count)
-				{
-					if (!isset($old_items[$product_id]))
-					{
-						$query = $this->_db->getQuery(true);
-						$query->update('#__ksenmart_products')->set('in_stock=in_stock-' . $count)->where('id=' . $product_id);
-						$this->_db->setQuery($query);
-						$this->_db->execute();
-					}
-				}
-			}
-		}
+        if ($this->params->get('use_stock', 1))
+        {
+            if (!KSMOrders::getStatus($data['status_id'])->withdraw && KSMOrders::getStatus($old_status)->withdraw)
+            {
+                foreach ($old_items as $old_item)
+                {
+                    $product = KSMProducts::getProduct($old_item->product_id);
+                    $product->in_stock += $old_item->count;
+                    $product->save(['in_stock']);
+                }
+            }
+            elseif (KSMOrders::getStatus($data['status_id'])->withdraw && !KSMOrders::getStatus($old_status)->withdraw)
+            {
+                foreach ($new_items as $product_id => $count)
+                {
+                    $product = KSMProducts::getProduct($product_id);
+                    $product->in_stock -= $count;
+                    $product->save(['in_stock']);
+                }
+            }
+            elseif (KSMOrders::getStatus($data['status_id'])->withdraw)
+            {
+                foreach ($old_items as $old_item)
+                {
+                    if (!isset($new_items[$old_item->product_id]))
+                    {
+                        $product = KSMProducts::getProduct($old_item->product_id);
+                        $product->in_stock += $old_item->count;
+                        $product->save(['in_stock']);
+                    }
+                    elseif ($old_item->count > $new_items[$old_item->product_id])
+                    {
+                        $product = KSMProducts::getProduct($old_item->product_id);
+                        $product->in_stock += ($old_item->count - $new_items[$old_item->product_id]);
+                        $product->save(['in_stock']);
+                    }
+                    elseif ($old_item->count < $new_items[$old_item->product_id])
+                    {
+                        $product = KSMProducts::getProduct($old_item->product_id);
+                        $product->in_stock -= ($new_items[$old_item->product_id] - $old_item->count);
+                        $product->save(['in_stock']);
+                    }
+                }
+                foreach ($new_items as $product_id => $count)
+                {
+                    if (!isset($old_items[$product_id]))
+                    {
+                        $product = KSMProducts::getProduct($product_id);
+                        $product->in_stock -= $count;
+                        $product->save(['in_stock']);
+                    }
+                }
+            }
+        }
+        KSMOrders::setOrderStatus($id, $data['status_id']);
 
-		$on_close = 'window.parent.OrdersList.refreshList();';
-		$return   = array('id' => $id, 'on_close' => $on_close);
+        $on_close = 'window.parent.OrdersList.refreshList();';
+        $return   = array('id' => $id, 'on_close' => $on_close);
 
-		$this->onExecuteAfter('saveOrder', array(&$return));
+        $this->onExecuteAfter('saveOrder', array(&$return));
 
-		return $return;
-	}
+        return $return;
+    }
 
 	function updateOrderDiscounts($order_id = null, $discount_ids = array())
 	{
