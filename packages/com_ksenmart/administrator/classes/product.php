@@ -9,6 +9,7 @@ defined('_JEXEC') or die;
 class KSMProduct
 {
 
+    private static $_columns;
 	private $_child_properties = null;
 
 	public function __construct()
@@ -296,12 +297,34 @@ class KSMProduct
 		return $ids;
 	}
 
-	/*public function update(){
-		$user   = JFactory::getUser();
-		$isroot = $user->authorise('core.admin');
-		if ($isroot){
+    public function save($updateColumns = [])
+    {
+        JFactory::getApplication()->triggerEvent('onBeforeKSMSaveProduct', [$this]);
 
-		}
-	}*/
+        $columns = $this->getColumns();
+
+        $productObj     = new stdClass();
+        $productObj->id = $this->id;
+        foreach ($columns as $key => $column) {
+            if (!isset($this->{$key}) || (!empty($updateColumns) && !in_array($key, $updateColumns))) {
+                continue;
+            }
+
+            $productObj->{$key} = trim($this->{$key});
+        }
+
+        $db = JFactory::getDbo();
+        $db->updateObject('#__ksenmart_products', $productObj, ['id']);
+    }
+
+    private function getColumns()
+    {
+        if (empty(self::$_columns)) {
+            $db             = JFactory::getDbo();
+            self::$_columns = $db->getTableColumns('#__ksenmart_products');
+        }
+
+        return self::$_columns;
+    }
 
 }
