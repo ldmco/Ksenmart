@@ -38,6 +38,7 @@ class JFormFieldOrderDiscounts extends JFormField {
                     $html .= '</div>';
                 }
             }
+            $html .= '    <input type="hidden" name="' . $this->name . '[]" value="0" />';
             $html.= '</div>';
         } else {
             $html.= '</div>';
